@@ -37,15 +37,219 @@
             font-family: "Noto Serif JP", serif;
         }
 
-        /* 天川村の豊かな山林・清流をイメージした背景とトポグラフィック（等高線/フィールドワーク探究）パターン */
+        /* 天川村の空・森・川をイメージした背景（上：空 → 中：森 → 下：川） */
+        :root {
+            --river-h: max(96px, 17vh);
+        }
         .tenkawa-canvas {
-            background-color: #f1f6f3;
-            background-image: 
-                radial-gradient(circle at 10% 10%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 90% 20%, rgba(14, 116, 144, 0.1) 0%, transparent 45%),
-                radial-gradient(circle at 50% 90%, rgba(5, 150, 105, 0.08) 0%, transparent 50%),
-                url("data:image/svg+xml,%3Csvg width='160' height='160' viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 80 C 30 65, 60 95, 90 80 C 120 65, 140 90, 160 80 M0 40 C 40 25, 80 50, 120 35 C 140 28, 150 32, 160 30 M0 120 C 40 105, 70 135, 110 120 C 135 112, 150 125, 160 120' fill='none' stroke='%230f766e' stroke-width='0.75' stroke-opacity='0.06'/%3E%3C/svg%3E");
+            background: linear-gradient(180deg, #cde8f7 0%, #e2f2f8 28%, #eef7ee 55%, #e1f0df 78%, #d5ead6 100%);
             background-attachment: fixed;
+        }
+
+        /* 背景シーン全体（固定・操作不可） */
+        .nature-scene {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        /* 太陽の柔らかな光 */
+        .sun-glow {
+            position: absolute;
+            top: -90px;
+            right: 6%;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 248, 216, 0.95) 0%, rgba(255, 240, 190, 0.35) 40%, transparent 70%);
+        }
+
+        /* ===== 上部：雲 ===== */
+        .cloud {
+            position: absolute;
+            left: 0;
+            animation: cloud-drift linear infinite;
+            will-change: transform;
+            filter: drop-shadow(0 8px 12px rgba(56, 120, 160, 0.08));
+        }
+        .cloud svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        @keyframes cloud-drift {
+            from { transform: translateX(-28vw); }
+            to   { transform: translateX(110vw); }
+        }
+
+        /* ===== 中部：遠山・草地・木 ===== */
+        .far-mountains {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: calc(var(--river-h) + 6vh);
+            height: 24vh;
+        }
+        .meadow {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: calc(var(--river-h) - 6px);
+            height: 13vh;
+        }
+        .far-mountains svg,
+        .meadow svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        .trees {
+            position: absolute;
+            bottom: calc(var(--river-h) + 1.5vh);
+            width: clamp(170px, 21vw, 330px);
+        }
+        .trees svg {
+            width: 100%;
+            height: auto;
+            display: block;
+            overflow: visible;
+        }
+        .trees-left  { left: 0.5vw; }
+        .trees-right { right: 0.5vw; transform: scaleX(-1); }
+
+        /* 葉のそよぎ */
+        .sway {
+            transform-box: fill-box;
+            transform-origin: 50% 100%;
+            animation: sway 6s ease-in-out infinite;
+        }
+        @keyframes sway {
+            0%, 100% { transform: rotate(-1.2deg); }
+            50%      { transform: rotate(1.2deg); }
+        }
+
+        /* 枝に止まる鳥（ついばむ・首をかしげる） */
+        .perched {
+            transform-box: fill-box;
+            transform-origin: 50% 100%;
+            animation: peck 4.5s ease-in-out infinite;
+        }
+        @keyframes peck {
+            0%, 55%, 100% { transform: rotate(0deg); }
+            62%  { transform: rotate(-20deg); }
+            70%  { transform: rotate(0deg); }
+            78%  { transform: rotate(-14deg); }
+            86%  { transform: rotate(0deg) translateY(-2px); }
+            90%  { transform: rotate(0deg) translateY(0); }
+        }
+
+        /* 空を飛ぶ鳥 */
+        .flyer {
+            position: absolute;
+            left: 0;
+            animation: fly linear infinite;
+            will-change: transform;
+        }
+        .flyer.reverse { animation-name: fly-rev; }
+        .flyer .bob {
+            animation: fly-bob 3.4s ease-in-out infinite;
+        }
+        .flyer svg {
+            display: block;
+            transform-origin: 50% 56%;
+            animation: flap 0.42s ease-in-out infinite alternate;
+        }
+        @keyframes fly {
+            from { transform: translateX(-10vw); }
+            to   { transform: translateX(110vw); }
+        }
+        @keyframes fly-rev {
+            from { transform: translateX(110vw); }
+            to   { transform: translateX(-10vw); }
+        }
+        @keyframes fly-bob {
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(-16px); }
+        }
+        @keyframes flap {
+            from { transform: scaleY(1); }
+            to   { transform: scaleY(-0.45); }
+        }
+
+        /* ===== 下部：川 ===== */
+        .river {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: var(--river-h);
+        }
+        .river-edge {
+            position: absolute;
+            top: -16px;
+            left: 0;
+            width: 100%;
+            height: 22px;
+            display: block;
+        }
+        .river-body {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, #92d4e9 0%, #5db5d7 45%, #3a92bc 100%);
+            overflow: hidden;
+        }
+        .ripple {
+            position: absolute;
+            inset: 0;
+            background-repeat: repeat;
+            animation: flow-1 8s linear infinite;
+        }
+        .ripple-1 {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='48'%3E%3Cg fill='none' stroke='white' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M10 14 q12 -6 24 0 t24 0'/%3E%3Cpath d='M130 36 q10 -5 20 0 t20 0'/%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.7;
+        }
+        .ripple-2 {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='64'%3E%3Cg fill='none' stroke='white' stroke-width='1.5' stroke-linecap='round'%3E%3Cpath d='M60 22 q16 -7 32 0 t32 0 t32 0'/%3E%3Cpath d='M250 50 q9 -4 18 0'/%3E%3C/g%3E%3C/svg%3E");
+            background-position: 120px 18px;
+            opacity: 0.45;
+            animation-name: flow-2;
+            animation-duration: 14s;
+        }
+        .river-shine {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, 0.18) 45%, transparent 60%);
+            background-size: 200% 100%;
+            animation: shine 9s ease-in-out infinite;
+        }
+        @keyframes flow-1 {
+            from { background-position-x: 0; }
+            to   { background-position-x: 240px; }
+        }
+        @keyframes flow-2 {
+            from { background-position-x: 120px; }
+            to   { background-position-x: 480px; }
+        }
+        @keyframes shine {
+            0%, 100% { background-position-x: 100%; }
+            50%      { background-position-x: 0%; }
+        }
+
+        @media (max-width: 640px) {
+            .trees { width: 34vw; }
+        }
+
+        /* 動きを減らす設定の利用者への配慮 */
+        @media (prefers-reduced-motion: reduce) {
+            .nature-scene *,
+            .nature-scene *::before,
+            .nature-scene *::after {
+                animation: none !important;
+            }
+            .cloud { transform: translateX(var(--x, 10vw)); }
+            .flyer { display: none; }
         }
 
         /* 日本語テキストの自然な折り返し制御 */
@@ -78,8 +282,192 @@
 </head>
 <body class="tenkawa-canvas text-slate-800 min-h-screen py-3 px-2 sm:py-10 sm:px-4">
 
+    <!-- ===== 背景シーン：上＝雲 / 中＝木と鳥 / 下＝川 ===== -->
+    <div class="nature-scene" aria-hidden="true">
+
+        <div class="sun-glow"></div>
+
+        <!-- 上部：浮かぶ雲 -->
+        <div class="cloud" style="top:4%;  width:260px; animation-duration:110s; animation-delay:-10s;  --x:6vw;">
+            <svg viewBox="0 0 200 80"><g fill="#fff"><ellipse cx="100" cy="58" rx="92" ry="20"/><circle cx="68" cy="44" r="28"/><circle cx="108" cy="32" r="34"/><circle cx="146" cy="47" r="22"/></g></svg>
+        </div>
+        <div class="cloud" style="top:13%; width:180px; animation-duration:85s;  animation-delay:-50s;  --x:72vw; opacity:.9;">
+            <svg viewBox="0 0 200 80"><g fill="#fff"><ellipse cx="100" cy="60" rx="85" ry="16"/><circle cx="80" cy="46" r="24"/><circle cx="120" cy="40" r="28"/></g></svg>
+        </div>
+        <div class="cloud" style="top:2%;  width:320px; animation-duration:140s; animation-delay:-90s;  --x:40vw; opacity:.8;">
+            <svg viewBox="0 0 200 80"><g fill="#fff"><ellipse cx="100" cy="58" rx="92" ry="20"/><circle cx="68" cy="44" r="28"/><circle cx="108" cy="32" r="34"/><circle cx="146" cy="47" r="22"/></g></svg>
+        </div>
+        <div class="cloud" style="top:21%; width:200px; animation-duration:95s;  animation-delay:-30s;  --x:86vw; opacity:.85;">
+            <svg viewBox="0 0 200 80"><g fill="#fff"><ellipse cx="100" cy="60" rx="85" ry="16"/><circle cx="80" cy="46" r="24"/><circle cx="120" cy="40" r="28"/></g></svg>
+        </div>
+        <div class="cloud" style="top:9%;  width:150px; animation-duration:75s;  animation-delay:-65s;  --x:24vw; opacity:.75;">
+            <svg viewBox="0 0 200 80"><g fill="#fff"><ellipse cx="100" cy="60" rx="85" ry="16"/><circle cx="80" cy="46" r="24"/><circle cx="120" cy="40" r="28"/></g></svg>
+        </div>
+        <div class="cloud" style="top:25%; width:240px; animation-duration:125s; animation-delay:-115s; --x:55vw; opacity:.7;">
+            <svg viewBox="0 0 200 80"><g fill="#fff"><ellipse cx="100" cy="58" rx="92" ry="20"/><circle cx="68" cy="44" r="28"/><circle cx="108" cy="32" r="34"/><circle cx="146" cy="47" r="22"/></g></svg>
+        </div>
+
+        <!-- 中部：遠くの山並み -->
+        <div class="far-mountains">
+            <svg viewBox="0 0 1440 200" preserveAspectRatio="none">
+                <path d="M0 200 L0 120 L140 60 L260 110 L420 30 L580 105 L720 55 L880 120 L1040 40 L1200 100 L1320 65 L1440 110 L1440 200 Z" fill="#c4e0d1" opacity=".7"/>
+                <path d="M0 200 L0 150 L180 100 L340 145 L520 90 L700 150 L900 95 L1080 150 L1260 105 L1440 145 L1440 200 Z" fill="#acd4bd" opacity=".75"/>
+            </svg>
+        </div>
+
+        <!-- 中部：草地 -->
+        <div class="meadow">
+            <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+                <path d="M0 120 L0 50 Q240 10 480 40 T960 35 T1440 45 L1440 120 Z" fill="#a9d8a6"/>
+                <path d="M0 120 L0 75 Q300 45 620 70 T1200 65 T1440 72 L1440 120 Z" fill="#8fcb8c"/>
+            </svg>
+        </div>
+
+        <!-- 中部：木と止まる鳥（左） -->
+        <div class="trees trees-left">
+            <svg viewBox="0 0 320 420">
+                <!-- 吉野杉 -->
+                <g class="sway" style="animation-duration:7s;">
+                    <rect x="66" y="290" width="12" height="130" rx="3" fill="#6b4a2b"/>
+                    <polygon points="72,40 30,150 114,150" fill="#2e7d57"/>
+                    <polygon points="72,100 18,230 126,230" fill="#28704e"/>
+                    <polygon points="72,170 8,305 136,305" fill="#226345"/>
+                    <!-- 杉のてっぺんの鳥（オオルリ） -->
+                    <g transform="translate(72 44)">
+                        <g class="perched" style="animation-duration:5.2s; animation-delay:-1.5s;">
+                            <polygon points="-8,-9 -17,-4 -8,-5" fill="#24467f"/>
+                            <ellipse cx="0" cy="-8" rx="9" ry="6.5" fill="#2f5fa8"/>
+                            <ellipse cx="1.5" cy="-6" rx="5.5" ry="3.5" fill="#f3f4f6"/>
+                            <circle cx="7" cy="-14" r="4.6" fill="#2f5fa8"/>
+                            <polygon points="11,-15 16,-13.5 11,-12.5" fill="#1f2937"/>
+                            <circle cx="8.3" cy="-15" r="0.9" fill="#fff"/>
+                            <line x1="-1" y1="-2" x2="-1" y2="0" stroke="#374151" stroke-width="1.2"/>
+                            <line x1="2" y1="-2" x2="2" y2="0" stroke="#374151" stroke-width="1.2"/>
+                        </g>
+                    </g>
+                </g>
+                <!-- 広葉樹の幹と枝 -->
+                <path d="M206 420 L206 250" stroke="#7a5532" stroke-width="16" stroke-linecap="round"/>
+                <path d="M206 300 Q250 284 302 278" stroke="#7a5532" stroke-width="6" fill="none" stroke-linecap="round"/>
+                <!-- 広葉樹の葉 -->
+                <g class="sway" style="animation-duration:5.5s; animation-delay:-2s;">
+                    <circle cx="206" cy="190" r="72" fill="#4fae73"/>
+                    <circle cx="150" cy="225" r="48" fill="#43a067"/>
+                    <circle cx="262" cy="220" r="46" fill="#5cbb7f"/>
+                    <circle cx="190" cy="150" r="44" fill="#66c48a"/>
+                    <circle cx="232" cy="160" r="38" fill="#57b57b"/>
+                </g>
+                <!-- 枝に止まる鳥（スズメ） -->
+                <g transform="translate(282 278)">
+                    <g class="perched">
+                        <polygon points="-8,-9 -17,-4 -8,-5" fill="#5b3f26"/>
+                        <ellipse cx="0" cy="-8" rx="9" ry="6.5" fill="#8a6440"/>
+                        <ellipse cx="1.5" cy="-6" rx="5.5" ry="3.5" fill="#efe4cf"/>
+                        <circle cx="7" cy="-14" r="4.6" fill="#7a4f2c"/>
+                        <circle cx="8" cy="-12.5" r="1.8" fill="#f5efe3"/>
+                        <polygon points="11,-15 16,-13.5 11,-12.5" fill="#1f2937"/>
+                        <circle cx="8.3" cy="-15" r="0.9" fill="#111"/>
+                        <line x1="-1" y1="-2" x2="-1" y2="0" stroke="#374151" stroke-width="1.2"/>
+                        <line x1="2" y1="-2" x2="2" y2="0" stroke="#374151" stroke-width="1.2"/>
+                    </g>
+                </g>
+                <!-- 枝の付け根にもう一羽 -->
+                <g transform="translate(240 289)">
+                    <g class="perched" style="animation-duration:6s; animation-delay:-3s;">
+                        <polygon points="-8,-9 -17,-4 -8,-5" fill="#5b3f26"/>
+                        <ellipse cx="0" cy="-8" rx="9" ry="6.5" fill="#8a6440"/>
+                        <ellipse cx="1.5" cy="-6" rx="5.5" ry="3.5" fill="#efe4cf"/>
+                        <circle cx="7" cy="-14" r="4.6" fill="#7a4f2c"/>
+                        <circle cx="8" cy="-12.5" r="1.8" fill="#f5efe3"/>
+                        <polygon points="11,-15 16,-13.5 11,-12.5" fill="#1f2937"/>
+                        <circle cx="8.3" cy="-15" r="0.9" fill="#111"/>
+                        <line x1="-1" y1="-2" x2="-1" y2="0" stroke="#374151" stroke-width="1.2"/>
+                        <line x1="2" y1="-2" x2="2" y2="0" stroke="#374151" stroke-width="1.2"/>
+                    </g>
+                </g>
+            </svg>
+        </div>
+
+        <!-- 中部：木と止まる鳥（右・左右反転） -->
+        <div class="trees trees-right">
+            <svg viewBox="0 0 320 420">
+                <g class="sway" style="animation-duration:6.4s; animation-delay:-1s;">
+                    <rect x="66" y="290" width="12" height="130" rx="3" fill="#6b4a2b"/>
+                    <polygon points="72,50 32,155 112,155" fill="#2e7d57"/>
+                    <polygon points="72,110 20,235 124,235" fill="#28704e"/>
+                    <polygon points="72,175 10,305 134,305" fill="#226345"/>
+                </g>
+                <path d="M206 420 L206 250" stroke="#7a5532" stroke-width="16" stroke-linecap="round"/>
+                <path d="M206 300 Q250 284 302 278" stroke="#7a5532" stroke-width="6" fill="none" stroke-linecap="round"/>
+                <g class="sway" style="animation-duration:6s; animation-delay:-3.5s;">
+                    <circle cx="206" cy="190" r="70" fill="#52b276"/>
+                    <circle cx="152" cy="228" r="46" fill="#46a36a"/>
+                    <circle cx="260" cy="222" r="44" fill="#5fbe82"/>
+                    <circle cx="196" cy="148" r="42" fill="#6ac78d"/>
+                    <circle cx="238" cy="165" r="36" fill="#58b77c"/>
+                    <!-- 葉の上の鳥（メジロ） -->
+                    <g transform="translate(196 108)">
+                        <g class="perched" style="animation-duration:3.8s; animation-delay:-0.8s;">
+                            <polygon points="-8,-9 -17,-4 -8,-5" fill="#5f7a2c"/>
+                            <ellipse cx="0" cy="-8" rx="9" ry="6.5" fill="#86a83a"/>
+                            <ellipse cx="1.5" cy="-6" rx="5.5" ry="3.5" fill="#f1efd8"/>
+                            <circle cx="7" cy="-14" r="4.6" fill="#8fb33f"/>
+                            <circle cx="8.3" cy="-15" r="1.9" fill="#fff"/>
+                            <circle cx="8.3" cy="-15" r="0.9" fill="#111"/>
+                            <polygon points="11,-15 16,-13.5 11,-12.5" fill="#1f2937"/>
+                            <line x1="-1" y1="-2" x2="-1" y2="0" stroke="#374151" stroke-width="1.2"/>
+                            <line x1="2" y1="-2" x2="2" y2="0" stroke="#374151" stroke-width="1.2"/>
+                        </g>
+                    </g>
+                </g>
+                <g transform="translate(286 278)">
+                    <g class="perched" style="animation-duration:5s; animation-delay:-2.2s;">
+                        <polygon points="-8,-9 -17,-4 -8,-5" fill="#24467f"/>
+                        <ellipse cx="0" cy="-8" rx="9" ry="6.5" fill="#2f5fa8"/>
+                        <ellipse cx="1.5" cy="-6" rx="5.5" ry="3.5" fill="#f3f4f6"/>
+                        <circle cx="7" cy="-14" r="4.6" fill="#2f5fa8"/>
+                        <polygon points="11,-15 16,-13.5 11,-12.5" fill="#1f2937"/>
+                        <circle cx="8.3" cy="-15" r="0.9" fill="#fff"/>
+                        <line x1="-1" y1="-2" x2="-1" y2="0" stroke="#374151" stroke-width="1.2"/>
+                        <line x1="2" y1="-2" x2="2" y2="0" stroke="#374151" stroke-width="1.2"/>
+                    </g>
+                </g>
+            </svg>
+        </div>
+
+        <!-- 中部：空を飛ぶ鳥 -->
+        <div class="flyer" style="top:32%; animation-duration:26s; animation-delay:-4s;">
+            <div class="bob"><svg width="34" height="16" viewBox="0 0 34 16"><path d="M1 9 Q8 1 17 9 Q26 1 33 9" fill="none" stroke="#2f4858" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="flyer" style="top:36%; animation-duration:26s; animation-delay:-5.2s;">
+            <div class="bob" style="animation-delay:-1s;"><svg width="26" height="12" viewBox="0 0 34 16" style="animation-delay:-.2s;"><path d="M1 9 Q8 1 17 9 Q26 1 33 9" fill="none" stroke="#2f4858" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="flyer" style="top:30%; animation-duration:26s; animation-delay:-6.1s;">
+            <div class="bob" style="animation-delay:-2s;"><svg width="22" height="10" viewBox="0 0 34 16" style="animation-delay:-.1s;"><path d="M1 9 Q8 1 17 9 Q26 1 33 9" fill="none" stroke="#2f4858" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="flyer reverse" style="top:42%; animation-duration:34s; animation-delay:-18s;">
+            <div class="bob" style="animation-duration:4s;"><svg width="30" height="14" viewBox="0 0 34 16" style="animation-duration:.5s;"><path d="M1 9 Q8 1 17 9 Q26 1 33 9" fill="none" stroke="#3b5566" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="flyer" style="top:47%; animation-duration:40s; animation-delay:-28s;">
+            <div class="bob" style="animation-duration:3s;"><svg width="20" height="10" viewBox="0 0 34 16" style="animation-duration:.38s;"><path d="M1 9 Q8 1 17 9 Q26 1 33 9" fill="none" stroke="#3b5566" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+
+        <!-- 下部：流れる川 -->
+        <div class="river">
+            <svg class="river-edge" viewBox="0 0 1440 22" preserveAspectRatio="none">
+                <path d="M0 14 Q180 2 360 12 T720 11 T1080 9 T1440 13 V22 H0 Z" fill="#92d4e9"/>
+                <path d="M0 14 Q180 2 360 12 T720 11 T1080 9 T1440 13" fill="none" stroke="#e9e1c9" stroke-width="3"/>
+            </svg>
+            <div class="river-body">
+                <div class="ripple ripple-2"></div>
+                <div class="ripple ripple-1"></div>
+                <div class="river-shine"></div>
+            </div>
+        </div>
+    </div>
+
     <!-- メインコンテナ（中央配置・全幅制御） -->
-    <main class="w-full max-w-full sm:max-w-2xl mx-auto bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl border border-emerald-900/10 shadow-xl shadow-emerald-950/5 overflow-hidden">
+    <main class="relative z-10 w-full max-w-full sm:max-w-2xl mx-auto bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl border border-emerald-900/10 shadow-xl shadow-emerald-950/5 overflow-hidden">
 
         <!-- ヘッダー：天川村の自然（山・森・川）と探求の学びを象徴するヒーローエリア -->
         <header class="relative bg-gradient-to-br from-emerald-900 via-teal-900 to-slate-900 text-white p-4 sm:p-8 overflow-hidden">
@@ -398,8 +786,8 @@
     </main>
 
     <!-- 控えめなクレジット -->
-    <div class="mt-3 text-center text-[9px] sm:text-[10px] text-slate-400 tracking-wider">
-        <span>© 天川村立天川小中学校</span>
+    <div class="relative z-10 mt-3 text-center text-[9px] sm:text-[10px] text-slate-500 tracking-wider">
+        <span class="inline-block bg-white/75 backdrop-blur-sm px-3 py-1 rounded-full">© 天川村立天川小中学校</span>
     </div>
 
 </body>
