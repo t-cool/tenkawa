@@ -3,14 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>研究の仮説と体制 - ふるさと学習</title>
+    <title>研究紀要（案） - ふるさと学習</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Noto Sans JP (見出し用ゴシック) & Noto Serif JP (本文用明朝) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --font-gothic: "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+            --font-mincho: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", YuMincho, "HGS明朝E", "MS PMincho", serif;
+        }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+            font-family: var(--font-mincho);
+        }
+        h1, h2, h3, h4, h5, h6,
+        header, button, nav, th,
+        .font-gothic {
+            font-family: var(--font-gothic);
+        }
+        .font-mincho {
+            font-family: var(--font-mincho);
+        }
+        @media print {
+            body {
+                background-color: #ffffff !important;
+                padding: 0 !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            section {
+                box-shadow: none !important;
+                page-break-inside: avoid;
+            }
         }
     </style>
 </head>
@@ -26,126 +55,488 @@
             </a>
             <span class="text-slate-300">|</span>
             <div class="text-xs md:text-sm font-bold text-slate-700">
-                ふるさと学習 研究の仮説と体制
+                ふるさと学習 研究紀要（案）
             </div>
+        </div>
+        <div class="flex items-center gap-2">
+            <button onclick="window.print()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium rounded text-sm transition flex items-center gap-1.5 border border-slate-300">
+                <i class="fa-solid fa-print text-xs text-slate-500"></i>
+                <span>印刷</span>
+            </button>
         </div>
     </header>
 
     <!-- メインコンテンツ -->
     <main class="max-w-[900px] mx-auto space-y-6">
 
-        <!-- ページ見出しカード -->
-        <section class="bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs">
-            <div class="border-b border-slate-200 pb-3 mb-4 flex items-center justify-between flex-wrap gap-2">
-                <div>
-                    <span class="text-xs font-bold text-teal-700 bg-teal-50 border border-teal-200 px-2.5 py-0.5 rounded">
-                        研究推進委員会
-                    </span>
-                    <h1 class="text-xl md:text-2xl font-bold text-slate-900 mt-1.5">
-                        研究の仮説と体制
-                    </h1>
+        <!-- 学校の概要 -->
+        <section class="bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs space-y-6">
+            <div class="border-b border-slate-200 pb-3 flex items-center justify-between flex-wrap gap-2">
+                <h2 class="text-base md:text-lg font-bold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-school text-teal-600"></i>
+                    <span>Ⅰ　学校の概要</span>
+                </h2>
+                <span class="text-xs font-medium text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full">
+                    地域特性・実態・教育目標・学級編成
+                </span>
+            </div>
+
+            <!-- 1 地域の特性 -->
+            <div class="space-y-3">
+                <h3 class="text-sm sm:text-base font-bold text-slate-900">
+                    1　地域の特性
+                </h3>
+                <div class="space-y-3 text-xs sm:text-sm md:text-base text-slate-800 leading-relaxed text-justify px-1">
+                    <p class="indent-[1em]">
+                        天川村は紀伊半島の中央部に位置し、村の面積の４分の１が吉野熊野国立公園に指定されている。また、本村は、大峰山脈が北東より南西に伸び、近畿最高峰の八経ヶ岳、弥山、山上ヶ岳を始め、1,500〜1,900mの山岳が座している。
+                    </p>
+                    <p class="indent-[1em]">
+                        これらの急峻な山々を対象に古くから山岳修験が発達し、現在まで引き継がれている。約1300年前に役行者によって開かれた修験道発祥の地である霊峰大峯山（山上ヶ岳）には、今も多くの修験者が修行に訪れ、2004年にはユネスコ世界文化遺産「紀伊山地の霊場と参詣道」として登録された。こうした地域の自然環境や歴史、文化、産業などについて、「ふるさと学習」を通して地域の方から学んだり体験させていただいたりしながら、学校と地域が協力し合って教育活動に取り組んでいる。
+                    </p>
                 </div>
             </div>
-            <p class="text-sm text-slate-600 leading-relaxed">
-                研究テーマを設定した理由、教育計画と期待される効果についての仮説、およびその計画を実行・推進するための校内体制についてまとめます。
-            </p>
-        </section>
 
-        <!-- 1. 研究テーマを設定した理由 -->
-        <section class="bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs">
-            <h2 class="text-base md:text-lg font-bold text-slate-900 mb-3 flex items-center gap-2">
-                <i class="fa-solid fa-lightbulb text-teal-600"></i>
-                <span>1. 研究テーマ設定の理由</span>
-            </h2>
-            <div class="p-4 rounded-xl border border-dashed border-slate-300 bg-slate-50/60 text-slate-500 text-xs sm:text-sm leading-relaxed">
-                研究テーマを設定した背景や、児童生徒・地域の実態、本研究を通して目指す課題意識などをここに記載します。
+            <!-- 2 児童生徒の実態 -->
+            <div class="space-y-3 pt-2">
+                <h3 class="text-sm sm:text-base font-bold text-slate-900">
+                    2　児童生徒の実態
+                </h3>
+                <div class="space-y-3 text-xs sm:text-sm md:text-base text-slate-800 leading-relaxed text-justify px-1">
+                    <p class="indent-[1em]">
+                        本校は、令和２年に天川小学校と天川中学校が統合して開校した、県内初の施設一体型義務教育学校である。児童生徒は互いに仲良く、思いやりの心を大切にしている。学習面においては、指示されたことについて集中して取り組むことができる。一方、指示を待つ受け身の姿勢になりがちで、自ら進んで課題を見つけて主体的に取り組むことに課題が見られる。また、主体的に学習の計画を立てて取り組むことや、家庭で自ら学ぶ習慣が身に付いていない児童生徒も見られる。
+                    </p>
+                </div>
+            </div>
+
+            <!-- 3 学校教育目標 -->
+            <div class="space-y-3 pt-2">
+                <h3 class="text-sm sm:text-base font-bold text-slate-900">
+                    3　学校教育目標
+                </h3>
+                <div class="p-4 md:p-5 rounded-lg bg-slate-50 border border-slate-200 text-left">
+                    <div class="text-sm sm:text-base md:text-lg text-slate-900 font-medium tracking-wide">
+                        「ふるさとを愛し、自らの未来を主体的に切り拓く児童生徒の育成」
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4 学級編成と教職員数 -->
+            <div class="space-y-3 pt-2">
+                <h3 class="text-sm sm:text-base font-bold text-slate-900">
+                    4　学級編成と教職員数
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-center border-collapse border border-slate-400 text-xs sm:text-sm text-slate-800">
+                        <thead>
+                            <tr class="bg-slate-100">
+                                <th class="border border-slate-400 py-2 px-1.5 font-medium whitespace-nowrap">学年</th>
+                                <th class="border border-slate-400 py-2 px-1.5 font-medium whitespace-nowrap">１年</th>
+                                <th class="border border-slate-400 py-2 px-1.5 font-medium whitespace-nowrap">２年</th>
+                                <th class="border border-slate-400 py-2 px-1.5 font-medium whitespace-nowrap">３年</th>
+                                <th class="border border-slate-400 py-2 px-1.5 font-medium whitespace-nowrap">４年</th>
+                                <th class="border border-slate-400 py-2 px-1.5 font-medium whitespace-nowrap">５年</th>
+                                <th class="border border-slate-400 py-2 px-1.5 font-medium whitespace-nowrap">６年</th>
+                                <th class="border border-slate-400 py-2 px-1.5 font-medium whitespace-nowrap">７年</th>
+                                <th class="border border-slate-400 py-2 px-1.5 font-medium whitespace-nowrap">８年</th>
+                                <th class="border border-slate-400 py-2 px-1.5 font-medium whitespace-nowrap">９年</th>
+                                <th class="border border-slate-400 py-2 px-1.5 font-medium whitespace-nowrap">特別支援</th>
+                                <th class="border border-slate-400 py-2 px-1.5 font-medium whitespace-nowrap">合計</th>
+                                <th class="border border-slate-400 py-2 px-1.5 font-medium whitespace-nowrap">教職員数</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border border-slate-400 py-2.5 px-1.5 font-medium bg-slate-50">男子</td>
+                                <td class="border border-slate-400 py-2.5 px-1.5"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5 font-medium"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5 font-medium"></td>
+                            </tr>
+                            <tr>
+                                <td class="border border-slate-400 py-2.5 px-1.5 font-medium bg-slate-50">女子</td>
+                                <td class="border border-slate-400 py-2.5 px-1.5"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5 font-medium"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5 font-medium"></td>
+                            </tr>
+                            <tr class="bg-slate-50/80 font-medium">
+                                <td class="border border-slate-400 py-2.5 px-1.5 font-medium">合計</td>
+                                <td class="border border-slate-400 py-2.5 px-1.5"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5 font-bold"></td>
+                                <td class="border border-slate-400 py-2.5 px-1.5 font-bold"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </section>
 
-        <!-- 2. 研究の仮説（教育計画と効果についての仮説） -->
-        <section class="bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs">
-            <h2 class="text-base md:text-lg font-bold text-slate-900 mb-3 flex items-center gap-2">
-                <i class="fa-solid fa-chart-line text-teal-600"></i>
-                <span>2. 研究の仮説（教育計画と効果）</span>
-            </h2>
-            <div class="p-4 rounded-xl border border-dashed border-slate-300 bg-slate-50/60 text-slate-500 text-xs sm:text-sm leading-relaxed">
-                義務教育学校９年間の教育計画を実行することで、児童生徒にどのような資質・能力が育まれ、どのような効果や意識の変容が得られるかという仮説をここに記載します。
+        <!-- Ⅱ 研究の概要 -->
+        <section class="bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs space-y-6">
+            <div class="border-b border-slate-200 pb-3 flex items-center justify-between flex-wrap gap-2">
+                <h2 class="text-base md:text-lg font-bold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-flag text-teal-600"></i>
+                    <span>Ⅱ　研究の概要</span>
+                </h2>
+                <span class="text-xs font-medium text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full">
+                    研究主題・理由・内容・組織
+                </span>
+            </div>
+
+            <!-- 1 研究主題 -->
+            <div class="space-y-3">
+                <h3 class="text-sm sm:text-base font-bold text-slate-900">
+                    1　研究主題
+                </h3>
+                <div class="p-5 md:p-6 rounded-lg bg-slate-50 border border-slate-200 text-center space-y-2">
+                    <div class="text-base md:text-xl text-slate-900 tracking-wide leading-relaxed font-bold">
+                        「９年間のつながりの中で、主体的に学び、学びを深める児童生徒の育成」
+                    </div>
+                    <div class="text-xs md:text-sm text-slate-700 font-medium">
+                        〜生活科から総合的な学習の時間へとつなぐ『ふるさと学習』の実践を通して〜
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2 主題設定の理由 -->
+            <div class="space-y-3 pt-2">
+                <h3 class="text-sm sm:text-base font-bold text-slate-900">
+                    2　主題設定の理由
+                </h3>
+                <!-- Word形式の段落文章 -->
+                <div class="space-y-4 text-xs sm:text-sm md:text-base text-slate-800 leading-relaxed text-justify px-1">
+                    <p class="indent-[1em]">
+                        本校の児童生徒の実態から見える課題として、大きく以下の２つが挙げられた。
+                    </p>
+                    <p class="indent-[1em]">
+                        まずは、ふるさと天川村について、特定のテーマを年度を跨いでより深く学ぶ機会を、従来の教育課程として設定しづらかったことである。そこで、令和２年に義務教育学校となり９年間で一貫した指導計画を立てられるようになったことで、低学年の生活科から高学年・中学校段階の総合的な学習の時間へとつなぎ、ふるさとに関わる特定のテーマについて、学年や年度を跨いで継続的により深く学習を進めていくことが良いと考えた。
+                    </p>
+                    <p class="indent-[1em]">
+                        もう一点は、指示されたことに対して真面目に素直に取り組む良さがある一方で、受け身の姿勢になりがちで、自ら進んで課題を見つけ主体的に取り組む習慣や、家庭学習において自分で学ぶ姿勢に課題が見られていた。また、少人数で互いによく知っている関係だからこそ、言葉にしなくても通じ合ってしまい、筋道を立てて自分の考えを伝え合ったり、多様な意見から学び合ったりする経験も不足していた。これらの課題を解決するため、児童生徒自身が調べたいテーマを決定し、ポスターセッション等の対話的な活動を取り入れ、児童生徒間の学び合いの機会を増やし、授業の改善を図ることで、自ら学ぶ意欲（主体性）の向上が見られるのではないかと考えた。
+                    </p>
+                    <p class="indent-[1em]">
+                        以上のような背景により、本校では、生活科から総合的な学習の時間へとつなぐ「ふるさと学習」の実践を研究目標に掲げ、天川小中学校の全職員が一丸となって、研究テーマの実現に向けて実践を進めている。
+                    </p>
+                </div>
+            </div>
+
+            <!-- 3 研究の内容 -->
+            <div class="space-y-3 pt-2">
+                <h3 class="text-sm sm:text-base font-bold text-slate-900">
+                    3　研究の内容
+                </h3>
+                <!-- Word形式の段落文章 -->
+                <div class="space-y-4 text-xs sm:text-sm md:text-base text-slate-800 leading-relaxed text-justify px-1">
+                    <p class="indent-[1em]">
+                        研究主題を達成するため、以下の２つの柱を立てて研究を進めている。
+                    </p>
+
+                    <!-- (1) ９年間を通した生活科と総合的な学習の時間の実践 -->
+                    <div class="space-y-1.5 pt-1">
+                        <h4 class="font-bold text-slate-900">
+                            (1) ９年間を通した生活科と総合的な学習の時間の実践
+                        </h4>
+                        <p class="indent-[1em]">
+                            施設一体型義務教育学校の強みを生かし、９年間の指導目標を全教職員で共有して系統的な学習を進めている。児童生徒自らが「知りたい・やってみたい」テーマを設定し、年度を跨いで地域を深く探究できるカリキュラムを工夫することで、主体的に課題を解決する力を育んでいる。
+                        </p>
+                    </div>
+
+                    <!-- (2) ポスターセッションの取組 -->
+                    <div class="space-y-1.5 pt-1">
+                        <h4 class="font-bold text-slate-900">
+                            (2) ポスターセッションの取組
+                        </h4>
+                        <p class="indent-[1em]">
+                            １年生から９年生までを通して、ポスターセッションを帯学習として日常的に実施している。ブース形式で対面しながら自分の言葉で伝え、他学年や地域の方々と双方向のやり取りを重ねることで、表現力や周りと主体的に関わる姿勢を育てている。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4 研究組織 -->
+            <div class="space-y-3 pt-2">
+                <h3 class="text-sm sm:text-base font-bold text-slate-900">
+                    4　研究組織
+                </h3>
+
+                <!-- 研究組織（完全フィット） -->
+                <div class="p-5 md:p-6 rounded-xl border border-slate-300 bg-white shadow-2xs space-y-3 font-gothic">
+                <div class="text-xs md:text-sm font-bold text-slate-900 border-b border-slate-200 pb-2 flex items-center justify-between">
+                    <span>研究組織</span>
+                    <span class="text-[11px] font-normal text-slate-500">校内推進体制</span>
+                </div>
+
+                <div class="w-full overflow-x-auto py-1">
+                    <div class="w-full max-w-[680px] mx-auto flex items-center justify-between gap-0 select-none py-2 px-1">
+                        
+                        <!-- 1. 校長 -->
+                        <div class="w-14 sm:w-16 h-36 sm:h-40 border-2 border-slate-800 bg-white rounded-lg flex items-center justify-center p-1 shadow-2xs shrink-0">
+                            <span class="text-xs sm:text-sm font-bold text-slate-900 [writing-mode:vertical-rl] tracking-widest">
+                                校長
+                            </span>
+                        </div>
+
+                        <!-- 接続線1 -->
+                        <div class="flex-1 min-w-[10px] max-w-[32px] h-0.5 bg-slate-600 shrink-0"></div>
+
+                        <!-- 2. 研究推進委員会 -->
+                        <div class="w-32 sm:w-36 h-52 sm:h-56 border-2 border-slate-800 bg-white rounded-lg flex shadow-2xs shrink-0 overflow-hidden divide-x-2 divide-slate-800">
+                            <!-- 左：研究推進委員会（縦書き） -->
+                            <div class="w-14 sm:w-16 flex items-center justify-center p-2 bg-white">
+                                <span class="text-xs sm:text-sm md:text-base font-bold text-slate-900 [writing-mode:vertical-rl] tracking-widest whitespace-nowrap">
+                                    研究推進委員会
+                                </span>
+                            </div>
+                            <!-- 右：構成員（縦並び） -->
+                            <div class="flex-1 flex flex-col items-center justify-center p-2 text-[11px] sm:text-xs md:text-sm text-slate-900 font-medium leading-none gap-1 sm:gap-1.5 bg-white">
+                                <span>校長</span>
+                                <span class="text-[10px] font-bold leading-none">・</span>
+                                <span>教頭</span>
+                                <span class="text-[10px] font-bold leading-none">・</span>
+                                <span>教務主任</span>
+                                <span class="text-[10px] font-bold leading-none">・</span>
+                                <span>研究主任</span>
+                            </div>
+                        </div>
+
+                        <!-- 接続線2 -->
+                        <div class="flex-1 min-w-[10px] max-w-[32px] h-0.5 bg-slate-600 shrink-0"></div>
+
+                        <!-- 3. 校内研究全体会 -->
+                        <div class="w-16 sm:w-18 h-52 sm:h-56 border-2 border-slate-800 bg-white rounded-lg flex items-center justify-center p-1 shadow-2xs shrink-0">
+                            <span class="text-xs sm:text-sm font-bold text-slate-900 [writing-mode:vertical-rl] tracking-widest">
+                                校内研究全体会
+                            </span>
+                        </div>
+
+                        <!-- 接続線3 -->
+                        <div class="flex-1 min-w-[10px] max-w-[32px] h-0.5 bg-slate-600 shrink-0"></div>
+
+                        <!-- 4. ３部会（天部会・木部会・川部会） -->
+                        <div class="w-40 sm:w-48 border-2 border-slate-800 bg-white rounded-lg overflow-hidden shadow-2xs divide-y-2 divide-slate-800 text-center shrink-0">
+                            <div class="py-3 sm:py-3.5 font-bold text-xs sm:text-sm text-slate-900 tracking-widest hover:bg-slate-50 transition">
+                                天　部　会
+                            </div>
+                            <div class="py-3 sm:py-3.5 font-bold text-xs sm:text-sm text-slate-900 tracking-widest hover:bg-slate-50 transition">
+                                木　部　会
+                            </div>
+                            <div class="py-3 sm:py-3.5 font-bold text-xs sm:text-sm text-slate-900 tracking-widest hover:bg-slate-50 transition">
+                                川　部　会
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- 3. 研究推進体制（三部会の構成） -->
-        <section class="bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs">
-            <h2 class="text-base md:text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-                <i class="fa-solid fa-sitemap text-teal-600"></i>
-                <span>3. 計画を実行するための体制（三部会の構成）</span>
-            </h2>
+        <!-- 研究構想図 -->
+        <section class="bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs space-y-6">
+            <div class="border-b border-slate-200 pb-3 flex items-center justify-between flex-wrap gap-2">
+                <h2 class="text-base md:text-lg font-bold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-diagram-project text-teal-600"></i>
+                    <span>研究構想図</span>
+                </h2>
+                <span class="text-xs font-medium text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full">
+                    教育目標・研究主題・実践の連関
+                </span>
+            </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <!-- 天部会 -->
-                <div class="p-5 rounded-xl border border-slate-200 bg-slate-50/50 flex flex-col">
-                    <div class="flex items-center gap-2 mb-2">
-                        <span class="w-7 h-7 rounded-lg bg-sky-100 text-sky-700 font-bold flex items-center justify-center text-sm">天</span>
-                        <h3 class="font-bold text-slate-900 text-base">天部会</h3>
+            <!-- 研究構想図 本体フレーム（新図解形式・モノクロ） -->
+            <div class="border-2 border-slate-700 rounded-2xl p-5 md:p-8 bg-white space-y-6">
+
+                <!-- 1. 上段：実態・教育目標・願い（3カラム） -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 items-stretch">
+                    <!-- 左：地域・児童生徒の実態 -->
+                    <div class="border border-slate-700 rounded-lg p-4 md:p-5 bg-white flex flex-col shadow-2xs">
+                        <div class="text-xs md:text-sm font-bold text-slate-900 text-center pb-2 border-b border-slate-200 mb-3 font-gothic">
+                            地域・児童生徒の実態
+                        </div>
+                        <ul class="text-xs sm:text-sm text-slate-700 space-y-2 leading-relaxed flex-1">
+                            <li class="flex items-start gap-1.5">
+                                <span class="shrink-0">・</span>
+                                <span>地域について系統的に学ぶ機会の不足</span>
+                            </li>
+                            <li class="flex items-start gap-1.5">
+                                <span class="shrink-0">・</span>
+                                <span>指示待ち傾向と主体的な取組への課題</span>
+                            </li>
+                            <li class="flex items-start gap-1.5">
+                                <span class="shrink-0">・</span>
+                                <span>筋道を立てて考えを伝える経験の不足</span>
+                            </li>
+                        </ul>
                     </div>
-                    <p class="text-xs text-slate-500 leading-relaxed flex-1">
-                        部会の役割や対象学年、主な研究内容をここに記載します。
-                    </p>
-                    <div class="mt-4 pt-3 border-t border-slate-200 space-y-1.5">
-                        <div class="text-[11px] font-bold text-slate-400">担当・策定資料</div>
-                        <a href="../plan/plan.html" class="flex items-center justify-between p-2 rounded-lg bg-white border border-slate-200 hover:border-blue-400 text-xs font-medium text-slate-700 hover:text-blue-600 transition group shadow-2xs">
-                            <span class="truncate">全体計画</span>
-                            <i class="fa-solid fa-chevron-right text-[10px] text-slate-400 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-transform shrink-0 ml-1"></i>
-                        </a>
-                        <a href="../furikaeri/furikaeri.html" class="flex items-center justify-between p-2 rounded-lg bg-white border border-slate-200 hover:border-purple-400 text-xs font-medium text-slate-700 hover:text-purple-600 transition group shadow-2xs">
-                            <span class="truncate">振り返りの記録</span>
-                            <i class="fa-solid fa-chevron-right text-[10px] text-slate-400 group-hover:text-purple-500 group-hover:translate-x-0.5 transition-transform shrink-0 ml-1"></i>
-                        </a>
+
+                    <!-- 中央：学校教育目標 -->
+                    <div class="border-2 border-slate-900 rounded-lg p-4 md:p-5 bg-white flex flex-col justify-center text-center shadow-2xs">
+                        <div class="text-xs md:text-sm font-bold text-slate-900 pb-2 border-b border-slate-200 mb-3 font-gothic">
+                            学校教育目標
+                        </div>
+                        <div class="text-sm md:text-base text-slate-900 font-medium leading-loose tracking-wide my-auto py-2">
+                            ふるさとを愛し、<br>
+                            自らの未来を<br>
+                            主体的に切り拓く<br>
+                            児童生徒の育成
+                        </div>
+                    </div>
+
+                    <!-- 右：地域・保護者の願い -->
+                    <div class="border border-slate-700 rounded-lg p-4 md:p-5 bg-white flex flex-col shadow-2xs">
+                        <div class="text-xs md:text-sm font-bold text-slate-900 text-center pb-2 border-b border-slate-200 mb-3 font-gothic">
+                            地域・保護者の願い
+                        </div>
+                        <ul class="text-xs sm:text-sm text-slate-700 space-y-2 leading-relaxed flex-1">
+                            <li class="flex items-start gap-1.5">
+                                <span class="shrink-0">・</span>
+                                <span>ふるさとへの誇りと愛着の育成</span>
+                            </li>
+                            <li class="flex items-start gap-1.5">
+                                <span class="shrink-0">・</span>
+                                <span>未来を生きるために必要な学力の育成</span>
+                            </li>
+                            <li class="flex items-start gap-1.5">
+                                <span class="shrink-0">・</span>
+                                <span>安全・安心な環境と基本的生活習慣の確立</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
-                <!-- 木部会 -->
-                <div class="p-5 rounded-xl border border-slate-200 bg-slate-50/50 flex flex-col">
-                    <div class="flex items-center gap-2 mb-2">
-                        <span class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center text-sm">木</span>
-                        <h3 class="font-bold text-slate-900 text-base">木部会</h3>
+                <!-- 2. めざす児童生徒像 -->
+                <div class="max-w-2xl mx-auto border border-slate-700 rounded-lg p-4 md:p-5 bg-white text-center space-y-2 shadow-2xs">
+                    <div class="text-xs md:text-sm font-bold text-slate-900 pb-2 border-b border-slate-200 mb-2 font-gothic">
+                        めざす児童生徒像
                     </div>
-                    <p class="text-xs text-slate-500 leading-relaxed flex-1">
-                        部会の役割や対象学年、主な研究内容をここに記載します。
-                    </p>
-                    <div class="mt-4 pt-3 border-t border-slate-200 space-y-1.5">
-                        <div class="text-[11px] font-bold text-slate-400">担当・策定資料</div>
-                        <a href="../kako/kako.html" class="flex items-center justify-between p-2 rounded-lg bg-white border border-slate-200 hover:border-emerald-400 text-xs font-medium text-slate-700 hover:text-emerald-700 transition group shadow-2xs">
-                            <span class="truncate">ふるさと学習のテーマ</span>
-                            <i class="fa-solid fa-chevron-right text-[10px] text-slate-400 group-hover:text-emerald-600 group-hover:translate-x-0.5 transition-transform shrink-0 ml-1"></i>
-                        </a>
-                        <a href="../obi/obi.html" class="flex items-center justify-between p-2 rounded-lg bg-white border border-slate-200 hover:border-amber-400 text-xs font-medium text-slate-700 hover:text-amber-700 transition group shadow-2xs">
-                            <span class="truncate">帯学習</span>
-                            <i class="fa-solid fa-chevron-right text-[10px] text-slate-400 group-hover:text-amber-600 group-hover:translate-x-0.5 transition-transform shrink-0 ml-1"></i>
-                        </a>
+                    <div class="text-xs sm:text-sm text-slate-800 space-y-1.5 leading-relaxed">
+                        <div>自らの未来を見つめ、自ら学び続ける子（知）</div>
+                        <div>自他共に大切にする子（徳）</div>
+                        <div>ふるさとを愛し、ふるさとをよりよくしようとする子（郷土愛）</div>
+                        <div>正しく判断し、次の一歩を踏み出せる子（判断・行動）</div>
+                        <div>すこやかな心身をもち、自分らしく前向きに生きようとする子（体）</div>
                     </div>
                 </div>
 
-                <!-- 川部会 -->
-                <div class="p-5 rounded-xl border border-slate-200 bg-slate-50/50 flex flex-col">
-                    <div class="flex items-center gap-2 mb-2">
-                        <span class="w-7 h-7 rounded-lg bg-blue-100 text-blue-700 font-bold flex items-center justify-center text-sm">川</span>
-                        <h3 class="font-bold text-slate-900 text-base">川部会</h3>
+                <!-- 3. 研究主題 -->
+                <div class="border-2 border-slate-900 rounded-lg p-4 md:p-5 bg-white space-y-2 shadow-2xs">
+                    <div class="text-xs font-bold text-slate-900 tracking-wider font-gothic">
+                        研究主題
                     </div>
-                    <p class="text-xs text-slate-500 leading-relaxed flex-1">
-                        部会の役割や対象学年、主な研究内容をここに記載します。
-                    </p>
-                    <div class="mt-4 pt-3 border-t border-slate-200 space-y-1.5">
-                        <div class="text-[11px] font-bold text-slate-400">担当・策定資料</div>
-                        <a href="../keiji/keiji.html" class="flex items-center justify-between p-2 rounded-lg bg-white border border-slate-200 hover:border-blue-400 text-xs font-medium text-slate-700 hover:text-blue-600 transition group shadow-2xs">
-                            <span class="truncate">校内掲示</span>
-                            <i class="fa-solid fa-chevron-right text-[10px] text-slate-400 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-transform shrink-0 ml-1"></i>
-                        </a>
-                        <a href="../bank/bank.html" class="flex items-center justify-between p-2 rounded-lg bg-white border border-slate-200 hover:border-blue-400 text-xs font-medium text-slate-700 hover:text-blue-600 transition group shadow-2xs">
-                            <span class="truncate">教材・人材バンク</span>
-                            <i class="fa-solid fa-chevron-right text-[10px] text-slate-400 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-transform shrink-0 ml-1"></i>
-                        </a>
+                    <div class="text-center space-y-1.5 py-1">
+                        <div class="text-sm md:text-lg text-slate-900 tracking-wide font-medium">
+                            「９年間のつながりの中で、主体的に学び、学びを深める児童生徒の育成」
+                        </div>
+                        <div class="text-xs md:text-sm text-slate-600">
+                            〜生活科から総合的な学習の時間へとつなぐ『ふるさと学習』の実践を通して〜
+                        </div>
                     </div>
                 </div>
+
+                <!-- 4. 研究の視点 -->
+                <div class="border border-slate-700 rounded-lg p-4 md:p-5 bg-white space-y-2 shadow-2xs">
+                    <div class="text-xs font-bold text-slate-900 tracking-wider font-gothic">
+                        研究の視点
+                    </div>
+                    <div class="text-center py-1">
+                        <p class="text-xs sm:text-sm text-slate-800 leading-relaxed max-w-2xl mx-auto font-medium">
+                            児童生徒が主体的に学習課題に取り組むために、生活科から総合的な学習の時間へとつなぐ「ふるさと学習」を推進することで、より深い学びにつながると考える。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 分岐接続ライン（デスクトップ：樹形ライン、モバイル：矢印） -->
+                <div class="hidden md:block relative h-6 -my-2">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-0.5 h-3 bg-slate-400"></div>
+                    <div class="absolute top-3 left-[16.6%] right-[16.6%] h-0.5 bg-slate-400"></div>
+                    <div class="absolute top-3 left-[16.6%] w-0.5 h-3 bg-slate-400"></div>
+                    <div class="absolute top-3 left-1/2 -translate-x-1/2 w-0.5 h-3 bg-slate-400"></div>
+                    <div class="absolute top-3 right-[16.6%] w-0.5 h-3 bg-slate-400"></div>
+                </div>
+                <div class="md:hidden flex justify-center -my-2">
+                    <svg class="w-6 h-6 fill-slate-500" viewBox="0 0 24 24">
+                        <path d="M12 16l-6-6h12z"/>
+                    </svg>
+                </div>
+
+                <!-- 5. 最下段：3つの実践の柱（3カラム） -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 items-stretch">
+                    <!-- 左：ふるさと学習 -->
+                    <div class="border border-slate-700 rounded-lg p-4 md:p-5 bg-white flex flex-col shadow-2xs">
+                        <div class="text-xs md:text-sm font-bold text-slate-900 text-center pb-2 border-b border-slate-200 mb-3 font-gothic">
+                            ふるさと学習
+                        </div>
+                        <ul class="text-xs sm:text-sm text-slate-700 space-y-2.5 leading-relaxed flex-1">
+                            <li class="flex items-start gap-1.5">
+                                <span class="shrink-0">・</span>
+                                <span>児童・生徒によるテーマ設定と探究的な学び</span>
+                            </li>
+                            <li class="flex items-start gap-1.5">
+                                <span class="shrink-0">・</span>
+                                <span>年度を跨いで地域を深める系統的な追究</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 中央：授業中の学び合い -->
+                    <div class="border border-slate-700 rounded-lg p-4 md:p-5 bg-white flex flex-col shadow-2xs">
+                        <div class="text-xs md:text-sm font-bold text-slate-900 text-center pb-2 border-b border-slate-200 mb-3 font-gothic">
+                            授業中の学び合い
+                        </div>
+                        <ul class="text-xs sm:text-sm text-slate-700 space-y-2.5 leading-relaxed flex-1">
+                            <li class="flex items-start gap-1.5">
+                                <span class="shrink-0">・</span>
+                                <span>話型を活用した対話的・協働的な学び</span>
+                            </li>
+                            <li class="flex items-start gap-1.5">
+                                <span class="shrink-0">・</span>
+                                <span>考えを深め合う日常的な対話の習慣化</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 右：ポスターセッション -->
+                    <div class="border border-slate-700 rounded-lg p-4 md:p-5 bg-white flex flex-col shadow-2xs">
+                        <div class="text-xs md:text-sm font-bold text-slate-900 text-center pb-2 border-b border-slate-200 mb-3 font-gothic">
+                            ポスターセッション
+                        </div>
+                        <ul class="text-xs sm:text-sm text-slate-700 space-y-2.5 leading-relaxed flex-1">
+                            <li class="flex items-start gap-1.5">
+                                <span class="shrink-0">・</span>
+                                <span>ブース形式による対面発表と質疑応答</span>
+                            </li>
+                            <li class="flex items-start gap-1.5">
+                                <span class="shrink-0">・</span>
+                                <span>他学年や地域への発信・交流の実践</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
         </section>
 

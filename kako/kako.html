@@ -3,21 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ふるさと学習のテーマ - ふるさと学習</title>
+    <title>ふるさと学習「テーマ集（過去の取組）」 - ふるさと学習</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Noto Sans JP (見出し用ゴシック) & Noto Serif JP (本文用明朝) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --font-gothic: "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+            --font-mincho: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", YuMincho, "HGS明朝E", "MS PMincho", serif;
+        }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+            font-family: var(--font-mincho);
+        }
+        h1, h2, h3, h4, h5, h6,
+        header, button, nav, th,
+        .font-gothic {
+            font-family: var(--font-gothic);
+        }
+        .font-mincho {
+            font-family: var(--font-mincho);
+        }
+        @media print {
+            body {
+                background-color: #ffffff !important;
+                padding: 0 !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .print-break-inside-avoid {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            .year-section {
+                display: block !important;
+                page-break-after: always;
+            }
+            .year-section:last-child {
+                page-break-after: auto;
+            }
         }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen p-4 md:p-6">
 
     <!-- 操作ナビゲーションバー -->
-    <header class="no-print max-w-[900px] mx-auto mb-6 bg-white p-3.5 md:p-4 rounded-xl border border-slate-300 shadow-xs flex flex-wrap items-center justify-between gap-3">
+    <header class="no-print max-w-[1000px] mx-auto mb-6 bg-white p-3.5 md:p-4 rounded-xl border border-slate-300 shadow-xs flex flex-wrap items-center justify-between gap-3">
         <div class="flex items-center gap-3">
             <a href="../index.html" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium rounded text-sm transition flex items-center gap-2 border border-slate-300">
                 <i class="fa-solid fa-arrow-left text-xs text-slate-500"></i>
@@ -25,51 +61,981 @@
                 <span>目次</span>
             </a>
             <span class="text-slate-300">|</span>
-            <div class="text-xs md:text-sm font-bold text-slate-700">
-                ふるさと学習のテーマ
+            <div class="text-xs md:text-sm font-bold text-slate-700 font-gothic">
+                ふるさと学習「テーマ集（過去の取組）」
             </div>
+        </div>
+        <div class="flex items-center gap-2">
+            <button onclick="window.print()" class="px-3 py-1.5 bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 rounded text-xs md:text-sm font-medium transition flex items-center gap-1.5 shadow-2xs">
+                <i class="fa-solid fa-print text-slate-500"></i>
+                <span>印刷する</span>
+            </button>
         </div>
     </header>
 
     <!-- メインコンテンツ -->
-    <main class="max-w-[900px] mx-auto space-y-6">
+    <main class="max-w-[1000px] mx-auto space-y-6">
 
         <!-- ページ見出しカード -->
         <section class="bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs">
-            <div class="border-b border-slate-200 pb-3 mb-4 flex items-center justify-between flex-wrap gap-2">
+            <div class="flex items-center justify-between flex-wrap gap-2">
                 <div>
-                    <span class="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded">
-                        過去の取組・探求の領域
+                    <span class="text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded font-gothic">
+                        過年度の取組・探究の領域
                     </span>
-                    <h1 class="text-xl md:text-2xl font-bold text-slate-900 mt-1.5">
-                        ふるさと学習のテーマ
+                    <h1 class="text-xl md:text-2xl font-bold text-slate-900 mt-1.5 font-gothic">
+                        ふるさと学習「テーマ集（過去の取組）」
                     </h1>
                 </div>
+                <div class="text-xs text-slate-500 font-gothic">
+                    天川村立天川小中学校
+                </div>
             </div>
-            <p class="text-sm text-slate-600 leading-relaxed">
-                これまでに実践されたふるさと学習（総合的な学習の時間）のテーマ、過去の取組と探求の領域に関する資料をまとめています。
-            </p>
         </section>
 
-        <!-- 資料一覧・プレースホルダー -->
-        <section class="bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs">
-            <h2 class="text-base md:text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-                <i class="fa-solid fa-folder-open text-amber-500"></i>
-                <span>スライド・資料一覧</span>
-            </h2>
-
-            <div class="p-8 text-center border-2 border-dashed border-slate-200 rounded-xl bg-slate-50/50">
-                <i class="fa-solid fa-file-powerpoint text-slate-300 text-4xl mb-3"></i>
-                <div class="font-medium text-slate-600 text-sm mb-1">
-                    資料準備中
+        <!-- 年度切り替えタブ / ナビゲーション -->
+        <section class="no-print bg-white p-4 rounded-xl border border-slate-300 shadow-xs">
+            <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+                <div class="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5 font-gothic">
+                    <i class="fa-solid fa-calendar-days text-slate-400"></i>
+                    <span>年度の選択</span>
                 </div>
-                <p class="text-xs text-slate-400">
-                    今後、kako フォルダ内に過去のスライド資料やまとめPDFを追加・整理していく予定です。
-                </p>
+                <div class="text-xs text-slate-500 font-gothic">
+                    ※ボタンをクリックすると表示を切り替えます
+                </div>
+            </div>
+            <div class="flex flex-wrap gap-2">
+                <button onclick="filterYear('all')" id="btn-all" class="year-tab-btn px-3 py-1.5 text-xs md:text-sm font-bold rounded-lg transition border bg-slate-800 text-white border-slate-800 font-gothic">
+                    全年度を表示
+                </button>
+                <button onclick="filterYear('r7')" id="btn-r7" class="year-tab-btn px-3 py-1.5 text-xs md:text-sm font-bold rounded-lg transition border bg-white text-slate-700 border-slate-300 hover:bg-slate-100 font-gothic">
+                    令和7年度 (2025)
+                </button>
+                <button onclick="filterYear('r6')" id="btn-r6" class="year-tab-btn px-3 py-1.5 text-xs md:text-sm font-bold rounded-lg transition border bg-white text-slate-700 border-slate-300 hover:bg-slate-100 font-gothic">
+                    令和6年度 (2024)
+                </button>
+                <button onclick="filterYear('r5')" id="btn-r5" class="year-tab-btn px-3 py-1.5 text-xs md:text-sm font-bold rounded-lg transition border bg-white text-slate-700 border-slate-300 hover:bg-slate-100 font-gothic">
+                    令和5年度 (2023)
+                </button>
+                <button onclick="filterYear('r4')" id="btn-r4" class="year-tab-btn px-3 py-1.5 text-xs md:text-sm font-bold rounded-lg transition border bg-white text-slate-700 border-slate-300 hover:bg-slate-100 font-gothic">
+                    令和4年度 (2022)
+                </button>
+                <button onclick="filterYear('r3')" id="btn-r3" class="year-tab-btn px-3 py-1.5 text-xs md:text-sm font-bold rounded-lg transition border bg-white text-slate-700 border-slate-300 hover:bg-slate-100 font-gothic">
+                    令和3年度 (2021)
+                </button>
+                <button onclick="filterYear('r2')" id="btn-r2" class="year-tab-btn px-3 py-1.5 text-xs md:text-sm font-bold rounded-lg transition border bg-white text-slate-700 border-slate-300 hover:bg-slate-100 font-gothic">
+                    令和2年度 (2020)
+                </button>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 令和７年度（2025年度） -->
+        <!-- ========================================== -->
+        <section id="section-r7" class="year-section bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs print-break-inside-avoid">
+            <div class="border-b-2 border-slate-800 pb-3 mb-5 flex items-center justify-between flex-wrap gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-2.5 h-6 bg-emerald-600 rounded-xs"></span>
+                    <h2 class="text-lg md:text-xl font-bold text-slate-900 font-gothic">
+                        令和７年度（2025年度） ふるさと学習発表会
+                    </h2>
+                </div>
+                <span class="text-xs font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded border border-slate-200 font-gothic">
+                    2025年11月13日 開催
+                </span>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse border border-slate-300 text-sm">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-800 border-b border-slate-300 font-gothic">
+                            <th class="p-3 border-r border-slate-300 text-center w-28 font-bold whitespace-nowrap">学年</th>
+                            <th class="p-3 border-r border-slate-300 font-bold w-1/3 min-w-[220px]">学習テーマ</th>
+                            <th class="p-3 font-bold">取組の概要</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        <!-- 前期課程 -->
+                        <tr class="bg-emerald-50/40 font-gothic">
+                            <td colspan="3" class="px-3 py-1.5 text-xs font-bold text-emerald-800 border-b border-emerald-200">
+                                <i class="fa-solid fa-seedling mr-1"></i> 前期課程（1年生〜6年生）
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs mb-1">前期</span><br>
+                                １年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">「1ねん生のあきさがし」</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                学校の周りで見つけた天川の秋の自然や宝物を紹介しました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs mb-1">前期</span><br>
+                                ２年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">「天川たんけんたい」</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                天川村のすてきな人たちにお話を聞きに出かけ、地域の人の温かさや魅力を学びました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs mb-1">前期</span><br>
+                                ３年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">「天川のとくさん品」</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                「陀羅尼助」「いもぼた」「トラフグ」へのインタビューを通して、天川の自慢の特産品の良さを伝えました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs mb-1">前期</span><br>
+                                ４年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">「地球をゆたかにSDGｓ<br><span class="text-xs text-slate-600 font-normal">〜天川村の水と山について考える〜」</span></span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                天川村の美しい自然について、SDGsの４つの目標を通して学んだことや考えたこと、村内見学で分かったことを中心に発表しました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs mb-1">前期</span><br>
+                                ５年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">「ズーム天川！！<br><span class="text-xs text-slate-600 font-normal">〜天河大辨財天社の秘密をさぐれ！～」</span></span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                天河大辨財天社について調査。祀られている神様や五十鈴の秘密、参拝者が多い理由などを詳しく調べました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs mb-1">前期</span><br>
+                                ６年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">「天川のジビエ」</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                天川村の獣害とジビエの関係について考察。ジビエ肉を使った料理について調べ、実際に美味しく食べられる調理法を思案しました。
+                            </td>
+                        </tr>
+
+                        <!-- 後期課程 -->
+                        <tr class="bg-indigo-50/40 font-gothic">
+                            <td colspan="3" class="px-3 py-1.5 text-xs font-bold text-indigo-900 border-b border-indigo-200">
+                                <i class="fa-solid fa-graduation-cap mr-1"></i> 後期課程（7年生〜9年生）
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-indigo-100 text-indigo-800 rounded text-xs mb-1">後期</span><br>
+                                ７年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">天川村の世代を繋ぐ｢おかいさん｣<br><span class="text-xs text-slate-600 font-normal">～ ７年生茶粥物語 ～</span></span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                天川村に古くから伝わる食文化「おかいさん（茶粥）」に注目し、伝統食を未来へ繋ぐ新しいソウルフードとなるよう探究。村民アンケートや昔ながらの調理法をまとめました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-indigo-100 text-indigo-800 rounded text-xs mb-1">後期</span><br>
+                                ８年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">商品開発物語<br><span class="text-xs text-slate-600 font-normal">〜６人の田舎者による天川活性化計画X〜</span></span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                「御当地食材を使って、天川村をアピールできる商品・新メニューを生み出したい」というテーマで試行錯誤しながら開発に取り組み、地域活性化の提案を行いました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-indigo-100 text-indigo-800 rounded text-xs mb-1">後期</span><br>
+                                ９年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">「植樹×食事イベント」遂に企画・実施！</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                ５年生時から取り組んできた「環境保全と観光を結びつけた植樹×食事イベント」の最終目標をついに達成。当日の様子や天川の自然を守る思いを発信し、約５年にわたる探究の集大成を発表しました。
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+<!-- ========================================== -->
+        <!-- 令和６年度（2024年度） -->
+        <!-- ========================================== -->
+        <section id="section-r6" class="year-section bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs print-break-inside-avoid">
+            <div class="border-b-2 border-slate-800 pb-3 mb-5 flex items-center justify-between flex-wrap gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-2.5 h-6 bg-emerald-600 rounded-xs"></span>
+                    <h2 class="text-lg md:text-xl font-bold text-slate-900 font-gothic">
+                        令和６年度（2024年度） ふるさと学習発表会
+                    </h2>
+                </div>
+                <span class="text-xs font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded border border-slate-200 font-gothic">
+                    2024年11月8日 開催
+                </span>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse border border-slate-300 text-sm">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-800 border-b border-slate-300 font-gothic">
+                            <th class="p-3 border-r border-slate-300 text-center w-28 font-bold whitespace-nowrap">学年</th>
+                            <th class="p-3 border-r border-slate-300 font-bold w-1/3 min-w-[220px]">学習テーマ</th>
+                            <th class="p-3 font-bold">取組の概要</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        <!-- 前期課程 -->
+                        <tr class="bg-emerald-50/40 font-gothic">
+                            <td colspan="3" class="px-3 py-1.5 text-xs font-bold text-emerald-800 border-b border-emerald-200">
+                                <i class="fa-solid fa-seedling mr-1"></i> 前期課程（1年生〜6年生）
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs mb-1">前期</span><br>
+                                １年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">「すてきなところ　みいつけた」</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                １学期と２学期の探検で見つけた学校周辺のすてきなところを紹介しました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs mb-1">前期</span><br>
+                                ２年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">「人！村！天川！　インタビューへ GO ！」</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                天川村のすてきな人たちにお話を聞きに出かけ、村で働く人たちの想いや魅力をインタビューしました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs mb-1">前期</span><br>
+                                ３年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">「天川の川」</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                「あまごつかみ取り体験」「水生生物の調査」「水質検査」「ストーンアート」を通じて、天川の清流の姿とその生態系に迫りました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs mb-1">前期</span><br>
+                                ４年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">「天川村に関係のある歴史人物」</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                「役小角」「イチキシマヒメノミコト」「後醍醐天皇」について、3班に分かれてゆかりの歴史や伝承を調べ発表しました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs mb-1">前期</span><br>
+                                ５年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">「天川村植物探検隊　～天川村の植物を守るために～」</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                自然豊かな天川村の植物について調査し、豊かな自然環境を守るために自分たちにできることを考えました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs mb-1">前期</span><br>
+                                ６年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">「茶豆の魅力を伝え隊」</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                茶豆の魅力であるおいしさを伝えるため、茶豆を使ったオリジナル料理を考案し、料理に使うための栽培活動も行いました。
+                            </td>
+                        </tr>
+
+                        <!-- 後期課程 -->
+                        <tr class="bg-indigo-50/40 font-gothic">
+                            <td colspan="3" class="px-3 py-1.5 text-xs font-bold text-indigo-900 border-b border-indigo-200">
+                                <i class="fa-solid fa-graduation-cap mr-1"></i> 後期課程（7年生〜9年生）
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-indigo-100 text-indigo-800 rounded text-xs mb-1">後期</span><br>
+                                ７年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">『目指せ紫流の滝』<br><span class="text-xs text-slate-600 font-normal">～天川村の滝について調べる。～</span></span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                天川村の豊かな名瀑について現地調査を行いました。洞川地区「河鹿の滝」「龍泉寺の滝」、中央地区「みたらいの滝」「光の滝」、西部地区「紫流の滝」「不動滝」について調べ、まとめました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-indigo-100 text-indigo-800 rounded text-xs mb-1">後期</span><br>
+                                ８年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">「植樹×食事イベント」に向けて<br><span class="text-xs text-slate-600 font-normal">～校内植樹イベント企画・実施～</span></span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                9年次での実施を想定している「環境保全と観光を結びつけた植樹×食事イベント」の第一歩として、「天川村の広葉樹を増やし、土砂災害を防ぐ」ことを目的に、地域の方々の協力を得ながら「校内植樹イベント」を企画・実施しました。自然を守る思いを発信しました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-indigo-100 text-indigo-800 rounded text-xs mb-1">後期</span><br>
+                                ９年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">天川村の歴史の謎を探る＆天川産ランチメニュー考案</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                <div class="space-y-2">
+                                    <div>
+                                        <strong class="text-slate-800 font-gothic text-xs bg-slate-100 px-1.5 py-0.5 rounded">洞川班</strong>
+                                        <p class="mt-0.5">女人禁制の歴史を知ることでふるさとへの知見を深め、様々な体験を通じて洞川の歴史を探求。</p>
+                                    </div>
+                                    <div>
+                                        <strong class="text-slate-800 font-gothic text-xs bg-slate-100 px-1.5 py-0.5 rounded">ランチメニュー班</strong>
+                                        <p class="mt-0.5">村の魅力発信に向け、天川産の新鮮な食材を使用した美味しいランチメニューを考案・調理。</p>
+                                    </div>
+                                    <div>
+                                        <strong class="text-slate-800 font-gothic text-xs bg-slate-100 px-1.5 py-0.5 rounded">天川村西部地区班</strong>
+                                        <p class="mt-0.5">前年度の学びから関心を持った「すずかけの道」や空海とのつながりについて調査し発信。</p>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 令和５年度（2023年度） -->
+        <!-- ========================================== -->
+        <section id="section-r5" class="year-section bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs print-break-inside-avoid">
+            <div class="border-b-2 border-slate-800 pb-3 mb-5 flex items-center justify-between flex-wrap gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-2.5 h-6 bg-emerald-600 rounded-xs"></span>
+                    <h2 class="text-lg md:text-xl font-bold text-slate-900 font-gothic">
+                        令和５年度（2023年度） ふるさと学習発表会
+                    </h2>
+                </div>
+                <span class="text-xs font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded border border-slate-200 font-gothic">
+                    発表概要
+                </span>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse border border-slate-300 text-sm">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-800 border-b border-slate-300 font-gothic">
+                            <th class="p-3 border-r border-slate-300 text-center w-28 font-bold whitespace-nowrap">学年</th>
+                            <th class="p-3 border-r border-slate-300 font-bold w-1/3 min-w-[220px]">学習テーマ</th>
+                            <th class="p-3 font-bold">取組の概要</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        <!-- 前期課程 -->
+                        <tr class="bg-emerald-50/40 font-gothic">
+                            <td colspan="3" class="px-3 py-1.5 text-xs font-bold text-emerald-800 border-b border-emerald-200">
+                                <i class="fa-solid fa-seedling mr-1"></i> 前期課程（1年生〜6年生）
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs mb-1">前期</span><br>
+                                １年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">「はっくつ　天川！ 一年じるし」<br><span class="text-xs text-slate-600 font-normal">～わ！わ！わぁ！を見つけたよ～</span></span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                天川の“わ！わ！わぁ！”を見つけに、三人のお家へ探検に出かけ、身近なふるさとの驚きを発見しました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs mb-1">前期</span><br>
+                                ２年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">「天川のすてきはっけん」</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                村たんけんで天川村のすてきなところをたくさん発見し、地域の特徴をまとめました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs mb-1">前期</span><br>
+                                ３年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">「ふくしってなんだろう？」</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                村探検や地域の方々とのふれ合いの中で、福祉とは何か、お互いに支え合うことの大切さを考えました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs mb-1">前期</span><br>
+                                ４年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">「山にまつわるふしぎ」</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                なぜ人は山に登るのだろう、山にはどんな魅力があるのだろうという疑問から、山にまつわる不思議を調べました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs mb-1">前期</span><br>
+                                ５年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">「茶豆をさらに広め隊～害獣との共存～」</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                ３・４年生の時に育てた茶豆をさらに広めるために、天川村における害獣の実態や共存のための対策について詳しく調べました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs mb-1">前期</span><br>
+                                ６年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">天川村の郷土料理と最新グルメ</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                天川村に伝わる郷土料理がなぜ長い間受け継がれてきたのか、どのように継承されてきたかを調査。さらに最新グルメに込められた想いと未来について探究しました。
+                            </td>
+                        </tr>
+
+                        <!-- 後期課程 -->
+                        <tr class="bg-indigo-50/40 font-gothic">
+                            <td colspan="3" class="px-3 py-1.5 text-xs font-bold text-indigo-900 border-b border-indigo-200">
+                                <i class="fa-solid fa-graduation-cap mr-1"></i> 後期課程（7年生〜9年生）
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-indigo-100 text-indigo-800 rounded text-xs mb-1">後期</span><br>
+                                ７年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">天川村の自然を学ぶ、自然に学ぶ<br><span class="text-xs text-slate-600 font-normal">〜体験学習や調べ学習を通して〜</span></span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                後期課程3年間で天川村に広葉樹を広めたいという目標を立て、体験を通して自然や環境の学びを深めました。<br>
+                                ①自然体験学習（斎庭や登山等）　②自然災害学習（平成23年紀伊半島大水害）　③広葉樹の植樹イベントの構想
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-indigo-100 text-indigo-800 rounded text-xs mb-1">後期</span><br>
+                                ８年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">「天川村の歴史及び自然について」</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                <div class="space-y-2">
+                                    <div>
+                                        <strong class="text-slate-800 font-gothic text-xs bg-slate-100 px-1.5 py-0.5 rounded">自然班</strong>
+                                        <p class="mt-0.5">村の自然を調べ、美しさを知ってもらうためのPR動画を作成。</p>
+                                    </div>
+                                    <div>
+                                        <strong class="text-slate-800 font-gothic text-xs bg-slate-100 px-1.5 py-0.5 rounded">傳御組班</strong>
+                                        <p class="mt-0.5">南朝と位衆傳御組について地域の方々のお話をもとに歴史を探求し史跡を調査。</p>
+                                    </div>
+                                    <div>
+                                        <strong class="text-slate-800 font-gothic text-xs bg-slate-100 px-1.5 py-0.5 rounded">西部地区班</strong>
+                                        <p class="mt-0.5">天和の里、塩野地区、天和鉱山の現地取材・調査を実施。</p>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-indigo-100 text-indigo-800 rounded text-xs mb-1">後期</span><br>
+                                ９年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">天川村の古き良き伝統<br><span class="text-xs text-slate-600 font-normal">～後世に伝えたい盆踊り～</span></span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                天川村の盆踊りについて地元の方々から聞き取り調査を実施。村内3地域（洞川・中央・西部）に分かれて調査し、貴重な民俗資料のデータ整理を行いました。
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 令和４年度（2022年度） -->
+        <!-- ========================================== -->
+        <section id="section-r4" class="year-section bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs print-break-inside-avoid">
+            <div class="border-b-2 border-slate-800 pb-3 mb-5 flex items-center justify-between flex-wrap gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-2.5 h-6 bg-emerald-600 rounded-xs"></span>
+                    <h2 class="text-lg md:text-xl font-bold text-slate-900 font-gothic">
+                        令和４年度（2022年度） ふるさと学習発表会
+                    </h2>
+                </div>
+                <span class="text-xs text-slate-500 bg-slate-100 px-2.5 py-1 rounded border border-slate-200 font-gothic">
+                    ※令和3年度の取組を継続・発展
+                </span>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse border border-slate-300 text-sm">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-800 border-b border-slate-300 font-gothic">
+                            <th class="p-3 border-r border-slate-300 text-center w-28 font-bold whitespace-nowrap">学年</th>
+                            <th class="p-3 border-r border-slate-300 font-bold w-1/3 min-w-[220px]">学習テーマ</th>
+                            <th class="p-3 font-bold">取組の概要</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        <!-- 前期課程 -->
+                        <tr class="bg-emerald-50/40 font-gothic">
+                            <td colspan="3" class="px-3 py-1.5 text-xs font-bold text-emerald-800 border-b border-emerald-200">
+                                <i class="fa-solid fa-seedling mr-1"></i> 前期課程（1年生〜6年生）
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs mb-1">前期</span><br>
+                                １年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">天川 すっごいもの　みっけ隊</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                学校から少しずつ足を伸ばしながら、子ども達が見つけた“天川のすっごいもの”を集めて発表しました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs mb-1">前期</span><br>
+                                ２年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">むらには　いろんな　かおが　いて</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                天川村を探検する中で、村にはいろいろな「かお」が隠れていることに気がつき、それぞれの「かお」がある場所や施設を写真絵本にまとめました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs mb-1">前期</span><br>
+                                ３年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">天川のふしぎな食べ物</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                天川村の食文化、伝統的な野菜、新たな特産物について、その魅力を「ふしぎ」として調査し発表しました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs mb-1">前期</span><br>
+                                ４年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">気になるスポットの　ひみつにせまる</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                天河辨財天と龍泉寺の２チームに分かれ、それぞれの歴史や不思議だなと感じたことを調べました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs mb-1">前期</span><br>
+                                ５年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">天川村の森林環境について学習したこと</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                ①間伐体験・「私たちのくらしと森林」学習、②村フォレストパワー協議会の見学、③斎庭（ゆにわ）井頭さん・柿坂さんからのお話を通して森林の恵みと役割を学習しました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs mb-1">前期</span><br>
+                                ６年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">NO　MORE　WAR<br><span class="text-xs text-slate-600 font-normal">（もう戦争はいらない）</span></span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                ビデオや調べ学習を通して戦争の悲惨さや平和の大切さを学習。洞川資料館のB-29エンジン一部の見学や、京谷友明さんからの聞き取りを通じ地域と戦争の歴史を学びました。
+                            </td>
+                        </tr>
+
+                        <!-- 後期課程 -->
+                        <tr class="bg-indigo-50/40 font-gothic">
+                            <td colspan="3" class="px-3 py-1.5 text-xs font-bold text-indigo-900 border-b border-indigo-200">
+                                <i class="fa-solid fa-graduation-cap mr-1"></i> 後期課程（7年生〜9年生）
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-indigo-100 text-indigo-800 rounded text-xs mb-1">後期</span><br>
+                                ７年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">天川村（中央地区）のMAP作成</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                村の観光に役立ちたいという思いで二班に分かれ、中央地区のキャンプ場と寺社のマップを作成。自らの目で確かめた情報をまとめました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-indigo-100 text-indigo-800 rounded text-xs mb-1">後期</span><br>
+                                ８年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">ふるさとの食材を使用した創作料理</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                「いもぼた」「名水豆腐」「洞川イチゴ」「川魚」の４グループに分かれて調査・インタビューを実施。調理実習を経てオリジナルレシピを考案し、広く見られるようQRコード化しました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-indigo-100 text-indigo-800 rounded text-xs mb-1">後期</span><br>
+                                ９年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">戦中・戦後の移り変わりと天川村</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                当時の天川における生活実態（衣食住）を現代と比較しながら調査。村内の戦争経験者へのインタビューを通じて考えを深め、９年生としての平和宣言を発信しました。
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 令和３年度（2021年度） -->
+        <!-- ========================================== -->
+        <section id="section-r3" class="year-section bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs print-break-inside-avoid">
+            <div class="border-b-2 border-slate-800 pb-3 mb-5 flex items-center justify-between flex-wrap gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-2.5 h-6 bg-emerald-600 rounded-xs"></span>
+                    <h2 class="text-lg md:text-xl font-bold text-slate-900 font-gothic">
+                        令和３年度（2021年度） ふるさと学習発表会
+                    </h2>
+                </div>
+                <span class="text-xs font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded border border-slate-200 font-gothic">
+                    発表プログラム
+                </span>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse border border-slate-300 text-sm">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-800 border-b border-slate-300 font-gothic">
+                            <th class="p-3 border-r border-slate-300 text-center w-28 font-bold whitespace-nowrap">学年</th>
+                            <th class="p-3 border-r border-slate-300 font-bold w-1/3 min-w-[220px]">学習テーマ</th>
+                            <th class="p-3 font-bold">取組の概要</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        <!-- 前期課程 -->
+                        <tr class="bg-emerald-50/40 font-gothic">
+                            <td colspan="3" class="px-3 py-1.5 text-xs font-bold text-emerald-800 border-b border-emerald-200">
+                                <i class="fa-solid fa-seedling mr-1"></i> 前期課程（1年生〜6年生）
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs mb-1">前期</span><br>
+                                １年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">天川 すっごいもの　みっけ隊</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                学校から少しずつ足を伸ばしながら、子ども達が見つけた“天川のすっごいもの”を集めて発表しました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs mb-1">前期</span><br>
+                                ２年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">むらには　いろんな　かおが　いて</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                天川村を探検する中で、村にはいろいろな「かお」が隠れていることに気がつき、それぞれの「かお」がある場所や施設を写真絵本にまとめました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs mb-1">前期</span><br>
+                                ３年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">天川のふしぎな食べ物</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                天川村の食文化、伝統的な野菜、新たな特産物について、その魅力を「ふしぎ」として調査し発表しました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs mb-1">前期</span><br>
+                                ４年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">気になるスポットの　ひみつにせまる</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                天河辨財天と龍泉寺の２チームに分かれ、それぞれの歴史や不思議だなと感じたことを調べました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs mb-1">前期</span><br>
+                                ５年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">天川村の森林環境について学習したこと</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                ①間伐体験・「私たちのくらしと森林」学習、②村フォレストパワー協議会の見学、③斎庭（ゆにわ）井頭さん・柿坂さんからのお話を通して森林の恵みと役割を学習しました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded text-xs mb-1">前期</span><br>
+                                ６年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">NO　MORE　WAR<br><span class="text-xs text-slate-600 font-normal">（もう戦争はいらない）</span></span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                ビデオや調べ学習を通して戦争の悲惨さや命の尊さ、平和の大切さを学習。洞川資料館のB-29部品見学や、京谷友明さんからの聞き取りを通じ地域と戦争の歴史を学びました。
+                            </td>
+                        </tr>
+
+                        <!-- 後期課程 -->
+                        <tr class="bg-indigo-50/40 font-gothic">
+                            <td colspan="3" class="px-3 py-1.5 text-xs font-bold text-indigo-900 border-b border-indigo-200">
+                                <i class="fa-solid fa-graduation-cap mr-1"></i> 後期課程（7年生〜9年生）
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-indigo-100 text-indigo-800 rounded text-xs mb-1">後期</span><br>
+                                ７年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">天川村（中央地区）のMAP作成</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                天川村の観光に役立ちたいという思いで、二班に分かれ、中央地区のキャンプ場と寺社のマップを作成。自らの目で確かめながら発信しました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-indigo-100 text-indigo-800 rounded text-xs mb-1">後期</span><br>
+                                ８年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">ふるさとの食材を使用した創作料理</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                「いもぼた」「名水豆腐」「洞川イチゴ」「川魚」の４グループに分かれて調査。調理実習を行いオリジナルレシピを作成し、多くの方が見られるようQRコードを作成しました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-indigo-100 text-indigo-800 rounded text-xs mb-1">後期</span><br>
+                                ９年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">戦中・戦後の移り変わりと天川村</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                ふるさと天川における当時の生活実態に焦点を当て、衣食住の観点から文献調査や村内の戦争経験者へのインタビューを実施。平和宣言を発信しました。
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 令和２年度（2020年度） -->
+        <!-- ========================================== -->
+        <section id="section-r2" class="year-section bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs print-break-inside-avoid">
+            <div class="border-b-2 border-slate-800 pb-3 mb-5 flex items-center justify-between flex-wrap gap-2">
+                <div class="flex items-center gap-3">
+                    <span class="w-2.5 h-6 bg-emerald-600 rounded-xs"></span>
+                    <h2 class="text-lg md:text-xl font-bold text-slate-900 font-gothic">
+                        令和２年度（2020年度） 学習発表会
+                    </h2>
+                </div>
+                <span class="text-xs font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded border border-slate-200 font-gothic">
+                    2020年11月14日 開催（後期課程）
+                </span>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse border border-slate-300 text-sm">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-800 border-b border-slate-300 font-gothic">
+                            <th class="p-3 border-r border-slate-300 text-center w-28 font-bold whitespace-nowrap">学年</th>
+                            <th class="p-3 border-r border-slate-300 font-bold w-1/3 min-w-[220px]">学習テーマ</th>
+                            <th class="p-3 font-bold">取組の概要</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        <!-- 後期課程 -->
+                        <tr class="bg-indigo-50/40 font-gothic">
+                            <td colspan="3" class="px-3 py-1.5 text-xs font-bold text-indigo-900 border-b border-indigo-200">
+                                <i class="fa-solid fa-graduation-cap mr-1"></i> 後期課程（7年生〜9年生） ※記録資料より
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-indigo-100 text-indigo-800 rounded text-xs mb-1">後期</span><br>
+                                ７年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">【天川村の食文化について】</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                「地場産物」「家庭料理」「地域の食文化」の3班に分かれ調査。役場地域振興課（イチゴ・フグ等の村食材取材）、後期家庭への伝統食アンケート、給食調理員さんへのインタビューを実施。地域（天川・洞川）による食文化の違いや産業の取組をまとめスライド化しました。
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-indigo-100 text-indigo-800 rounded text-xs mb-1">後期</span><br>
+                                ８年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">天川の伝説と間伐材の利用について</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                <div class="space-y-2">
+                                    <div>
+                                        <strong class="text-slate-800 font-gothic text-xs bg-slate-100 px-1.5 py-0.5 rounded">伝説班</strong>
+                                        <p class="mt-0.5">村に伝わる伝説や昔話を調査。洞川出身の方に監修・音読指導を受け、洞川弁（方言）で地域の大切な文化を紹介。</p>
+                                    </div>
+                                    <div>
+                                        <strong class="text-slate-800 font-gothic text-xs bg-slate-100 px-1.5 py-0.5 rounded">間伐材班</strong>
+                                        <p class="mt-0.5">天川村や全国の山林の現状、間伐材の種類・用途を調査。間伐材を使った木工作品やミニハウスを製作。</p>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition">
+                            <td class="p-3 border-r border-slate-300 text-center font-bold text-slate-700 bg-slate-50/50 font-gothic">
+                                <span class="inline-block px-2 py-0.5 bg-indigo-100 text-indigo-800 rounded text-xs mb-1">後期</span><br>
+                                ９年生
+                            </td>
+                            <td class="p-3 border-r border-slate-300 align-top">
+                                <span class="font-bold text-slate-900 font-gothic text-base">気になりませんか天川村</span>
+                            </td>
+                            <td class="p-3 align-top leading-relaxed text-slate-700">
+                                「ふるさとと未来を見つめ発信する」を目標に、コロナ禍でも発信できるよう村内各地域で撮影を実施。<br>
+                                <strong class="text-slate-800 font-gothic text-xs bg-slate-100 px-1.5 py-0.5 rounded">CM班</strong>：方言ナレーションを取り入れた30秒PR動画CMを制作。<br>
+                                <strong class="text-slate-800 font-gothic text-xs bg-slate-100 px-1.5 py-0.5 rounded">ポスター班</strong>：役場でのアドバイスを生かしA1判の観光ポスターを制作し各事業所に掲示。
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </section>
 
     </main>
 
+    <!-- フッター -->
+    <footer class="no-print max-w-[1000px] mx-auto mt-12 mb-6 text-center text-xs text-slate-400 font-gothic">
+        天川村立天川小中学校 ふるさと学習アーカイブ
+    </footer>
+
+    <!-- スクリプト：年度切り替えタブ機能 -->
+    <script>
+        function filterYear(year) {
+            const sections = document.querySelectorAll('.year-section');
+            const buttons = document.querySelectorAll('.year-tab-btn');
+
+            // ボタンのアクティブ状態の更新
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-slate-800', 'text-white', 'border-slate-800');
+                btn.classList.add('bg-white', 'text-slate-700', 'border-slate-300');
+            });
+
+            const activeBtn = document.getElementById('btn-' + year);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-white', 'text-slate-700', 'border-slate-300');
+                activeBtn.classList.add('bg-slate-800', 'text-white', 'border-slate-800');
+            }
+
+            // セクションの表示・非表示切り替え
+            sections.forEach(sec => {
+                if (year === 'all') {
+                    sec.style.display = 'block';
+                } else if (sec.id === 'section-' + year) {
+                    sec.style.display = 'block';
+                } else {
+                    sec.style.display = 'none';
+                }
+            });
+        }
+    </script>
 </body>
 </html>
