@@ -3,168 +3,404 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>振興大会に向けたポータルサイト</title>
+    <title>天川村ふるさと学習 ポータルサイト | 振興大会</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Noto Serif JP (伝統・自然の格式) & Noto Sans JP (クリーンな探求の知性) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Noto+Serif+JP:wght@600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans JP"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                        serif: ['"Noto Serif JP"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+            font-family: "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+        .font-serif-title {
+            font-family: "Noto Serif JP", serif;
+        }
+
+        /* 天川村の豊かな山林・清流をイメージした背景とトポグラフィック（等高線/フィールドワーク探究）パターン */
+        .tenkawa-canvas {
+            background-color: #f1f6f3;
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 20%, rgba(14, 116, 144, 0.1) 0%, transparent 45%),
+                radial-gradient(circle at 50% 90%, rgba(5, 150, 105, 0.08) 0%, transparent 50%),
+                url("data:image/svg+xml,%3Csvg width='160' height='160' viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 80 C 30 65, 60 95, 90 80 C 120 65, 140 90, 160 80 M0 40 C 40 25, 80 50, 120 35 C 140 28, 150 32, 160 30 M0 120 C 40 105, 70 135, 110 120 C 135 112, 150 125, 160 120' fill='none' stroke='%230f766e' stroke-width='0.75' stroke-opacity='0.06'/%3E%3C/svg%3E");
+            background-attachment: fixed;
+        }
+
+        /* 日本語テキストの自然な折り返し制御 */
+        .text-wrap-safe {
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+        /* QRコードの厳格なサイズ制御 */
+        .qr-code-img {
+            width: 52px;
+            height: 52px;
+        }
+        @media (min-width: 640px) {
+            .qr-code-img {
+                width: 76px;
+                height: 76px;
+            }
+        }
+
+        /* カードのホバー・マイクロインタラクション */
+        .nature-card {
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .nature-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(13, 51, 38, 0.12), 0 4px 6px -2px rgba(13, 51, 38, 0.04);
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex items-center justify-center p-4 sm:p-8">
+<body class="tenkawa-canvas text-slate-800 min-h-screen py-3 px-2 sm:py-10 sm:px-4">
 
-    <main class="max-w-2xl w-full bg-white rounded-2xl border border-slate-200 shadow-sm p-8 sm:p-12">
-        
-        <header class="mb-8 border-b border-slate-100 pb-5 flex items-start justify-between gap-3 sm:gap-4">
-            <div class="flex-1 min-w-0 pr-1">
-                <h1 class="text-xl sm:text-3xl font-bold text-slate-900 tracking-tight leading-snug">
-                    <span class="inline-block">振興大会に向けた</span><span class="inline-block">ポータルサイト</span>
-                </h1>
-                <p class="text-xs sm:text-base text-slate-500 mt-1.5">準備期間は情報集約、大会当日は配布資料として活用</p>
+    <!-- メインコンテナ（中央配置・全幅制御） -->
+    <main class="w-full max-w-full sm:max-w-2xl mx-auto bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl border border-emerald-900/10 shadow-xl shadow-emerald-950/5 overflow-hidden">
+
+        <!-- ヘッダー：天川村の自然（山・森・川）と探求の学びを象徴するヒーローエリア -->
+        <header class="relative bg-gradient-to-br from-emerald-900 via-teal-900 to-slate-900 text-white p-4 sm:p-8 overflow-hidden">
+            
+            <!-- 自然の情景（大峯の山並みと天ノ川の清流）を描いたSVGベクターアート -->
+            <div class="absolute inset-0 pointer-events-none opacity-25">
+                <svg class="w-full h-full object-cover" viewBox="0 0 700 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- 奥の連山シルエット -->
+                    <path d="M0,170 L110,85 L200,135 L330,55 L450,120 L570,70 L680,130 L700,115 L700,220 L0,220 Z" fill="#ffffff" fill-opacity="0.2" />
+                    <!-- 手前の深山 -->
+                    <path d="M0,195 L140,115 L260,160 L380,95 L510,150 L620,105 L700,150 L700,220 L0,220 Z" fill="#34d399" fill-opacity="0.25" />
+                    <!-- 天ノ川の清流のせせらぎ -->
+                    <path d="M0,210 C 180,180 350,230 520,195 C 620,175 660,195 700,190 L700,220 L0,220 Z" fill="#38bdf8" fill-opacity="0.35" />
+                </svg>
             </div>
-            <!-- 右上のQRコード -->
-            <a href="https://t-cool.github.io/tenkawa/" target="_blank" rel="noopener noreferrer" class="shrink-0 group" title="Webサイトを開く（https://t-cool.github.io/tenkawa/）">
-                <img src="qr.png" alt="QRコード: https://t-cool.github.io/tenkawa/" class="w-14 h-14 sm:w-20 sm:h-20 rounded-lg border border-slate-200 p-0.5 bg-white shadow-2xs group-hover:border-blue-400 group-hover:shadow-xs transition">
-            </a>
-        </header>
 
-        <nav class="space-y-6">
-            <!-- 継続して策定を検討する資料 -->
-            <section class="space-y-4">
-                <div class="flex items-center gap-2 px-1">
-                    <span class="w-1.5 h-4 bg-teal-600 rounded-full inline-block"></span>
-                    <h2 class="text-xs sm:text-sm font-bold text-slate-700 tracking-wide">継続して策定を検討する資料</h2>
+            <div class="relative z-10 space-y-3">
+                <!-- 上部タグライン -->
+                <div class="flex items-center justify-between gap-2">
+                    <div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-800/80 border border-emerald-500/40 text-emerald-200 text-[10px] sm:text-xs font-medium tracking-wide">
+                        <i class="fa-solid fa-mountain text-emerald-300 text-[9px] sm:text-[10px]"></i>
+                        <span>奈良県吉野郡天川村 ｜ ふるさと学習</span>
+                    </div>
+                    <div class="hidden sm:inline-flex items-center gap-1 text-[11px] text-emerald-200/80 font-mono tracking-wider">
+                        <i class="fa-solid fa-compass text-teal-300"></i>
+                        <span>INQUIRY PORTAL</span>
+                    </div>
                 </div>
 
-                <div class="space-y-3.5">
-                    <!-- 研究推進委員会 -->
-                    <div class="bg-slate-50/80 rounded-xl p-3.5 sm:p-4 border border-slate-200/90 space-y-2.5">
-                        <div class="flex items-center gap-2 px-1">
-                            <span class="w-6 h-6 rounded-md bg-teal-100 text-teal-700 font-bold flex items-center justify-center text-xs">推</span>
-                            <h3 class="text-sm font-bold text-slate-800">研究推進委員会</h3>
+                <!-- タイトル ＆ QRコード -->
+                <div class="flex items-start justify-between gap-2.5 sm:gap-4">
+                    <div class="flex-1 min-w-0 pr-1">
+                        <h1 class="text-lg sm:text-2xl lg:text-3xl font-bold tracking-tight text-white font-serif-title leading-snug text-wrap-safe">
+                            <span>振興大会に向けた</span><span>ポータルサイト</span>
+                        </h1>
+                        <p class="text-[11px] sm:text-sm text-emerald-100/90 mt-1 sm:mt-1.5 leading-relaxed text-wrap-safe">
+                            天・木・川の豊かな自然に抱かれ、問いを深める学びの道標。<br class="hidden sm:inline">
+                            準備期間は情報集約、大会当日は配布資料として活用
+                        </p>
+                    </div>
+
+                    <!-- 右上のQRコード（当日配布・スマホ連携） -->
+                    <div class="shrink-0">
+                        <a href="https://t-cool.github.io/tenkawa/" target="_blank" rel="noopener noreferrer" 
+                           class="group block bg-white p-1 sm:p-1.5 rounded-xl border border-emerald-300/40 shadow-md hover:border-emerald-400 hover:shadow-lg transition-all text-center"
+                           title="Webサイトを開く（https://t-cool.github.io/tenkawa/）">
+                            <img src="qr.png" alt="QRコード: https://t-cool.github.io/tenkawa/" class="qr-code-img rounded-lg object-contain mx-auto group-hover:scale-105 transition-transform duration-200">
+                            <span class="block mt-1 text-[8px] sm:text-[10px] font-bold text-emerald-800 tracking-tight flex items-center justify-center gap-0.5">
+                                <i class="fa-solid fa-mobile-screen text-[8px] sm:text-[9px] text-emerald-600"></i>
+                                <span>当日用QR</span>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 自然×探求×ふるさとの3つのピラーバッジ -->
+                <div class="pt-2.5 border-t border-emerald-700/50 grid grid-cols-3 gap-1 sm:gap-2 text-center">
+                    <div class="bg-emerald-950/40 rounded-lg py-1 px-0.5 border border-emerald-600/30 flex items-center justify-center gap-1 text-[10px] sm:text-xs text-emerald-100 min-w-0">
+                        <i class="fa-solid fa-tree text-emerald-400 text-[9px] shrink-0"></i>
+                        <span class="truncate">豊かな自然</span>
+                    </div>
+                    <div class="bg-emerald-950/40 rounded-lg py-1 px-0.5 border border-emerald-600/30 flex items-center justify-center gap-1 text-[10px] sm:text-xs text-emerald-100 min-w-0">
+                        <i class="fa-solid fa-compass text-amber-300 text-[9px] shrink-0"></i>
+                        <span class="truncate">深める探求</span>
+                    </div>
+                    <div class="bg-emerald-950/40 rounded-lg py-1 px-0.5 border border-emerald-600/30 flex items-center justify-center gap-1 text-[10px] sm:text-xs text-emerald-100 min-w-0">
+                        <i class="fa-solid fa-water text-cyan-300 text-[9px] shrink-0"></i>
+                        <span class="truncate">ふるさとの絆</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインナビゲーションコンテンツ -->
+        <nav class="p-3 sm:p-8 space-y-5 sm:space-y-7">
+
+            <!-- セクション1：継続して策定を検討する資料 -->
+            <section class="space-y-3 sm:space-y-4">
+                <div class="flex items-center justify-between border-b border-emerald-900/10 pb-2 px-1">
+                    <div class="flex items-center gap-1.5 sm:gap-2">
+                        <span class="w-1.5 sm:w-2 h-4 sm:h-4.5 bg-gradient-to-b from-teal-600 to-emerald-700 rounded-full inline-block shadow-2xs"></span>
+                        <h2 class="text-xs sm:text-sm font-bold text-slate-800 tracking-wide font-serif-title">継続して策定を検討する資料</h2>
+                    </div>
+                    <span class="text-[9px] sm:text-xs font-semibold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200/70 shrink-0">
+                        部会別研究資料
+                    </span>
+                </div>
+
+                <div class="space-y-2.5 sm:space-y-3">
+
+                    <!-- 1. 研究推進委員会（探求の羅針盤） -->
+                    <div class="bg-gradient-to-r from-teal-50/70 to-emerald-50/30 rounded-xl p-2.5 sm:p-4 border border-teal-200/70 space-y-2">
+                        <div class="flex items-center justify-between px-1">
+                            <div class="flex items-center gap-2 min-w-0">
+                                <span class="w-5 h-5 sm:w-6 sm:h-6 rounded-md bg-gradient-to-br from-teal-600 to-emerald-700 text-white font-bold flex items-center justify-center text-[10px] sm:text-xs shadow-2xs shrink-0">推</span>
+                                <h3 class="text-xs sm:text-sm font-bold text-slate-800 truncate">研究推進委員会</h3>
+                                <span class="text-[9px] sm:text-[10px] text-teal-700 bg-teal-100/60 px-1.5 py-0.2 rounded hidden xs:inline shrink-0">全体推進</span>
+                            </div>
+                            <i class="fa-solid fa-compass text-teal-600/70 text-xs shrink-0" title="探求の羅針盤"></i>
                         </div>
                         <div class="space-y-2">
-                            <a href="taisei/taisei.html" class="flex items-center justify-between p-4 sm:p-4.5 rounded-lg bg-white border border-slate-200 hover:border-teal-400 hover:bg-teal-50/40 hover:shadow-xs transition group">
-                                <div>
-                                    <div class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-teal-700 transition">研究紀要（案）</div>
-                                    <div class="text-xs sm:text-sm text-slate-500 mt-0.5">学校の概要・研究主題・研究の内容・研究組織・研究構想図</div>
+                            <a href="taisei/taisei.html" class="nature-card flex items-center justify-between p-3 sm:p-4.5 rounded-lg bg-white border border-teal-200/90 hover:border-teal-500 hover:bg-teal-50/30 transition group shadow-2xs relative overflow-hidden min-w-0 w-full">
+                                <div class="absolute left-0 top-0 bottom-0 w-1 bg-teal-600 rounded-l"></div>
+                                <div class="pl-2 flex-1 min-w-0 pr-2">
+                                    <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                                        <span class="text-sm sm:text-base lg:text-lg font-bold text-slate-900 group-hover:text-teal-800 transition text-wrap-safe">研究紀要（案）</span>
+                                        <span class="text-[9px] sm:text-[10px] font-medium text-teal-700 bg-teal-50 border border-teal-200 px-1.5 py-0.2 rounded-full shrink-0">基本構想</span>
+                                    </div>
+                                    <p class="text-[11px] sm:text-sm text-slate-500 mt-0.5 leading-snug text-wrap-safe">学校の概要・研究主題・研究の内容・研究組織・研究構想図</p>
                                 </div>
-                                <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-teal-600 text-sm sm:text-base transition-transform group-hover:translate-x-1 shrink-0 ml-3"></i>
+                                <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-slate-50 group-hover:bg-teal-600 group-hover:text-white text-slate-400 flex items-center justify-center transition shrink-0 shadow-2xs">
+                                    <i class="fa-solid fa-chevron-right text-[10px] sm:text-xs transition-transform group-hover:translate-x-0.5"></i>
+                                </div>
                             </a>
                         </div>
                     </div>
 
-                    <!-- 天部会 -->
-                    <div class="bg-slate-50/80 rounded-xl p-3.5 sm:p-4 border border-slate-200/90 space-y-2.5">
-                        <div class="flex items-center gap-2 px-1">
-                            <span class="w-6 h-6 rounded-md bg-sky-100 text-sky-700 font-bold flex items-center justify-center text-xs">天</span>
-                            <h3 class="text-sm font-bold text-slate-800">天部会</h3>
+                    <!-- 2. 天部会（空・9年間の見通し） -->
+                    <div class="bg-gradient-to-r from-sky-50/70 to-blue-50/30 rounded-xl p-2.5 sm:p-4 border border-sky-200/70 space-y-2">
+                        <div class="flex items-center justify-between px-1">
+                            <div class="flex items-center gap-2 min-w-0">
+                                <span class="w-5 h-5 sm:w-6 sm:h-6 rounded-md bg-gradient-to-br from-sky-600 to-blue-700 text-white font-bold flex items-center justify-center text-[10px] sm:text-xs shadow-2xs shrink-0">天</span>
+                                <h3 class="text-xs sm:text-sm font-bold text-slate-800 truncate">天部会</h3>
+                                <span class="text-[9px] sm:text-[10px] text-sky-700 bg-sky-100/60 px-1.5 py-0.2 rounded hidden xs:inline shrink-0">天川の空・9年間の見通し</span>
+                            </div>
+                            <i class="fa-solid fa-cloud-sun text-sky-600/70 text-xs shrink-0" title="大志と見通し"></i>
                         </div>
                         <div class="space-y-2">
-                            <a href="plan/plan.html" class="flex items-center justify-between p-4 sm:p-4.5 rounded-lg bg-white border border-slate-200 hover:border-blue-400 hover:bg-blue-50/40 hover:shadow-xs transition group">
-                                <div>
-                                    <div class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-blue-600 transition">ふるさと学習（生活科・総合的な学習の時間）全体計画</div>
-                                    <div class="text-xs sm:text-sm text-slate-500 mt-0.5">義務教育学校９年間を見通した目指す児童生徒像の共有</div>
+                            <a href="plan/plan.html" class="nature-card flex items-center justify-between p-3 sm:p-4.5 rounded-lg bg-white border border-sky-200/90 hover:border-sky-500 hover:bg-sky-50/30 transition group shadow-2xs relative overflow-hidden min-w-0 w-full">
+                                <div class="absolute left-0 top-0 bottom-0 w-1 bg-sky-600 rounded-l"></div>
+                                <div class="pl-2 flex-1 min-w-0 pr-2">
+                                    <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                                        <span class="text-sm sm:text-base lg:text-lg font-bold text-slate-900 group-hover:text-sky-800 transition text-wrap-safe">ふるさと学習（生活科・総合的な学習の時間）全体計画</span>
+                                        <span class="text-[9px] sm:text-[10px] font-medium text-sky-700 bg-sky-50 border border-sky-200 px-1.5 py-0.2 rounded-full shrink-0">教育課程</span>
+                                    </div>
+                                    <p class="text-[11px] sm:text-sm text-slate-500 mt-0.5 leading-snug text-wrap-safe">義務教育学校９年間を見通した目指す児童生徒像の共有</p>
                                 </div>
-                                <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-blue-500 text-sm sm:text-base transition-transform group-hover:translate-x-1 shrink-0 ml-3"></i>
+                                <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-slate-50 group-hover:bg-sky-600 group-hover:text-white text-slate-400 flex items-center justify-center transition shrink-0 shadow-2xs">
+                                    <i class="fa-solid fa-chevron-right text-[10px] sm:text-xs transition-transform group-hover:translate-x-0.5"></i>
+                                </div>
                             </a>
 
-                            <a href="furikaeri/furikaeri.html" class="flex items-center justify-between p-4 sm:p-4.5 rounded-lg bg-white border border-slate-200 hover:border-purple-400 hover:bg-purple-50/40 hover:shadow-xs transition group">
-                                <div>
-                                    <div class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-purple-700 transition">振り返りの記録</div>
-                                    <div class="text-xs sm:text-sm text-slate-500 mt-0.5">教職員・児童生徒の意識の変容</div>
+                            <a href="furikaeri/furikaeri.html" class="nature-card flex items-center justify-between p-3 sm:p-4.5 rounded-lg bg-white border border-sky-200/90 hover:border-indigo-400 hover:bg-indigo-50/30 transition group shadow-2xs relative overflow-hidden min-w-0 w-full">
+                                <div class="absolute left-0 top-0 bottom-0 w-1 bg-indigo-500 rounded-l"></div>
+                                <div class="pl-2 flex-1 min-w-0 pr-2">
+                                    <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                                        <span class="text-sm sm:text-base lg:text-lg font-bold text-slate-900 group-hover:text-indigo-800 transition text-wrap-safe">振り返りの記録</span>
+                                        <span class="text-[9px] sm:text-[10px] font-medium text-indigo-700 bg-indigo-50 border border-indigo-200 px-1.5 py-0.2 rounded-full shrink-0">変容の評価</span>
+                                    </div>
+                                    <p class="text-[11px] sm:text-sm text-slate-500 mt-0.5 leading-snug text-wrap-safe">教職員・児童生徒の意識の変容</p>
                                 </div>
-                                <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-purple-600 text-sm sm:text-base transition-transform group-hover:translate-x-1 shrink-0 ml-3"></i>
+                                <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-slate-50 group-hover:bg-indigo-600 group-hover:text-white text-slate-400 flex items-center justify-center transition shrink-0 shadow-2xs">
+                                    <i class="fa-solid fa-chevron-right text-[10px] sm:text-xs transition-transform group-hover:translate-x-0.5"></i>
+                                </div>
                             </a>
                         </div>
                     </div>
 
-                    <!-- 木部会 -->
-                    <div class="bg-slate-50/80 rounded-xl p-3.5 sm:p-4 border border-slate-200/90 space-y-2.5">
-                        <div class="flex items-center gap-2 px-1">
-                            <span class="w-6 h-6 rounded-md bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center text-xs">木</span>
-                            <h3 class="text-sm font-bold text-slate-800">木部会</h3>
+                    <!-- 3. 木部会（森・吉野杉・年輪の蓄積） -->
+                    <div class="bg-gradient-to-r from-emerald-50/70 to-amber-50/30 rounded-xl p-2.5 sm:p-4 border border-emerald-200/70 space-y-2">
+                        <div class="flex items-center justify-between px-1">
+                            <div class="flex items-center gap-2 min-w-0">
+                                <span class="w-5 h-5 sm:w-6 sm:h-6 rounded-md bg-gradient-to-br from-emerald-700 to-green-800 text-white font-bold flex items-center justify-center text-[10px] sm:text-xs shadow-2xs shrink-0">木</span>
+                                <h3 class="text-xs sm:text-sm font-bold text-slate-800 truncate">木部会</h3>
+                                <span class="text-[9px] sm:text-[10px] text-emerald-800 bg-emerald-100/60 px-1.5 py-0.2 rounded hidden xs:inline shrink-0">天川の森・探求の蓄積</span>
+                            </div>
+                            <i class="fa-solid fa-tree text-emerald-700/70 text-xs shrink-0" title="大樹と年輪"></i>
                         </div>
                         <div class="space-y-2">
-                            <a href="kako/kako.html" class="flex items-center justify-between p-4 sm:p-4.5 rounded-lg bg-white border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/40 hover:shadow-xs transition group">
-                                <div>
-                                    <div class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-emerald-700 transition">ふるさと学習「テーマ集（過去の取組）」</div>
-                                    <div class="text-xs sm:text-sm text-slate-500 mt-0.5">過去の取組と探求の領域</div>
+                            <a href="kako/kako.html" class="nature-card flex items-center justify-between p-3 sm:p-4.5 rounded-lg bg-white border border-emerald-200/90 hover:border-emerald-500 hover:bg-emerald-50/30 transition group shadow-2xs relative overflow-hidden min-w-0 w-full">
+                                <div class="absolute left-0 top-0 bottom-0 w-1 bg-emerald-600 rounded-l"></div>
+                                <div class="pl-2 flex-1 min-w-0 pr-2">
+                                    <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                                        <span class="text-sm sm:text-base lg:text-lg font-bold text-slate-900 group-hover:text-emerald-800 transition text-wrap-safe">ふるさと学習「テーマ集（過去の取組）」</span>
+                                        <span class="text-[9px] sm:text-[10px] font-medium text-emerald-800 bg-emerald-50 border border-emerald-200 px-1.5 py-0.2 rounded-full shrink-0">テーマ集積</span>
+                                    </div>
+                                    <p class="text-[11px] sm:text-sm text-slate-500 mt-0.5 leading-snug text-wrap-safe">過去の取組と探求の領域</p>
                                 </div>
-                                <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-emerald-600 text-sm sm:text-base transition-transform group-hover:translate-x-1 shrink-0 ml-3"></i>
+                                <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-slate-50 group-hover:bg-emerald-600 group-hover:text-white text-slate-400 flex items-center justify-center transition shrink-0 shadow-2xs">
+                                    <i class="fa-solid fa-chevron-right text-[10px] sm:text-xs transition-transform group-hover:translate-x-0.5"></i>
+                                </div>
                             </a>
 
-                            <a href="obi/obi.html" class="flex items-center justify-between p-4 sm:p-4.5 rounded-lg bg-white border border-slate-200 hover:border-amber-400 hover:bg-amber-50/40 hover:shadow-xs transition group">
-                                <div>
-                                    <div class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-amber-700 transition">帯学習</div>
-                                    <div class="text-xs sm:text-sm text-slate-500 mt-0.5">ポスターセッションを実現するための全校活動</div>
+                            <a href="obi/obi.html" class="nature-card flex items-center justify-between p-3 sm:p-4.5 rounded-lg bg-white border border-emerald-200/90 hover:border-amber-500 hover:bg-amber-50/30 transition group shadow-2xs relative overflow-hidden min-w-0 w-full">
+                                <div class="absolute left-0 top-0 bottom-0 w-1 bg-amber-600 rounded-l"></div>
+                                <div class="pl-2 flex-1 min-w-0 pr-2">
+                                    <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                                        <span class="text-sm sm:text-base lg:text-lg font-bold text-slate-900 group-hover:text-amber-800 transition text-wrap-safe">帯学習</span>
+                                        <span class="text-[9px] sm:text-[10px] font-medium text-amber-800 bg-amber-50 border border-amber-200 px-1.5 py-0.2 rounded-full shrink-0">全校活動</span>
+                                    </div>
+                                    <p class="text-[11px] sm:text-sm text-slate-500 mt-0.5 leading-snug text-wrap-safe">ポスターセッションを実現するための全校活動</p>
                                 </div>
-                                <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-amber-600 text-sm sm:text-base transition-transform group-hover:translate-x-1 shrink-0 ml-3"></i>
+                                <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-slate-50 group-hover:bg-amber-600 group-hover:text-white text-slate-400 flex items-center justify-center transition shrink-0 shadow-2xs">
+                                    <i class="fa-solid fa-chevron-right text-[10px] sm:text-xs transition-transform group-hover:translate-x-0.5"></i>
+                                </div>
                             </a>
                         </div>
                     </div>
 
-                    <!-- 川部会 -->
-                    <div class="bg-slate-50/80 rounded-xl p-3.5 sm:p-4 border border-slate-200/90 space-y-2.5">
-                        <div class="flex items-center gap-2 px-1">
-                            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-700 font-bold flex items-center justify-center text-xs">川</span>
-                            <h3 class="text-sm font-bold text-slate-800">川部会</h3>
+                    <!-- 4. 川部会（清流・天ノ川・地域と知恵の循環） -->
+                    <div class="bg-gradient-to-r from-cyan-50/70 to-teal-50/30 rounded-xl p-2.5 sm:p-4 border border-cyan-200/70 space-y-2">
+                        <div class="flex items-center justify-between px-1">
+                            <div class="flex items-center gap-2 min-w-0">
+                                <span class="w-5 h-5 sm:w-6 sm:h-6 rounded-md bg-gradient-to-br from-cyan-600 to-teal-700 text-white font-bold flex items-center justify-center text-[10px] sm:text-xs shadow-2xs shrink-0">川</span>
+                                <h3 class="text-xs sm:text-sm font-bold text-slate-800 truncate">川部会</h3>
+                                <span class="text-[9px] sm:text-[10px] text-cyan-800 bg-cyan-100/60 px-1.5 py-0.2 rounded hidden xs:inline shrink-0">清流・地域と教材の連携</span>
+                            </div>
+                            <i class="fa-solid fa-water text-cyan-600/70 text-xs shrink-0" title="清流と循環"></i>
                         </div>
                         <div class="space-y-2">
-                            <a href="keiji/keiji.html" class="flex items-center justify-between p-4 sm:p-4.5 rounded-lg bg-white border border-slate-200 hover:border-blue-400 hover:bg-blue-50/40 hover:shadow-xs transition group">
-                                <div>
-                                    <div class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-blue-700 transition">校内掲示</div>
-                                    <div class="text-xs sm:text-sm text-slate-500 mt-0.5">学級内でのふるさと学習掲示（発表の話型・教材ポスター等）</div>
+                            <a href="keiji/keiji.html" class="nature-card flex items-center justify-between p-3 sm:p-4.5 rounded-lg bg-white border border-cyan-200/90 hover:border-cyan-500 hover:bg-cyan-50/30 transition group shadow-2xs relative overflow-hidden min-w-0 w-full">
+                                <div class="absolute left-0 top-0 bottom-0 w-1 bg-cyan-600 rounded-l"></div>
+                                <div class="pl-2 flex-1 min-w-0 pr-2">
+                                    <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                                        <span class="text-sm sm:text-base lg:text-lg font-bold text-slate-900 group-hover:text-cyan-800 transition text-wrap-safe">校内掲示</span>
+                                        <span class="text-[9px] sm:text-[10px] font-medium text-cyan-700 bg-cyan-50 border border-cyan-200 px-1.5 py-0.2 rounded-full shrink-0">環境構成</span>
+                                    </div>
+                                    <p class="text-[11px] sm:text-sm text-slate-500 mt-0.5 leading-snug text-wrap-safe">学級内でのふるさと学習掲示（発表の話型・教材ポスター等）</p>
                                 </div>
-                                <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-blue-600 text-sm sm:text-base transition-transform group-hover:translate-x-1 shrink-0 ml-3"></i>
+                                <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-slate-50 group-hover:bg-cyan-600 group-hover:text-white text-slate-400 flex items-center justify-center transition shrink-0 shadow-2xs">
+                                    <i class="fa-solid fa-chevron-right text-[10px] sm:text-xs transition-transform group-hover:translate-x-0.5"></i>
+                                </div>
                             </a>
 
-                            <a href="bank/kyouzai.html" class="flex items-center justify-between p-4 sm:p-4.5 rounded-lg bg-white border border-slate-200 hover:border-blue-400 hover:bg-blue-50/40 hover:shadow-xs transition group">
-                                <div>
-                                    <div class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-blue-700 transition">ふるさと教材バンク</div>
-                                    <div class="text-xs sm:text-sm text-slate-500 mt-0.5">過去の学年別実践資料・ワークシート等の蓄積・共有</div>
+                            <a href="bank/kyouzai.html" class="nature-card flex items-center justify-between p-3 sm:p-4.5 rounded-lg bg-white border border-cyan-200/90 hover:border-teal-500 hover:bg-teal-50/30 transition group shadow-2xs relative overflow-hidden min-w-0 w-full">
+                                <div class="absolute left-0 top-0 bottom-0 w-1 bg-teal-600 rounded-l"></div>
+                                <div class="pl-2 flex-1 min-w-0 pr-2">
+                                    <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                                        <span class="text-sm sm:text-base lg:text-lg font-bold text-slate-900 group-hover:text-teal-800 transition text-wrap-safe">ふるさと教材バンク</span>
+                                        <span class="text-[9px] sm:text-[10px] font-medium text-teal-700 bg-teal-50 border border-teal-200 px-1.5 py-0.2 rounded-full shrink-0">教材共有</span>
+                                    </div>
+                                    <p class="text-[11px] sm:text-sm text-slate-500 mt-0.5 leading-snug text-wrap-safe">過去の学年別実践資料・ワークシート等の蓄積・共有</p>
                                 </div>
-                                <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-blue-600 text-sm sm:text-base transition-transform group-hover:translate-x-1 shrink-0 ml-3"></i>
+                                <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-slate-50 group-hover:bg-teal-600 group-hover:text-white text-slate-400 flex items-center justify-center transition shrink-0 shadow-2xs">
+                                    <i class="fa-solid fa-chevron-right text-[10px] sm:text-xs transition-transform group-hover:translate-x-0.5"></i>
+                                </div>
                             </a>
 
-                            <a href="bank/jinzai.html" class="flex items-center justify-between p-4 sm:p-4.5 rounded-lg bg-white border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50/40 hover:shadow-xs transition group">
-                                <div>
-                                    <div class="text-base sm:text-lg font-bold text-slate-900 group-hover:text-emerald-700 transition">ふるさと人材バンク</div>
-                                    <div class="text-xs sm:text-sm text-slate-500 mt-0.5">村内の協力個人・事業所情報（Google スプレッドシート連携）</div>
+                            <a href="bank/jinzai.html" class="nature-card flex items-center justify-between p-3 sm:p-4.5 rounded-lg bg-white border border-cyan-200/90 hover:border-emerald-500 hover:bg-emerald-50/30 transition group shadow-2xs relative overflow-hidden min-w-0 w-full">
+                                <div class="absolute left-0 top-0 bottom-0 w-1 bg-emerald-600 rounded-l"></div>
+                                <div class="pl-2 flex-1 min-w-0 pr-2">
+                                    <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                                        <span class="text-sm sm:text-base lg:text-lg font-bold text-slate-900 group-hover:text-emerald-800 transition text-wrap-safe">ふるさと人材バンク</span>
+                                        <span class="text-[9px] sm:text-[10px] font-medium text-emerald-800 bg-emerald-50 border border-emerald-200 px-1.5 py-0.2 rounded-full shrink-0">地域連携</span>
+                                    </div>
+                                    <p class="text-[11px] sm:text-sm text-slate-500 mt-0.5 leading-snug text-wrap-safe">村内の協力個人・事業所情報（Google スプレッドシート連携）</p>
                                 </div>
-                                <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-emerald-600 text-sm sm:text-base transition-transform group-hover:translate-x-1 shrink-0 ml-3"></i>
+                                <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-slate-50 group-hover:bg-emerald-600 group-hover:text-white text-slate-400 flex items-center justify-center transition shrink-0 shadow-2xs">
+                                    <i class="fa-solid fa-chevron-right text-[10px] sm:text-xs transition-transform group-hover:translate-x-0.5"></i>
+                                </div>
                             </a>
                         </div>
                     </div>
+
                 </div>
             </section>
 
-            <div class="pt-1 pb-1">
-                <hr class="border-t border-slate-300">
+            <!-- 区切り線 -->
+            <div class="pt-0.5 pb-0.5">
+                <hr class="border-t border-slate-200">
             </div>
 
-            <!-- R10年に作成する資料 -->
+            <!-- セクション2：R10年に作成する資料（未来への実り・成果発信） -->
             <section class="space-y-3">
-                <div class="flex items-center gap-2 px-1">
-                    <span class="w-1.5 h-4 bg-indigo-600 rounded-full inline-block"></span>
-                    <h2 class="text-xs sm:text-sm font-bold text-slate-700 tracking-wide">R10年に作成する資料</h2>
+                <div class="flex items-center justify-between border-b border-rose-900/10 pb-1.5 px-1">
+                    <div class="flex items-center gap-1.5 sm:gap-2">
+                        <span class="w-1.5 sm:w-2 h-4 sm:h-4.5 bg-gradient-to-b from-rose-500 to-amber-600 rounded-full inline-block shadow-2xs"></span>
+                        <h2 class="text-xs sm:text-sm font-bold text-slate-800 tracking-wide font-serif-title">R10年に作成する資料</h2>
+                    </div>
+                    <span class="text-[9px] sm:text-xs font-semibold text-rose-800 bg-rose-50 px-2 py-0.5 rounded-full border border-rose-200/70 shrink-0">
+                        大会成果発信
+                    </span>
                 </div>
 
-                <div class="space-y-3.5">
-                    <a href="slide/present.html" class="flex items-center justify-between p-5 sm:p-6 rounded-xl border border-slate-200 hover:border-rose-400 hover:bg-rose-50/40 hover:shadow-xs transition group">
-                        <div>
-                            <div class="text-lg sm:text-xl font-bold text-slate-900 group-hover:text-rose-700 transition">研究発表スライド</div>
-                            <div class="text-sm text-slate-500 mt-1">発表会用スライド資料・プレゼンテーション</div>
+                <div class="space-y-3">
+                    <a href="slide/present.html" class="nature-card flex items-center justify-between p-3.5 sm:p-5 rounded-xl bg-gradient-to-r from-rose-50/40 via-white to-white border border-rose-200/90 hover:border-rose-400 hover:shadow-xs transition group shadow-2xs relative overflow-hidden min-w-0 w-full">
+                        <div class="absolute left-0 top-0 bottom-0 w-1 sm:w-1.5 bg-gradient-to-b from-rose-500 to-amber-500 rounded-l"></div>
+                        <div class="pl-2 flex-1 min-w-0 pr-2">
+                            <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                                <span class="text-sm sm:text-base lg:text-lg font-bold text-slate-900 group-hover:text-rose-800 transition text-wrap-safe">研究発表スライド</span>
+                                <span class="text-[9px] sm:text-[10px] font-semibold text-rose-700 bg-rose-100/70 border border-rose-200 px-2 py-0.2 rounded-full shrink-0">成果発表</span>
+                            </div>
+                            <p class="text-[11px] sm:text-sm text-slate-500 mt-1 text-wrap-safe">発表会用スライド資料・プレゼンテーション</p>
                         </div>
-                        <i class="fa-solid fa-chevron-right text-slate-400 group-hover:text-rose-600 text-base sm:text-lg transition-transform group-hover:translate-x-1"></i>
+                        <div class="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-slate-50 group-hover:bg-rose-600 group-hover:text-white text-slate-400 flex items-center justify-center transition shrink-0 shadow-2xs">
+                            <i class="fa-solid fa-chevron-right text-[10px] sm:text-xs transition-transform group-hover:translate-x-0.5"></i>
+                        </div>
                     </a>
                 </div>
             </section>
         </nav>
 
+        <!-- フッター：天川村の自然と探求のメッセージ -->
+        <footer class="bg-gradient-to-b from-slate-50/90 to-emerald-50/50 border-t border-emerald-900/10 p-3.5 sm:p-6 text-center space-y-1.5">
+            <div class="flex items-center justify-center gap-2 sm:gap-3 text-emerald-800/80 text-[10px] sm:text-xs font-medium">
+                <span class="flex items-center gap-1">
+                    <i class="fa-solid fa-mountain text-emerald-600 text-[9px] sm:text-[10px]"></i>
+                    天川村の自然
+                </span>
+                <span class="text-slate-300">・</span>
+                <span class="flex items-center gap-1">
+                    <i class="fa-solid fa-compass text-teal-600 text-[9px] sm:text-[10px]"></i>
+                    主体的な探求
+                </span>
+                <span class="text-slate-300">・</span>
+                <span class="flex items-center gap-1">
+                    <i class="fa-solid fa-users text-sky-600 text-[9px] sm:text-[10px]"></i>
+                    ふるさとの未来
+                </span>
+            </div>
+            <p class="text-[10px] sm:text-[11px] text-slate-500">
+                奈良県吉野郡天川村 義務教育学校 ｜ ふるさと学習推進プロジェクト
+            </p>
+        </footer>
+
     </main>
+
+    <!-- 控えめなクレジット -->
+    <div class="mt-3 text-center text-[9px] sm:text-[10px] text-slate-400 tracking-wider">
+        <span>© 天川村立天川小中学校</span>
+    </div>
 
 </body>
 </html>
