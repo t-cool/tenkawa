@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人材バンク - ふるさと学習</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen p-4 md:p-6">
+
+    <!-- 操作ナビゲーションバー -->
+    <header class="no-print max-w-[900px] mx-auto mb-6 bg-white p-3.5 md:p-4 rounded-xl border border-slate-300 shadow-xs flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+            <a href="../index.html" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium rounded text-sm transition flex items-center gap-2 border border-slate-300">
+                <i class="fa-solid fa-arrow-left text-xs text-slate-500"></i>
+                <i class="fa-solid fa-house text-slate-600"></i>
+                <span>目次</span>
+            </a>
+            <span class="text-slate-300">|</span>
+            <div class="text-xs md:text-sm font-bold text-slate-700">
+                ふるさと学習 人材バンク
+            </div>
+        </div>
+        <div class="flex items-center gap-2">
+            <a href="kyouzai.html" class="px-3 py-1.5 bg-slate-100 hover:bg-blue-50 hover:text-blue-700 text-slate-700 font-medium rounded text-sm transition flex items-center gap-1.5 border border-slate-300">
+                <i class="fa-solid fa-box-archive text-xs text-blue-600"></i>
+                <span>教材バンクへ</span>
+            </a>
+            <a href="../keiji/keiji.html" class="px-3 py-1.5 bg-slate-100 hover:bg-blue-50 hover:text-blue-700 text-slate-700 font-medium rounded text-sm transition flex items-center gap-1.5 border border-slate-300">
+                <i class="fa-solid fa-chalkboard-user text-xs text-blue-600"></i>
+                <span>校内掲示へ</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main class="max-w-[900px] mx-auto space-y-6">
+
+        <!-- ページ見出しカード -->
+        <section class="bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs">
+            <div class="border-b border-slate-200 pb-3 mb-4 flex items-center justify-between flex-wrap gap-2">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded">
+                            川部会
+                        </span>
+                        <span class="text-xs font-bold text-slate-600 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded">
+                            地域人材・協力事業所
+                        </span>
+                    </div>
+                    <h1 class="text-xl md:text-2xl font-bold text-slate-900 mt-2">
+                        人材バンク
+                    </h1>
+                </div>
+            </div>
+            <p class="text-sm text-slate-600 leading-relaxed">
+                ふるさと学習（総合的な学習の時間）を充実させるため、村内の協力個人や事業所・団体の情報を蓄積・共有し、児童生徒の探究活動や体験・見学、ゲストティーチャー等で円滑に連携できるようにするページです。
+            </p>
+        </section>
+
+        <!-- 人材バンク（Google スプレッドシート連携） -->
+        <section class="bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs space-y-5">
+            <div class="flex items-center justify-between flex-wrap gap-2 pb-3 border-b border-slate-100">
+                <h2 class="text-base md:text-lg font-bold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-address-book text-emerald-600"></i>
+                    <span>村内の協力個人・事業所情報</span>
+                </h2>
+                <span class="text-xs text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full font-medium">Google スプレッドシート</span>
+            </div>
+
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                天川村内の協力者・事業所の連絡先、協力可能な学習分野（自然、歴史・文化、観光、産業、食など）、受け入れ可能な活動形態（見学・体験、ゲストティーチャー、インタビュー等）が一覧として管理されています。
+            </p>
+
+            <!-- 外部リンクボタン -->
+            <div class="p-5 md:p-6 rounded-xl bg-gradient-to-br from-emerald-50/60 to-teal-50/30 border border-emerald-200">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="space-y-1">
+                        <div class="flex items-center gap-2 text-slate-900 font-bold text-base">
+                            <i class="fa-solid fa-file-excel text-emerald-600 text-lg"></i>
+                            <span>人材バンク データシート</span>
+                        </div>
+                        <p class="text-xs text-slate-500">
+                            村内協力者・事業所一覧、活動分野、留意事項などの詳細データ（Google スプレッドシート）
+                        </p>
+                    </div>
+                    <a href="https://docs.google.com/spreadsheets/d/1sT6D0MamBCUVRrvF0cVL-BYYraGsKg1eFHiCnYwftIs" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-sm transition shrink-0 group">
+                        <span>シートを開く</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-xs transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 人材バンク活用の流れ -->
+        <section class="bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs">
+            <h2 class="text-base md:text-lg font-bold text-slate-900 flex items-center gap-2 mb-4">
+                <i class="fa-solid fa-list-check text-blue-600"></i>
+                <span>活用の流れ</span>
+            </h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs sm:text-sm">
+                <div class="p-3.5 rounded-lg bg-slate-50 border border-slate-200">
+                    <div class="font-bold text-emerald-700 mb-1 flex items-center gap-1.5">
+                        <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 text-xs flex items-center justify-center font-bold">1</span>
+                        <span>検索・検討</span>
+                    </div>
+                    <p class="text-slate-600 text-xs leading-relaxed">
+                        単元のねらいや児童生徒の興味に応じ、協力分野・地域・活動形態を確認します。
+                    </p>
+                </div>
+
+                <div class="p-3.5 rounded-lg bg-slate-50 border border-slate-200">
+                    <div class="font-bold text-emerald-700 mb-1 flex items-center gap-1.5">
+                        <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 text-xs flex items-center justify-center font-bold">2</span>
+                        <span>校内調整</span>
+                    </div>
+                    <p class="text-slate-600 text-xs leading-relaxed">
+                        学年団・担当者で依頼内容や時期を確認し、他の学年との重複がないか調整します。
+                    </p>
+                </div>
+
+                <div class="p-3.5 rounded-lg bg-slate-50 border border-slate-200">
+                    <div class="font-bold text-emerald-700 mb-1 flex items-center gap-1.5">
+                        <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 text-xs flex items-center justify-center font-bold">3</span>
+                        <span>相手先へ連絡</span>
+                    </div>
+                    <p class="text-slate-600 text-xs leading-relaxed">
+                        趣旨説明、日程・活動内容の相談、児童生徒への配慮事項等を事前に確認します。
+                    </p>
+                </div>
+
+                <div class="p-3.5 rounded-lg bg-slate-50 border border-slate-200">
+                    <div class="font-bold text-emerald-700 mb-1 flex items-center gap-1.5">
+                        <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 text-xs flex items-center justify-center font-bold">4</span>
+                        <span>実践・振り返り</span>
+                    </div>
+                    <p class="text-slate-600 text-xs leading-relaxed">
+                        学習活動の実施後にお礼の連絡を行い、実践の記録を教材バンク等に共有します。
+                    </p>
+                </div>
+            </div>
+
+            <!-- 留意点 -->
+            <div class="mt-4 p-3.5 rounded-lg bg-amber-50/70 border border-amber-200 text-xs text-amber-900 leading-relaxed flex items-start gap-2">
+                <i class="fa-solid fa-triangle-exclamation text-amber-600 mt-0.5 shrink-0"></i>
+                <div>
+                    <span class="font-bold">取り扱い上の留意事項：</span>
+                    スプレッドシート内の連絡先や個人情報は校内業務・教育活動専用です。外部への転載や不適切な取り扱いには十分ご留意ください。
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>
