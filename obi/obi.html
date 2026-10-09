@@ -44,24 +44,6 @@
                 page-break-after: avoid !important;
             }
         }
-
-        /* 学校プリント標準キリトリ線 */
-        .cut-line {
-            border-top: 1px dashed #64748b;
-            position: relative;
-        }
-        .cut-line::after {
-            content: "--- キリトリ線（A4用紙1枚で2回分使用できます） ---";
-            position: absolute;
-            top: -9px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #ffffff;
-            padding: 0 16px;
-            font-size: 11px;
-            color: #64748b;
-            letter-spacing: 0.05em;
-        }
     </style>
 </head>
 <body class="p-2 md:p-6 min-h-screen">
@@ -107,25 +89,22 @@
                 <button onclick="switchTab('card_stage4')" id="tab_card_stage4" class="tab-btn px-2.5 py-1 rounded font-medium transition bg-white text-slate-700 border border-slate-200 hover:bg-slate-100">
                     卓上カード（7~9年）
                 </button>
-                <button onclick="switchTab('builder')" id="tab_builder" class="tab-btn px-2.5 py-1 rounded font-medium transition bg-white text-slate-700 border border-slate-200 hover:bg-slate-100">
-                    原稿連動シート（全学年）
-                </button>
             </div>
 
             <!-- グループ2：振り返り用シート -->
             <div class="flex flex-wrap items-center gap-1.5 p-2 rounded bg-slate-50 border border-slate-200">
                 <span class="font-bold text-slate-700 px-1">振り返り用シート</span>
                 <button onclick="switchTab('record_stage1')" id="tab_record_stage1" class="tab-btn px-3 py-1.5 rounded font-medium transition bg-white text-slate-700 border border-slate-300 hover:bg-slate-100">
-                    1~2年 記録シート
+                    1~2年 振り返りシート
                 </button>
                 <button onclick="switchTab('record_stage2')" id="tab_record_stage2" class="tab-btn px-3 py-1.5 rounded font-medium transition bg-white text-slate-700 border border-slate-300 hover:bg-slate-100">
-                    3~4年 記録シート
+                    3~4年 振り返りシート
                 </button>
                 <button onclick="switchTab('record_stage3')" id="tab_record_stage3" class="tab-btn px-3 py-1.5 rounded font-medium transition bg-white text-slate-700 border border-slate-300 hover:bg-slate-100">
-                    5~6年 記録シート
+                    5~6年 振り返りシート
                 </button>
                 <button onclick="switchTab('record_stage4')" id="tab_record_stage4" class="tab-btn px-3 py-1.5 rounded font-medium transition bg-white text-slate-700 border border-slate-300 hover:bg-slate-100">
-                    7~9年 記録シート
+                    7~9年 振り返りシート
                 </button>
             </div>
 
@@ -141,636 +120,366 @@
     <main class="max-w-[900px] mx-auto">
 
         <!-- ======================================================== -->
-        <!-- 独立印刷セクション①：第1ステージ（1〜2年）記録シート          -->
+        <!-- 独立印刷セクション①：第1ステージ（1〜2年）振り返りシート          -->
         <!-- ======================================================== -->
         <div id="content_record_stage1" class="tab-content hidden">
-            <div class="no-print mb-2 text-xs text-slate-500 text-right">
-                ※ A4用紙（縦）1枚で2回分の記録ができます。
-            </div>
-
             <!-- A4縦 印刷カード -->
             <section class="print-page bg-white p-6 md:p-8 rounded border border-slate-400 max-w-[900px] mx-auto text-slate-800">
-                <!-- 上段（1回目） -->
-                <div class="mb-5">
-                    <div class="flex flex-wrap md:flex-nowrap justify-between items-end border-b-2 border-slate-700 pb-2 mb-3.5 gap-2">
-                        <div class="flex items-baseline gap-2 shrink-0">
-                            <h2 class="text-base md:text-lg font-bold text-slate-900 whitespace-nowrap">ポスターセッション きろくシート（１・２年）</h2>
-                            <span class="text-xs text-slate-600 font-semibold whitespace-nowrap">［ １回目 ］</span>
-                        </div>
-                        <div class="text-xs text-slate-700 flex flex-wrap gap-2.5 md:gap-3.5 font-medium whitespace-nowrap">
-                            <span>年　組</span>
-                            <span>なまえ［　　　　　　　　　］</span>
-                            <span>月　日</span>
-                            <span>ペア［　　　　　］</span>
-                        </div>
+                <!-- ページヘッダー -->
+                <div class="flex flex-wrap md:flex-nowrap justify-between items-end border-b-2 border-slate-700 pb-2.5 mb-3.5 gap-2">
+                    <div>
+                        <h2 class="text-base md:text-lg font-bold text-slate-900 whitespace-nowrap">ポスターセッション ふりかえりシート（１・２年）</h2>
                     </div>
-
-                    <div class="grid grid-cols-3 gap-3.5 text-xs leading-normal">
-                        <!-- 発表 -->
-                        <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50 flex flex-col justify-between min-h-[290px]">
-                            <div>
-                                <div class="font-bold border-b border-slate-200 pb-1 mb-2 text-slate-900">
-                                    【1】わたしのはっぴょう
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">ゆびさしたところ（○をつける）：</div>
-                                <div class="space-y-1 text-slate-700 mb-2.5">
-                                    <label class="flex items-center gap-1.5"><input type="checkbox"> しゃしん・え</label>
-                                    <label class="flex items-center gap-1.5"><input type="checkbox"> おおきな もじ</label>
-                                    <label class="flex items-center gap-1.5"><input type="checkbox"> みつけたもの マーク</label>
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">みつけたこと・はなしたこと（メモ）：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 h-24 text-[11px]"></div>
-                            </div>
-                            <div class="text-[11px] text-slate-600 pt-1.5 border-t border-slate-200 mt-2 font-medium">
-                                めあて：手はポスター、目はともだち
-                            </div>
-                        </div>
-
-                        <!-- 質問＆回答 -->
-                        <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50 flex flex-col justify-between min-h-[290px]">
-                            <div>
-                                <div class="font-bold border-b border-slate-200 pb-1 mb-2 text-slate-900">
-                                    【2】しつもんと こたえ
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">おともだちからの しつもん（メモ）：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 h-20 mb-2 text-[11px]"></div>
-                                <div class="text-[11px] text-slate-600 mb-1">しつもんの しゅるい：</div>
-                                <div class="grid grid-cols-2 gap-1 text-[10.5px] text-slate-700 mb-2">
-                                    <label class="flex items-center gap-1"><input type="checkbox"> どこ？</label>
-                                    <label class="flex items-center gap-1"><input type="checkbox"> わけ？</label>
-                                    <label class="flex items-center gap-1"><input type="checkbox"> なまえ？</label>
-                                    <label class="flex items-center gap-1"><input type="checkbox"> どんな？</label>
-                                </div>
-                            </div>
-                            <div class="bg-white p-2 rounded border border-slate-200 text-center">
-                                <div class="text-[11px] font-medium text-slate-700">こたえられたかな？</div>
-                                <div class="text-xs text-slate-900 font-bold mt-0.5">［ できた ・ すこし言えた ・ 次がんばる ］</div>
-                            </div>
-                        </div>
-
-                        <!-- 相互評価 -->
-                        <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50 flex flex-col justify-between min-h-[290px]">
-                            <div>
-                                <div class="font-bold border-b border-slate-200 pb-1 mb-2 text-slate-900">
-                                    【3】おともだちへ メッセージ
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">すてきだったところ（○をつける）：</div>
-                                <div class="space-y-1 text-slate-700 text-[11px] mb-2.5">
-                                    <label class="flex items-start gap-1"><input type="checkbox" class="mt-0.5"> ゆびさしが わかりやすかった</label>
-                                    <label class="flex items-start gap-1"><input type="checkbox" class="mt-0.5"> とおる声で にこにこ 伝わった</label>
-                                    <label class="flex items-start gap-1"><input type="checkbox" class="mt-0.5"> しつもんに しっかり こたえられた</label>
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">ひとことメッセージ（かいてみよう）：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 h-24 text-[11px]"></div>
-                            </div>
-                        </div>
+                    <div class="text-xs text-slate-700 flex flex-wrap gap-3 font-medium whitespace-nowrap">
+                        <span>年　組</span>
+                        <span>なまえ［　　　　　　　　　］</span>
+                        <span>月　日</span>
+                        <span>あいてのグループ名［　　　　　］</span>
                     </div>
                 </div>
 
-                <!-- キリトリ線 -->
-                <div class="cut-line my-6 md:my-7"></div>
-
-                <!-- 下段（2回目） -->
-                <div>
-                    <div class="flex flex-wrap md:flex-nowrap justify-between items-end border-b-2 border-slate-700 pb-2 mb-3.5 gap-2">
-                        <div class="flex items-baseline gap-2 shrink-0">
-                            <h2 class="text-base md:text-lg font-bold text-slate-900 whitespace-nowrap">ポスターセッション きろくシート（１・２年）</h2>
-                            <span class="text-xs text-slate-600 font-semibold whitespace-nowrap">［ ２回目 ］</span>
+                <div class="space-y-3 text-xs leading-normal">
+                    <!-- 【1】じぶんの はっぴょうの ふりかえり -->
+                    <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50">
+                        <div class="flex flex-wrap items-center justify-between border-b border-slate-200 pb-2 mb-2.5 gap-2">
+                            <div class="font-bold text-slate-900 text-sm">
+                                【1】じぶんの はっぴょうの ふりかえり
+                            </div>
+                            <div class="text-[11px] text-teal-800 font-bold bg-teal-50 border border-teal-200 px-2 py-0.5 rounded">
+                                めあて：五感でみつけたことを、ポスターをゆびさして たのしくつたえよう
+                            </div>
                         </div>
-                        <div class="text-xs text-slate-700 flex flex-wrap gap-2.5 md:gap-3.5 font-medium whitespace-nowrap">
-                            <span>年　組</span>
-                            <span>なまえ［　　　　　　　　　］</span>
-                            <span>月　日</span>
-                            <span>ペア［　　　　　］</span>
+                        <div class="mb-2">
+                            <div class="font-medium text-slate-800 text-[11px] mb-1.5">じぶんの できたこと（○をつける）：</div>
+                            <div class="space-y-1 pl-1 text-[11px] text-slate-700">
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> えがおで おおきな声で はなせた</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> えや しゃしんを ゆびさしながら はなせた</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 「まるで〜みたい！」と たとえて つたえられた</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> おともだちの しつもんに こたえられた</label>
+                            </div>
                         </div>
+                        <div class="text-[11px] text-slate-600 mb-1">じぶんが いちばん つたえたかったこと・みつけたこと（メモ）：</div>
+                        <div class="bg-white border border-slate-300 rounded p-2.5 h-14 text-[11px]"></div>
                     </div>
 
-                    <div class="grid grid-cols-3 gap-3.5 text-xs leading-normal">
-                        <!-- 発表 -->
-                        <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50 flex flex-col justify-between min-h-[290px]">
-                            <div>
-                                <div class="font-bold border-b border-slate-200 pb-1 mb-2 text-slate-900">
-                                    【1】わたしのはっぴょう
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">ゆびさしたところ（○をつける）：</div>
-                                <div class="space-y-1 text-slate-700 mb-2.5">
-                                    <label class="flex items-center gap-1.5"><input type="checkbox"> しゃしん・え</label>
-                                    <label class="flex items-center gap-1.5"><input type="checkbox"> おおきな もじ</label>
-                                    <label class="flex items-center gap-1.5"><input type="checkbox"> みつけたもの マーク</label>
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">みつけたこと・はなしたこと（メモ）：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 h-24 text-[11px]"></div>
+                    <!-- 【2】あいての はっぴょうへの フィードバック -->
+                    <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50">
+                        <div class="flex flex-wrap items-center justify-between border-b border-slate-200 pb-2 mb-2.5 gap-2">
+                            <div class="font-bold text-slate-900 text-sm">
+                                【2】あいての はっぴょうへの フィードバック
                             </div>
-                            <div class="text-[11px] text-slate-600 pt-1.5 border-t border-slate-200 mt-2 font-medium">
-                                めあて：手はポスター、目はともだち
+                            <div class="text-[11px] text-slate-600 font-medium">
+                                あいてのグループへ おくるメッセージ
                             </div>
                         </div>
+                        <div class="mb-2">
+                            <div class="font-medium text-slate-800 text-[11px] mb-1.5">すてきだったところ（○をつける）：</div>
+                            <div class="space-y-1 pl-1 text-[11px] text-slate-700">
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 「〜みたい！」のたとえが よくつたわった</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> ゆびさしが わかりやすくて 見やすかった</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> にこにこ えがおで たのしく はなしていた</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> しつもんに やさしく こたえてくれた</label>
+                            </div>
+                        </div>
+                        <div class="text-[11px] text-slate-600 mb-1">あいてのグループへの ひとことメッセージ（かいてみよう）：</div>
+                        <div class="bg-white border border-slate-300 rounded p-2.5 h-14 text-[11px]"></div>
+                    </div>
 
-                        <!-- 質問＆回答 -->
-                        <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50 flex flex-col justify-between min-h-[290px]">
-                            <div>
-                                <div class="font-bold border-b border-slate-200 pb-1 mb-2 text-slate-900">
-                                    【2】しつもんと こたえ
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">おともだちからの しつもん（メモ）：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 h-20 mb-2 text-[11px]"></div>
-                                <div class="text-[11px] text-slate-600 mb-1">しつもんの しゅるい：</div>
-                                <div class="grid grid-cols-2 gap-1 text-[10.5px] text-slate-700 mb-2">
-                                    <label class="flex items-center gap-1"><input type="checkbox"> どこ？</label>
-                                    <label class="flex items-center gap-1"><input type="checkbox"> わけ？</label>
-                                    <label class="flex items-center gap-1"><input type="checkbox"> なまえ？</label>
-                                    <label class="flex items-center gap-1"><input type="checkbox"> どんな？</label>
-                                </div>
-                            </div>
-                            <div class="bg-white p-2 rounded border border-slate-200 text-center">
-                                <div class="text-[11px] font-medium text-slate-700">こたえられたかな？</div>
-                                <div class="text-xs text-slate-900 font-bold mt-0.5">［ できた ・ すこし言えた ・ 次がんばる ］</div>
+                    <!-- 【3】つぎの はっぴょうに むけて -->
+                    <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50">
+                        <div class="font-bold border-b border-slate-200 pb-2 mb-2.5 text-slate-900 text-sm">
+                            【3】つぎの はっぴょうに むけて
+                        </div>
+                        <div class="mb-2">
+                            <div class="font-medium text-slate-800 text-[11px] mb-1.5">つぎに がんばりたいこと（○をつける）：</div>
+                            <div class="space-y-1 pl-1 text-[11px] text-slate-700">
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> もっと おおきな こえで はなす</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> おともだちの かお（め）を みて はなす</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> ポスターを もっと たくさん ゆびさす</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> しつもんを よくきいて こたえる</label>
                             </div>
                         </div>
-
-                        <!-- 相互評価 -->
-                        <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50 flex flex-col justify-between min-h-[290px]">
-                            <div>
-                                <div class="font-bold border-b border-slate-200 pb-1 mb-2 text-slate-900">
-                                    【3】おともだちへ メッセージ
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">すてきだったところ（○をつける）：</div>
-                                <div class="space-y-1 text-slate-700 text-[11px] mb-2.5">
-                                    <label class="flex items-start gap-1"><input type="checkbox" class="mt-0.5"> ゆびさしが わかりやすかった</label>
-                                    <label class="flex items-start gap-1"><input type="checkbox" class="mt-0.5"> とおる声で にこにこ 伝わった</label>
-                                    <label class="flex items-start gap-1"><input type="checkbox" class="mt-0.5"> しつもんに しっかり こたえられた</label>
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">ひとことメッセージ（かいてみよう）：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 h-24 text-[11px]"></div>
-                            </div>
-                        </div>
+                        <div class="text-[11px] text-slate-600 mb-1">つぎの はっぴょうの さくせん（ひとこと）：</div>
+                        <div class="bg-white border border-slate-300 rounded p-2.5 h-14 text-[11px]"></div>
                     </div>
                 </div>
             </section>
         </div>
 
         <!-- ======================================================== -->
-        <!-- 独立印刷セクション②：第2ステージ（3〜4年）記録シート          -->
+        <!-- 独立印刷セクション②：第2ステージ（3〜4年）振り返りシート          -->
         <!-- ======================================================== -->
         <div id="content_record_stage2" class="tab-content hidden">
-            <div class="no-print mb-2 text-xs text-slate-500 text-right">
-                ※ A4用紙（縦）1枚で2回分の記録ができます。
-            </div>
-
             <!-- A4縦 印刷カード -->
             <section class="print-page bg-white p-6 md:p-8 rounded border border-slate-400 max-w-[900px] mx-auto text-slate-800">
-                <!-- 上段（1回目） -->
-                <div class="mb-5">
-                    <div class="flex flex-wrap md:flex-nowrap justify-between items-end border-b-2 border-slate-700 pb-2 mb-3.5 gap-2">
-                        <div class="flex items-baseline gap-2 shrink-0">
-                            <h2 class="text-base md:text-lg font-bold text-slate-900 whitespace-nowrap">ポスターセッション 記録シート（３・４年）</h2>
-                            <span class="text-xs text-slate-600 font-semibold whitespace-nowrap">［ 第１回 ］</span>
-                        </div>
-                        <div class="text-xs text-slate-700 flex flex-wrap gap-2.5 md:gap-3.5 font-medium whitespace-nowrap">
-                            <span>年　組</span>
-                            <span>氏名［　　　　　　　　　］</span>
-                            <span>実施日：　月　日</span>
-                            <span>相手［　　　　　］</span>
-                        </div>
+                <!-- ページヘッダー -->
+                <div class="flex flex-wrap md:flex-nowrap justify-between items-end border-b-2 border-slate-700 pb-2.5 mb-3.5 gap-2">
+                    <div>
+                        <h2 class="text-base md:text-lg font-bold text-slate-900 whitespace-nowrap">ポスターセッション 振り返りシート（３・４年）</h2>
                     </div>
-
-                    <div class="grid grid-cols-3 gap-3.5 text-xs leading-normal">
-                        <!-- 発表設計 -->
-                        <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50 flex flex-col justify-between min-h-[290px]">
-                            <div>
-                                <div class="font-bold border-b border-slate-200 pb-1 mb-2 text-slate-900">
-                                    【1】自分の発表メモ
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">伝えたい要点（メモ）：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 h-28 mb-2 text-[11px]"></div>
-                                <div class="text-[11px] text-slate-600 mb-1">指差す資料（チェック）：</div>
-                                <div class="space-y-1 text-slate-700 text-[11px]">
-                                    <label class="flex items-center gap-1.5"><input type="checkbox"> 写真・図</label>
-                                    <label class="flex items-center gap-1.5"><input type="checkbox"> 見出し・言葉</label>
-                                    <label class="flex items-center gap-1.5"><input type="checkbox"> 地図・手順図</label>
-                                </div>
-                            </div>
-                            <div class="text-[11px] text-slate-600 pt-1.5 border-t border-slate-200 mt-2 font-medium">
-                                めあて：資料を指差しながら順序よく話そう
-                            </div>
-                        </div>
-
-                        <!-- 質疑応答 -->
-                        <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50 flex flex-col justify-between min-h-[290px]">
-                            <div>
-                                <div class="font-bold border-b border-slate-200 pb-1 mb-2 text-slate-900">
-                                    【2】相手からの質問と回答
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">相手からの質問（メモ）：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 h-28 mb-2 text-[11px]"></div>
-                            </div>
-                            <div class="bg-white p-2 rounded border border-slate-200 text-center">
-                                <div class="text-[11px] font-medium text-slate-700">資料を指差して答えられたか：</div>
-                                <div class="text-xs text-slate-900 font-bold mt-1">［ できた ・ もう少し ・ 次がんばる ］</div>
-                            </div>
-                        </div>
-
-                        <!-- 相互評価 -->
-                        <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50 flex flex-col justify-between min-h-[290px]">
-                            <div>
-                                <div class="font-bold border-b border-slate-200 pb-1 mb-2 text-slate-900">
-                                    【3】相互評価（Good & Next）
-                                </div>
-                                <div class="space-y-1 text-slate-700 text-[11px] mb-2.5">
-                                    <div class="font-medium text-slate-800">・良かった点（○をつける）：</div>
-                                    <label class="flex items-start gap-1"><input type="checkbox" class="mt-0.5"> 資料を指差して分かりやすかった</label>
-                                    <label class="flex items-start gap-1"><input type="checkbox" class="mt-0.5"> 「理由は〜」と順序よく話せた</label>
-                                    <label class="flex items-start gap-1"><input type="checkbox" class="mt-0.5"> 相手の目を見て話せていた</label>
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">アドバイス・ひとこと（記入）：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 h-20 text-[11px]"></div>
-                            </div>
-                        </div>
+                    <div class="text-xs text-slate-700 flex flex-wrap gap-3 font-medium whitespace-nowrap">
+                        <span>年　組</span>
+                        <span>氏名［　　　　　　　　　］</span>
+                        <span>実施日：　月　日</span>
+                        <span>相手のグループ名［　　　　　］</span>
                     </div>
                 </div>
 
-                <!-- キリトリ線 -->
-                <div class="cut-line my-6 md:my-7"></div>
-
-                <!-- 下段（2回目） -->
-                <div>
-                    <div class="flex flex-wrap md:flex-nowrap justify-between items-end border-b-2 border-slate-700 pb-2 mb-3.5 gap-2">
-                        <div class="flex items-baseline gap-2 shrink-0">
-                            <h2 class="text-base md:text-lg font-bold text-slate-900 whitespace-nowrap">ポスターセッション 記録シート（３・４年）</h2>
-                            <span class="text-xs text-slate-600 font-semibold whitespace-nowrap">［ 第２回 ］</span>
+                <div class="space-y-3 text-xs leading-normal">
+                    <!-- 【1】自分の発表の振り返り -->
+                    <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50">
+                        <div class="flex flex-wrap items-center justify-between border-b border-slate-200 pb-2 mb-2.5 gap-2">
+                            <div class="font-bold text-slate-900 text-sm">
+                                【1】自分の発表の振り返り
+                            </div>
+                            <div class="text-[11px] text-teal-800 font-bold bg-teal-50 border border-teal-200 px-2 py-0.5 rounded">
+                                めあて：調べたこと（事実）と自分の考えを、ポスターを見せながら順序よく話そう
+                            </div>
                         </div>
-                        <div class="text-xs text-slate-700 flex flex-wrap gap-2.5 md:gap-3.5 font-medium whitespace-nowrap">
-                            <span>年　組</span>
-                            <span>氏名［　　　　　　　　　］</span>
-                            <span>実施日：　月　日</span>
-                            <span>相手［　　　　　］</span>
+                        <div class="mb-2">
+                            <div class="font-medium text-slate-800 text-[11px] mb-1.5">自分の振り返り（チェック）：</div>
+                            <div class="space-y-1 pl-1 text-[11px] text-slate-700">
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 「はじめ・なか・おわり」の順序で、事実と考えを分けて話せた</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 「手はポスター、目は聞き手」を意識できた</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 写真や見出し、図を指さしながら話せた</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 質問に対して、ポスターを示して落ち着いて答えられた</label>
+                            </div>
                         </div>
+                        <div class="text-[11px] text-slate-600 mb-1">発表の手応え・受けた質問と回答（メモ）：</div>
+                        <div class="bg-white border border-slate-300 rounded p-2.5 h-14 text-[11px]"></div>
                     </div>
 
-                    <div class="grid grid-cols-3 gap-3.5 text-xs leading-normal">
-                        <!-- 発表設計 -->
-                        <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50 flex flex-col justify-between min-h-[290px]">
-                            <div>
-                                <div class="font-bold border-b border-slate-200 pb-1 mb-2 text-slate-900">
-                                    【1】自分の発表メモ
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">伝えたい要点（メモ）：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 h-28 mb-2 text-[11px]"></div>
-                                <div class="text-[11px] text-slate-600 mb-1">指差す資料（チェック）：</div>
-                                <div class="space-y-1 text-slate-700 text-[11px]">
-                                    <label class="flex items-center gap-1.5"><input type="checkbox"> 写真・図</label>
-                                    <label class="flex items-center gap-1.5"><input type="checkbox"> 見出し・言葉</label>
-                                    <label class="flex items-center gap-1.5"><input type="checkbox"> 地図・手順図</label>
-                                </div>
+                    <!-- 【2】相手の発表へのフィードバック -->
+                    <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50">
+                        <div class="flex flex-wrap items-center justify-between border-b border-slate-200 pb-2 mb-2.5 gap-2">
+                            <div class="font-bold text-slate-900 text-sm">
+                                【2】相手の発表へのフィードバック
                             </div>
-                            <div class="text-[11px] text-slate-600 pt-1.5 border-t border-slate-200 mt-2 font-medium">
-                                めあて：資料を指差しながら順序よく話そう
+                            <div class="text-[11px] text-slate-600 font-medium">
+                                相手グループへのアドバイス・メッセージ
                             </div>
                         </div>
+                        <div class="mb-2">
+                            <div class="font-medium text-slate-800 text-[11px] mb-1.5">良かったところ（チェック）：</div>
+                            <div class="space-y-1 pl-1 text-[11px] text-slate-700">
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> くらべたことや分けたポイントが整理されていて分かりやすかった</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> ポスターの図や写真の指さし方が上手だった</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 聞き手の目を見て話しかけてくれて、聞きやすかった</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 質問にやさしく笑顔で理由を教えてくれた</label>
+                            </div>
+                        </div>
+                        <div class="text-[11px] text-slate-600 mb-1">相手グループへの応援メッセージ・アドバイス（記入）：</div>
+                        <div class="bg-white border border-slate-300 rounded p-2.5 h-14 text-[11px]"></div>
+                    </div>
 
-                        <!-- 質疑応答 -->
-                        <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50 flex flex-col justify-between min-h-[290px]">
-                            <div>
-                                <div class="font-bold border-b border-slate-200 pb-1 mb-2 text-slate-900">
-                                    【2】相手からの質問と回答
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">相手からの質問（メモ）：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 h-28 mb-2 text-[11px]"></div>
-                            </div>
-                            <div class="bg-white p-2 rounded border border-slate-200 text-center">
-                                <div class="text-[11px] font-medium text-slate-700">資料を指差して答えられたか：</div>
-                                <div class="text-xs text-slate-900 font-bold mt-1">［ できた ・ もう少し ・ 次がんばる ］</div>
+                    <!-- 【3】次の発表に向けて -->
+                    <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50">
+                        <div class="font-bold border-b border-slate-200 pb-2 mb-2.5 text-slate-900 text-sm">
+                            【3】次の発表に向けて
+                        </div>
+                        <div class="mb-2">
+                            <div class="font-medium text-slate-800 text-[11px] mb-1.5">次に工夫・改善したいこと（チェック）：</div>
+                            <div class="space-y-1 pl-1 text-[11px] text-slate-700">
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 聞き手をもっと見て話す（メモを見すぎない）</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> ポスターの大切なところをタイミングよく指さす</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 「なぜそう考えたか」の理由やエピソードをくわしく話す</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 質問に答えるときに、図や写真をサッと指さす</label>
                             </div>
                         </div>
-
-                        <!-- 相互評価 -->
-                        <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50 flex flex-col justify-between min-h-[290px]">
-                            <div>
-                                <div class="font-bold border-b border-slate-200 pb-1 mb-2 text-slate-900">
-                                    【3】相互評価（Good & Next）
-                                </div>
-                                <div class="space-y-1 text-slate-700 text-[11px] mb-2.5">
-                                    <div class="font-medium text-slate-800">・良かった点（○をつける）：</div>
-                                    <label class="flex items-start gap-1"><input type="checkbox" class="mt-0.5"> 資料を指差して分かりやすかった</label>
-                                    <label class="flex items-start gap-1"><input type="checkbox" class="mt-0.5"> 「理由は〜」と順序よく話せた</label>
-                                    <label class="flex items-start gap-1"><input type="checkbox" class="mt-0.5"> 相手の目を見て話せていた</label>
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">アドバイス・ひとこと（記入）：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 h-20 text-[11px]"></div>
-                            </div>
-                        </div>
+                        <div class="text-[11px] text-slate-600 mb-1">次の発表への作戦・もっと調べたいこと（記入）：</div>
+                        <div class="bg-white border border-slate-300 rounded p-2.5 h-14 text-[11px]"></div>
                     </div>
                 </div>
             </section>
         </div>
 
         <!-- ======================================================== -->
-        <!-- 独立印刷セクション③：第3ステージ（5〜6年）記録シート          -->
+        <!-- 独立印刷セクション③：第3ステージ（5〜6年）振り返りシート          -->
         <!-- ======================================================== -->
         <div id="content_record_stage3" class="tab-content hidden">
-            <div class="no-print mb-2 text-xs text-slate-500 text-right">
-                ※ A4用紙（縦）1枚で2回分の記録ができます。
-            </div>
-
             <!-- A4縦 印刷カード -->
             <section class="print-page bg-white p-6 md:p-8 rounded border border-slate-400 max-w-[900px] mx-auto text-slate-800">
-                <!-- 上段（1回目） -->
-                <div class="mb-5">
-                    <div class="flex flex-wrap md:flex-nowrap justify-between items-end border-b-2 border-slate-700 pb-2 mb-3.5 gap-2">
-                        <div class="flex items-baseline gap-2 shrink-0">
-                            <h2 class="text-base md:text-lg font-bold text-slate-900 whitespace-nowrap">ポスターセッション 記録シート（５・６年）</h2>
-                            <span class="text-xs text-slate-600 font-semibold whitespace-nowrap">［ 第１回 ］</span>
-                        </div>
-                        <div class="text-xs text-slate-700 flex flex-wrap gap-2.5 md:gap-3.5 font-medium whitespace-nowrap">
-                            <span>年　組</span>
-                            <span>氏名［　　　　　　　　　］</span>
-                            <span>実施日：　月　日</span>
-                            <span>相手［　　　　　］</span>
-                        </div>
+                <!-- ページヘッダー -->
+                <div class="flex flex-wrap md:flex-nowrap justify-between items-end border-b-2 border-slate-700 pb-2.5 mb-3.5 gap-2">
+                    <div>
+                        <h2 class="text-base md:text-lg font-bold text-slate-900 whitespace-nowrap">ポスターセッション 振り返りシート（５・６年）</h2>
                     </div>
-
-                    <div class="grid grid-cols-3 gap-3.5 text-xs leading-normal">
-                        <!-- 発表設計 -->
-                        <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50 flex flex-col justify-between min-h-[290px]">
-                            <div>
-                                <div class="font-bold border-b border-slate-200 pb-1 mb-2 text-slate-900">
-                                    【1】主張とデータ
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">主張・考え（メモ）：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 h-24 mb-2 text-[11px]"></div>
-                                <div class="text-[11px] text-slate-600 mb-1">指差すグラフ・数値：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 text-[11px] text-slate-700 mb-2">
-                                    ［　　　　］グラフの［　　　％/数値］
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">根拠の補足メモ：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 h-12 text-[11px]"></div>
-                            </div>
-                        </div>
-
-                        <!-- 質疑応答 -->
-                        <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50 flex flex-col justify-between min-h-[290px]">
-                            <div>
-                                <div class="font-bold border-b border-slate-200 pb-1 mb-2 text-slate-900">
-                                    【2】受けた質問と回答
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">受けた質問と回答の要点（メモ）：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 h-28 mb-2 text-[11px]"></div>
-                            </div>
-                            <div class="bg-white p-2 rounded border border-slate-200 text-center">
-                                <div class="text-[11px] font-medium text-slate-700">資料をもとに回答できたか：</div>
-                                <div class="text-xs text-slate-900 font-bold mt-1">［ 根拠を示せた ・ 意見のみ ・ 詰まった ］</div>
-                            </div>
-                        </div>
-
-                        <!-- 相互評価 -->
-                        <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50 flex flex-col justify-between min-h-[290px]">
-                            <div>
-                                <div class="font-bold border-b border-slate-200 pb-1 mb-2 text-slate-900">
-                                    【3】4大アクション相互チェック
-                                </div>
-                                <div class="grid grid-cols-2 gap-1 text-[10.5px] text-slate-700 mb-2">
-                                    <label class="flex items-center gap-1"><input type="checkbox"> 目線（相手を見る）</label>
-                                    <label class="flex items-center gap-1"><input type="checkbox"> 声（通る声・間）</label>
-                                    <label class="flex items-center gap-1"><input type="checkbox"> 身振り（手振り）</label>
-                                    <label class="flex items-center gap-1"><input type="checkbox"> 資料（指差し参照）</label>
-                                </div>
-                                <div class="text-[11px] font-medium text-slate-800 mb-2 pb-1 border-b border-slate-200">
-                                    総合評価：［ A: 卓越 ・ B: 良好 ・ C: 次回 ］
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">ワンポイント助言・フィードバック（記入）：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 h-20 text-[11px]"></div>
-                            </div>
-                        </div>
+                    <div class="text-xs text-slate-700 flex flex-wrap gap-3 font-medium whitespace-nowrap">
+                        <span>年　組</span>
+                        <span>氏名［　　　　　　　　　］</span>
+                        <span>実施日：　月　日</span>
+                        <span>相手のグループ名［　　　　　］</span>
                     </div>
                 </div>
 
-                <!-- キリトリ線 -->
-                <div class="cut-line my-6 md:my-7"></div>
-
-                <!-- 下段（2回目） -->
-                <div>
-                    <div class="flex flex-wrap md:flex-nowrap justify-between items-end border-b-2 border-slate-700 pb-2 mb-3.5 gap-2">
-                        <div class="flex items-baseline gap-2 shrink-0">
-                            <h2 class="text-base md:text-lg font-bold text-slate-900 whitespace-nowrap">ポスターセッション 記録シート（５・６年）</h2>
-                            <span class="text-xs text-slate-600 font-semibold whitespace-nowrap">［ 第２回 ］</span>
+                <div class="space-y-3 text-xs leading-normal">
+                    <!-- 【1】自分の発表の振り返り -->
+                    <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50">
+                        <div class="flex flex-wrap items-center justify-between border-b border-slate-200 pb-2 mb-2.5 gap-2">
+                            <div class="font-bold text-slate-900 text-sm">
+                                【1】自分の発表の振り返り
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[11px] text-teal-800 font-bold bg-teal-50 border border-teal-200 px-2 py-0.5 rounded">
+                                    めあて：「なぜそう言えるか」ポスターのデータを見せて、理由をわかりやすく伝えよう
+                                </span>
+                                <span class="font-medium text-slate-700 text-[11px]">自己評価：</span>
+                                <span class="font-bold text-slate-900 bg-white px-2 py-0.5 rounded border border-slate-200 text-[11px]">
+                                    ［ A（十分できた） ・ B（おおむねできた） ・ C（次がんばる） ］
+                                </span>
+                            </div>
                         </div>
-                        <div class="text-xs text-slate-700 flex flex-wrap gap-2.5 md:gap-3.5 font-medium whitespace-nowrap">
-                            <span>年　組</span>
-                            <span>氏名［　　　　　　　　　］</span>
-                            <span>実施日：　月　日</span>
-                            <span>相手［　　　　　］</span>
+                        <div class="mb-2">
+                            <div class="font-medium text-slate-800 text-[11px] mb-1.5">観点チェック：</div>
+                            <div class="space-y-1 pl-1 text-[11px] text-slate-700">
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 「結論→理由・データ→具体策」の筋道で論理的に説明できた</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> ポスターのグラフや数値を効果的に指さして説明できた</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 聞き手の反応を確かめながら落ち着いて対話できた</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 質問に対し、客観的な根拠や数字を示して答えられた</label>
+                            </div>
                         </div>
+                        <div class="text-[11px] text-slate-600 mb-1">発表の手応え・受けた質問と対話で深まったこと（メモ）：</div>
+                        <div class="bg-white border border-slate-300 rounded p-2.5 h-14 text-[11px]"></div>
                     </div>
 
-                    <div class="grid grid-cols-3 gap-3.5 text-xs leading-normal">
-                        <!-- 発表設計 -->
-                        <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50 flex flex-col justify-between min-h-[290px]">
-                            <div>
-                                <div class="font-bold border-b border-slate-200 pb-1 mb-2 text-slate-900">
-                                    【1】主張とデータ
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">主張・考え（メモ）：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 h-24 mb-2 text-[11px]"></div>
-                                <div class="text-[11px] text-slate-600 mb-1">指差すグラフ・数値：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 text-[11px] text-slate-700 mb-2">
-                                    ［　　　　］グラフの［　　　％/数値］
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">根拠の補足メモ：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 h-12 text-[11px]"></div>
+                    <!-- 【2】相手の発表へのフィードバック -->
+                    <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50">
+                        <div class="flex flex-wrap items-center justify-between border-b border-slate-200 pb-2 mb-2.5 gap-2">
+                            <div class="font-bold text-slate-900 text-sm">
+                                【2】相手の発表へのフィードバック
+                            </div>
+                            <div class="flex items-center gap-2 text-[11px]">
+                                <span class="font-medium text-slate-700">相手の発表の評価：</span>
+                                <span class="font-bold text-slate-900 bg-white px-2 py-0.5 rounded border border-slate-200">
+                                    ［ A（よく伝わった） ・ B（伝わった） ・ C（もう一歩） ］
+                                </span>
                             </div>
                         </div>
+                        <div class="mb-2">
+                            <div class="font-medium text-slate-800 text-[11px] mb-1.5">良かったところ（チェック）：</div>
+                            <div class="space-y-1 pl-1 text-[11px] text-slate-700">
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 統計グラフや現地取材などの根拠が具体的で説得力があった</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 天川村の自然や人々のくらし、歴史の背景が盛り込まれていた</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> ポスターのグラフや写真の見せ方が工夫されていて見やすかった</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 質問を笑顔で受け止め、分かりやすく理由を答えてくれた</label>
+                            </div>
+                        </div>
+                        <div class="text-[11px] text-slate-600 mb-1">相手グループへのアドバイス・応援メッセージ（記入）：</div>
+                        <div class="bg-white border border-slate-300 rounded p-2.5 h-14 text-[11px]"></div>
+                    </div>
 
-                        <!-- 質疑応答 -->
-                        <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50 flex flex-col justify-between min-h-[290px]">
-                            <div>
-                                <div class="font-bold border-b border-slate-200 pb-1 mb-2 text-slate-900">
-                                    【2】受けた質問と回答
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">受けた質問と回答の要点（メモ）：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 h-28 mb-2 text-[11px]"></div>
-                            </div>
-                            <div class="bg-white p-2 rounded border border-slate-200 text-center">
-                                <div class="text-[11px] font-medium text-slate-700">資料をもとに回答できたか：</div>
-                                <div class="text-xs text-slate-900 font-bold mt-1">［ 根拠を示せた ・ 意見のみ ・ 詰まった ］</div>
+                    <!-- 【3】次の発表に向けて -->
+                    <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50">
+                        <div class="font-bold border-b border-slate-200 pb-2 mb-2.5 text-slate-900 text-sm">
+                            【3】次の発表に向けて
+                        </div>
+                        <div class="mb-2">
+                            <div class="font-medium text-slate-800 text-[11px] mb-1.5">次に高めたいポイント（チェック）：</div>
+                            <div class="space-y-1 pl-1 text-[11px] text-slate-700">
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> データの読み取りや比較（過去・他地域との比較）を深める</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> ポスターのグラフや写真の指さしをよりスムーズにする</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 異なる立場（住民・観光客など）の視点を取り入れて提案を練る</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 質問に対し、追加データや事例をサッと出せるように準備する</label>
                             </div>
                         </div>
-
-                        <!-- 相互評価 -->
-                        <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50 flex flex-col justify-between min-h-[290px]">
-                            <div>
-                                <div class="font-bold border-b border-slate-200 pb-1 mb-2 text-slate-900">
-                                    【3】4大アクション相互チェック
-                                </div>
-                                <div class="grid grid-cols-2 gap-1 text-[10.5px] text-slate-700 mb-2">
-                                    <label class="flex items-center gap-1"><input type="checkbox"> 目線（相手を見る）</label>
-                                    <label class="flex items-center gap-1"><input type="checkbox"> 声（通る声・間）</label>
-                                    <label class="flex items-center gap-1"><input type="checkbox"> 身振り（手振り）</label>
-                                    <label class="flex items-center gap-1"><input type="checkbox"> 資料（指差し参照）</label>
-                                </div>
-                                <div class="text-[11px] font-medium text-slate-800 mb-2 pb-1 border-b border-slate-200">
-                                    総合評価：［ A: 卓越 ・ B: 良好 ・ C: 次回 ］
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">ワンポイント助言・フィードバック（記入）：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 h-20 text-[11px]"></div>
-                            </div>
-                        </div>
+                        <div class="text-[11px] text-slate-600 mb-1">次の発表への改善策・探究の次の一歩（記入）：</div>
+                        <div class="bg-white border border-slate-300 rounded p-2.5 h-14 text-[11px]"></div>
                     </div>
                 </div>
             </section>
         </div>
 
         <!-- ======================================================== -->
-        <!-- 独立印刷セクション④：第4ステージ（7〜9年）記録シート          -->
+        <!-- 独立印刷セクション④：第4ステージ（7〜9年）振り返りシート          -->
         <!-- ======================================================== -->
         <div id="content_record_stage4" class="tab-content hidden">
-            <div class="no-print mb-2 text-xs text-slate-500 text-right">
-                ※ A4用紙（縦）1枚で2回分の記録ができます。
-            </div>
-
             <!-- A4縦 印刷カード -->
             <section class="print-page bg-white p-6 md:p-8 rounded border border-slate-400 max-w-[900px] mx-auto text-slate-800">
-                <!-- 上段（1回目） -->
-                <div class="mb-5">
-                    <div class="flex flex-wrap md:flex-nowrap justify-between items-end border-b-2 border-slate-700 pb-2 mb-3.5 gap-2">
-                        <div class="flex items-baseline gap-2 shrink-0">
-                            <h2 class="text-base md:text-lg font-bold text-slate-900 whitespace-nowrap">ポスターセッション 記録シート（７〜９年）</h2>
-                            <span class="text-xs text-slate-600 font-semibold whitespace-nowrap">［ Round 1 ］</span>
-                        </div>
-                        <div class="text-xs text-slate-700 flex flex-wrap gap-2.5 md:gap-3.5 font-medium whitespace-nowrap">
-                            <span>年　組</span>
-                            <span>氏名［　　　　　　　　　］</span>
-                            <span>実施日：　月　日</span>
-                            <span>対話相手［　　　　　］</span>
-                        </div>
+                <!-- ページヘッダー -->
+                <div class="flex flex-wrap md:flex-nowrap justify-between items-end border-b-2 border-slate-700 pb-2.5 mb-3.5 gap-2">
+                    <div>
+                        <h2 class="text-base md:text-lg font-bold text-slate-900 whitespace-nowrap">ポスターセッション 振り返りシート（７〜９年）</h2>
                     </div>
-
-                    <div class="grid grid-cols-3 gap-3.5 text-xs leading-normal">
-                        <!-- ピッチ設計 -->
-                        <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50 flex flex-col justify-between min-h-[290px]">
-                            <div>
-                                <div class="font-bold border-b border-slate-200 pb-1 mb-2 text-slate-900">
-                                    【1】課題と提言の骨組み
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">本質課題＆提言（メモ）：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 h-24 mb-2 text-[11px]"></div>
-                                <div class="text-[11px] text-slate-600 mb-1">提示する主要図表：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 text-[11px] text-slate-700 mb-2">
-                                    図表1［　　　　　］／ 図表2［　　　　　］
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">根拠データ・出典メモ：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 h-12 text-[11px]"></div>
-                            </div>
-                        </div>
-
-                        <!-- 質疑応答 -->
-                        <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50 flex flex-col justify-between min-h-[290px]">
-                            <div>
-                                <div class="font-bold border-b border-slate-200 pb-1 mb-2 text-slate-900">
-                                    【2】受けた質問と回答
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">受けた質問と回答の要点（メモ）：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 h-28 mb-2 text-[11px]"></div>
-                            </div>
-                            <div class="bg-white p-2 rounded border border-slate-200 text-center">
-                                <div class="text-[11px] font-medium text-slate-700">資料をもとに回答できたか：</div>
-                                <div class="text-xs text-slate-900 font-bold mt-1">［ 根拠を示せた ・ 意見のみ ・ 詰まった ］</div>
-                            </div>
-                        </div>
-
-                        <!-- 相互評価 -->
-                        <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50 flex flex-col justify-between min-h-[290px]">
-                            <div>
-                                <div class="font-bold border-b border-slate-200 pb-1 mb-2 text-slate-900">
-                                    【3】4大スキル相互チェック
-                                </div>
-                                <div class="grid grid-cols-2 gap-1 text-[10.5px] text-slate-700 mb-2">
-                                    <label class="flex items-center gap-1"><input type="checkbox"> 目線（語りかけ）</label>
-                                    <label class="flex items-center gap-1"><input type="checkbox"> 声（1秒の間）</label>
-                                    <label class="flex items-center gap-1"><input type="checkbox"> 身振り（身体表現）</label>
-                                    <label class="flex items-center gap-1"><input type="checkbox"> 資料（図表ポインティング）</label>
-                                </div>
-                                <div class="flex items-center justify-between text-[11px] pt-1 pb-1 border-t border-b border-slate-200 mb-2">
-                                    <span class="font-medium text-slate-800">評価：［ A ・ B ・ C ］</span>
-                                    <span class="text-[10px] text-slate-600">サイン［　　　　］</span>
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">建設的フィードバック（記入）：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 h-20 text-[11px]"></div>
-                            </div>
-                        </div>
+                    <div class="text-xs text-slate-700 flex flex-wrap gap-3 font-medium whitespace-nowrap">
+                        <span>年　組</span>
+                        <span>氏名［　　　　　　　　　］</span>
+                        <span>実施日：　月　日</span>
+                        <span>相手のグループ名［　　　　　］</span>
                     </div>
                 </div>
 
-                <!-- キリトリ線 -->
-                <div class="cut-line my-6 md:my-7"></div>
-
-                <!-- 下段（2回目） -->
-                <div>
-                    <div class="flex flex-wrap md:flex-nowrap justify-between items-end border-b-2 border-slate-700 pb-2 mb-3.5 gap-2">
-                        <div class="flex items-baseline gap-2 shrink-0">
-                            <h2 class="text-base md:text-lg font-bold text-slate-900 whitespace-nowrap">ポスターセッション 記録シート（７〜９年）</h2>
-                            <span class="text-xs text-slate-600 font-semibold whitespace-nowrap">［ Round 2 ］</span>
+                <div class="space-y-3 text-xs leading-normal">
+                    <!-- 【1】自分の発表の振り返り -->
+                    <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50">
+                        <div class="flex flex-wrap items-center justify-between border-b border-slate-200 pb-2 mb-2.5 gap-2">
+                            <div class="font-bold text-slate-900 text-sm">
+                                【1】自分の発表の振り返り
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[11px] text-teal-800 font-bold bg-teal-50 border border-teal-200 px-2 py-0.5 rounded">
+                                    めあて：事実と自分の考えを分け、ポスターや端末の資料を見せながら未来への提案を語ろう
+                                </span>
+                                <span class="font-medium text-slate-700 text-[11px]">自己評価：</span>
+                                <span class="font-bold text-slate-900 bg-white px-2 py-0.5 rounded border border-slate-200 text-[11px]">
+                                    ［ A（説得力を持って対話できた） ・ B（提案が伝わった） ・ C（改善の余地あり） ］
+                                </span>
+                            </div>
                         </div>
-                        <div class="text-xs text-slate-700 flex flex-wrap gap-2.5 md:gap-3.5 font-medium whitespace-nowrap">
-                            <span>年　組</span>
-                            <span>氏名［　　　　　　　　　］</span>
-                            <span>実施日：　月　日</span>
-                            <span>対話相手［　　　　　］</span>
+                        <div class="mb-2">
+                            <div class="font-medium text-slate-800 text-[11px] mb-1.5">観点チェック：</div>
+                            <div class="space-y-1 pl-1 text-[11px] text-slate-700">
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 現状の課題と提案の根拠（一次データ・取材・試算）を論理的に結びつけて説明できた</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> ポスター（論理の骨子）と端末（詳細データ・補足資料）を自在に連携させて提示できた</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 相手からの疑問や視点を受け止め、対話を通してアイデアを広げられた</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 「天川村の未来のために」という当事者意識を持ち、熱意と誠実さを持って語りかけられた</label>
+                            </div>
                         </div>
+                        <div class="text-[11px] text-slate-600 mb-1">発表の成果・受けた質問と対話で深まった論点（メモ）：</div>
+                        <div class="bg-white border border-slate-300 rounded p-2.5 h-14 text-[11px]"></div>
                     </div>
 
-                    <div class="grid grid-cols-3 gap-3.5 text-xs leading-normal">
-                        <!-- ピッチ設計 -->
-                        <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50 flex flex-col justify-between min-h-[290px]">
-                            <div>
-                                <div class="font-bold border-b border-slate-200 pb-1 mb-2 text-slate-900">
-                                    【1】課題と提言の骨組み
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">本質課題＆提言（メモ）：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 h-24 mb-2 text-[11px]"></div>
-                                <div class="text-[11px] text-slate-600 mb-1">提示する主要図表：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 text-[11px] text-slate-700 mb-2">
-                                    図表1［　　　　　］／ 図表2［　　　　　］
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">根拠データ・出典メモ：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 h-12 text-[11px]"></div>
+                    <!-- 【2】相手の発表へのフィードバック -->
+                    <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50">
+                        <div class="flex flex-wrap items-center justify-between border-b border-slate-200 pb-2 mb-2.5 gap-2">
+                            <div class="font-bold text-slate-900 text-sm">
+                                【2】相手の発表へのフィードバック
+                            </div>
+                            <div class="flex items-center gap-2 text-[11px]">
+                                <span class="font-medium text-slate-700">相手の発表の評価：</span>
+                                <span class="font-bold text-slate-900 bg-white px-2 py-0.5 rounded border border-slate-200">
+                                    ［ A（高い説得力と深い洞察） ・ B（論理的で明確な提案） ・ C（今後に期待） ］
+                                </span>
                             </div>
                         </div>
+                        <div class="mb-2">
+                            <div class="font-medium text-slate-800 text-[11px] mb-1.5">良かった点（チェック）：</div>
+                            <div class="space-y-1 pl-1 text-[11px] text-slate-700">
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 課題の本質を捉えた独自性のある提案で、実現可能性も考えられていた</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 統計データや現地インタビューなどのエビデンス（客観的事実）の扱いが的確だった</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 多角的な立場（住民・行政・観光客・将来世代など）への配慮や視点が含まれていた</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 対話的な姿勢で質問を受け止め、建設的に議論を発展させていた</label>
+                            </div>
+                        </div>
+                        <div class="text-[11px] text-slate-600 mb-1">相手グループへの建設的なフィードバック・アドバイス（記入）：</div>
+                        <div class="bg-white border border-slate-300 rounded p-2.5 h-14 text-[11px]"></div>
+                    </div>
 
-                        <!-- 質疑応答 -->
-                        <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50 flex flex-col justify-between min-h-[290px]">
-                            <div>
-                                <div class="font-bold border-b border-slate-200 pb-1 mb-2 text-slate-900">
-                                    【2】受けた質問と回答
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">受けた質問と回答の要点（メモ）：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 h-28 mb-2 text-[11px]"></div>
-                            </div>
-                            <div class="bg-white p-2 rounded border border-slate-200 text-center">
-                                <div class="text-[11px] font-medium text-slate-700">資料をもとに回答できたか：</div>
-                                <div class="text-xs text-slate-900 font-bold mt-1">［ 根拠を示せた ・ 意見のみ ・ 詰まった ］</div>
+                    <!-- 【3】次の発表に向けて（探究の深化と次の一歩） -->
+                    <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50">
+                        <div class="font-bold border-b border-slate-200 pb-2 mb-2.5 text-slate-900 text-sm">
+                            【3】次の発表に向けて（探究の深化と次の一歩）
+                        </div>
+                        <div class="mb-2">
+                            <div class="font-medium text-slate-800 text-[11px] mb-1.5">今後深化・改善させたい視点（チェック）：</div>
+                            <div class="space-y-1 pl-1 text-[11px] text-slate-700">
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 異なる意見や課題（コスト・手間・持続可能性など）への対応策を補強する</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 地域住民や専門家など、多様な主体からのヒアリング・一次情報を増やす</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> 提案を実際のアクションにつなげるための具体的なステップ（計画）を明確にする</label>
+                                <label class="flex items-center gap-1.5"><input type="checkbox"> ポスターとデジタル端末の相乗効果（ビジュアル・数字の訴求力）を一段と高める</label>
                             </div>
                         </div>
-
-                        <!-- 相互評価 -->
-                        <div class="border border-slate-300 p-3.5 rounded bg-slate-50/50 flex flex-col justify-between min-h-[290px]">
-                            <div>
-                                <div class="font-bold border-b border-slate-200 pb-1 mb-2 text-slate-900">
-                                    【3】4大スキル相互チェック
-                                </div>
-                                <div class="grid grid-cols-2 gap-1 text-[10.5px] text-slate-700 mb-2">
-                                    <label class="flex items-center gap-1"><input type="checkbox"> 目線（語りかけ）</label>
-                                    <label class="flex items-center gap-1"><input type="checkbox"> 声（1秒の間）</label>
-                                    <label class="flex items-center gap-1"><input type="checkbox"> 身振り（身体表現）</label>
-                                    <label class="flex items-center gap-1"><input type="checkbox"> 資料（図表ポインティング）</label>
-                                </div>
-                                <div class="flex items-center justify-between text-[11px] pt-1 pb-1 border-t border-b border-slate-200 mb-2">
-                                    <span class="font-medium text-slate-800">評価：［ A ・ B ・ C ］</span>
-                                    <span class="text-[10px] text-slate-600">サイン［　　　　］</span>
-                                </div>
-                                <div class="text-[11px] text-slate-600 mb-1">建設的フィードバック（記入）：</div>
-                                <div class="bg-white border border-slate-300 rounded p-1.5 h-20 text-[11px]"></div>
-                            </div>
-                        </div>
+                        <div class="text-[11px] text-slate-600 mb-1">次のステップ・提案のブラッシュアップ計画（記入）：</div>
+                        <div class="bg-white border border-slate-300 rounded p-2.5 h-14 text-[11px]"></div>
                     </div>
                 </div>
             </section>
@@ -783,8 +492,7 @@
             <section class="print-page bg-white p-6 md:p-8 rounded border border-slate-400 max-w-[900px] mx-auto text-slate-800">
                 <div class="border-b-2 border-slate-800 pb-2 mb-5 flex justify-between items-end">
                     <div>
-                        <div class="text-xs font-bold text-slate-500">１・２年生 卓上支援カード（つくえの上に立てて使用）</div>
-                        <h2 class="text-xl font-bold text-slate-900">はっぴょう＆しつもん おたすけシート</h2>
+                        <h2 class="text-xl font-bold text-slate-900">ポスターセッション・ガイド（1・2年生）</h2>
                     </div>
                     <div class="text-right text-xs text-slate-600">
                         探究の視点：〜の中で（五感と発見）
@@ -792,71 +500,75 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs leading-relaxed">
-                    <!-- 左列：はっぴょうの じゅんばん -->
+                    <!-- 左列：はっぴょうのかたち -->
                     <div class="border border-slate-300 p-3.5 rounded bg-slate-50/40 flex flex-col justify-between">
                         <div>
                             <div class="font-bold text-slate-900 text-sm border-b border-slate-300 pb-1.5 mb-2.5">
-                                ■ はっぴょうの ３つの やくそく
+                                ■ はっぴょうのかたち（五感と はっけんを つたえる）
                             </div>
                             <ul class="space-y-1.5 text-slate-800 font-medium mb-4 bg-white p-2.5 rounded border border-slate-200">
-                                <li>・<strong>「手」</strong>は ポスターを ゆびさす（トントン）</li>
-                                <li>・<strong>「目」</strong>は おともだちの かおを みる</li>
-                                <li>・<strong>「声」</strong>は まっすぐ おともだちに とどける</li>
+                                <li>・<strong>「五感のことば」</strong>：見たこと・音・さわったかんじを「まるで〜みたい」とたとえる</li>
+                                <li>・<strong>「て（ゆびさし）」</strong>：ポスターの え や しゃしんを「トントン」とゆびさす</li>
+                                <li>・<strong>「目とこえ」</strong>：おともだちの かおを 見て、まっすぐ こえをとどける</li>
                             </ul>
 
-                            <div class="font-bold text-slate-900 text-xs mb-1.5">【はっぴょうの じゅんばん（1分30秒・３つのこと）】</div>
+                            <div class="font-bold text-slate-900 text-xs mb-1.5">【はっぴょうの じゅんばん（1分30秒・五感でみつけた３つのこと）】</div>
                             <div class="space-y-1.5 text-slate-700">
                                 <div class="bg-white p-1.5 rounded border border-slate-200">
                                     <div class="font-bold text-slate-900">1. はじめ（約15秒）</div>
-                                    <div class="mt-0.5">「これは、わたしが みつけた <strong>〇〇</strong> です。つたえたいことは <strong>３つ</strong> あります。」</div>
+                                    <div class="mt-0.5">「わたし（ぼく）が みつけた 天川村の <strong>〇〇</strong> です。つたえたいことは <strong>３つ</strong> あります。」</div>
                                 </div>
                                 <div class="bg-white p-1.5 rounded border border-slate-200">
                                     <div class="font-bold text-slate-900">2. つたえること（約60秒・各約20秒）</div>
                                     <div class="space-y-1 mt-0.5 pl-1 text-[11px]">
-                                        <div>①「１つ目は、〜〜です。（トントンと ゆびさす）ここを みてください。」</div>
-                                        <div>②「２つ目は、〜〜です。（トントンと ゆびさす）〜が 〜になっています。」</div>
-                                        <div>③「３つ目は、〜〜です。（トントンと ゆびさす）わたしが すきなところです。」</div>
+                                        <div>①「１つ目は、<strong>【みため・色やかたち】</strong>です。（トントン）ここを 見てね。まるで〜みたいです。」</div>
+                                        <div>②「２つ目は、<strong>【さわったかんじ・おと】</strong>です。（トントン）〜してみたら、〜でした。」</div>
+                                        <div>③「３つ目は、<strong>【すきなところ】</strong>です。（トントン）ここが〜だから、だいすきです。」</div>
                                     </div>
                                 </div>
                                 <div class="bg-white p-1.5 rounded border border-slate-200">
                                     <div class="font-bold text-slate-900">3. おわり（約15秒）</div>
-                                    <div class="mt-0.5">「これで はっぴょうを おわります。しつもんを おねがいします。」</div>
+                                    <div class="mt-0.5">「これで はっぴょうを おわります。きいてくれて ありがとう！ なんでも きいてね。」</div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 右列：しつもん＆こたえかた -->
+                    <!-- 右列：しつもん＆たいわ -->
                     <div class="border border-slate-300 p-3.5 rounded bg-slate-50/40 flex flex-col justify-between">
                         <div>
                             <div class="font-bold text-slate-900 text-sm border-b border-slate-300 pb-1.5 mb-2.5">
-                                ■ しつもんの ことば（１つ えらんで きこう）
+                                ■ しつもん＆たいわ（おともだちと たのしく おしゃべり）
                             </div>
-                            <div class="grid grid-cols-2 gap-2 text-[11px] mb-4">
+                            <div class="grid grid-cols-2 gap-2 text-[11px] mb-3">
                                 <div class="bg-white p-2 rounded border border-slate-200">
-                                    <div class="font-bold text-slate-800">・どこ？（ばしょ）</div>
-                                    「それは、どこで みつけましたか？」
+                                    <div class="font-bold text-slate-800">・どんな かんじ？（五感）</div>
+                                    「さわったとき、どんな かんじだった？ どんな おとがした？」
                                 </div>
                                 <div class="bg-white p-2 rounded border border-slate-200">
-                                    <div class="font-bold text-slate-800">・なに？（なまえ）</div>
-                                    「この ゆびさしたところは なんですか？」
+                                    <div class="font-bold text-slate-800">・どこで？（ばしょ）</div>
+                                    「天川村の どこで みつけたの？」
                                 </div>
                                 <div class="bg-white p-2 rounded border border-slate-200">
-                                    <div class="font-bold text-slate-800">・どうして？（わけ）</div>
-                                    「どうして それが すきなんですか？」
+                                    <div class="font-bold text-slate-800">・どうして？（わけ・気もち）</div>
+                                    「どうして そこが いちばん すきなの？」
                                 </div>
                                 <div class="bg-white p-2 rounded border border-slate-200">
-                                    <div class="font-bold text-slate-800">・どんな かんじ？</div>
-                                    「さわったとき、どんな かんじでしたか？」
+                                    <div class="font-bold text-slate-800">・見くらべ（にてる・ちがう）</div>
+                                    「ぼく（わたし）のみつけたものと にてるところはあるかな？」
                                 </div>
                             </div>
 
-                            <div class="font-bold text-slate-900 text-xs mb-1.5">【こたえかた】</div>
-                            <ol class="space-y-1 list-decimal pl-4 text-slate-700">
-                                <li>「しつもん ありがとうございます。」</li>
-                                <li>「ポスターの ここを みてください。（ゆびさす）これは 〜 だからです。」</li>
-                                <li>「わかりましたか？」</li>
+                            <div class="font-bold text-slate-900 text-xs mb-1.5">【こたえかたの ３ステップ】</div>
+                            <ol class="space-y-1 list-decimal pl-4 text-slate-700 mb-3">
+                                <li>「きいてくれて ありがとう！」</li>
+                                <li>「ポスターの ここを見てね。（トントン）〜だからだよ。」</li>
+                                <li>「わかったかな？（にこにこ笑顔で）」</li>
                             </ol>
+
+                            <div class="text-[10.5px] text-slate-600 p-2 bg-slate-100 rounded border border-slate-200">
+                                <strong>※ リラックスの コツ：</strong>じゅぎょうのテストじゃないよ！ おともだちと「天川村のすてき」を たのしく おしゃべりしよう！
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -870,8 +582,7 @@
             <section class="print-page bg-white p-6 md:p-8 rounded border border-slate-400 max-w-[900px] mx-auto text-slate-800">
                 <div class="border-b-2 border-slate-800 pb-2 mb-5 flex justify-between items-end">
                     <div>
-                        <div class="text-xs font-bold text-slate-500">３・４年生 卓上支援カード（机上に常設）</div>
-                        <h2 class="text-xl font-bold text-slate-900">観点と理由が伝わる ポスターセッションガイド</h2>
+                        <h2 class="text-xl font-bold text-slate-900">ポスターセッション・ガイド（3・4年生）</h2>
                     </div>
                     <div class="text-right text-xs text-slate-600">
                         探究の視点：〜について（整理と要点）
@@ -879,55 +590,103 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs leading-relaxed">
-                    <!-- 左列：発表の型 -->
-                    <div class="border border-slate-300 p-3.5 rounded bg-slate-50/40">
-                        <div class="font-bold text-slate-900 text-sm border-b border-slate-300 pb-1.5 mb-2.5">
-                            ■ 発表の型（1分30秒・３つの観点を列挙）
-                        </div>
-                        <div class="space-y-2 text-slate-800">
-                            <div class="bg-white p-2 rounded border border-slate-200">
-                                <strong>1. はじめ（約15秒）：要点と予告</strong><br>
-                                「私たちが調べている〜について話します。伝えたいポイントは <strong>３つ</strong> あります。」
+                    <!-- 左列：発表の型 ＆ 聞き手のコツ -->
+                    <div class="border border-slate-300 p-3.5 rounded bg-slate-50/40 flex flex-col justify-between">
+                        <div>
+                            <div class="font-bold text-slate-900 text-sm border-b border-slate-300 pb-1.5 mb-2.5">
+                                ■ 発表の型（観点と事実を整理して伝える）
                             </div>
-                            <div class="bg-white p-2 rounded border border-slate-200">
-                                <strong>2. つたえること（約60秒・各約20秒）：３つの観点を順に伝える</strong>
-                                <div class="mt-1 space-y-1 text-[11px] pl-1 text-slate-700">
-                                    <div>①「１つ目は、〜〜です。（写真・図を指差す）ここを見ると分かるように、〜〜です。」</div>
-                                    <div>②「２つ目は、〜〜です。（手順・マップを指差す）ここにあるように、〜〜という工夫があります。」</div>
-                                    <div>③「３つ目は、〜〜です。（数字・表を指差す）この数字から、〜〜だと分かりました。」</div>
+                            <div class="space-y-1.5 text-slate-800 mb-3">
+                                <div class="bg-white p-2 rounded border border-slate-200">
+                                    <div class="font-bold text-slate-900 text-[11px] mb-0.5">1. 観点ごとに整理して話す</div>
+                                    <div class="text-slate-600 text-[11px]">場所や工夫など、伝えるポイントを分けて順序よく話す。</div>
+                                </div>
+                                <div class="bg-white p-2 rounded border border-slate-200">
+                                    <div class="font-bold text-slate-900 text-[11px] mb-0.5">2. 事実と考えを分ける</div>
+                                    <div class="text-slate-600 text-[11px]">「調べた事実（いつ・どこで・何が）」と「自分が思ったこと」を区別する。</div>
+                                </div>
+                                <div class="bg-white p-2 rounded border border-slate-200">
+                                    <div class="font-bold text-slate-900 text-[11px] mb-0.5">3. ポスターを指さす</div>
+                                    <div class="text-slate-600 text-[11px]">「写真や地図のここを見てください」と言葉に合わせて指し示す。</div>
+                                </div>
+                                <div class="bg-white p-2 rounded border border-slate-200">
+                                    <div class="font-bold text-slate-900 text-[11px] mb-0.5">4. 相手の目を見て話す</div>
+                                    <div class="text-slate-600 text-[11px]">手元のメモばかり見ず、笑顔で友達の顔を見て声を届ける。</div>
                                 </div>
                             </div>
-                            <div class="bg-white p-2 rounded border border-slate-200">
-                                <strong>3. おわり（約15秒）：まとめと質問のお願い</strong><br>
-                                「このように、〇〇には〜〜の良さがあります。これで発表を終わります。質問をお願いします。」
+
+                            <div class="font-bold text-slate-900 text-sm border-b border-slate-300 pb-1.5 mb-2">
+                                ■ 聞き手と対話のコツ
+                            </div>
+                            <div class="space-y-1.5 text-slate-800">
+                                <div class="bg-white p-2 rounded border border-slate-200">
+                                    <div class="font-bold text-slate-900 text-[11px] mb-0.5 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-ear-listen text-teal-600 text-xs"></i>
+                                        <span>相づちを打ちながら聞く</span>
+                                    </div>
+                                    <div class="text-slate-600 text-[11px]">「うん、うん」「へえ〜」とうなずきながら聞き、話し手を安心させる。</div>
+                                </div>
+                                <div class="bg-white p-2 rounded border border-slate-200">
+                                    <div class="font-bold text-slate-900 text-[11px] mb-0.5 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-pen text-teal-600 text-xs"></i>
+                                        <span>気になったところを見つける</span>
+                                    </div>
+                                    <div class="text-slate-600 text-[11px]">「もっと知りたいこと」や「すごいと思った工夫」をメモして質問しよう。</div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 右列：質問ステム＆応答 -->
+                    <!-- 右列：発表と対話の型 -->
                     <div class="border border-slate-300 p-3.5 rounded bg-slate-50/40 flex flex-col justify-between">
                         <div>
                             <div class="font-bold text-slate-900 text-sm border-b border-slate-300 pb-1.5 mb-2.5">
-                                ■ 5W1H 質問ステム（1つ選んで質問する）
+                                ■ 発表と対話の型（質問して、もっと仲良く知ろう）
                             </div>
-                            <ul class="space-y-1.5 text-slate-800 mb-4">
-                                <li class="bg-white p-2 rounded border border-slate-200">
-                                    <strong>・いつ・どこで：</strong>「これは、いつ・どこで行われるのですか？」
-                                </li>
-                                <li class="bg-white p-2 rounded border border-slate-200">
-                                    <strong>・なぜ（理由）：</strong>「どうしてその工夫（名前・形）になったのですか？」
-                                </li>
-                                <li class="bg-white p-2 rounded border border-slate-200">
-                                    <strong>・工夫・大変さ：</strong>「調べる中で、一番大変だったことは何ですか？」
-                                </li>
-                            </ul>
 
-                            <div class="font-bold text-slate-900 text-xs mb-1.5">【応答の3ステップ】</div>
-                            <ol class="space-y-1 list-decimal pl-4 text-slate-700">
-                                <li>「ご質問ありがとうございます。」</li>
-                                <li>「ポスターの【ここ】を見てください。ここにあるように〜〜だからです。」</li>
-                                <li>「ご質問の答えになっていますでしょうか？」</li>
-                            </ol>
+                            <div class="mb-2.5">
+                                <div class="font-bold text-slate-800 text-[11px] mb-1">【発表の型（1分30秒・観点を順序立てて伝える）】</div>
+                                <div class="bg-white p-2 rounded border border-slate-200 space-y-1.5 text-[11px] text-slate-700">
+                                    <div>
+                                        <strong>1. はじめ（約15秒）：要点と予告</strong><br>
+                                        「私たちが調べている【テーマ：〇〇】について発表します。地域のよさや工夫を、<strong>３つのポイント</strong>から整理して伝えます。」
+                                    </div>
+                                    <div>
+                                        <strong>2. 本論（約60秒・各約20秒）：３つの観点を順に提示</strong>
+                                        <div class="mt-0.5 space-y-0.5 text-[10.5px] pl-1">
+                                            <div>①「１つ目【事実・特徴】：（写真・図を指差す）ここを見ると分かるように、〜〜です。」</div>
+                                            <div>②「２つ目【人々の工夫】：（図や写真を指差す）昔と比べると、〜〜という工夫がされています。」</div>
+                                            <div>③「３つ目【わかった魅力】：（見出し・まとめを指差す）このことから、天川村には〜〜の魅力があると分かりました。」</div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <strong>3. おわり（約15秒）：まとめと質問のお願い</strong><br>
+                                        「これで発表を終わります。聞いてくれてありがとう！ 何か質問や気になったことはありますか？」
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-2.5">
+                                <div class="font-bold text-slate-800 text-[11px] mb-1">【対話のヒント（5W1Hで質問してみよう）】</div>
+                                <div class="bg-white p-2 rounded border border-slate-200 text-[11px] text-slate-700 space-y-0.5">
+                                    <div>・「その工夫や行事は、いつ・どこで見られるの？」</div>
+                                    <div>・「どうしてそのやり方をしているの？ どんな工夫があるの？」</div>
+                                    <div>・「昔や他の地域と比べたとき、どんな違いがあったの？」</div>
+                                </div>
+                            </div>
+
+                            <div class="mb-2.5">
+                                <div class="font-bold text-slate-800 text-[11px] mb-1">【こたえ方の ３ステップ】</div>
+                                <div class="bg-white p-1.5 rounded border border-slate-200 text-[11px] text-slate-700 space-y-0.5">
+                                    <div>①「質問ありがとう！」</div>
+                                    <div>②「ポスターの【ここ】を見てね。（指さす）調べたら、〜〜だったよ。」</div>
+                                    <div>③「伝わったかな？（笑顔で）」</div>
+                                </div>
+                            </div>
+
+                            <div class="text-[10.5px] text-slate-600 p-2 bg-slate-100 rounded border border-slate-200">
+                                <strong>※ リラックスのコツ：</strong>テストじゃないから緊張しなくて大丈夫！ポスターを見せながら、普段のおしゃべりのように楽しもう！
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -941,8 +700,7 @@
             <section class="print-page bg-white p-6 md:p-8 rounded border border-slate-400 max-w-[900px] mx-auto text-slate-800">
                 <div class="border-b-2 border-slate-800 pb-2 mb-5 flex justify-between items-end">
                     <div>
-                        <div class="text-xs font-bold text-slate-500">５・６年生 卓上支援カード（机上に常設）</div>
-                        <h2 class="text-xl font-bold text-slate-900">相手に届く！ポスターセッション・スキルガイド</h2>
+                        <h2 class="text-xl font-bold text-slate-900">ポスターセッション・ガイド（5・6年生）</h2>
                     </div>
                     <div class="text-right text-xs text-slate-600">
                         探究の視点：〜のために(準備)（根拠と伝達）
@@ -950,78 +708,109 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs leading-relaxed">
-                    <!-- 左列：相手に届ける！４つのアクション -->
+                    <!-- 左列：発表の型 ＆ 聞き手と対話のコツ -->
                     <div class="border border-slate-300 p-3.5 rounded bg-slate-50/40 flex flex-col justify-between">
                         <div>
                             <div class="font-bold text-slate-900 text-sm border-b border-slate-300 pb-1.5 mb-2.5">
-                                ■ 相手に届ける！４つのプレゼン・アクション
+                                ■ 発表の型（データと理由でわかりやすく伝える）
                             </div>
-                            <div class="space-y-2 text-slate-800">
-                                <div class="bg-white p-2.5 rounded border border-slate-200">
-                                    <div class="font-bold text-slate-900 mb-0.5">1. 目線（アイコンタクト）</div>
-                                    <div class="text-slate-600 text-[11px]">原稿ばかり見ない。相手の顔を見て語る（相手７割、原稿３割）。</div>
+                            <div class="space-y-1.5 text-slate-800 mb-3">
+                                <div class="bg-white p-2 rounded border border-slate-200">
+                                    <div class="font-bold text-slate-900 text-[11px] mb-0.5">1. 理由をデータで示す</div>
+                                    <div class="text-slate-600 text-[11px]">「〜と思います」だけでなく、ポスターの数値・グラフを指さして「なぜそう言えるか」を伝える。</div>
                                 </div>
-                                <div class="bg-white p-2.5 rounded border border-slate-200">
-                                    <div class="font-bold text-slate-900 mb-0.5">2. 声の大きさ・速さ</div>
-                                    <div class="text-slate-600 text-[11px]">相手に届く通る声。大事な言葉や数値はゆっくり話す。</div>
+                                <div class="bg-white p-2 rounded border border-slate-200">
+                                    <div class="font-bold text-slate-900 text-[11px] mb-0.5">2. 背景や工夫も伝える</div>
+                                    <div class="text-slate-600 text-[11px]">自然環境・産業・歴史・村の人の思いなど、理由の背景までわかりやすく話す。</div>
                                 </div>
-                                <div class="bg-white p-2.5 rounded border border-slate-200">
-                                    <div class="font-bold text-slate-900 mb-0.5">3. 身振り（ジェスチャー）</div>
-                                    <div class="text-slate-600 text-[11px]">「ポイントは３点あります」と指で３を示し、要点をアピールする。</div>
+                                <div class="bg-white p-2 rounded border border-slate-200">
+                                    <div class="font-bold text-slate-900 text-[11px] mb-0.5">3. 相手の目を見て話す</div>
+                                    <div class="text-slate-600 text-[11px]">手元のメモばかり見ず、聞き手を見て話しかける（相手７割、資料３割）。大切な言葉の前に一呼吸置く。</div>
                                 </div>
-                                <div class="bg-white p-2.5 rounded border border-slate-200">
-                                    <div class="font-bold text-slate-900 mb-0.5">4. 資料への参照（※最重要）</div>
-                                    <div class="text-slate-600 text-[11px]">「このグラフをご覧ください」と指やペン先で<strong>数値や矢印</strong>を指し示す。</div>
+                                <div class="bg-white p-2 rounded border border-slate-200">
+                                    <div class="font-bold text-slate-900 text-[11px] mb-0.5">4. 図表やグラフを指さして話す</div>
+                                    <div class="text-slate-600 text-[11px]">ポスターの数値や図表を指さしながら話すと、聞き手に理由や根拠がしっかり伝わります。</div>
+                                </div>
+                            </div>
+
+                            <div class="font-bold text-slate-900 text-sm border-b border-slate-300 pb-1.5 mb-2">
+                                ■ 聞き手と対話のコツ（対話で深める）
+                            </div>
+                            <div class="space-y-1.5 text-slate-800">
+                                <div class="bg-white p-2 rounded border border-slate-200">
+                                    <div class="font-bold text-slate-900 text-[11px] mb-0.5 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-eye text-teal-600 text-xs"></i>
+                                        <span>聞き手の反応を見ながら話す</span>
+                                    </div>
+                                    <div class="text-slate-600 text-[11px]">相づちを打ってくれているか確認しながら、ゆっくり落ち着いて話そう。</div>
+                                </div>
+                                <div class="bg-white p-2 rounded border border-slate-200">
+                                    <div class="font-bold text-slate-900 text-[11px] mb-0.5 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-hand-pointer text-teal-600 text-xs"></i>
+                                        <span>見せたい図や写真を大きく指さす</span>
+                                    </div>
+                                    <div class="text-slate-600 text-[11px]">「ここを見てください」と声をかけながら指さすと、相手も注目しやすくなります。</div>
+                                </div>
+                                <div class="bg-white p-2 rounded border border-slate-200">
+                                    <div class="font-bold text-slate-900 text-[11px] mb-0.5 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-comments text-teal-600 text-xs"></i>
+                                        <span>質問されたら笑顔で理由を補足する</span>
+                                    </div>
+                                    <div class="text-slate-600 text-[11px]">「いい質問ありがとう！」と受け止め、ポスターの資料を指しながら補足しよう。</div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 右列：発表・質問・答え方の型 -->
+                    <!-- 右列：発表と対話の型 -->
                     <div class="border border-slate-300 p-3.5 rounded bg-slate-50/40 flex flex-col justify-between">
                         <div>
                             <div class="font-bold text-slate-900 text-sm border-b border-slate-300 pb-1.5 mb-2.5">
-                                ■ 発表と対話のシンプルな型
+                                ■ 対話の型（質問と対話で考えを深める）
                             </div>
                             
-                            <div class="mb-3">
-                                <div class="font-bold text-slate-800 text-[11px] mb-1">【発表の型（1分30秒・３つの論拠を列挙）】</div>
+                            <div class="mb-2.5">
+                                <div class="font-bold text-slate-800 text-[11px] mb-1">【発表の型（1分30秒・課題からデータ、提案へ）】</div>
                                 <div class="bg-white p-2 rounded border border-slate-200 space-y-1.5 text-[11px] text-slate-700">
                                     <div>
-                                        <strong>1. はじめ（約15秒）：</strong><br>
-                                        「私たちが探究したテーマは、〜〜です。伝えたいことは <strong>３点</strong> あります。」
+                                        <strong>1. はじめ（約15秒）：テーマと目的</strong><br>
+                                        「私たちが探究しているテーマは【〇〇】です。調査でわかったことと私たちの考えを、<strong>３つのポイント</strong>から発表します。」
                                     </div>
                                     <div>
-                                        <strong>2. つたえること（約60秒・各約20秒）：３つのデータを順に提示</strong>
+                                        <strong>2. 本論（約60秒・各約20秒）：データと要因の提示（ポスター活用）</strong>
                                         <div class="pl-1 mt-0.5 space-y-0.5 text-[10.5px]">
-                                            <div>①「１点目は、〜〜です。（グラフを指差す）この数値から〜〜が分かります。」</div>
-                                            <div>②「２点目は、〜〜です。（写真を指差す）現場の様子から〜〜という課題があります。」</div>
-                                            <div>③「３点目は、〜〜です。（比較表を指差す）他地域と比べると〜〜という特徴があります。」</div>
+                                            <div>①「１点目【現状とデータ】：（グラフを指差す）この数値の推移から、〜〜の実態が分かります。」</div>
+                                            <div>②「２点目【理由や背景】：（写真や要因図を指差す）取材してみると、〜〜という背景や工夫がありました。」</div>
+                                            <div>③「３点目【比べた良さ・強み】：（比較表を指差す）他地域と比べると、天川村には〜〜という特徴・強みがあります。」</div>
                                         </div>
                                     </div>
                                     <div>
-                                        <strong>3. おわり（約15秒）：</strong><br>
-                                        「以上の３点から、天川村には〜〜が必要だと考えます。ご質問をお願いします。」
+                                        <strong>3. おわり（約15秒）：まとめと提案</strong><br>
+                                        「以上の理由から、天川村のために〜〜が必要だと考えました。聞いてくれてありがとう！ 質問や感想があれば教えてください。」
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="mb-3">
-                                <div class="font-bold text-slate-800 text-[11px] mb-1">【質問の例（1つ選んで尋ねる）】</div>
+                            <div class="mb-2.5">
+                                <div class="font-bold text-slate-800 text-[11px] mb-1">【探究を深める質問のヒント】</div>
                                 <div class="bg-white p-2 rounded border border-slate-200 text-[11px] text-slate-700 space-y-0.5">
-                                    <div>・「グラフの数値が急に変化した理由は何ですか？」</div>
-                                    <div>・「一番大変だったことや工夫した点はどこですか？」</div>
-                                    <div>・「地域の方や観光客の意見はどうでしたか？」</div>
+                                    <div>・「グラフの数字がこうなっているのは、どんな理由があるのかな？」</div>
+                                    <div>・「地域の人に聞いてみて、自分たちで一番大切だと思ったことは何？」</div>
+                                    <div>・「他の地域と比べたとき、天川村ならではの良さはどんなところ？」</div>
                                 </div>
                             </div>
 
-                            <div>
-                                <div class="font-bold text-slate-800 text-[11px] mb-1">【応答のしかた】</div>
+                            <div class="mb-2.5">
+                                <div class="font-bold text-slate-800 text-[11px] mb-1">【質問への答え方】</div>
                                 <div class="bg-white p-1.5 rounded border border-slate-200 text-[11px] text-slate-700 space-y-0.5">
-                                    <div>①「ご質問ありがとうございます。」</div>
-                                    <div>②「資料のここにあるように、〜〜だからです。」</div>
-                                    <div>③「お答えになっていますでしょうか。」</div>
+                                    <div>①「いい質問をありがとう！」</div>
+                                    <div>②「ポスターの【ここ】を見てほしいんだけど、取材した結果〜〜だったんだ。」</div>
+                                    <div>③「〇〇さんはどう思う？（対話をつなげる）」</div>
                                 </div>
+                            </div>
+
+                            <div class="text-[10.5px] text-slate-600 p-2 bg-slate-100 rounded border border-slate-200">
+                                <strong>※ リラックスして話そう！：</strong>正解・不正解を競う場ではありません。データや理由を見せながら、お互いのアイデアを楽しく語り合おう！
                             </div>
                         </div>
                     </div>
@@ -1036,90 +825,118 @@
             <section class="print-page bg-white p-6 md:p-8 rounded border border-slate-400 max-w-[900px] mx-auto text-slate-800">
                 <div class="border-b-2 border-slate-800 pb-2 mb-5 flex justify-between items-end">
                     <div>
-                        <div class="text-xs font-bold text-slate-500">７〜９年生 卓上支援カード（机上に常設）</div>
-                        <h2 class="text-xl font-bold text-slate-900">説得力を生む プレゼン＆ディスカッション・ガイド</h2>
+                        <h2 class="text-xl font-bold text-slate-900">ポスターセッション・ガイド（7〜9年生）</h2>
                     </div>
                     <div class="text-right text-xs text-slate-600">
-                        探究の視点：〜のために（論理と対話）
+                        探究の視点：〜のために（論理と対話・ICT活用）
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs leading-relaxed">
-                    <!-- 左列：意識すべき４大デリバリー・スキル -->
+                    <!-- 左列：発表の型 ＆ ICT有効活用 -->
                     <div class="border border-slate-300 p-3.5 rounded bg-slate-50/40 flex flex-col justify-between">
                         <div>
                             <div class="font-bold text-slate-900 text-sm border-b border-slate-300 pb-1.5 mb-2.5">
-                                ■ 意識すべき４大デリバリー・スキル
+                                ■ 発表の型（事実と意見を整理し、ICTを活用して提案する）
                             </div>
-                            <div class="space-y-2 text-slate-800">
-                                <div class="bg-white p-2.5 rounded border border-slate-200">
-                                    <div class="font-bold text-slate-900 mb-0.5">1. 目線（アイコンタクト）</div>
-                                    <div class="text-slate-600 text-[11px]">原稿の棒読み厳禁。相手の反応やうなずきを見ながら「語りかける」。</div>
+                            <div class="space-y-1.5 text-slate-800 mb-3">
+                                <div class="bg-white p-2 rounded border border-slate-200">
+                                    <div class="font-bold text-slate-900 text-[11px] mb-0.5">1. 事実と自分の考えを分ける</div>
+                                    <div class="text-slate-600 text-[11px]">調べたデータ（事実）と、そこから考えた自分たちのアイデア（提案）を分かりやすく分けて話す。</div>
                                 </div>
-                                <div class="bg-white p-2.5 rounded border border-slate-200">
-                                    <div class="font-bold text-slate-900 mb-0.5">2. 声のメリハリ（間・トーン）</div>
-                                    <div class="text-slate-600 text-[11px]">一本調子にならない。重要な提言や核心データの前後に<strong>１秒の間（沈黙）</strong>を置く。</div>
+                                <div class="bg-white p-2 rounded border border-slate-200">
+                                    <div class="font-bold text-slate-900 text-[11px] mb-0.5">2. ポスター×端末を使いこなす</div>
+                                    <div class="text-slate-600 text-[11px]">ポスターで全体のポイントを示し、端末で写真や動画、詳しいグラフをサッと拡大して見せる。</div>
                                 </div>
-                                <div class="bg-white p-2.5 rounded border border-slate-200">
-                                    <div class="font-bold text-slate-900 mb-0.5">3. 身体表現（ジェスチャー）</div>
-                                    <div class="text-slate-600 text-[11px]">手や体を使って対比（「一方で〜」）や広がりを視覚化する。</div>
+                                <div class="bg-white p-2 rounded border border-slate-200">
+                                    <div class="font-bold text-slate-900 text-[11px] mb-0.5">3. いろんな人の立場を想像する</div>
+                                    <div class="text-slate-600 text-[11px]">住民・観光客・事業者など多様な立場を意識し、共感を生む言葉と自然な間で語る。</div>
                                 </div>
-                                <div class="bg-white p-2.5 rounded border border-slate-200">
-                                    <div class="font-bold text-slate-900 mb-0.5">4. 資料への参照（※最重要）</div>
-                                    <div class="text-slate-600 text-[11px]">「こちらの【図表〇】をご覧ください」と言葉と指差しを完全連動させ、<strong>数値や根拠</strong>を的確に指す。</div>
+                                <div class="bg-white p-2 rounded border border-slate-200">
+                                    <div class="font-bold text-slate-900 text-[11px] mb-0.5">4. 対話でアイデアを深める</div>
+                                    <div class="text-slate-600 text-[11px]">自分の考えを一方的に話すのではなく、友達からの質問や新しい視点を受け止めて対話を広げる。</div>
                                 </div>
                             </div>
-                            <div class="mt-2 text-[10px] text-slate-600 p-1.5 bg-slate-100 rounded">
-                                ※「阿吽の呼吸」禁止：固有名詞・数字・根拠を省略せず、初めて聞く人にも論理が通る言葉遣いを徹底する。
+
+                            <div class="font-bold text-slate-900 text-sm border-b border-slate-300 pb-1.5 mb-2 flex items-center justify-between">
+                                <span>■ 発展：ポスター×ICTのスマートな使い方</span>
+                                <span class="text-[10px] bg-teal-100 text-teal-800 font-bold px-1.5 py-0.5 rounded">実践スキル</span>
+                            </div>
+                            <div class="space-y-1.5 text-slate-800">
+                                <div class="bg-white p-2 rounded border border-slate-200">
+                                    <div class="font-bold text-slate-900 text-[11px] mb-0.5 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-tablet-screen-button text-teal-600 text-xs"></i>
+                                        <span>手元端末で写真・動画をサッと見せる</span>
+                                    </div>
+                                    <div class="text-slate-600 text-[11px]">ポスターの図を補強する取材写真やインタビュー動画を手元端末ですぐに見せる。</div>
+                                </div>
+                                <div class="bg-white p-2 rounded border border-slate-200">
+                                    <div class="font-bold text-slate-900 text-[11px] mb-0.5 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-users-viewfinder text-teal-600 text-xs"></i>
+                                        <span>聞き手に見やすい画面の向きを意識する</span>
+                                    </div>
+                                    <div class="text-slate-600 text-[11px]">自分が画面をのぞき込まず、聞き手に見える角度に向け、目線は相手と画面を行き来させる。</div>
+                                </div>
+                                <div class="bg-white p-2 rounded border border-slate-200">
+                                    <div class="font-bold text-slate-900 text-[11px] mb-0.5 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-magnifying-glass-chart text-teal-600 text-xs"></i>
+                                        <span>質問されたら追加データをサッと提示</span>
+                                    </div>
+                                    <div class="text-slate-600 text-[11px]">質問を受けた際、端末内の補足データや引用元（統計・Web資料等）をサッと示して根拠を補強。</div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 右列：ピッチとディスカッションの型 -->
+                    <!-- 右列：発表と対話の型 -->
                     <div class="border border-slate-300 p-3.5 rounded bg-slate-50/40 flex flex-col justify-between">
                         <div>
                             <div class="font-bold text-slate-900 text-sm border-b border-slate-300 pb-1.5 mb-2.5">
-                                ■ ピッチ＆ディスカッションの型
+                                ■ 発表と対話の型（アイデアを共有し、対話で深める）
                             </div>
 
-                            <div class="mb-3">
-                                <div class="font-bold text-slate-800 text-[11px] mb-1">【ピッチの型（1分30秒厳守・３つの柱を列挙）】</div>
+                            <div class="mb-2.5">
+                                <div class="font-bold text-slate-800 text-[11px] mb-1">【発表の型（1分30秒・課題提起から論証、提案へ）】</div>
                                 <div class="bg-white p-2 rounded border border-slate-200 space-y-1.5 text-[11px] text-slate-700">
                                     <div>
-                                        <strong>1. 導入（約15秒）：課題と提言</strong><br>
-                                        「私たちが取り組んでいるプロジェクトについてお話しします。伝えたいことは <strong>３点</strong> あります。」
+                                        <strong>1. 導入（約15秒）：自然な導入とテーマの投げかけ</strong><br>
+                                        「私たちは、天川村について探究する中で【テーマ：〇〇】に着目しました。今日は、調べて分かった現状と、未来に向けた私たちの提案をお伝えします。」
                                     </div>
                                     <div>
-                                        <strong>2. 本論（約60秒・各約20秒）：３つの柱を順に提示</strong>
+                                        <strong>2. 本論（約60秒・各約20秒）：事実と提案の３つの柱（ポスター＋端末活用）</strong>
                                         <div class="pl-1 mt-0.5 space-y-0.5 text-[10.5px]">
-                                            <div>①「第１に、〜〜です。（【図表１】を指差す）事実として〜〜という現状があります。」</div>
-                                            <div>②「第２に、〜〜です。（【図表２】を指差す）この施策により〜〜を解決します。」</div>
-                                            <div>③「第３に、〜〜です。（【図表３】を指差す）中長期的に〜〜の成果をもたらします。」</div>
+                                            <div>①「まず【現状とデータ】：（図表１を指差す）統計データを見ると、〜〜という実態が分かります。」</div>
+                                            <div>②「次に【要因と提案】：（図表２を指差す／端末で動画・写真提示）現地取材から判明した課題に対し、私たちは〜〜というアイデアを提案します。」</div>
+                                            <div>③「そして【期待される効果】：（図表３を指差す／端末で詳細試算提示）この取り組みにより、〜〜という効果と持続可能性が期待されます。」</div>
                                         </div>
                                     </div>
                                     <div>
-                                        <strong>3. 結び（約15秒）：まとめと討議</strong><br>
-                                        「以上の３つの柱により村の未来を切り拓きます。批判的なご意見やご質問をお願いします。」
+                                        <strong>3. 結び（約15秒）：提案のまとめと対話への誘い</strong><br>
+                                        「天川村の未来のために、みなさんの意見も聞かせてほしいです。感想やアドバイス、質問をお願いします。」
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="mb-3">
-                                <div class="font-bold text-slate-800 text-[11px] mb-1">【批判的吟味・質問の例】</div>
+                            <div class="mb-2.5">
+                                <div class="font-bold text-slate-800 text-[11px] mb-1">【対話を深める質問のヒント】</div>
                                 <div class="bg-white p-2 rounded border border-slate-200 text-[11px] text-slate-700 space-y-0.5">
-                                    <div>・「提案を実行する上で、最大のハードル（費用・人手）は何ですか？」</div>
-                                    <div>・「住民と観光客で利害が対立した場合、どう調整しますか？」</div>
-                                    <div>・「提示されたデータ以外に、別の可能性は検討しましたか？」</div>
+                                    <div>・「村の人や観光客の立場から見ると、どんなメリットや課題がありそうかな？」</div>
+                                    <div>・「提案を実行・継続するための工夫やアイデアについて、どんなことが考えられる？」</div>
+                                    <div>・「そのアイデアの根拠になっているデータについて、他の見方はできないかな？」</div>
                                 </div>
                             </div>
 
-                            <div>
-                                <div class="font-bold text-slate-800 text-[11px] mb-1">【対話を深める応答】</div>
+                            <div class="mb-2.5">
+                                <div class="font-bold text-slate-800 text-[11px] mb-1">【対話を広げる応答のコツ】</div>
                                 <div class="bg-white p-1.5 rounded border border-slate-200 text-[11px] text-slate-700 space-y-0.5">
-                                    <div>①「重要なご指摘、ありがとうございます。」</div>
-                                    <div>②「確かに〜という課題がありますが、資料にある通り〜と考えています。」</div>
-                                    <div>③「この点について、どう思われますか？」（対話を発展）</div>
+                                    <div>①「鋭い視点からの質問をありがとう！」</div>
+                                    <div>②「ポスター（または端末）のここを見てほしいんだけど、〜〜という視点から検討したんだ。」</div>
+                                    <div>③「〇〇さんの視点を取り入れると、さらに良くなりそう！ どうすればもっと良くなると思う？」（対話を発展させる）</div>
                                 </div>
+                            </div>
+
+                            <div class="text-[10.5px] text-slate-600 p-2 bg-slate-100 rounded border border-slate-200">
+                                <strong>※ リラックスして楽しもう！：</strong>発表というより、未来を考える「作戦会議」。画面に閉じこもらず、相手の目を見て笑顔で対話を楽しもう！
                             </div>
                         </div>
                     </div>
@@ -1127,95 +944,6 @@
             </section>
         </div>
 
-        <!-- ======================================================== -->
-        <!-- 原稿連動準備シート（全校共通）                              -->
-        <!-- ======================================================== -->
-        <div id="content_builder" class="tab-content hidden">
-            <section class="print-page bg-white p-5 md:p-6 rounded border border-slate-400 max-w-[900px] mx-auto text-slate-800">
-                <div class="border-b-2 border-slate-800 pb-2 mb-4 flex justify-between items-end">
-                    <div>
-                        <div class="text-xs font-bold text-slate-500 leading-normal">
-                            小・中共通 発表準備ワークシート
-                        </div>
-                        <h2 class="text-lg md:text-xl font-bold text-slate-900 mt-0.5 leading-normal">
-                            ポスターセッションの発表の形 - １分３０秒で伝える
-                        </h2>
-                    </div>
-                    <div class="text-xs text-slate-600 font-medium whitespace-nowrap">
-                        年　組　名前［　　　　　　　　　　］
-                    </div>
-                </div>
-
-                <div>
-                    <div class="font-bold text-slate-900 text-xs mb-2 leading-normal">
-                        ゆびさし発表の 原稿（※ポスターを トントンと 指差しながら はなそう）
-                    </div>
-                    <div class="space-y-3 text-xs leading-normal">
-                        <div class="border border-slate-300 p-3 rounded bg-white leading-relaxed">
-                            <div class="font-bold text-slate-800">
-                                1. はじめ（約15秒）：テーマの紹介と「伝えたいことは３つ」
-                            </div>
-                            <div class="text-slate-700 mt-1.5 pl-1">
-                                「私が調べたことは、〜〜です。きょう伝えたいことは、<strong>３つ</strong>あります。」
-                            </div>
-                        </div>
-
-                        <div class="border border-slate-300 p-3 rounded bg-white leading-relaxed">
-                            <div class="font-bold text-slate-800 mb-2">
-                                2. つたえること（約60秒）：３つのことを じゅんばんに話そう（各約20秒）
-                            </div>
-                            <div class="space-y-2 pl-1">
-                                <div class="p-2.5 rounded bg-slate-50 border border-slate-200">
-                                    <div class="font-bold text-slate-800 text-xs">
-                                        ① １つ目（約20秒）※ポスターを トントンと指差す
-                                    </div>
-                                    <div class="text-slate-700 mt-1">
-                                        「１つ目は、〜〜です。（指差す）ここを見るとわかるように、〜〜です。」
-                                    </div>
-                                </div>
-                                <div class="p-2.5 rounded bg-slate-50 border border-slate-200">
-                                    <div class="font-bold text-slate-800 text-xs">
-                                        ② ２つ目（約20秒）※ポスターを トントンと指差す
-                                    </div>
-                                    <div class="text-slate-700 mt-1">
-                                        「２つ目は、〜〜です。（指差す）これを見るとわかるように、〜〜です。」
-                                    </div>
-                                </div>
-                                <div class="p-2.5 rounded bg-slate-50 border border-slate-200">
-                                    <div class="font-bold text-slate-800 text-xs">
-                                        ③ ３つ目（約20秒）※ポスターを トントンと指差す
-                                    </div>
-                                    <div class="text-slate-700 mt-1">
-                                        「３つ目は、〜〜です。（指差す）このことから、〜〜ということがわかります。」
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="border border-slate-300 p-3 rounded bg-white leading-relaxed">
-                            <div class="font-bold text-slate-800">
-                                3. おわり（約15秒）：まとめと 質問のおねがい
-                            </div>
-                            <div class="text-slate-700 mt-1.5 pl-1">
-                                「このことから、天川村のために〜〜していきたいです。これで発表をおわります。質問をおねがいします。」
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 下部：3つのやくそくリマインダー -->
-                <div class="mt-4 p-3 bg-slate-50 rounded border border-slate-200 text-xs leading-relaxed text-slate-700">
-                    <div class="font-bold text-slate-800 mb-1">
-                        【大切な ３つの やくそく】
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
-                        <div>・<strong>「手」</strong>は ポスターを ゆびさす（トントン）</div>
-                        <div>・<strong>「目」</strong>は おともだちの かおを みる</div>
-                        <div>・<strong>「声」</strong>は まっすぐ おともだちに とどける</div>
-                    </div>
-                </div>
-            </section>
-        </div>
 
         <!-- ======================================================== -->
         <!-- 教室投影用 10分カウントダウンタイマー                         -->
@@ -1237,7 +965,7 @@
                         じゃんけんで A（発表）/ B（聞き手）を決めよう
                     </h2>
                     <p id="phase_instruction" class="text-xs md:text-sm text-slate-600 mt-1">
-                        ポスターをセットし、卓上カードを手元に置きます。「阿吽の呼吸禁止！」初めての人に伝える意識を持ちましょう。
+                        ポスターをセットし、ガイドカードを手元に置きます。リラックスして、初めて聞く人にもわかるように笑顔で話しましょう。
                     </p>
                 </div>
 
@@ -1294,7 +1022,7 @@
                 <div class="grid grid-cols-2 md:grid-cols-7 gap-1.5 text-left mt-8 text-[11px] text-slate-500">
                     <div id="tl_0" class="bg-slate-100 p-2 rounded border border-slate-300 text-slate-800 font-bold">
                         <div>1. 準備 (1分)</div>
-                        <div class="text-[10px] font-normal">ペア・めあて</div>
+                        <div class="text-[10px] font-normal">グループ・めあて</div>
                     </div>
                     <div id="tl_1" class="bg-slate-50 p-2 rounded border border-slate-200">
                         <div>2. 発表A (1分30秒)</div>
@@ -1362,13 +1090,13 @@
         let isRunning = false;
 
         const phases = [
-            { id: 0, start: 600, end: 540, durationText: "1分00秒", name: "フェーズ 1：準備・めあて確認", title: "じゃんけんで A（発表）/ B（聞き手）を決めよう", desc: "ポスターとお助けシートを手元に準備。「阿吽の呼吸禁止！」初めての人に話すつもりで臨みましょう。" },
-            { id: 1, start: 540, end: 450, durationText: "1分30秒", name: "フェーズ 2：前半発表（Aさん）", title: "【発表 A】ポスターの画像やグラフを指差して話そう", desc: "手元原稿の棒読みは避けましょう。「手はポスター、目は相手」。Bさんはメモを取りながら聞きます。" },
-            { id: 2, start: 450, end: 390, durationText: "1分00秒", name: "フェーズ 3：前半質疑（B→A）", title: "【質疑 A】Bさんから質問・Aさんはポスターを示して回答", desc: "お助けカードを参考に質問を投げかけましょう。Aさんは「ご質問ありがとうございます」から落ち着いて回答します。" },
-            { id: 3, start: 390, end: 360, durationText: "30秒",    name: "フェーズ 4：役割交代（30秒）", title: "役割チェンジ！気持ちを切り替えましょう", desc: "Bさんが発表者、Aさんが聞き手になります。ポスターの位置や手元資料を整えてください。" },
-            { id: 4, start: 360, end: 270, durationText: "1分30秒", name: "フェーズ 5：後半発表（Bさん）", title: "【発表 B】Bさんの発表スタート！資料を指差して伝えよう", desc: "相手に届く声で発表します。Aさんはうなずきながらメモを取り、質問の準備をします。" },
-            { id: 5, start: 270, end: 210, durationText: "1分00秒", name: "フェーズ 6：後半質疑（A→B）", title: "【質疑 B】Aさんから質問・Bさんは根拠をもって回答", desc: "資料の数値や工夫した点を尋ねましょう。Bさんはポスターを示しながら丁寧に回答します。" },
-            { id: 6, start: 210, end: 0,   durationText: "3分30秒", name: "フェーズ 7：相互評価＆まとめ", title: "相互チェックと振り返りを行いましょう", desc: "記録シートのチェック欄を記入し、相手に良かった点とアドバイスを伝えます。全体のまとめを行います。" }
+            { id: 0, start: 600, end: 540, durationText: "1分00秒", name: "フェーズ 1：準備・めあて確認", title: "じゃんけんで A（発表グループ）/ B（聞き手グループ）を決めよう", desc: "ポスターとガイドカードを手元に準備。リラックスして、初めて聞く友達にも伝わるよう笑顔で臨みましょう。" },
+            { id: 1, start: 540, end: 450, durationText: "1分30秒", name: "フェーズ 2：前半発表（Aグループ）", title: "【発表 A】ポスターの画像やグラフを指差して話そう", desc: "「手はポスター、目は相手」。原稿を見すぎず、聞き手の顔を見て話しかけましょう。Bグループは相づちを打ちながら聞きます。" },
+            { id: 2, start: 450, end: 390, durationText: "1分00秒", name: "フェーズ 3：前半質疑（B→A）", title: "【質問と対話 A】Bグループから質問・Aグループはポスターを示して回答", desc: "ガイドカードを参考に気になったことを質問しましょう。Aグループは「質問ありがとう！」と笑顔でポスターを示して答えます。" },
+            { id: 3, start: 390, end: 360, durationText: "30秒",    name: "フェーズ 4：役割交代（30秒）", title: "役割チェンジ！深呼吸して交代しよう", desc: "Bグループが発表、Aグループが聞き手になります。ポスターの位置を整えて、リラックスして交代しましょう。" },
+            { id: 4, start: 360, end: 270, durationText: "1分30秒", name: "フェーズ 5：後半発表（Bグループ）", title: "【発表 B】Bグループの発表スタート！資料を指差して伝えよう", desc: "相手に届く明るい声で発表します。Aグループは笑顔でうなずきながら聞き、気になったところを見つけましょう。" },
+            { id: 5, start: 270, end: 210, durationText: "1分00秒", name: "フェーズ 6：後半質疑（A→B）", title: "【質問と対話 B】Aグループから質問・Bグループはポスターを示して回答", desc: "ポスターの数字や工夫について尋ねてみましょう。Bグループは「質問ありがとう！」と資料を示しながら答えます。" },
+            { id: 6, start: 210, end: 0,   durationText: "3分30秒", name: "フェーズ 7：ふりかえり＆メッセージ", title: "お互いに良かったところを伝え合おう", desc: "記録シートを記入し、「ここがよかったよ！」と応援メッセージを伝え合います。今日見つけた素敵な発見を共有しましょう。" }
         ];
 
         function formatTime(sec) {
