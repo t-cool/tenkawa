@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ふるさと学習（総合的な学習の時間）全体計画</title>
+    <title>ふるさと学習（生活科・総合的な学習の時間）全体計画</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -154,7 +154,7 @@
             <div class="text-center mb-6">
                 <div class="inline-flex items-center gap-2 group cursor-pointer select-none" onclick="downloadA3PDF()" title="クリックしてA3用紙（縦）サイズのPDFをダウンロード">
                     <h1 class="text-3xl font-bold tracking-wider text-slate-800 group-hover:text-indigo-600 transition-colors border-b-2 border-transparent group-hover:border-indigo-400 px-2 py-1" id="doc_title">
-                        R９年度 ふるさと学習（総合的な学習の時間） 全体計画（案）
+                        R９年度 ふるさと学習（生活科・総合的な学習の時間） 全体計画（案）
                     </h1>
                     <span class="no-print inline-flex items-center text-xs font-medium text-indigo-600 bg-indigo-50 border border-indigo-200 px-2.5 py-1 rounded-full shadow-xs group-hover:bg-indigo-600 group-hover:text-white transition-all">
                         <i class="fa-solid fa-file-pdf mr-1 text-xs"></i>A3 PDF保存
@@ -663,8 +663,8 @@
                     if (legacy) {
                         try {
                             const oldData = JSON.parse(legacy);
-                            if (oldData.title === '総合的な学習の時間 全体計画') {
-                                oldData.title = 'R９年度 ふるさと学習（総合的な学習の時間） 全体計画';
+                            if (oldData.title === '総合的な学習の時間 全体計画' || oldData.title === 'R９年度 ふるさと学習（総合的な学習の時間） 全体計画') {
+                                oldData.title = 'R９年度 ふるさと学習（生活科・総合的な学習の時間） 全体計画';
                             }
                             saved = JSON.stringify(oldData);
                             localStorage.setItem(STORAGE_KEY_SECTION1, saved);
@@ -677,8 +677,8 @@
                     const data = JSON.parse(saved);
                     if (data.title && document.getElementById('doc_title')) {
                         let t = data.title;
-                        if (t === '総合的な学習の時間 全体計画') {
-                            t = 'R９年度 ふるさと学習（総合的な学習の時間） 全体計画（案）';
+                        if (t === '総合的な学習の時間 全体計画' || t === 'R９年度 ふるさと学習（総合的な学習の時間） 全体計画' || t === 'R９年度 ふるさと学習（総合的な学習の時間） 全体計画（案）') {
+                            t = 'R９年度 ふるさと学習（生活科・総合的な学習の時間） 全体計画（案）';
                         }
                         document.getElementById('doc_title').innerText = t;
                     }
@@ -1160,7 +1160,7 @@
 
                 const now = new Date();
                 const dateStr = now.toISOString().slice(0, 10);
-                const titleText = (document.getElementById('doc_title')?.innerText || 'R９年度_ふるさと学習（総合的な学習の時間）_全体計画').trim().replace(/[\s\t\n]+/g, '_');
+                const titleText = (document.getElementById('doc_title')?.innerText || 'R９年度_ふるさと学習（生活科・総合的な学習の時間）_全体計画').trim().replace(/[\s\t\n]+/g, '_');
                 pdf.save(`${titleText}_A3_${dateStr}.pdf`);
 
                 showToast("A3 PDFをダウンロードしました", false);
