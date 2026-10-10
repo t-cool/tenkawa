@@ -3,14 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>研究の実際 - ふるさと学習</title>
+    <title>R9年度の各学年の取組 - ふるさと学習</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Noto Sans JP -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+        }
+        @media print {
+            body {
+                background-color: #ffffff !important;
+                padding: 0 !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            section {
+                box-shadow: none !important;
+                page-break-inside: avoid;
+            }
         }
     </style>
 </head>
@@ -25,9 +42,16 @@
                 <span>目次</span>
             </a>
             <span class="text-slate-300">|</span>
-            <div class="text-xs md:text-sm font-bold text-slate-700">
-                ふるさと学習 各学年の取組
+            <div class="text-xs md:text-sm font-bold text-slate-700 flex items-center gap-1.5">
+                <i class="fa-solid fa-seedling text-emerald-600 text-xs"></i>
+                <span>R9年度の各学年の取組</span>
             </div>
+        </div>
+        <div class="flex items-center gap-2">
+            <button onclick="window.print()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium rounded text-sm transition flex items-center gap-1.5 border border-slate-300">
+                <i class="fa-solid fa-print text-xs text-slate-500"></i>
+                <span>印刷</span>
+            </button>
         </div>
     </header>
 
@@ -38,34 +62,133 @@
         <section class="bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs">
             <div class="border-b border-slate-200 pb-3 mb-4 flex items-center justify-between flex-wrap gap-2">
                 <div>
-                    <span class="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded">
-                        実践記録
+                    <span class="text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full inline-block">
+                        実践記録・R9年度
                     </span>
-                    <h1 class="text-xl md:text-2xl font-bold text-slate-900 mt-1.5">
-                        研究の実際
+                    <h1 class="text-xl md:text-2xl font-bold text-slate-900 mt-2 flex items-center gap-2.5">
+                        <i class="fa-solid fa-graduation-cap text-emerald-600"></i>
+                        <span>R9年度の各学年の取組</span>
                     </h1>
                 </div>
             </div>
-            <p class="text-sm text-slate-600 leading-relaxed">
-                ふるさと学習（総合的な学習の時間）において、各学年でどのように探究活動や学習に取り組んだのかを記した実践記録です。
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                R9年度における天川小中学校ふるさと学習（生活科・総合的な学習の時間）の様子をまとめるページです。1年生から9年生まで、各学年の子どもたちが地域の豊かな自然や人々と関わりながら探究を深めていく取組や姿を記録します。
             </p>
         </section>
 
-        <!-- 学年別 実践記録セクション -->
+        <!-- 各学年・ブロックの取組一覧 -->
         <section class="bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs space-y-6">
-            <h2 class="text-base md:text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-                <i class="fa-solid fa-graduation-cap text-emerald-600"></i>
-                <span>学年別 実践の記録一覧</span>
-            </h2>
+            <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                <h2 class="text-base md:text-lg font-bold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-shapes text-emerald-600"></i>
+                    <span>学年別 実践の記録</span>
+                </h2>
+                <span class="text-[11px] text-slate-500 bg-slate-100 px-2 py-0.5 rounded">R9年度 実践活動</span>
+            </div>
 
-            <!-- 準備中プレースホルダー（後ほど各学年の内容を記載） -->
-            <div class="p-8 text-center border-2 border-dashed border-slate-200 rounded-xl bg-slate-50/50">
-                <i class="fa-solid fa-book-bookmark text-slate-300 text-4xl mb-3"></i>
-                <div class="font-medium text-slate-600 text-sm mb-1">
-                    各学年の実践記録 準備中
+            <!-- 学年カードグリッド -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                <!-- 1・2年生（低学年ブロック） -->
+                <div class="p-4 sm:p-5 rounded-xl border border-emerald-200 bg-gradient-to-br from-emerald-50/40 via-white to-white space-y-3 relative overflow-hidden">
+                    <div class="w-1 absolute left-0 top-0 bottom-0 bg-emerald-500"></div>
+                    <div class="flex items-center justify-between pl-1">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] font-bold rounded">生活科</span>
+                            <h3 class="font-bold text-sm sm:text-base text-slate-800">1・2年生（低学年）</h3>
+                        </div>
+                        <span class="text-[10px] text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">記録準備中</span>
+                    </div>
+                    <p class="text-xs text-slate-600 pl-1 leading-relaxed">
+                        天川の豊かな自然や身近な生き物、地域の人々とのふれあいを通して、ふるさとのよさに気付く活動。
+                    </p>
+                    <div class="pt-2 pl-1 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                        <span class="flex items-center gap-1.5">
+                            <i class="fa-regular fa-images"></i>
+                            <span>活動の様子・ワークシート</span>
+                        </span>
+                        <span class="italic text-[11px]">順次掲載予定</span>
+                    </div>
                 </div>
-                <p class="text-xs text-slate-400">
-                    ふるさと学習における各学年（1〜9年生）の具体的な取組内容や児童生徒の姿を今後掲載予定です。
+
+                <!-- 3・4年生（中学年ブロック） -->
+                <div class="p-4 sm:p-5 rounded-xl border border-sky-200 bg-gradient-to-br from-sky-50/40 via-white to-white space-y-3 relative overflow-hidden">
+                    <div class="w-1 absolute left-0 top-0 bottom-0 bg-sky-500"></div>
+                    <div class="flex items-center justify-between pl-1">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2 py-0.5 bg-sky-100 text-sky-800 text-[10px] font-bold rounded">総合</span>
+                            <h3 class="font-bold text-sm sm:text-base text-slate-800">3・4年生（中学年）</h3>
+                        </div>
+                        <span class="text-[10px] text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">記録準備中</span>
+                    </div>
+                    <p class="text-xs text-slate-600 pl-1 leading-relaxed">
+                        地域の名所・産業・暮らしについて自ら調べ、友達と協力して課題を追究・発信する探究活動。
+                    </p>
+                    <div class="pt-2 pl-1 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                        <span class="flex items-center gap-1.5">
+                            <i class="fa-regular fa-images"></i>
+                            <span>活動の様子・ポスター</span>
+                        </span>
+                        <span class="italic text-[11px]">順次掲載予定</span>
+                    </div>
+                </div>
+
+                <!-- 5・6年生（高学年ブロック） -->
+                <div class="p-4 sm:p-5 rounded-xl border border-amber-200 bg-gradient-to-br from-amber-50/40 via-white to-white space-y-3 relative overflow-hidden">
+                    <div class="w-1 absolute left-0 top-0 bottom-0 bg-amber-500"></div>
+                    <div class="flex items-center justify-between pl-1">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2 py-0.5 bg-amber-100 text-amber-800 text-[10px] font-bold rounded">総合</span>
+                            <h3 class="font-bold text-sm sm:text-base text-slate-800">5・6年生（高学年）</h3>
+                        </div>
+                        <span class="text-[10px] text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">記録準備中</span>
+                    </div>
+                    <p class="text-xs text-slate-600 pl-1 leading-relaxed">
+                        天川村の歴史・文化・環境問題などを多角的に探究し、持続可能な未来への提言を考える活動。
+                    </p>
+                    <div class="pt-2 pl-1 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                        <span class="flex items-center gap-1.5">
+                            <i class="fa-regular fa-images"></i>
+                            <span>活動の様子・プレゼン資料</span>
+                        </span>
+                        <span class="italic text-[11px]">順次掲載予定</span>
+                    </div>
+                </div>
+
+                <!-- 7〜9年生（中学校ブロック） -->
+                <div class="p-4 sm:p-5 rounded-xl border border-indigo-200 bg-gradient-to-br from-indigo-50/40 via-white to-white space-y-3 relative overflow-hidden">
+                    <div class="w-1 absolute left-0 top-0 bottom-0 bg-indigo-500"></div>
+                    <div class="flex items-center justify-between pl-1">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2 py-0.5 bg-indigo-100 text-indigo-800 text-[10px] font-bold rounded">総合</span>
+                            <h3 class="font-bold text-sm sm:text-base text-slate-800">7〜9年生（中学校）</h3>
+                        </div>
+                        <span class="text-[10px] text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">記録準備中</span>
+                    </div>
+                    <p class="text-xs text-slate-600 pl-1 leading-relaxed">
+                        職場体験や地域課題の解決に向けた協同的探究、キャリア形成と未来の地域社会への参画。
+                    </p>
+                    <div class="pt-2 pl-1 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                        <span class="flex items-center gap-1.5">
+                            <i class="fa-regular fa-images"></i>
+                            <span>活動の様子・成果レポート</span>
+                        </span>
+                        <span class="italic text-[11px]">順次掲載予定</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 記録準備中案内ボックス -->
+        <section class="bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs">
+            <div class="p-8 text-center border-2 border-dashed border-slate-200 rounded-xl bg-slate-50/50">
+                <i class="fa-solid fa-camera-retro text-emerald-400 text-4xl mb-3"></i>
+                <div class="font-medium text-slate-700 text-sm mb-1">
+                    R9年度 実践記録を準備中
+                </div>
+                <p class="text-xs text-slate-500 max-w-lg mx-auto leading-relaxed">
+                    R9年度の授業実践や校外学習、ポスターセッション、地域の方々との協同活動の記録・写真を順次取りまとめて掲載していきます。
                 </p>
             </div>
         </section>
