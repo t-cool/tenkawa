@@ -42,7 +42,7 @@
 
         <!-- ページ見出しカード -->
         <section class="bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs">
-            <div class="border-b border-slate-200 pb-3 mb-4 flex items-center justify-between flex-wrap gap-2">
+            <div class="flex items-center justify-between flex-wrap gap-2">
                 <div>
                     <div class="flex items-center gap-2">
                         <span class="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded">
@@ -57,9 +57,6 @@
                     </h1>
                 </div>
             </div>
-            <p class="text-sm text-slate-600 leading-relaxed">
-                ふるさと学習（総合的な学習の時間）を充実させるため、村内の協力個人や事業所・団体の情報を蓄積・共有し、児童生徒の探究活動や体験・見学、ゲストティーチャー等で円滑に連携できるようにするページです。
-            </p>
         </section>
 
         <!-- 人材バンク（Google スプレッドシート連携） -->
@@ -103,45 +100,49 @@
                 <span>活用の流れ</span>
             </h2>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs sm:text-sm">
-                <div class="p-3.5 rounded-lg bg-slate-50 border border-slate-200">
-                    <div class="font-bold text-emerald-700 mb-1 flex items-center gap-1.5">
-                        <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 text-xs flex items-center justify-center font-bold">1</span>
-                        <span>検索・検討</span>
+            <div class="space-y-2 text-xs sm:text-sm">
+                <!-- 1. 検索・検討 -->
+                <div class="py-2.5 px-3.5 sm:py-3 sm:px-4 rounded-lg bg-slate-50 border border-slate-200 flex items-start gap-3">
+                    <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 text-xs sm:text-sm flex items-center justify-center font-bold shrink-0 mt-0.5">1</span>
+                    <div class="flex-1 min-w-0">
+                        <div class="font-bold text-emerald-800 text-xs sm:text-sm mb-0.5">検索・検討</div>
+                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                            単元のねらいや児童生徒の興味に応じ、協力分野・地域・活動形態を確認します。
+                        </p>
                     </div>
-                    <p class="text-slate-600 text-xs leading-relaxed">
-                        単元のねらいや児童生徒の興味に応じ、協力分野・地域・活動形態を確認します。
-                    </p>
                 </div>
 
-                <div class="p-3.5 rounded-lg bg-slate-50 border border-slate-200">
-                    <div class="font-bold text-emerald-700 mb-1 flex items-center gap-1.5">
-                        <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 text-xs flex items-center justify-center font-bold">2</span>
-                        <span>校内調整</span>
+                <!-- 2. 校内調整 -->
+                <div class="py-2.5 px-3.5 sm:py-3 sm:px-4 rounded-lg bg-slate-50 border border-slate-200 flex items-start gap-3">
+                    <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 text-xs sm:text-sm flex items-center justify-center font-bold shrink-0 mt-0.5">2</span>
+                    <div class="flex-1 min-w-0">
+                        <div class="font-bold text-emerald-800 text-xs sm:text-sm mb-0.5">校内調整</div>
+                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                            学年団・担当者で依頼内容や時期を確認し、他の学年との重複がないか調整します。
+                        </p>
                     </div>
-                    <p class="text-slate-600 text-xs leading-relaxed">
-                        学年団・担当者で依頼内容や時期を確認し、他の学年との重複がないか調整します。
-                    </p>
                 </div>
 
-                <div class="p-3.5 rounded-lg bg-slate-50 border border-slate-200">
-                    <div class="font-bold text-emerald-700 mb-1 flex items-center gap-1.5">
-                        <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 text-xs flex items-center justify-center font-bold">3</span>
-                        <span>相手先へ連絡</span>
+                <!-- 3. 相手先へ連絡 -->
+                <div class="py-2.5 px-3.5 sm:py-3 sm:px-4 rounded-lg bg-slate-50 border border-slate-200 flex items-start gap-3">
+                    <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 text-xs sm:text-sm flex items-center justify-center font-bold shrink-0 mt-0.5">3</span>
+                    <div class="flex-1 min-w-0">
+                        <div class="font-bold text-emerald-800 text-xs sm:text-sm mb-0.5">相手先へ連絡</div>
+                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                            趣旨説明、日程・活動内容の相談、児童生徒への配慮事項等を事前に確認します。
+                        </p>
                     </div>
-                    <p class="text-slate-600 text-xs leading-relaxed">
-                        趣旨説明、日程・活動内容の相談、児童生徒への配慮事項等を事前に確認します。
-                    </p>
                 </div>
 
-                <div class="p-3.5 rounded-lg bg-slate-50 border border-slate-200">
-                    <div class="font-bold text-emerald-700 mb-1 flex items-center gap-1.5">
-                        <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 text-xs flex items-center justify-center font-bold">4</span>
-                        <span>実践・振り返り</span>
+                <!-- 4. 実践・振り返り -->
+                <div class="py-2.5 px-3.5 sm:py-3 sm:px-4 rounded-lg bg-slate-50 border border-slate-200 flex items-start gap-3">
+                    <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 text-xs sm:text-sm flex items-center justify-center font-bold shrink-0 mt-0.5">4</span>
+                    <div class="flex-1 min-w-0">
+                        <div class="font-bold text-emerald-800 text-xs sm:text-sm mb-0.5">実践・振り返り</div>
+                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
+                            学習活動の実施後にお礼の連絡を行い、実践の記録を教材バンク等に共有します。
+                        </p>
                     </div>
-                    <p class="text-slate-600 text-xs leading-relaxed">
-                        学習活動の実施後にお礼の連絡を行い、実践の記録を教材バンク等に共有します。
-                    </p>
                 </div>
             </div>
 
