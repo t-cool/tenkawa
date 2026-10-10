@@ -145,38 +145,6 @@
             90%  { transform: rotate(0deg) translateY(0); }
         }
 
-        /* 空を飛ぶ鳥 */
-        .flyer {
-            position: absolute;
-            left: 0;
-            animation: fly linear infinite;
-            will-change: transform;
-        }
-        .flyer.reverse { animation-name: fly-rev; }
-        .flyer .bob {
-            animation: fly-bob 3.4s ease-in-out infinite;
-        }
-        .flyer svg {
-            display: block;
-            transform-origin: 50% 56%;
-            animation: flap 0.42s ease-in-out infinite alternate;
-        }
-        @keyframes fly {
-            from { transform: translateX(-10vw); }
-            to   { transform: translateX(110vw); }
-        }
-        @keyframes fly-rev {
-            from { transform: translateX(110vw); }
-            to   { transform: translateX(-10vw); }
-        }
-        @keyframes fly-bob {
-            0%, 100% { transform: translateY(0); }
-            50%      { transform: translateY(-16px); }
-        }
-        @keyframes flap {
-            from { transform: scaleY(1); }
-            to   { transform: scaleY(-0.45); }
-        }
 
         /* ===== 下部：川 ===== */
         .river {
@@ -249,7 +217,6 @@
                 animation: none !important;
             }
             .cloud { transform: translateX(var(--x, 10vw)); }
-            .flyer { display: none; }
         }
 
         /* 日本語テキストの自然な折り返し制御 */
@@ -435,23 +402,6 @@
             </svg>
         </div>
 
-        <!-- 中部：空を飛ぶ鳥 -->
-        <div class="flyer" style="top:32%; animation-duration:26s; animation-delay:-4s;">
-            <div class="bob"><svg width="34" height="16" viewBox="0 0 34 16"><path d="M1 9 Q8 1 17 9 Q26 1 33 9" fill="none" stroke="#2f4858" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        </div>
-        <div class="flyer" style="top:36%; animation-duration:26s; animation-delay:-5.2s;">
-            <div class="bob" style="animation-delay:-1s;"><svg width="26" height="12" viewBox="0 0 34 16" style="animation-delay:-.2s;"><path d="M1 9 Q8 1 17 9 Q26 1 33 9" fill="none" stroke="#2f4858" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        </div>
-        <div class="flyer" style="top:30%; animation-duration:26s; animation-delay:-6.1s;">
-            <div class="bob" style="animation-delay:-2s;"><svg width="22" height="10" viewBox="0 0 34 16" style="animation-delay:-.1s;"><path d="M1 9 Q8 1 17 9 Q26 1 33 9" fill="none" stroke="#2f4858" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        </div>
-        <div class="flyer reverse" style="top:42%; animation-duration:34s; animation-delay:-18s;">
-            <div class="bob" style="animation-duration:4s;"><svg width="30" height="14" viewBox="0 0 34 16" style="animation-duration:.5s;"><path d="M1 9 Q8 1 17 9 Q26 1 33 9" fill="none" stroke="#3b5566" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        </div>
-        <div class="flyer" style="top:47%; animation-duration:40s; animation-delay:-28s;">
-            <div class="bob" style="animation-duration:3s;"><svg width="20" height="10" viewBox="0 0 34 16" style="animation-duration:.38s;"><path d="M1 9 Q8 1 17 9 Q26 1 33 9" fill="none" stroke="#3b5566" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        </div>
-
         <!-- 下部：流れる川 -->
         <div class="river">
             <svg class="river-edge" viewBox="0 0 1440 22" preserveAspectRatio="none">
@@ -486,14 +436,10 @@
 
             <div class="relative z-10 space-y-3">
                 <!-- 上部タグライン -->
-                <div class="flex items-center justify-between gap-2">
+                <div class="flex items-center gap-2">
                     <div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-800/80 border border-emerald-500/40 text-emerald-200 text-[10px] sm:text-xs font-medium tracking-wide">
                         <i class="fa-solid fa-mountain text-emerald-300 text-[9px] sm:text-[10px]"></i>
                         <span>奈良県吉野郡天川村 ｜ ふるさと学習</span>
-                    </div>
-                    <div class="hidden sm:inline-flex items-center gap-1 text-[11px] text-emerald-200/80 font-mono tracking-wider">
-                        <i class="fa-solid fa-compass text-teal-300"></i>
-                        <span>INQUIRY PORTAL</span>
                     </div>
                 </div>
 
@@ -504,7 +450,6 @@
                             <span>振興大会に向けた</span><span>ポータルサイト</span>
                         </h1>
                         <p class="text-[11px] sm:text-sm text-emerald-100/90 mt-1 sm:mt-1.5 leading-relaxed text-wrap-safe">
-                            天・木・川の豊かな自然に抱かれ、問いを深める学びの道標。<br class="hidden sm:inline">
                             準備期間は情報集約、大会当日は配布資料として活用
                         </p>
                     </div>
@@ -515,29 +460,10 @@
                            class="group block bg-white p-1 sm:p-1.5 rounded-xl border border-emerald-300/40 shadow-md hover:border-emerald-400 hover:shadow-lg transition-all text-center"
                            title="Webサイトを開く（https://t-cool.github.io/tenkawa/）">
                             <img src="qr.png" alt="QRコード: https://t-cool.github.io/tenkawa/" class="qr-code-img rounded-lg object-contain mx-auto group-hover:scale-105 transition-transform duration-200">
-                            <span class="block mt-1 text-[8px] sm:text-[10px] font-bold text-emerald-800 tracking-tight flex items-center justify-center gap-0.5">
-                                <i class="fa-solid fa-mobile-screen text-[8px] sm:text-[9px] text-emerald-600"></i>
-                                <span>当日用QR</span>
-                            </span>
                         </a>
                     </div>
                 </div>
 
-                <!-- 自然×探求×ふるさとの3つのピラーバッジ -->
-                <div class="pt-2.5 border-t border-emerald-700/50 grid grid-cols-3 gap-1 sm:gap-2 text-center">
-                    <div class="bg-emerald-950/40 rounded-lg py-1 px-0.5 border border-emerald-600/30 flex items-center justify-center gap-1 text-[10px] sm:text-xs text-emerald-100 min-w-0">
-                        <i class="fa-solid fa-tree text-emerald-400 text-[9px] shrink-0"></i>
-                        <span class="truncate">豊かな自然</span>
-                    </div>
-                    <div class="bg-emerald-950/40 rounded-lg py-1 px-0.5 border border-emerald-600/30 flex items-center justify-center gap-1 text-[10px] sm:text-xs text-emerald-100 min-w-0">
-                        <i class="fa-solid fa-compass text-amber-300 text-[9px] shrink-0"></i>
-                        <span class="truncate">深める探求</span>
-                    </div>
-                    <div class="bg-emerald-950/40 rounded-lg py-1 px-0.5 border border-emerald-600/30 flex items-center justify-center gap-1 text-[10px] sm:text-xs text-emerald-100 min-w-0">
-                        <i class="fa-solid fa-water text-cyan-300 text-[9px] shrink-0"></i>
-                        <span class="truncate">ふるさとの絆</span>
-                    </div>
-                </div>
             </div>
         </header>
 
@@ -546,14 +472,11 @@
 
             <!-- セクション1：継続して策定を検討する資料 -->
             <section class="space-y-3 sm:space-y-4">
-                <div class="flex items-center justify-between border-b border-emerald-900/10 pb-2 px-1">
+                <div class="flex items-center border-b border-emerald-900/10 pb-2 px-1">
                     <div class="flex items-center gap-1.5 sm:gap-2">
                         <span class="w-1.5 sm:w-2 h-4 sm:h-4.5 bg-gradient-to-b from-teal-600 to-emerald-700 rounded-full inline-block shadow-2xs"></span>
                         <h2 class="text-xs sm:text-sm font-bold text-slate-800 tracking-wide font-serif-title">継続して策定を検討する資料</h2>
                     </div>
-                    <span class="text-[9px] sm:text-xs font-semibold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200/70 shrink-0">
-                        部会別研究資料
-                    </span>
                 </div>
 
                 <div class="space-y-2.5 sm:space-y-3">
