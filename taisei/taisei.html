@@ -36,6 +36,16 @@
             .no-print {
                 display: none !important;
             }
+            .kousou-mobile,
+            .soshiki-mobile,
+            .gakkyu-mobile {
+                display: none !important;
+            }
+            .kousou-desktop,
+            .soshiki-desktop,
+            .gakkyu-desktop {
+                display: block !important;
+            }
             section {
                 box-shadow: none !important;
                 page-break-inside: avoid;
@@ -117,12 +127,31 @@
             </div>
 
             <!-- 4 学級編成と教職員数 -->
-            <div class="space-y-3 pt-2">
+            <div id="gakkyu" class="space-y-3 pt-2">
                 <h3 class="text-sm sm:text-base font-bold text-slate-900">
                     4　学級編成と教職員数
                 </h3>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-center border-collapse border border-slate-400 text-xs sm:text-sm text-slate-800">
+
+                <!-- モバイル表示用：1枚の画像として縮小全体表示（タップで拡大可能） -->
+                <div class="gakkyu-mobile block md:hidden">
+                    <div class="bg-white rounded-xl shadow-xs overflow-hidden border border-slate-200">
+                        <button type="button" onclick="openGakkyuModal()" class="w-full text-left block focus:outline-none focus:ring-2 focus:ring-slate-400 rounded-xl" aria-label="学級編成と教職員数の表を拡大表示">
+                            <img src="gakkyu.png" alt="学級編成と教職員数" class="w-full h-auto block rounded-xl" loading="lazy">
+                        </button>
+                    </div>
+                    <div class="flex items-center justify-between text-xs text-slate-500 mt-1.5 px-1 font-sans">
+                        <span class="text-[11px] text-slate-400">※PC表示と同じ1枚の表です</span>
+                        <button type="button" onclick="openGakkyuModal()" class="inline-flex items-center gap-1 text-[11px] text-blue-600 hover:text-blue-800 font-medium">
+                            <i class="fa-solid fa-magnifying-glass-plus text-xs"></i>
+                            <span>タップで拡大</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- パソコン・印刷表示用：HTML構造によるクリアなテキスト表示 -->
+                <div class="gakkyu-desktop hidden md:block">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-center border-collapse border border-slate-400 text-xs sm:text-sm text-slate-800">
                         <thead>
                             <tr class="bg-slate-100">
                                 <th class="border border-slate-400 py-2 px-1.5 font-medium whitespace-nowrap">学年</th>
@@ -188,6 +217,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </section>
@@ -206,7 +236,7 @@
                     1　研究主題
                 </h3>
                 <div class="space-y-1 text-xs sm:text-sm md:text-base text-slate-800 leading-relaxed px-1">
-                    <p class="font-bold text-slate-900 indent-[1em]">
+                    <p class="text-slate-900 indent-[1em]">
                         「９年間のつながりの中で、主体的に学び、学びを深める児童生徒の育成」
                     </p>
                     <p class="indent-[2em] text-slate-700">
@@ -226,7 +256,7 @@
                         本主題を設定するにあたり、本校の教育課程および児童生徒の実態から、大きく以下の２つの課題が挙げられた。
                     </p>
                     <p class="indent-[1em]">
-                        １点目は、教育課程上の課題である。従来の枠組みでは、ふるさと天川村に関する特定のテーマを年度を跨いでより深く学ぶ機会を設定しづらかった。そこで、令和２年度に義務教育学校となったことを機に、９年間の一貫した指導計画のもと、低学年の生活科から後期課程（中学校段階）の総合的な学習の時間へと系統的につなぎ、地域に関わる探究的な学びを継続的・発展的に深めていく必要があると考えた。
+                        １点目は、ふるさと学習を行ううえでの教育課程上の課題である。従来の枠組みでは、ふるさと天川村に関する特定のテーマを年度を跨いでより深く学ぶ機会を設定しづらかった。そこで、令和２年度に義務教育学校となったことを機に、９年間の一貫した指導計画のもと、低学年の生活科から後期課程（中学校段階）の総合的な学習の時間へと系統的につなぎ、地域に関わる探究的な学びを継続的・発展的に深めることで、ふるさと天川村への郷土愛を育む必要があると考えた。
                     </p>
                     <p class="indent-[1em]">
                         ２点目は、児童生徒の実態に関わる課題である。本校の児童生徒は、指示されたことに対して真面目に素直に取り組む良さがある一方で、受け身の姿勢になりがちで、自ら問いを見出して主体的に取り組む姿勢や家庭学習の習慣に課題が見られた。また、小規模校ならではの親密さゆえに、言葉を尽くさずとも通じ合ってしまい、筋道を立てて考えを伝え合ったり、多様な意見から学び合ったりする経験が不足していた。これらの課題を解決するため、児童生徒自身が探究テーマを決定し、ポスターセッション等の対話的な活動を取り入れて学び合いを活性化させることで、主体的に学ぶ態度の育成につながると考えた。
@@ -271,88 +301,122 @@
             </div>
 
             <!-- 4 研究組織 -->
-            <div class="space-y-3 pt-2">
+            <div id="soshiki" class="space-y-3 pt-2">
                 <h3 class="text-sm sm:text-base font-bold text-slate-900">
                     4　研究組織
                 </h3>
 
-                <!-- 研究組織（完全フィット） -->
-                <div class="p-5 md:p-6 rounded-xl border border-slate-300 bg-white shadow-2xs space-y-3 font-gothic">
-                <div class="text-xs md:text-sm font-bold text-slate-900 border-b border-slate-200 pb-2">
-                    研究組織
+                <!-- モバイル表示用：1枚の画像として縮小全体表示（タップで拡大可能） -->
+                <div class="soshiki-mobile block md:hidden">
+                    <div class="bg-white rounded-xl shadow-2xs overflow-hidden border border-slate-300 p-3 sm:p-4">
+                        <button type="button" onclick="openSoshikiModal()" class="w-full text-left block focus:outline-none focus:ring-2 focus:ring-slate-400 rounded-lg" aria-label="研究組織図を拡大表示">
+                            <img src="soshiki.png" alt="研究組織" class="w-full h-auto block" loading="lazy">
+                        </button>
+                    </div>
+                    <div class="flex items-center justify-between text-xs text-slate-500 mt-1.5 px-1 font-sans">
+                        <span class="text-[11px] text-slate-400">※PC表示と同じ1枚の組織図です</span>
+                        <button type="button" onclick="openSoshikiModal()" class="inline-flex items-center gap-1 text-[11px] text-blue-600 hover:text-blue-800 font-medium">
+                            <i class="fa-solid fa-magnifying-glass-plus text-xs"></i>
+                            <span>タップで拡大</span>
+                        </button>
+                    </div>
                 </div>
 
-                <div class="w-full overflow-x-auto py-1">
+                <!-- パソコン・印刷表示用：HTML構造によるクリアなテキスト表示 -->
+                <div class="soshiki-desktop hidden md:block">
+                    <!-- 研究組織（完全フィット） -->
+                    <div class="p-5 md:p-6 rounded-xl border border-slate-300 bg-white shadow-2xs font-gothic">
+                        <div class="w-full overflow-x-auto py-1">
                     <div class="w-full max-w-[680px] mx-auto flex items-center justify-between gap-0 select-none py-2 px-1">
                         
                         <!-- 1. 校長 -->
-                        <div class="w-14 sm:w-16 h-36 sm:h-40 border-2 border-slate-800 bg-white rounded-lg flex items-center justify-center p-1 shadow-2xs shrink-0">
-                            <span class="text-xs sm:text-sm font-bold text-slate-900 [writing-mode:vertical-rl] tracking-widest">
+                        <div class="w-20 h-44 border border-slate-700 bg-white rounded-lg flex items-center justify-center p-2 shadow-2xs shrink-0">
+                            <span class="text-base md:text-lg font-bold text-slate-900 [writing-mode:vertical-rl] tracking-widest">
                                 校長
                             </span>
                         </div>
 
-                        <!-- 接続線1 -->
-                        <div class="flex-1 min-w-[10px] max-w-[32px] h-0.5 bg-slate-600 shrink-0"></div>
+                        <!-- 接続線1（短縮） -->
+                        <div class="w-4 h-px bg-slate-700 shrink-0"></div>
 
                         <!-- 2. 研究推進委員会 -->
-                        <div class="w-32 sm:w-36 h-52 sm:h-56 border-2 border-slate-800 bg-white rounded-lg flex shadow-2xs shrink-0 overflow-hidden divide-x-2 divide-slate-800">
+                        <div class="w-[220px] md:w-[230px] h-56 border border-slate-700 bg-white rounded-lg flex shadow-2xs shrink-0 overflow-hidden divide-x divide-slate-700">
                             <!-- 左：研究推進委員会（縦書き） -->
-                            <div class="w-14 sm:w-16 flex items-center justify-center p-2 bg-white">
-                                <span class="text-xs sm:text-sm md:text-base font-bold text-slate-900 [writing-mode:vertical-rl] tracking-widest whitespace-nowrap">
+                            <div class="w-20 flex items-center justify-center p-2 bg-white">
+                                <span class="text-sm md:text-base font-bold text-slate-900 [writing-mode:vertical-rl] tracking-widest whitespace-nowrap">
                                     研究推進委員会
                                 </span>
                             </div>
                             <!-- 右：構成員（縦並び） -->
-                            <div class="flex-1 flex flex-col items-center justify-center p-2 text-[11px] sm:text-xs md:text-sm text-slate-900 font-medium leading-none gap-1 sm:gap-1.5 bg-white">
+                            <div class="flex-1 flex flex-col items-center justify-center p-2 text-xs md:text-sm font-bold text-slate-900 leading-none gap-2 bg-white">
                                 <span>校長</span>
-                                <span class="text-[10px] font-bold leading-none">・</span>
+                                <span class="text-[10px] font-bold leading-none text-slate-500">・</span>
                                 <span>教頭</span>
-                                <span class="text-[10px] font-bold leading-none">・</span>
+                                <span class="text-[10px] font-bold leading-none text-slate-500">・</span>
                                 <span>教務主任</span>
-                                <span class="text-[10px] font-bold leading-none">・</span>
+                                <span class="text-[10px] font-bold leading-none text-slate-500">・</span>
                                 <span>研究主任</span>
                             </div>
                         </div>
 
-                        <!-- 接続線2 -->
-                        <div class="flex-1 min-w-[10px] max-w-[32px] h-0.5 bg-slate-600 shrink-0"></div>
+                        <!-- 接続線2（短縮） -->
+                        <div class="w-4 h-px bg-slate-700 shrink-0"></div>
 
                         <!-- 3. 校内研究全体会 -->
-                        <div class="w-16 sm:w-18 h-52 sm:h-56 border-2 border-slate-800 bg-white rounded-lg flex items-center justify-center p-1 shadow-2xs shrink-0">
-                            <span class="text-xs sm:text-sm font-bold text-slate-900 [writing-mode:vertical-rl] tracking-widest">
+                        <div class="w-20 h-56 border border-slate-700 bg-white rounded-lg flex items-center justify-center p-2 shadow-2xs shrink-0">
+                            <span class="text-sm md:text-base font-bold text-slate-900 [writing-mode:vertical-rl] tracking-widest whitespace-nowrap">
                                 校内研究全体会
                             </span>
                         </div>
 
-                        <!-- 接続線3 -->
-                        <div class="flex-1 min-w-[10px] max-w-[32px] h-0.5 bg-slate-600 shrink-0"></div>
+                        <!-- 接続線3（短縮） -->
+                        <div class="w-4 h-px bg-slate-700 shrink-0"></div>
 
                         <!-- 4. ３部会（天部会・木部会・川部会） -->
-                        <div class="w-40 sm:w-48 border-2 border-slate-800 bg-white rounded-lg overflow-hidden shadow-2xs divide-y-2 divide-slate-800 text-center shrink-0">
-                            <div class="py-3 sm:py-3.5 font-bold text-xs sm:text-sm text-slate-900 tracking-widest hover:bg-slate-50 transition">
+                        <div class="w-[200px] md:w-[220px] border border-slate-700 bg-white rounded-lg overflow-hidden shadow-2xs divide-y divide-slate-700 text-center shrink-0">
+                            <div class="py-3.5 font-bold text-sm md:text-base text-slate-900 tracking-widest hover:bg-slate-50 transition">
                                 天　部　会
                             </div>
-                            <div class="py-3 sm:py-3.5 font-bold text-xs sm:text-sm text-slate-900 tracking-widest hover:bg-slate-50 transition">
+                            <div class="py-3.5 font-bold text-sm md:text-base text-slate-900 tracking-widest hover:bg-slate-50 transition">
                                 木　部　会
                             </div>
-                            <div class="py-3 sm:py-3.5 font-bold text-xs sm:text-sm text-slate-900 tracking-widest hover:bg-slate-50 transition">
+                            <div class="py-3.5 font-bold text-sm md:text-base text-slate-900 tracking-widest hover:bg-slate-50 transition">
                                 川　部　会
                             </div>
                         </div>
 
                     </div>
+                    </div>
+                </div>
                 </div>
             </div>
 
             <!-- 5 研究構想図 -->
-            <div class="space-y-3 pt-2">
+            <div id="kousou" class="space-y-3 pt-2">
                 <h3 class="text-sm sm:text-base font-bold text-slate-900">
                     5　研究構想図
                 </h3>
 
-                <!-- 研究構想図 本体フレーム（新図解形式・モノクロ） -->
-                <div class="border-2 border-slate-700 rounded-2xl p-5 md:p-8 bg-white space-y-6">
+                <!-- モバイル表示用：1枚の画像として表示（スマホで縦長にならずPC同様に全体を1枚で確認可能） -->
+                <div class="kousou-mobile block md:hidden">
+                    <div class="bg-white rounded-xl shadow-2xs overflow-hidden border border-slate-300 p-3 sm:p-4">
+                        <button type="button" onclick="openDiagramModal()" class="w-full text-left block focus:outline-none focus:ring-2 focus:ring-slate-400 rounded-lg" aria-label="研究構想図を拡大表示">
+                            <img src="kousou.png" alt="研究構想図" class="w-full h-auto block rounded-lg" loading="lazy">
+                        </button>
+                    </div>
+                    <div class="flex items-center justify-between text-xs text-slate-500 mt-1.5 px-1 font-sans">
+                        <span class="text-[11px] text-slate-400">※PC表示と同じ1枚の構想図です</span>
+                        <button type="button" onclick="openDiagramModal()" class="inline-flex items-center gap-1 text-[11px] text-blue-600 hover:text-blue-800 font-medium">
+                            <i class="fa-solid fa-magnifying-glass-plus text-xs"></i>
+                            <span>タップで拡大</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- パソコン・印刷表示用：HTML構造によるクリアなテキスト表示 -->
+                <div class="kousou-desktop hidden md:block">
+                    <!-- 研究構想図 本体フレーム（研究組織と同じ外枠スタイル） -->
+                    <div class="p-5 md:p-8 rounded-xl border border-slate-300 bg-white shadow-2xs space-y-6">
 
                 <!-- 1. 上段：実態・教育目標・願い（3カラム） -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 items-stretch">
@@ -378,7 +442,7 @@
                     </div>
 
                     <!-- 中央：学校教育目標 -->
-                    <div class="border-2 border-slate-900 rounded-lg p-4 md:p-5 bg-white flex flex-col justify-center text-center shadow-2xs">
+                    <div class="border border-slate-700 rounded-lg p-4 md:p-5 bg-white flex flex-col justify-center text-center shadow-2xs">
                         <div class="text-xs md:text-sm font-bold text-slate-900 pb-2 border-b border-slate-200 mb-3 font-gothic">
                             学校教育目標
                         </div>
@@ -425,7 +489,7 @@
                 </div>
 
                 <!-- 3. 研究主題 -->
-                <div class="border-2 border-slate-900 rounded-lg p-4 md:p-5 bg-white space-y-2 shadow-2xs">
+                <div class="border border-slate-700 rounded-lg p-4 md:p-5 bg-white space-y-2 shadow-2xs">
                     <div class="text-xs font-bold text-slate-900 tracking-wider font-gothic">
                         研究主題
                     </div>
@@ -519,6 +583,7 @@
                     </div>
                 </div>
 
+                </div>
                 </div>
             </div>
         </section>
@@ -618,5 +683,70 @@
 
     </main>
 
+    <!-- 図解 拡大モーダル（モバイル対応：研究組織・研究構想図 共用） -->
+    <div id="diagramModal" class="no-print fixed inset-0 z-50 bg-black/80 backdrop-blur-xs hidden items-center justify-center p-3 sm:p-6 transition-opacity duration-200" onclick="closeDiagramModal()">
+        <div class="w-full max-w-4xl max-h-[92vh] flex flex-col bg-white rounded-2xl overflow-hidden shadow-2xl" onclick="event.stopPropagation()">
+            <!-- モーダルヘッダー -->
+            <div class="flex items-center justify-between px-4 py-3 bg-slate-100 border-b border-slate-200">
+                <div class="font-bold text-sm text-slate-800 flex items-center gap-2 font-gothic">
+                    <i class="fa-regular fa-image text-slate-600"></i>
+                    <span id="diagramModalTitle">図解（拡大）</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <a id="diagramModalLink" href="kousou.png" target="_blank" class="px-2.5 py-1 text-xs bg-white hover:bg-slate-50 text-slate-700 rounded border border-slate-300 flex items-center gap-1.5 transition font-gothic">
+                        <i class="fa-solid fa-up-right-from-square text-[11px] text-slate-500"></i>
+                        <span>別タブで開く</span>
+                    </a>
+                    <button type="button" onclick="closeDiagramModal()" class="w-8 h-8 flex items-center justify-center text-slate-500 hover:text-slate-800 hover:bg-slate-200 rounded-full transition" aria-label="閉じる">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- モーダル画像エリア -->
+            <div class="overflow-auto p-2 sm:p-4 bg-slate-100/50 flex items-center justify-center flex-1">
+                <img id="diagramModalImg" src="kousou.png" alt="拡大画像" class="max-w-full h-auto object-contain rounded-lg shadow-xs">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openImageModal(src, title) {
+            var modal = document.getElementById('diagramModal');
+            var img = document.getElementById('diagramModalImg');
+            var titleEl = document.getElementById('diagramModalTitle');
+            var link = document.getElementById('diagramModalLink');
+            if (modal) {
+                if (img) img.src = src;
+                if (titleEl) titleEl.textContent = title;
+                if (link) link.href = src;
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+        function openDiagramModal() {
+            openImageModal('kousou.png', '研究構想図（拡大）');
+        }
+        function openSoshikiModal() {
+            openImageModal('soshiki.png', '研究組織（拡大）');
+        }
+        function openGakkyuModal() {
+            openImageModal('gakkyu.png', '学級編成と教職員数（拡大）');
+        }
+        function closeDiagramModal() {
+            var modal = document.getElementById('diagramModal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = '';
+            }
+        }
+        // Escキーで閉じる
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeDiagramModal();
+            }
+        });
+    </script>
 </body>
 </html>
