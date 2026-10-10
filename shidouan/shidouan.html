@@ -60,7 +60,7 @@
 
         <!-- ページ見出しカード -->
         <section class="bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs">
-            <div class="border-b border-slate-200 pb-3 mb-4 flex items-center justify-between flex-wrap gap-2">
+            <div class="flex items-center justify-between flex-wrap gap-2">
                 <div>
                     <span class="text-xs font-bold text-rose-700 bg-rose-50 border border-rose-200 px-2.5 py-0.5 rounded-full inline-block">
                         公開授業
@@ -71,115 +71,145 @@
                     </h1>
                 </div>
             </div>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                研究発表会および前年度の公開授業における学習指導案を掲載・管理するページです。9年間の小中一貫ふるさと学習を見通した各学年・ブロックの指導計画を閲覧できます。
-            </p>
         </section>
 
-        <!-- ブロック別 指導案一覧 -->
-        <section class="bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs space-y-6">
+        <!-- R9年度 公開授業 指導案一覧（2本） -->
+        <section class="bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs space-y-5">
             <div class="flex items-center justify-between border-b border-slate-200 pb-3">
                 <h2 class="text-base md:text-lg font-bold text-slate-900 flex items-center gap-2">
-                    <i class="fa-solid fa-layer-group text-rose-600"></i>
-                    <span>学年・ブロック別 指導案一覧</span>
+                    <i class="fa-solid fa-file-circle-check text-rose-600"></i>
+                    <span>R9年度 公開授業 指導案</span>
                 </h2>
-                <span class="text-[11px] text-slate-500 bg-slate-100 px-2 py-0.5 rounded">小中9年間</span>
+                <span class="text-[11px] text-slate-500 bg-slate-100 px-2 py-0.5 rounded">事前公開・2本</span>
             </div>
 
-            <!-- ブロックカードグリッド -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                
-                <!-- 1. 低学年ブロック -->
-                <div class="p-4 sm:p-5 rounded-xl border border-emerald-200 bg-gradient-to-br from-emerald-50/40 via-white to-white space-y-3 relative overflow-hidden">
-                    <div class="w-1 absolute left-0 top-0 bottom-0 bg-emerald-500"></div>
+            <!-- 指導案カード一覧 (1列) -->
+            <div class="space-y-3.5">
+                <!-- R9 指導案1 -->
+                <div class="p-4 sm:p-5 rounded-xl border border-rose-200 bg-gradient-to-br from-rose-50/40 via-white to-white space-y-3 relative overflow-hidden">
+                    <div class="w-1 absolute left-0 top-0 bottom-0 bg-rose-500"></div>
                     <div class="flex items-center justify-between pl-1">
                         <div class="flex items-center gap-2">
-                            <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] font-bold rounded">生活科</span>
-                            <h3 class="font-bold text-sm sm:text-base text-slate-800">低学年（1・2年）</h3>
+                            <span class="px-2 py-0.5 bg-rose-100 text-rose-800 text-[10px] font-bold rounded">公開授業 ①</span>
+                            <h3 class="font-bold text-sm sm:text-base text-slate-800">指導案 1</h3>
                         </div>
-                        <span class="text-[10px] text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">準備中</span>
+                        <span class="text-[10px] text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">策定中</span>
                     </div>
-                    <p class="text-xs text-slate-600 pl-1 leading-relaxed">
-                        身近な自然や地域の人々とふれあい、天川のよさや温かさに気付く活動。
+                    <p class="text-xs sm:text-sm text-slate-500 pl-1 leading-relaxed">
+                        ※対象学年・教科・単元名・本時案は策定・確定次第掲載します。
                     </p>
                     <div class="pt-2 pl-1 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
                         <span class="flex items-center gap-1.5">
                             <i class="fa-regular fa-file-pdf"></i>
-                            <span>指導案PDF</span>
+                            <span>指導案PDF（細案・本時案）</span>
                         </span>
                         <span class="italic text-[11px]">順次公開予定</span>
                     </div>
                 </div>
 
-                <!-- 2. 中学年ブロック -->
-                <div class="p-4 sm:p-5 rounded-xl border border-sky-200 bg-gradient-to-br from-sky-50/40 via-white to-white space-y-3 relative overflow-hidden">
-                    <div class="w-1 absolute left-0 top-0 bottom-0 bg-sky-500"></div>
+                <!-- R9 指導案2 -->
+                <div class="p-4 sm:p-5 rounded-xl border border-rose-200 bg-gradient-to-br from-rose-50/40 via-white to-white space-y-3 relative overflow-hidden">
+                    <div class="w-1 absolute left-0 top-0 bottom-0 bg-rose-500"></div>
                     <div class="flex items-center justify-between pl-1">
                         <div class="flex items-center gap-2">
-                            <span class="px-2 py-0.5 bg-sky-100 text-sky-800 text-[10px] font-bold rounded">総合</span>
-                            <h3 class="font-bold text-sm sm:text-base text-slate-800">中学年（3・4年）</h3>
+                            <span class="px-2 py-0.5 bg-rose-100 text-rose-800 text-[10px] font-bold rounded">公開授業 ②</span>
+                            <h3 class="font-bold text-sm sm:text-base text-slate-800">指導案 2</h3>
                         </div>
-                        <span class="text-[10px] text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">準備中</span>
+                        <span class="text-[10px] text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">策定中</span>
                     </div>
-                    <p class="text-xs text-slate-600 pl-1 leading-relaxed">
-                        地域の自然環境・産業・暮らしを調べ、協同して課題を解決する探究。
+                    <p class="text-xs sm:text-sm text-slate-500 pl-1 leading-relaxed">
+                        ※対象学年・教科・単元名・本時案は策定・確定次第掲載します。
                     </p>
                     <div class="pt-2 pl-1 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
                         <span class="flex items-center gap-1.5">
                             <i class="fa-regular fa-file-pdf"></i>
-                            <span>指導案PDF</span>
+                            <span>指導案PDF（細案・本時案）</span>
                         </span>
                         <span class="italic text-[11px]">順次公開予定</span>
                     </div>
                 </div>
-
-                <!-- 3. 高学年ブロック -->
-                <div class="p-4 sm:p-5 rounded-xl border border-amber-200 bg-gradient-to-br from-amber-50/40 via-white to-white space-y-3 relative overflow-hidden">
-                    <div class="w-1 absolute left-0 top-0 bottom-0 bg-amber-500"></div>
-                    <div class="flex items-center justify-between pl-1">
-                        <div class="flex items-center gap-2">
-                            <span class="px-2 py-0.5 bg-amber-100 text-amber-800 text-[10px] font-bold rounded">総合</span>
-                            <h3 class="font-bold text-sm sm:text-base text-slate-800">高学年（5・6年）</h3>
-                        </div>
-                        <span class="text-[10px] text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">準備中</span>
-                    </div>
-                    <p class="text-xs text-slate-600 pl-1 leading-relaxed">
-                        歴史・文化・環境を多面的に探究し、持続可能な地域づくりへの参画意識を育む。
-                    </p>
-                    <div class="pt-2 pl-1 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
-                        <span class="flex items-center gap-1.5">
-                            <i class="fa-regular fa-file-pdf"></i>
-                            <span>指導案PDF</span>
-                        </span>
-                        <span class="italic text-[11px]">順次公開予定</span>
-                    </div>
-                </div>
-
-                <!-- 4. 中学校ブロック -->
-                <div class="p-4 sm:p-5 rounded-xl border border-indigo-200 bg-gradient-to-br from-indigo-50/40 via-white to-white space-y-3 relative overflow-hidden">
-                    <div class="w-1 absolute left-0 top-0 bottom-0 bg-indigo-500"></div>
-                    <div class="flex items-center justify-between pl-1">
-                        <div class="flex items-center gap-2">
-                            <span class="px-2 py-0.5 bg-indigo-100 text-indigo-800 text-[10px] font-bold rounded">総合</span>
-                            <h3 class="font-bold text-sm sm:text-base text-slate-800">中学校（7〜9年）</h3>
-                        </div>
-                        <span class="text-[10px] text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">準備中</span>
-                    </div>
-                    <p class="text-xs text-slate-600 pl-1 leading-relaxed">
-                        地域課題の解決・未来への提言・キャリア形成と結び付けた高度な探究学習。
-                    </p>
-                    <div class="pt-2 pl-1 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
-                        <span class="flex items-center gap-1.5">
-                            <i class="fa-regular fa-file-pdf"></i>
-                            <span>指導案PDF</span>
-                        </span>
-                        <span class="italic text-[11px]">順次公開予定</span>
-                    </div>
-                </div>
-
             </div>
         </section>
 
+        <!-- R10年度 研究発表大会 公開授業 指導案一覧（3本） -->
+        <section class="bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs space-y-5">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                <h2 class="text-base md:text-lg font-bold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-award text-rose-600"></i>
+                    <span>R10年度 研究発表大会 公開授業 指導案</span>
+                </h2>
+                <span class="text-[11px] text-slate-500 bg-slate-100 px-2 py-0.5 rounded">本大会・3本</span>
+            </div>
+
+            <!-- 指導案カード一覧 (1列) -->
+            <div class="space-y-3.5">
+                <!-- R10 指導案1 -->
+                <div class="p-4 sm:p-5 rounded-xl border border-rose-200 bg-gradient-to-br from-rose-50/40 via-white to-white space-y-3 relative overflow-hidden">
+                    <div class="w-1 absolute left-0 top-0 bottom-0 bg-rose-500"></div>
+                    <div class="flex items-center justify-between pl-1">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2 py-0.5 bg-rose-100 text-rose-800 text-[10px] font-bold rounded">公開授業 ①</span>
+                            <h3 class="font-bold text-sm sm:text-base text-slate-800">指導案 1</h3>
+                        </div>
+                        <span class="text-[10px] text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">策定中</span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-500 pl-1 leading-relaxed">
+                        ※対象学年・教科・単元名・本時案は策定・確定次第掲載します。
+                    </p>
+                    <div class="pt-2 pl-1 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                        <span class="flex items-center gap-1.5">
+                            <i class="fa-regular fa-file-pdf"></i>
+                            <span>指導案PDF（細案・本時案）</span>
+                        </span>
+                        <span class="italic text-[11px]">順次公開予定</span>
+                    </div>
+                </div>
+
+                <!-- R10 指導案2 -->
+                <div class="p-4 sm:p-5 rounded-xl border border-rose-200 bg-gradient-to-br from-rose-50/40 via-white to-white space-y-3 relative overflow-hidden">
+                    <div class="w-1 absolute left-0 top-0 bottom-0 bg-rose-500"></div>
+                    <div class="flex items-center justify-between pl-1">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2 py-0.5 bg-rose-100 text-rose-800 text-[10px] font-bold rounded">公開授業 ②</span>
+                            <h3 class="font-bold text-sm sm:text-base text-slate-800">指導案 2</h3>
+                        </div>
+                        <span class="text-[10px] text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">策定中</span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-500 pl-1 leading-relaxed">
+                        ※対象学年・教科・単元名・本時案は策定・確定次第掲載します。
+                    </p>
+                    <div class="pt-2 pl-1 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                        <span class="flex items-center gap-1.5">
+                            <i class="fa-regular fa-file-pdf"></i>
+                            <span>指導案PDF（細案・本時案）</span>
+                        </span>
+                        <span class="italic text-[11px]">順次公開予定</span>
+                    </div>
+                </div>
+
+                <!-- R10 指導案3 -->
+                <div class="p-4 sm:p-5 rounded-xl border border-rose-200 bg-gradient-to-br from-rose-50/40 via-white to-white space-y-3 relative overflow-hidden">
+                    <div class="w-1 absolute left-0 top-0 bottom-0 bg-rose-500"></div>
+                    <div class="flex items-center justify-between pl-1">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2 py-0.5 bg-rose-100 text-rose-800 text-[10px] font-bold rounded">公開授業 ③</span>
+                            <h3 class="font-bold text-sm sm:text-base text-slate-800">指導案 3</h3>
+                        </div>
+                        <span class="text-[10px] text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">策定中</span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-500 pl-1 leading-relaxed">
+                        ※対象学年・教科・単元名・本時案は策定・確定次第掲載します。
+                    </p>
+                    <div class="pt-2 pl-1 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                        <span class="flex items-center gap-1.5">
+                            <i class="fa-regular fa-file-pdf"></i>
+                            <span>指導案PDF（細案・本時案）</span>
+                        </span>
+                        <span class="italic text-[11px]">順次公開予定</span>
+                    </div>
+                </div>
+            </div>
+        </section>
         <!-- 準備中案内ボックス -->
         <section class="bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs">
             <div class="p-8 text-center border-2 border-dashed border-slate-200 rounded-xl bg-slate-50/50">
