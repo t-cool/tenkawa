@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>天川村ふるさと学習 ポータルサイト | 振興大会</title>
+    <!-- PWA Settings -->
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#047857">
+    <link rel="icon" type="image/svg+xml" href="./icons/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./icons/favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png">
+    <!-- iOS PWA Meta -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="天川ふるさと学習">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -495,6 +506,11 @@
                         <i class="fa-solid fa-mountain text-emerald-300 text-[9px] sm:text-[10px]"></i>
                         <span>奈良県吉野郡天川村 ｜ ふるさと学習</span>
                     </div>
+                    <!-- PWA インストールボタン (未インストール時に動的表示) -->
+                    <button id="pwa-install-btn" type="button" class="hidden inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-600/90 hover:bg-emerald-500 text-white text-[11px] sm:text-xs font-medium shadow-sm hover:shadow transition-all active:scale-95 cursor-pointer border border-emerald-400/40" title="端末にアプリとして追加">
+                        <i class="fa-solid fa-download text-[10px]"></i>
+                        <span>アプリを追加</span>
+                    </button>
                 </div>
 
                 <!-- タイトル ＆ QRコード -->
@@ -939,6 +955,44 @@
         </div>
     </div>
 
+    <!-- PWA iOS/案内用モーダル -->
+    <div id="pwaGuideModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs hidden items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-5 shadow-2xl border border-emerald-100 space-y-4">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+                <div class="flex items-center gap-2">
+                    <img src="./icons/icon-192.png" alt="天" class="w-7 h-7 rounded-lg shadow-xs">
+                    <h3 class="font-bold text-slate-800 text-sm">アプリとしてホーム画面に追加</h3>
+                </div>
+                <button type="button" onclick="closePwaGuideModal()" class="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition" aria-label="閉じる">
+                    <i class="fa-solid fa-xmark text-xs"></i>
+                </button>
+            </div>
+            <div class="space-y-3 text-xs text-slate-600 leading-relaxed">
+                <p>ホーム画面に追加すると、全画面で快適に閲覧でき、通信が不安定なオフライン環境でもポータルサイトを利用できます。</p>
+                <div class="bg-emerald-50/70 p-3 rounded-xl border border-emerald-200/60 space-y-2">
+                    <div class="font-semibold text-emerald-900 flex items-center gap-1.5">
+                        <i class="fa-brands fa-apple text-emerald-700"></i>
+                        <span>iPhone / iPad (Safari) の場合</span>
+                    </div>
+                    <ol class="list-decimal list-inside space-y-1 text-slate-700">
+                        <li>画面下の共有アイコン <i class="fa-solid fa-arrow-up-from-bracket text-emerald-700"></i> をタップ</li>
+                        <li>メニュー内の「<strong>ホーム画面に追加</strong>」を選択</li>
+                    </ol>
+                </div>
+                <div class="bg-slate-50 p-3 rounded-xl border border-slate-200/60 space-y-2">
+                    <div class="font-semibold text-slate-900 flex items-center gap-1.5">
+                        <i class="fa-brands fa-chrome text-teal-700"></i>
+                        <span>Android / PC (Chrome, Edge) の場合</span>
+                    </div>
+                    <p class="text-slate-700">アドレスバー右側のインストールアイコン、またはブラウザメニューの「アプリをインストール」を選択してください。</p>
+                </div>
+            </div>
+            <button type="button" onclick="closePwaGuideModal()" class="w-full py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-medium rounded-xl text-xs transition shadow-sm">
+                閉じる
+            </button>
+        </div>
+    </div>
+
     <script>
         function openGraphModal() {
             const modal = document.getElementById('graphModal');
@@ -960,8 +1014,75 @@
             }
         }
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeGraphModal();
+            if (e.key === 'Escape') {
+                closeGraphModal();
+                closePwaGuideModal();
+            }
         });
+
+        // ===== PWA Service Worker 登録 & インストール制御 =====
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then((reg) => {
+                        console.log('PWA ServiceWorker registered with scope:', reg.scope);
+                    })
+                    .catch((err) => {
+                        console.warn('PWA ServiceWorker registration failed:', err);
+                    });
+            });
+        }
+
+        let deferredPrompt = null;
+        const pwaInstallBtn = document.getElementById('pwa-install-btn');
+        const pwaGuideModal = document.getElementById('pwaGuideModal');
+
+        function openPwaGuideModal() {
+            if (pwaGuideModal) {
+                pwaGuideModal.classList.remove('hidden');
+                pwaGuideModal.classList.add('flex');
+            }
+        }
+
+        function closePwaGuideModal() {
+            if (pwaGuideModal) {
+                pwaGuideModal.classList.add('hidden');
+                pwaGuideModal.classList.remove('flex');
+            }
+        }
+
+        const isRunningStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+
+        if (!isRunningStandalone && pwaInstallBtn) {
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                pwaInstallBtn.classList.remove('hidden');
+            });
+
+            pwaInstallBtn.addEventListener('click', async () => {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    const choiceResult = await deferredPrompt.userChoice;
+                    if (choiceResult && choiceResult.outcome === 'accepted') {
+                        pwaInstallBtn.classList.add('hidden');
+                    }
+                    deferredPrompt = null;
+                } else {
+                    openPwaGuideModal();
+                }
+            });
+
+            window.addEventListener('appinstalled', () => {
+                pwaInstallBtn.classList.add('hidden');
+                deferredPrompt = null;
+            });
+
+            const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            if (isIos) {
+                pwaInstallBtn.classList.remove('hidden');
+            }
+        }
     </script>
 </body>
 </html>
