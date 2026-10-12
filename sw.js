@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tenkawa-pwa-v1';
+const CACHE_NAME = 'tenkawa-pwa-v2';
 
 // アプリのコア資産（オフライン対応・高速化）
 const PRECACHE_ASSETS = [
