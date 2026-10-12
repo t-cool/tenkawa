@@ -110,13 +110,6 @@
                     7~9年 振り返りシート
                 </button>
             </div>
-
-            <!-- グループ3：タイマー（独立表示） -->
-            <div class="flex flex-wrap items-center gap-1.5 p-2 rounded bg-slate-50 border border-slate-200">
-                <button onclick="switchTab('timer')" id="tab_timer" class="tab-btn px-3 py-1.5 rounded font-medium transition bg-white text-slate-700 border border-slate-300 hover:bg-slate-100">
-                    教室提示用 10分タイマー
-                </button>
-            </div>
         </div>
     </header>
 
@@ -947,121 +940,13 @@
             </section>
         </div>
 
-
-        <!-- ======================================================== -->
-        <!-- 教室投影用 10分カウントダウンタイマー                         -->
-        <!-- ======================================================== -->
-        <div id="content_timer" class="tab-content hidden">
-            <section class="bg-white p-6 md:p-8 rounded border border-slate-300 shadow-xs text-center max-w-[900px] mx-auto text-slate-800">
-                <div class="flex items-center justify-between border-b border-slate-200 pb-2 mb-4">
-                    <span class="text-xs font-bold text-slate-500 tracking-wider">
-                        ふるさと学習 10分帯活動タイマー
-                    </span>
-                    <span class="text-xs text-slate-500">全体計画連動</span>
-                </div>
-
-                <div class="my-4">
-                    <div id="phase_badge" class="inline-block px-4 py-1 rounded bg-slate-800 text-white text-sm font-bold tracking-wider mb-2">
-                        フェーズ 1：準備・めあて確認
-                    </div>
-                    <h2 id="phase_title" class="text-xl md:text-2xl font-bold text-slate-900">
-                        じゃんけんで A（発表）/ B（聞き手）を決めよう
-                    </h2>
-                    <p id="phase_instruction" class="text-xs md:text-sm text-slate-600 mt-1">
-                        ポスターをセットし、ガイドカードを手元に置きます。リラックスして、初めて聞く人にもわかるように笑顔で話しましょう。
-                    </p>
-                </div>
-
-                <div class="my-6">
-                    <!-- フェーズ残り時間（引き算カウントダウン） -->
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 border border-slate-300 text-xs font-bold text-slate-700 mb-1">
-                        <span>フェーズ残り時間</span>
-                        <span class="text-slate-400">|</span>
-                        <span id="phase_total_badge">配分 1分00秒</span>
-                    </div>
-
-                    <div class="font-mono text-7xl md:text-9xl font-bold tracking-tight text-slate-900 select-none my-1">
-                        <span id="timer_display">1:00</span>
-                    </div>
-
-                    <!-- 全体進行（3:32 / 10:00）＆ プログレスバー -->
-                    <div class="mt-5 max-w-lg mx-auto bg-slate-50 p-3.5 rounded-lg border border-slate-200">
-                        <div class="flex items-center justify-between text-xs font-bold text-slate-700 mb-1.5 px-0.5">
-                            <span class="flex items-center gap-1.5">
-                                <span class="text-slate-500 font-normal">全体進行：</span>
-                                <span id="overall_progress_text" class="text-sm font-mono text-slate-900">0:00 / 10:00</span>
-                            </span>
-                            <span class="flex items-center gap-1.5">
-                                <span class="text-slate-500 font-normal">全体進捗：</span>
-                                <span id="progress_percent" class="text-sm font-mono text-slate-900">0%</span>
-                            </span>
-                        </div>
-
-                        <!-- 進行バー（左から右へ進捗） -->
-                        <div class="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
-                            <div id="progress_bar" class="bg-slate-800 h-full w-0 transition-all duration-1000"></div>
-                        </div>
-
-                        <div class="flex items-center justify-between text-[11px] text-slate-500 mt-2 px-0.5">
-                            <span>※10分間の帯活動全体の進捗状況</span>
-                            <span>全体残り：<span id="remaining_display" class="font-semibold text-slate-700">10:00</span></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex items-center justify-center gap-3 mt-6">
-                    <button onclick="toggleTimer()" id="btn_toggle" class="px-6 py-2.5 rounded bg-slate-800 hover:bg-slate-700 text-white text-base font-bold shadow-xs transition flex items-center gap-2">
-                        <i id="btn_icon" class="fa-solid fa-play"></i> <span id="btn_text">スタート</span>
-                    </button>
-                    <button onclick="resetTimer()" class="px-5 py-2.5 rounded bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 text-sm font-medium transition flex items-center gap-1.5">
-                        <i class="fa-solid fa-rotate-left"></i> リセット
-                    </button>
-                    <button onclick="nextPhase()" class="px-5 py-2.5 rounded bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 text-sm font-medium transition flex items-center gap-1.5">
-                        <i class="fa-solid fa-forward-step"></i> 次のフェーズ
-                    </button>
-                </div>
-
-                <!-- 進行タイムライン -->
-                <div class="grid grid-cols-2 md:grid-cols-7 gap-1.5 text-left mt-8 text-[11px] text-slate-500">
-                    <div id="tl_0" class="bg-slate-100 p-2 rounded border border-slate-300 text-slate-800 font-bold">
-                        <div>1. 準備 (1分)</div>
-                        <div class="text-[10px] font-normal">グループ・めあて</div>
-                    </div>
-                    <div id="tl_1" class="bg-slate-50 p-2 rounded border border-slate-200">
-                        <div>2. 発表A (1分30秒)</div>
-                        <div class="text-[10px]">資料指差し</div>
-                    </div>
-                    <div id="tl_2" class="bg-slate-50 p-2 rounded border border-slate-200">
-                        <div>3. 質疑A (1分)</div>
-                        <div class="text-[10px]">質問・応答</div>
-                    </div>
-                    <div id="tl_3" class="bg-slate-50 p-2 rounded border border-slate-200">
-                        <div>4. 役割交代 (30秒)</div>
-                        <div class="text-[10px]">役割チェンジ</div>
-                    </div>
-                    <div id="tl_4" class="bg-slate-50 p-2 rounded border border-slate-200">
-                        <div>5. 発表B (1分30秒)</div>
-                        <div class="text-[10px]">資料指差し</div>
-                    </div>
-                    <div id="tl_5" class="bg-slate-50 p-2 rounded border border-slate-200">
-                        <div>6. 質疑B (1分)</div>
-                        <div class="text-[10px]">質問・応答</div>
-                    </div>
-                    <div id="tl_6" class="bg-slate-50 p-2 rounded border border-slate-200">
-                        <div>7. 評価 (3分30秒)</div>
-                        <div class="text-[10px]">振り返り・まとめ</div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
     </main>
 
     <script>
         // タブ切り替えロジック
         function switchTab(targetId) {
             document.querySelectorAll('.tab-btn').forEach(btn => {
-                if (btn.id.startsWith('tab_record_') || btn.id === 'tab_timer') {
+                if (btn.id.startsWith('tab_record_')) {
                     btn.className = 'tab-btn px-3 py-1.5 rounded font-medium transition bg-white text-slate-700 border border-slate-300 hover:bg-slate-100';
                 } else {
                     btn.className = 'tab-btn px-2.5 py-1 rounded font-medium transition bg-white text-slate-700 border border-slate-200 hover:bg-slate-100';
@@ -1070,7 +955,7 @@
 
             const activeBtn = document.getElementById(`tab_${targetId}`);
             if (activeBtn) {
-                if (targetId.startsWith('record_') || targetId === 'timer') {
+                if (targetId.startsWith('record_')) {
                     activeBtn.className = 'tab-btn px-3 py-1.5 rounded font-medium transition bg-slate-800 text-white shadow-xs';
                 } else {
                     activeBtn.className = 'tab-btn px-2.5 py-1 rounded font-medium transition bg-slate-800 text-white shadow-xs';
@@ -1085,155 +970,6 @@
                 activeContent.classList.remove('hidden');
             }
         }
-
-        // 10分タイマー制御ロジック
-        const TOTAL_SECONDS = 600; // 10分
-        let remainingSeconds = TOTAL_SECONDS;
-        let timerInterval = null;
-        let isRunning = false;
-
-        const phases = [
-            { id: 0, start: 600, end: 540, durationText: "1分00秒", name: "フェーズ 1：準備・めあて確認", title: "じゃんけんで A（発表グループ）/ B（聞き手グループ）を決めよう", desc: "ポスターとガイドカードを手元に準備。リラックスして、初めて聞く友達にも伝わるよう笑顔で臨みましょう。" },
-            { id: 1, start: 540, end: 450, durationText: "1分30秒", name: "フェーズ 2：前半発表（Aグループ）", title: "【発表 A】ポスターの画像やグラフを指差して話そう", desc: "「手はポスター、目は相手」。原稿を見すぎず、聞き手の顔を見て話しかけましょう。Bグループは相づちを打ちながら聞きます。" },
-            { id: 2, start: 450, end: 390, durationText: "1分00秒", name: "フェーズ 3：前半質疑（B→A）", title: "【質問と対話 A】Bグループから質問・Aグループはポスターを示して回答", desc: "ガイドカードを参考に気になったことを質問しましょう。Aグループは「質問ありがとう！」と笑顔でポスターを示して答えます。" },
-            { id: 3, start: 390, end: 360, durationText: "30秒",    name: "フェーズ 4：役割交代（30秒）", title: "役割チェンジ！深呼吸して交代しよう", desc: "Bグループが発表、Aグループが聞き手になります。ポスターの位置を整えて、リラックスして交代しましょう。" },
-            { id: 4, start: 360, end: 270, durationText: "1分30秒", name: "フェーズ 5：後半発表（Bグループ）", title: "【発表 B】Bグループの発表スタート！資料を指差して伝えよう", desc: "相手に届く明るい声で発表します。Aグループは笑顔でうなずきながら聞き、気になったところを見つけましょう。" },
-            { id: 5, start: 270, end: 210, durationText: "1分00秒", name: "フェーズ 6：後半質疑（A→B）", title: "【質問と対話 B】Aグループから質問・Bグループはポスターを示して回答", desc: "ポスターの数字や工夫について尋ねてみましょう。Bグループは「質問ありがとう！」と資料を示しながら答えます。" },
-            { id: 6, start: 210, end: 0,   durationText: "3分30秒", name: "フェーズ 7：ふりかえり＆メッセージ", title: "お互いに良かったところを伝え合おう", desc: "記録シートを記入し、「ここがよかったよ！」と応援メッセージを伝え合います。今日見つけた素敵な発見を共有しましょう。" }
-        ];
-
-        function formatTime(sec) {
-            const m = Math.floor(sec / 60);
-            const s = sec % 60;
-            return `${m}:${String(s).padStart(2, '0')}`;
-        }
-
-        function playChime(type = 'ping') {
-            try {
-                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-
-                if (type === 'start') {
-                    osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
-                    osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.15); // E5
-                    gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.6);
-                    osc.start();
-                    osc.stop(audioCtx.currentTime + 0.6);
-                } else if (type === 'phase') {
-                    osc.frequency.setValueAtTime(880, audioCtx.currentTime); // A5
-                    osc.frequency.setValueAtTime(1046.50, audioCtx.currentTime + 0.12); // C6
-                    gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
-                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.5);
-                    osc.start();
-                    osc.stop(audioCtx.currentTime + 0.5);
-                }
-            } catch(e) {
-                // Audio context not allowed or not supported
-            }
-        }
-
-        function getCurrentPhase(sec) {
-            for (let i = 0; i < phases.length; i++) {
-                if (sec <= phases[i].start && sec > phases[i].end) {
-                    return phases[i];
-                }
-            }
-            return phases[phases.length - 1];
-        }
-
-        let currentPhaseId = 0;
-
-        function updateDisplay() {
-            const curPhase = getCurrentPhase(remainingSeconds);
-            if (curPhase.id !== currentPhaseId) {
-                currentPhaseId = curPhase.id;
-                playChime('phase');
-            }
-
-            // フェーズごとの残り時間（引き算カウントダウン）
-            const phaseRemainingSeconds = Math.max(0, remainingSeconds - curPhase.end);
-            document.getElementById('timer_display').innerText = formatTime(phaseRemainingSeconds);
-            document.getElementById('phase_total_badge').innerText = `配分 ${curPhase.durationText}`;
-
-            // 全体10分の進捗（経過時間 / 10:00）
-            const elapsedSeconds = TOTAL_SECONDS - remainingSeconds;
-            document.getElementById('overall_progress_text').innerText = `${formatTime(elapsedSeconds)} / 10:00`;
-            document.getElementById('remaining_display').innerText = formatTime(remainingSeconds);
-
-            const percent = Math.min(100, Math.max(0, (elapsedSeconds / TOTAL_SECONDS) * 100));
-            document.getElementById('progress_bar').style.width = `${percent}%`;
-            document.getElementById('progress_percent').innerText = `${Math.round(percent)}%`;
-
-            document.getElementById('phase_badge').innerText = curPhase.name;
-            document.getElementById('phase_title').innerText = curPhase.title;
-            document.getElementById('phase_instruction').innerText = curPhase.desc;
-
-            for (let i = 0; i < phases.length; i++) {
-                const el = document.getElementById(`tl_${i}`);
-                if (el) {
-                    if (i === curPhase.id) {
-                        el.className = 'bg-slate-200 p-2 rounded border border-slate-700 text-slate-900 font-bold';
-                    } else {
-                        el.className = 'bg-slate-50 p-2 rounded border border-slate-200 text-slate-500';
-                    }
-                }
-            }
-        }
-
-        function toggleTimer() {
-            if (isRunning) {
-                clearInterval(timerInterval);
-                isRunning = false;
-                document.getElementById('btn_icon').className = 'fa-solid fa-play';
-                document.getElementById('btn_text').innerText = '再開';
-            } else {
-                if (remainingSeconds === TOTAL_SECONDS) {
-                    playChime('start');
-                }
-                isRunning = true;
-                document.getElementById('btn_icon').className = 'fa-solid fa-pause';
-                document.getElementById('btn_text').innerText = '一時停止';
-                timerInterval = setInterval(() => {
-                    if (remainingSeconds > 0) {
-                        remainingSeconds--;
-                        updateDisplay();
-                    } else {
-                        clearInterval(timerInterval);
-                        isRunning = false;
-                        playChime('start');
-                        alert("10分間の帯活動が終了しました。振り返りを行ってください。");
-                    }
-                }, 1000);
-            }
-        }
-
-        function resetTimer() {
-            clearInterval(timerInterval);
-            isRunning = false;
-            remainingSeconds = TOTAL_SECONDS;
-            currentPhaseId = 0;
-            document.getElementById('btn_icon').className = 'fa-solid fa-play';
-            document.getElementById('btn_text').innerText = 'スタート';
-            updateDisplay();
-        }
-
-        function nextPhase() {
-            const curPhase = getCurrentPhase(remainingSeconds);
-            if (curPhase.id < phases.length - 1) {
-                const nextP = phases[curPhase.id + 1];
-                remainingSeconds = nextP.start;
-                updateDisplay();
-                playChime('phase');
-            }
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            updateDisplay();
-        });
     </script>
 </body>
 </html>
