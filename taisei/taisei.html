@@ -352,7 +352,7 @@
                     <!-- 研究組織（完全フィット） -->
                     <div class="p-5 md:p-6 rounded-xl border border-slate-300 bg-white shadow-2xs font-gothic">
                         <div class="w-full overflow-x-auto py-1">
-                    <div class="w-full max-w-[680px] mx-auto flex items-center justify-between gap-0 select-none py-2 px-1">
+                    <div class="w-full max-w-[700px] mx-auto flex items-center justify-between gap-0 select-none py-2 px-1">
                         
                         <!-- 1. 校長 -->
                         <div class="w-20 h-44 border border-slate-700 bg-white rounded-lg flex items-center justify-center p-2 shadow-2xs shrink-0">
@@ -394,19 +394,41 @@
                             </span>
                         </div>
 
-                        <!-- 接続線3（短縮） -->
-                        <div class="w-4 h-px bg-slate-700 shrink-0"></div>
+                        <!-- 接続線3 + 分岐構造（三部会 & 環境整備部） -->
+                        <div class="flex items-center shrink-0">
+                            <!-- 分岐SVG -->
+                            <svg class="w-5 h-[196px] shrink-0 text-slate-700 block" viewBox="0 0 20 196" fill="none">
+                                <!-- 全体会中央（y=98）からの水平線 -->
+                                <line x1="0" y1="98" x2="10" y2="98" stroke="currentColor" stroke-width="1" />
+                                <!-- 垂直の分岐線（三部会中心 y=68 から 環境整備部中心 y=170 まで） -->
+                                <line x1="10" y1="68" x2="10" y2="170" stroke="currentColor" stroke-width="1" />
+                                <!-- 三部会への水平線（y=68） -->
+                                <line x1="10" y1="68" x2="20" y2="68" stroke="currentColor" stroke-width="1" />
+                                <!-- 環境整備部への水平線（y=170） -->
+                                <line x1="10" y1="170" x2="20" y2="170" stroke="currentColor" stroke-width="1" />
+                            </svg>
 
-                        <!-- 4. ３部会（天部会・木部会・川部会） -->
-                        <div class="w-[200px] md:w-[220px] border border-slate-700 bg-white rounded-lg overflow-hidden shadow-2xs divide-y divide-slate-700 text-center shrink-0">
-                            <div class="py-3.5 font-bold text-sm md:text-base text-slate-900 tracking-widest hover:bg-slate-50 transition">
-                                天　部　会
-                            </div>
-                            <div class="py-3.5 font-bold text-sm md:text-base text-slate-900 tracking-widest hover:bg-slate-50 transition">
-                                木　部　会
-                            </div>
-                            <div class="py-3.5 font-bold text-sm md:text-base text-slate-900 tracking-widest hover:bg-slate-50 transition">
-                                川　部　会
+                            <!-- 右列ブロック（３部会 ＆ 環境整備部） -->
+                            <div class="w-[200px] md:w-[220px] flex flex-col gap-3 shrink-0">
+                                <!-- ３部会 -->
+                                <div class="border border-slate-700 bg-white rounded-lg overflow-hidden shadow-2xs divide-y divide-slate-700 text-center shrink-0">
+                                    <div class="py-2.5 font-bold text-sm md:text-base text-slate-900 tracking-widest hover:bg-slate-50 transition">
+                                        天　部　会
+                                    </div>
+                                    <div class="py-2.5 font-bold text-sm md:text-base text-slate-900 tracking-widest hover:bg-slate-50 transition">
+                                        木　部　会
+                                    </div>
+                                    <div class="py-2.5 font-bold text-sm md:text-base text-slate-900 tracking-widest hover:bg-slate-50 transition">
+                                        川　部　会
+                                    </div>
+                                </div>
+
+                                <!-- 環境整備部会 -->
+                                <div class="border border-slate-700 bg-white rounded-lg py-3 px-2 shadow-2xs text-center shrink-0 hover:bg-slate-50 transition">
+                                    <div class="font-bold text-sm md:text-base text-slate-900 tracking-wider leading-normal">
+                                        環境整備部会
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -656,6 +678,9 @@
                         </p>
                         <p class="indent-[1em] text-justify">
                             「川」部会では、児童生徒の探究成果を校内掲示やデジタルアーカイブとして蓄積する「ポスターの保管」の構築や、地域住民・事業所と協働する「人材バンク」の整備・活用を中心に授業改善を推進している。
+                        </p>
+                        <p class="indent-[1em] text-justify">
+                            「環境整備部会」では、主に校内の掲示に関わる整備を担当することを主な役割とし、児童生徒の探究の成果や学びの足跡を効果的に共有・発信できる教育環境の充実に努めている。
                         </p>
                     </div>
 
