@@ -540,6 +540,149 @@
         <!-- メインナビゲーションコンテンツ -->
         <nav class="p-3 sm:p-8 space-y-5 sm:space-y-7">
 
+            <!-- 全体相関図（スマホ時は縮小表示・拡大可能） -->
+            <section id="dependency-graph-section">
+                <div class="bg-white p-2 sm:p-4 rounded-xl border border-slate-200 shadow-2xs relative overflow-hidden" style="min-width: 0; max-width: 100%;">
+                    <!-- 拡大ボタン -->
+                    <button type="button" onclick="openGraphModal()" class="absolute top-2 right-2 sm:top-3 sm:right-3 inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-white/95 hover:bg-slate-50 text-teal-800 text-[10px] sm:text-xs font-bold transition border border-teal-600/40 shadow-xs z-10" aria-label="グラフを拡大表示">
+                        <i class="fa-solid fa-magnifying-glass-plus text-teal-600 text-[10px] sm:text-[11px]"></i>
+                        <span>拡大</span>
+                    </button>
+
+                    <div class="w-full max-w-full overflow-hidden" style="min-width: 0;">
+                        <svg id="dependency-svg" viewBox="0 0 760 440" style="width: 100%; max-width: 100%; height: auto; display: block;" class="block select-none" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <filter id="clean-shadow" x="-5%" y="-8%" width="110%" height="120%" filterUnits="userSpaceOnUse">
+                                        <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.06" />
+                                    </filter>
+                                    <marker id="arr-blue" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                        <path d="M 0 2 L 7 5 L 0 8 z" fill="#0284c7" />
+                                    </marker>
+                                    <marker id="arr-gray" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                        <path d="M 0 2 L 7 5 L 0 8 z" fill="#64748b" />
+                                    </marker>
+                                    <marker id="arr-rose" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                        <path d="M 0 2 L 7 5 L 0 8 z" fill="#e11d48" />
+                                    </marker>
+                                    <marker id="arr-indigo" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                        <path d="M 0 2 L 7 5 L 0 8 z" fill="#4f46e5" />
+                                    </marker>
+                                </defs>
+
+                                <!-- コネクタ線（交差ゼロ・整然としたライン） -->
+                                <g id="svg-connectors">
+                                    <!-- 1. 紀要 -> 全体計画（最優先・直下） -->
+                                    <path d="M 380 66 L 380 112" stroke="#0284c7" stroke-width="2.5" marker-end="url(#arr-blue)" fill="none" />
+                                    <text x="390" y="93" font-size="10" font-weight="bold" fill="#0284c7">逆算</text>
+
+                                    <!-- 2. 全体計画 -> 3分岐（帯活動 / 地域バンク / 各学年の取組） -->
+                                    <path d="M 380 174 L 380 200" stroke="#64748b" stroke-width="2" fill="none" />
+                                    <path d="M 150 200 L 610 200" stroke="#64748b" stroke-width="2" fill="none" />
+                                    <path d="M 150 200 L 150 222" stroke="#64748b" stroke-width="2" marker-end="url(#arr-gray)" fill="none" />
+                                    <path d="M 380 200 L 380 222" stroke="#64748b" stroke-width="2" marker-end="url(#arr-gray)" fill="none" />
+                                    <path d="M 610 200 L 610 222" stroke="#64748b" stroke-width="2" marker-end="url(#arr-gray)" fill="none" />
+
+                                    <!-- 3. 帯活動 ＋ 地域人材・ポスターの保管 -> 指導案（合流・結実） -->
+                                    <path d="M 150 286 L 150 312" stroke="#64748b" stroke-width="2" fill="none" />
+                                    <path d="M 380 286 L 380 312" stroke="#64748b" stroke-width="2" fill="none" />
+                                    <path d="M 150 312 L 380 312" stroke="#64748b" stroke-width="2" fill="none" />
+                                    <path d="M 265 312 L 265 338" stroke="#e11d48" stroke-width="2.5" marker-end="url(#arr-rose)" fill="none" />
+                                    <text x="275" y="329" font-size="9.5" font-weight="bold" fill="#e11d48">合流・結実</text>
+
+                                    <!-- 4. 各学年の取組・実践 -> 振り返りの記録（成果検証） -->
+                                    <path d="M 610 286 L 610 338" stroke="#4f46e5" stroke-width="2.5" marker-end="url(#arr-indigo)" fill="none" />
+                                    <text x="620" y="316" font-size="9.5" font-weight="bold" fill="#4f46e5">意識変容の検証</text>
+                                </g>
+
+                                <!-- ノード群（クリーン・整然としたカード） -->
+                                <g id="svg-nodes">
+
+                                    <!-- 1. 研究紀要（案） 【ゴール】 -->
+                                    <g id="node-bulletin" class="dep-node" onclick="location.href='taisei/taisei.html'">
+                                        <rect class="node-box" x="220" y="16" width="320" height="50" rx="10" fill="#0f766e" stroke="#0d9488" stroke-width="1.5" filter="url(#clean-shadow)" />
+                                        <text x="235" y="34" font-size="9" font-weight="bold" fill="#99f6e4">【ゴール】研究推進委員会</text>
+                                        <text x="235" y="52" font-size="14" font-weight="bold" fill="#ffffff">ふるさと学習 研究紀要（案）</text>
+                                        <circle cx="518" cy="41" r="10" fill="#ffffff" fill-opacity="0.2" />
+                                        <text x="518" y="44.5" font-size="10" fill="#ffffff" text-anchor="middle">↗</text>
+                                    </g>
+
+                                    <!-- 2. 全体計画（年間計画） ★研究紀要のすぐ下！ -->
+                                    <g id="node-plan" class="dep-node" onclick="location.href='plan/plan.html'">
+                                        <rect class="node-box" x="140" y="118" width="480" height="56" rx="12" fill="#f0f9ff" stroke="#0284c7" stroke-width="2.2" filter="url(#clean-shadow)" />
+                                        <rect x="155" y="126" width="125" height="17" rx="4" fill="#0284c7" />
+                                        <text x="217.5" y="138" font-size="9" font-weight="bold" fill="#ffffff" text-anchor="middle">★最優先・研究紀要直下</text>
+                                        <text x="290" y="139" font-size="10" font-weight="bold" fill="#0369a1">天部会</text>
+                                        <text x="155" y="161" font-size="15" font-weight="bold" fill="#0c4a6e">ふるさと学習 全体計画（年間計画）</text>
+                                        <circle cx="595" cy="146" r="11" fill="#0284c7" />
+                                        <text x="595" y="149.5" font-size="10" fill="#ffffff" text-anchor="middle">↗</text>
+                                    </g>
+
+                                    <!-- 3. 帯活動（ポスターセッション） -->
+                                    <g id="node-obi" class="dep-node" onclick="location.href='obi/obi.html'">
+                                        <rect class="node-box" x="40" y="228" width="220" height="58" rx="10" fill="#ffffff" stroke="#d97706" stroke-width="1.8" filter="url(#clean-shadow)" />
+                                        <rect x="52" y="236" width="50" height="15" rx="3" fill="#fef3c7" />
+                                        <text x="77" y="247" font-size="8.5" font-weight="bold" fill="#b45309" text-anchor="middle">日常実践</text>
+                                        <text x="110" y="248" font-size="9" font-weight="bold" fill="#92400e">木部会</text>
+                                        <text x="52" y="271" font-size="12.5" font-weight="bold" fill="#78350f">帯活動（ポスターセッション）</text>
+                                        <circle cx="238" cy="257" r="9" fill="#fde68a" />
+                                        <text x="238" y="260" font-size="9" fill="#92400e" text-anchor="middle">↗</text>
+                                    </g>
+
+                                    <!-- 4. ふるさと人材・ポスターの保管 -->
+                                    <g id="node-bank" class="dep-node" onclick="location.href='bank/jinzai.html'">
+                                        <rect class="node-box" x="270" y="228" width="220" height="58" rx="10" fill="#ffffff" stroke="#0891b2" stroke-width="1.8" filter="url(#clean-shadow)" />
+                                        <rect x="282" y="236" width="50" height="15" rx="3" fill="#cffafe" />
+                                        <text x="307" y="247" font-size="8.5" font-weight="bold" fill="#0e7490" text-anchor="middle">地域連携</text>
+                                        <text x="338" y="248" font-size="8.5" font-weight="bold" fill="#155e75">川部会・環境整備部会</text>
+                                        <text x="282" y="271" font-size="12.5" font-weight="bold" fill="#164e63">地域人材・ポスターの保管</text>
+                                        <circle cx="468" cy="257" r="9" fill="#a5f3fc" />
+                                        <text x="468" y="260" font-size="9" fill="#0e7490" text-anchor="middle">↗</text>
+                                    </g>
+
+                                    <!-- 5. 各学年の取組・実践 -->
+                                    <g id="node-jissai" class="dep-node" onclick="location.href='jissai/jissai.html'">
+                                        <rect class="node-box" x="500" y="228" width="220" height="58" rx="10" fill="#ffffff" stroke="#e11d48" stroke-width="1.8" filter="url(#clean-shadow)" />
+                                        <rect x="512" y="236" width="50" height="15" rx="3" fill="#ffe4e6" />
+                                        <text x="537" y="247" font-size="8.5" font-weight="bold" fill="#be123c" text-anchor="middle">探究活動</text>
+                                        <text x="570" y="248" font-size="9" font-weight="bold" fill="#9f1239">全学年 (1〜9年)</text>
+                                        <text x="512" y="271" font-size="12.5" font-weight="bold" fill="#881337">各学年の取組・実践</text>
+                                        <circle cx="698" cy="257" r="9" fill="#fecdd3" />
+                                        <text x="698" y="260" font-size="9" fill="#881337" text-anchor="middle">↗</text>
+                                    </g>
+
+                                    <!-- 6. 公開授業・指導案 -->
+                                    <g id="node-shidouan" class="dep-node" onclick="location.href='shidouan/shidouan.html'">
+                                        <rect class="node-box" x="100" y="344" width="330" height="64" rx="12" fill="#fff1f2" stroke="#e11d48" stroke-width="2.2" filter="url(#clean-shadow)" />
+                                        <rect x="114" y="352" width="130" height="17" rx="4" fill="#e11d48" />
+                                        <text x="179" y="364" font-size="8.5" font-weight="bold" fill="#ffffff" text-anchor="middle">★帯活動×地域教材の結実</text>
+                                        <text x="252" y="365" font-size="9" font-weight="bold" fill="#9f1239">R9: 2本 / R10: 3本</text>
+                                        <text x="114" y="391" font-size="14.5" font-weight="bold" fill="#881337">公開授業・指導案</text>
+                                        <circle cx="406" cy="376" r="11" fill="#e11d48" />
+                                        <text x="406" y="379.5" font-size="10" fill="#ffffff" text-anchor="middle">↗</text>
+                                    </g>
+
+                                    <!-- 7. 振り返りの記録（各学年の取組・実践から直結） -->
+                                    <g id="node-furikaeri" class="dep-node" onclick="location.href='furikaeri/furikaeri.html'">
+                                        <rect class="node-box" x="480" y="344" width="260" height="64" rx="12" fill="#eef2ff" stroke="#4f46e5" stroke-width="2" filter="url(#clean-shadow)" />
+                                        <rect x="494" y="352" width="75" height="17" rx="4" fill="#4f46e5" />
+                                        <text x="531.5" y="364" font-size="8.5" font-weight="bold" fill="#ffffff" text-anchor="middle">成果検証データ</text>
+                                        <text x="578" y="365" font-size="9" font-weight="bold" fill="#3730a3">天部会</text>
+                                        <text x="494" y="391" font-size="14" font-weight="bold" fill="#3730a3">振り返りの記録（アンケート）</text>
+                                        <circle cx="716" cy="376" r="11" fill="#4f46e5" />
+                                        <text x="716" y="379.5" font-size="10" fill="#ffffff" text-anchor="middle">↗</text>
+                                    </g>
+
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+            </section>
+
+            <!-- 区切り線 -->
+            <div class="pt-0.5 pb-0.5">
+                <hr class="border-t border-slate-200">
+            </div>
+
             <!-- セクション1：R8年度中に検討する資料 -->
             <section class="space-y-3 sm:space-y-4">
                 <div class="flex items-center border-b border-emerald-900/10 pb-2 px-1">
@@ -757,148 +900,6 @@
                 </div>
             </section>
 
-            <!-- 区切り線 -->
-            <div class="pt-2 pb-1">
-                <hr class="border-t border-slate-200">
-            </div>
-
-            <!-- セクション3：逆算グラフ（スマホ時は縮小表示・拡大可能） -->
-            <section id="dependency-graph-section" class="pt-1">
-                <div class="bg-white p-2 sm:p-4 rounded-xl border border-slate-200 shadow-2xs relative overflow-hidden" style="min-width: 0; max-width: 100%;">
-                    <!-- 拡大ボタン -->
-                    <button type="button" onclick="openGraphModal()" class="absolute top-2 right-2 sm:top-3 sm:right-3 inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-white/95 hover:bg-slate-50 text-teal-800 text-[10px] sm:text-xs font-bold transition border border-teal-600/40 shadow-xs z-10" aria-label="グラフを拡大表示">
-                        <i class="fa-solid fa-magnifying-glass-plus text-teal-600 text-[10px] sm:text-[11px]"></i>
-                        <span>拡大</span>
-                    </button>
-
-                    <div class="w-full max-w-full overflow-hidden" style="min-width: 0;">
-                        <svg id="dependency-svg" viewBox="0 0 760 440" style="width: 100%; max-width: 100%; height: auto; display: block;" class="block select-none" xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <filter id="clean-shadow" x="-5%" y="-8%" width="110%" height="120%" filterUnits="userSpaceOnUse">
-                                        <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.06" />
-                                    </filter>
-                                    <marker id="arr-blue" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                                        <path d="M 0 2 L 7 5 L 0 8 z" fill="#0284c7" />
-                                    </marker>
-                                    <marker id="arr-gray" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                                        <path d="M 0 2 L 7 5 L 0 8 z" fill="#64748b" />
-                                    </marker>
-                                    <marker id="arr-rose" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                                        <path d="M 0 2 L 7 5 L 0 8 z" fill="#e11d48" />
-                                    </marker>
-                                    <marker id="arr-indigo" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                                        <path d="M 0 2 L 7 5 L 0 8 z" fill="#4f46e5" />
-                                    </marker>
-                                </defs>
-
-                                <!-- コネクタ線（交差ゼロ・整然としたライン） -->
-                                <g id="svg-connectors">
-                                    <!-- 1. 紀要 -> 全体計画（最優先・直下） -->
-                                    <path d="M 380 66 L 380 112" stroke="#0284c7" stroke-width="2.5" marker-end="url(#arr-blue)" fill="none" />
-                                    <text x="390" y="93" font-size="10" font-weight="bold" fill="#0284c7">逆算</text>
-
-                                    <!-- 2. 全体計画 -> 3分岐（帯活動 / 地域バンク / 各学年の取組） -->
-                                    <path d="M 380 174 L 380 200" stroke="#64748b" stroke-width="2" fill="none" />
-                                    <path d="M 150 200 L 610 200" stroke="#64748b" stroke-width="2" fill="none" />
-                                    <path d="M 150 200 L 150 222" stroke="#64748b" stroke-width="2" marker-end="url(#arr-gray)" fill="none" />
-                                    <path d="M 380 200 L 380 222" stroke="#64748b" stroke-width="2" marker-end="url(#arr-gray)" fill="none" />
-                                    <path d="M 610 200 L 610 222" stroke="#64748b" stroke-width="2" marker-end="url(#arr-gray)" fill="none" />
-
-                                    <!-- 3. 帯活動 ＋ 地域人材・ポスターの保管 -> 指導案（合流・結実） -->
-                                    <path d="M 150 286 L 150 312" stroke="#64748b" stroke-width="2" fill="none" />
-                                    <path d="M 380 286 L 380 312" stroke="#64748b" stroke-width="2" fill="none" />
-                                    <path d="M 150 312 L 380 312" stroke="#64748b" stroke-width="2" fill="none" />
-                                    <path d="M 265 312 L 265 338" stroke="#e11d48" stroke-width="2.5" marker-end="url(#arr-rose)" fill="none" />
-                                    <text x="275" y="329" font-size="9.5" font-weight="bold" fill="#e11d48">合流・結実</text>
-
-                                    <!-- 4. 各学年の取組・実践 -> 振り返りの記録（成果検証） -->
-                                    <path d="M 610 286 L 610 338" stroke="#4f46e5" stroke-width="2.5" marker-end="url(#arr-indigo)" fill="none" />
-                                    <text x="620" y="316" font-size="9.5" font-weight="bold" fill="#4f46e5">意識変容の検証</text>
-                                </g>
-
-                                <!-- ノード群（クリーン・整然としたカード） -->
-                                <g id="svg-nodes">
-
-                                    <!-- 1. 研究紀要（案） 【ゴール】 -->
-                                    <g id="node-bulletin" class="dep-node" onclick="location.href='taisei/taisei.html'">
-                                        <rect class="node-box" x="220" y="16" width="320" height="50" rx="10" fill="#0f766e" stroke="#0d9488" stroke-width="1.5" filter="url(#clean-shadow)" />
-                                        <text x="235" y="34" font-size="9" font-weight="bold" fill="#99f6e4">【ゴール】研究推進委員会</text>
-                                        <text x="235" y="52" font-size="14" font-weight="bold" fill="#ffffff">ふるさと学習 研究紀要（案）</text>
-                                        <circle cx="518" cy="41" r="10" fill="#ffffff" fill-opacity="0.2" />
-                                        <text x="518" y="44.5" font-size="10" fill="#ffffff" text-anchor="middle">↗</text>
-                                    </g>
-
-                                    <!-- 2. 全体計画（年間計画） ★研究紀要のすぐ下！ -->
-                                    <g id="node-plan" class="dep-node" onclick="location.href='plan/plan.html'">
-                                        <rect class="node-box" x="140" y="118" width="480" height="56" rx="12" fill="#f0f9ff" stroke="#0284c7" stroke-width="2.2" filter="url(#clean-shadow)" />
-                                        <rect x="155" y="126" width="125" height="17" rx="4" fill="#0284c7" />
-                                        <text x="217.5" y="138" font-size="9" font-weight="bold" fill="#ffffff" text-anchor="middle">★最優先・研究紀要直下</text>
-                                        <text x="290" y="139" font-size="10" font-weight="bold" fill="#0369a1">天部会</text>
-                                        <text x="155" y="161" font-size="15" font-weight="bold" fill="#0c4a6e">ふるさと学習 全体計画（年間計画）</text>
-                                        <circle cx="595" cy="146" r="11" fill="#0284c7" />
-                                        <text x="595" y="149.5" font-size="10" fill="#ffffff" text-anchor="middle">↗</text>
-                                    </g>
-
-                                    <!-- 3. 帯活動（ポスターセッション） -->
-                                    <g id="node-obi" class="dep-node" onclick="location.href='obi/obi.html'">
-                                        <rect class="node-box" x="40" y="228" width="220" height="58" rx="10" fill="#ffffff" stroke="#d97706" stroke-width="1.8" filter="url(#clean-shadow)" />
-                                        <rect x="52" y="236" width="50" height="15" rx="3" fill="#fef3c7" />
-                                        <text x="77" y="247" font-size="8.5" font-weight="bold" fill="#b45309" text-anchor="middle">日常実践</text>
-                                        <text x="110" y="248" font-size="9" font-weight="bold" fill="#92400e">木部会</text>
-                                        <text x="52" y="271" font-size="12.5" font-weight="bold" fill="#78350f">帯活動（ポスターセッション）</text>
-                                        <circle cx="238" cy="257" r="9" fill="#fde68a" />
-                                        <text x="238" y="260" font-size="9" fill="#92400e" text-anchor="middle">↗</text>
-                                    </g>
-
-                                    <!-- 4. ふるさと人材・ポスターの保管 -->
-                                    <g id="node-bank" class="dep-node" onclick="location.href='bank/jinzai.html'">
-                                        <rect class="node-box" x="270" y="228" width="220" height="58" rx="10" fill="#ffffff" stroke="#0891b2" stroke-width="1.8" filter="url(#clean-shadow)" />
-                                        <rect x="282" y="236" width="50" height="15" rx="3" fill="#cffafe" />
-                                        <text x="307" y="247" font-size="8.5" font-weight="bold" fill="#0e7490" text-anchor="middle">地域連携</text>
-                                        <text x="338" y="248" font-size="8.5" font-weight="bold" fill="#155e75">川部会・環境整備部会</text>
-                                        <text x="282" y="271" font-size="12.5" font-weight="bold" fill="#164e63">地域人材・ポスターの保管</text>
-                                        <circle cx="468" cy="257" r="9" fill="#a5f3fc" />
-                                        <text x="468" y="260" font-size="9" fill="#0e7490" text-anchor="middle">↗</text>
-                                    </g>
-
-                                    <!-- 5. 各学年の取組・実践 -->
-                                    <g id="node-jissai" class="dep-node" onclick="location.href='jissai/jissai.html'">
-                                        <rect class="node-box" x="500" y="228" width="220" height="58" rx="10" fill="#ffffff" stroke="#e11d48" stroke-width="1.8" filter="url(#clean-shadow)" />
-                                        <rect x="512" y="236" width="50" height="15" rx="3" fill="#ffe4e6" />
-                                        <text x="537" y="247" font-size="8.5" font-weight="bold" fill="#be123c" text-anchor="middle">探究活動</text>
-                                        <text x="570" y="248" font-size="9" font-weight="bold" fill="#9f1239">全学年 (1〜9年)</text>
-                                        <text x="512" y="271" font-size="12.5" font-weight="bold" fill="#881337">各学年の取組・実践</text>
-                                        <circle cx="698" cy="257" r="9" fill="#fecdd3" />
-                                        <text x="698" y="260" font-size="9" fill="#881337" text-anchor="middle">↗</text>
-                                    </g>
-
-                                    <!-- 6. 公開授業・指導案 -->
-                                    <g id="node-shidouan" class="dep-node" onclick="location.href='shidouan/shidouan.html'">
-                                        <rect class="node-box" x="100" y="344" width="330" height="64" rx="12" fill="#fff1f2" stroke="#e11d48" stroke-width="2.2" filter="url(#clean-shadow)" />
-                                        <rect x="114" y="352" width="130" height="17" rx="4" fill="#e11d48" />
-                                        <text x="179" y="364" font-size="8.5" font-weight="bold" fill="#ffffff" text-anchor="middle">★帯活動×地域教材の結実</text>
-                                        <text x="252" y="365" font-size="9" font-weight="bold" fill="#9f1239">R9: 2本 / R10: 3本</text>
-                                        <text x="114" y="391" font-size="14.5" font-weight="bold" fill="#881337">公開授業・指導案</text>
-                                        <circle cx="406" cy="376" r="11" fill="#e11d48" />
-                                        <text x="406" y="379.5" font-size="10" fill="#ffffff" text-anchor="middle">↗</text>
-                                    </g>
-
-                                    <!-- 7. 振り返りの記録（各学年の取組・実践から直結） -->
-                                    <g id="node-furikaeri" class="dep-node" onclick="location.href='furikaeri/furikaeri.html'">
-                                        <rect class="node-box" x="480" y="344" width="260" height="64" rx="12" fill="#eef2ff" stroke="#4f46e5" stroke-width="2" filter="url(#clean-shadow)" />
-                                        <rect x="494" y="352" width="75" height="17" rx="4" fill="#4f46e5" />
-                                        <text x="531.5" y="364" font-size="8.5" font-weight="bold" fill="#ffffff" text-anchor="middle">成果検証データ</text>
-                                        <text x="578" y="365" font-size="9" font-weight="bold" fill="#3730a3">天部会</text>
-                                        <text x="494" y="391" font-size="14" font-weight="bold" fill="#3730a3">振り返りの記録（アンケート）</text>
-                                        <circle cx="716" cy="376" r="11" fill="#4f46e5" />
-                                        <text x="716" y="379.5" font-size="10" fill="#ffffff" text-anchor="middle">↗</text>
-                                    </g>
-
-                                </g>
-                            </svg>
-                        </div>
-                    </div>
-            </section>
         </nav>
 
         <!-- フッター：天川村の自然と探求のメッセージ -->
