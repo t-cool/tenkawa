@@ -609,68 +609,68 @@
     function buildCardStage4() {
         const children = [];
         children.push(...createSheetHeader(
-            'ポスターセッション・ガイド（7〜9年生）',
-            '【お助けカード】',
-            '探究の視点：〜のために（論理と対話・ICT活用）'
+            'ポスターセッション・セッション充実ガイド（7〜9年生）',
+            '【卓上ガイド】',
+            '探究の視点：〜のために（自然な質疑応答と対話の深化）'
         ));
 
         // 左ブロック
         const leftContent = [
             new docx.Paragraph({
                 spacing: { before: 0, after: 60 },
-                children: [gothicRun('■ 発表の型（事実と意見を整理し、ICTを活用して提案する）', { bold: true, size: 22 })]
+                children: [gothicRun('■ 発表後が本番！ セッションを立ち上げる3つの仕掛け', { bold: true, size: 22 })]
             }),
             new docx.Paragraph({
                 spacing: { before: 20, after: 20, line: 260 },
                 children: [
-                    gothicRun('1. 事実と自分の考えを分ける：', { bold: true, size: 20 }),
-                    minchoRun('調べたデータ（事実）と、そこから考えた自分たちのアイデア（提案）を分かりやすく分けて話す。', { size: 20 })
+                    gothicRun('1. 沈黙を生まない「呼び水の問いかけ」：', { bold: true, size: 20 }),
+                    minchoRun('発表の終わりに「質問ありますか？」と待たず、「〜について皆さんはどう感じましたか？」「実はここが一番迷った点です」と自分から投げかけて対話を始める。', { size: 20 })
                 ]
             }),
             new docx.Paragraph({
                 spacing: { before: 20, after: 20, line: 260 },
                 children: [
-                    gothicRun('2. ポスター×端末を使いこなす：', { bold: true, size: 20 }),
-                    minchoRun('ポスターで全体のポイントを示し、端末で写真や動画、詳しいグラフをサッと拡大して見せる。', { size: 20 })
+                    gothicRun('2. 手元端末・資料のスタンバイ（追加の引き出し）：', { bold: true, size: 20 }),
+                    minchoRun('質問を受けた瞬間、取材写真・ボツ案・詳細データを手元端末でサッと見せる。相手に見えやすい角度に向ける。', { size: 20 })
                 ]
             }),
             new docx.Paragraph({
-                spacing: { before: 20, after: 20, line: 260 },
+                spacing: { before: 20, after: 40, line: 260 },
                 children: [
-                    gothicRun('3. いろんな人の立場を想像する：', { bold: true, size: 20 }),
-                    minchoRun('住民・観光客・事業者など多様な立場を意識し、共感を生む言葉と自然な間で語る。', { size: 20 })
-                ]
-            }),
-            new docx.Paragraph({
-                spacing: { before: 20, after: 60, line: 260 },
-                children: [
-                    gothicRun('4. 対話でアイデアを深める：', { bold: true, size: 20 }),
-                    minchoRun('自分の考えを一方的に話すのではなく、友達からの質問や新しい視点を受け止めて対話を広げる。', { size: 20 })
+                    gothicRun('3. 聞き手に合わせた対話モードの切り替え：', { bold: true, size: 20 }),
+                    minchoRun('下級生には目線を下げてやさしく、地域の方には生活の実感を伺い、同級生には実現への課題を問いかける。', { size: 20 })
                 ]
             }),
             new docx.Paragraph({
                 spacing: { before: 40, after: 40 },
-                children: [gothicRun('■ 発展：ポスター×ICTのスマートな使い方', { bold: true, size: 22 })]
+                children: [gothicRun('■ 一問一答にしない！「4つの応答ステップ」', { bold: true, size: 22 })]
             }),
             new docx.Paragraph({
-                spacing: { before: 20, after: 20, line: 260 },
+                spacing: { before: 10, after: 10, line: 260 },
                 children: [
-                    gothicRun('・手元端末で写真・動画をサッと見せる：', { bold: true, size: 20 }),
-                    minchoRun('ポスターの図を補強する取材写真やインタビュー動画を手元端末ですぐに見せる。', { size: 20 })
+                    gothicRun('Step 1【受け止め】：', { bold: true, size: 20 }),
+                    minchoRun('「質問ありがとう！」「鋭いところに着目してくれたね」と笑顔で頷く。', { size: 20 })
                 ]
             }),
             new docx.Paragraph({
-                spacing: { before: 20, after: 20, line: 260 },
+                spacing: { before: 10, after: 10, line: 260 },
                 children: [
-                    gothicRun('・聞き手に見やすい画面の向きを意識する：', { bold: true, size: 20 }),
-                    minchoRun('自分が画面をのぞき込まず、聞き手に見える角度に向け、目線は相手と画面を行き来させる。', { size: 20 })
+                    gothicRun('Step 2【背景とエピソード】：', { bold: true, size: 20 }),
+                    minchoRun('「はい/いいえ」だけで終わらせず、「実は取材の時に…（端末見せる）」と裏話を添える。', { size: 20 })
                 ]
             }),
             new docx.Paragraph({
-                spacing: { before: 20, after: 20, line: 260 },
+                spacing: { before: 10, after: 10, line: 260 },
                 children: [
-                    gothicRun('・質問されたら追加データをサッと提示：', { bold: true, size: 20 }),
-                    minchoRun('質問を受けた際、端末内の補足データや引用元（統計・Web資料等）をサッと示して根拠を補強。', { size: 20 })
+                    gothicRun('Step 3【パスを返す】：', { bold: true, size: 20 }),
+                    minchoRun('「〇〇さんはどう思いますか？」「もし〜ならどうしますか？」と相手を対話に巻き込む。', { size: 20 })
+                ]
+            }),
+            new docx.Paragraph({
+                spacing: { before: 10, after: 20, line: 260 },
+                children: [
+                    gothicRun('Step 4【わからない時も宝】：', { bold: true, size: 20 }),
+                    minchoRun('「そこはまだ調べ切れていませんでした。良い視点をありがとう！ 一緒に考えてみませんか？」', { size: 20 })
                 ]
             })
         ];
@@ -681,70 +681,54 @@
         const rightContent = [
             new docx.Paragraph({
                 spacing: { before: 0, after: 60 },
-                children: [gothicRun('■ 発表と対話の型（アイデアを共有し、対話で深める）', { bold: true, size: 22 })]
-            }),
-            new docx.Paragraph({
-                spacing: { before: 20, after: 30 },
-                children: [gothicRun('【発表の型（1分30秒・課題提起から論証、提案へ）】', { bold: true, size: 21 })]
-            }),
-            new docx.Paragraph({
-                spacing: { before: 10, after: 20, line: 240 },
-                children: [
-                    gothicRun('1. 導入（約15秒）：', { bold: true, size: 19 }),
-                    minchoRun('「私たちは、天川村について探究する中で【テーマ：〇〇】に着目しました。今日は、調べて分かった現状と、未来に向けた私たちの提案をお伝えします。」', { size: 19 })
-                ]
-            }),
-            new docx.Paragraph({
-                spacing: { before: 10, after: 20, line: 240 },
-                children: [
-                    gothicRun('2. 本論（約60秒・各約20秒）：', { bold: true, size: 19 }),
-                    minchoRun('事実と提案の３つの柱（①現状とデータ、②要因と提案、③期待される効果）', { size: 19 })
-                ]
-            }),
-            new docx.Paragraph({
-                spacing: { before: 10, after: 40, line: 240 },
-                children: [
-                    gothicRun('3. 結び（約15秒）：', { bold: true, size: 19 }),
-                    minchoRun('「天川村の未来のために、みなさんの意見も聞かせてほしいです。感想やアドバイス、質問をお願いします。」', { size: 19 })
-                ]
+                children: [gothicRun('■ 対話を弾ませる実践フレーズ集 ＆ 心得', { bold: true, size: 22 })]
             }),
             new docx.Paragraph({
                 spacing: { before: 20, after: 20 },
-                children: [gothicRun('【対話を深める質問のヒント】', { bold: true, size: 21 })]
+                children: [gothicRun('【発表の終わりに投げる「呼び水フレーズ」】', { bold: true, size: 21 })]
             }),
             new docx.Paragraph({
                 spacing: { before: 10, after: 10, line: 240 },
-                children: [minchoRun('・「村の人や観光客の立場から見ると、どんなメリットや課題がありそうかな？」', { size: 19 })]
+                children: [minchoRun('・「ここまで聞いてみて、一番『おっ』と思ったところや気になったところはどこですか？」', { size: 19 })]
             }),
             new docx.Paragraph({
                 spacing: { before: 10, after: 10, line: 240 },
-                children: [minchoRun('・「提案を実行・継続するための工夫やアイデアについて、どんなことが考えられる？」', { size: 19 })]
+                children: [minchoRun('・「実は今、〇〇のアイデアで迷っています。皆さんならどちらを選びますか？」', { size: 19 })]
             }),
             new docx.Paragraph({
                 spacing: { before: 10, after: 30, line: 240 },
-                children: [minchoRun('・「そのアイデアの根拠になっているデータについて、他の見方はできないかな？」', { size: 19 })]
+                children: [minchoRun('・「村の未来に向けて、皆さんの普段の生活や体験からどう感じますか？」', { size: 19 })]
             }),
             new docx.Paragraph({
                 spacing: { before: 20, after: 20 },
-                children: [gothicRun('【対話を広げる応答のコツ】', { bold: true, size: 21 })]
+                children: [gothicRun('【聞き手（相手）に応じた対話アプローチ】', { bold: true, size: 21 })]
             }),
             new docx.Paragraph({
                 spacing: { before: 10, after: 10, line: 240 },
-                children: [minchoRun('①「鋭い視点からの質問をありがとう！」', { size: 19 })]
+                children: [
+                    gothicRun('・下級生（1〜6年）へ：', { bold: true, size: 19 }),
+                    minchoRun('「写真のここ、見たことある？」「どっちが好きかな？」とやさしく共感し、笑顔で語りかける。', { size: 19 })
+                ]
             }),
             new docx.Paragraph({
                 spacing: { before: 10, after: 10, line: 240 },
-                children: [minchoRun('②「ポスター（または端末）のここを見てほしいんだけど、〜〜という視点から検討したんだ。」', { size: 19 })]
+                children: [
+                    gothicRun('・地域の方・大人へ：', { bold: true, size: 19 }),
+                    minchoRun('「昔の様子や普段の暮らしから見て、改善できる点はありますか？」と知恵をお借りする。', { size: 19 })
+                ]
             }),
             new docx.Paragraph({
-                spacing: { before: 10, after: 40, line: 240 },
-                children: [minchoRun('③「〇〇さんの視点を取り入れると、さらに良くなりそう！ どうすればもっと良くなると思う？」（対話を発展させる）', { size: 19 })]
+                spacing: { before: 10, after: 30, line: 240 },
+                children: [
+                    gothicRun('・同級生へ：', { bold: true, size: 19 }),
+                    minchoRun('「実現するためのコストや手間について、別アイデアはある？」と議論を発展させる。', { size: 19 })
+                ]
             }),
             new docx.Paragraph({
                 spacing: { before: 20, after: 0, line: 240 },
                 children: [
-                    gothicRun('※ リラックスして楽しもう！：', { bold: true, size: 19 }),
-                    minchoRun('発表というより、未来を考える「作戦会議」。画面に閉じこもらず、相手の目を見て笑顔で対話を楽しもう！', { size: 19 })
+                    gothicRun('※ セッションの極意（リラックスして楽しもう！）：', { bold: true, size: 19 }),
+                    minchoRun('発表は「きっかけ」、質疑応答が「本体」です。テストのように完璧に答える必要はありません。聞き手と一緒に未来を考える「作戦会議」を楽しもう！', { size: 19 })
                 ]
             })
         ];
@@ -1031,98 +1015,128 @@
     }
 
     // ─────────────────────────────────────────────────────────────
-    // 8. 振り返りシート（7〜9年）
+    // 8. セッション充実ワークシート（7〜9年）
     // ─────────────────────────────────────────────────────────────
     function buildRecordStage4() {
         const children = [];
         children.push(...createSheetHeader(
-            'ポスターセッション 振り返りシート（７〜９年）',
+            'ポスターセッション セッション充実ワークシート（７〜９年）',
             '',
-            '年　組　氏名［　　　　　　　　　］　　実施日：　月　日　相手のグループ名［　　　　　］'
+            '年　組　氏名［　　　　　　　　　］　　実施日：　月　日　相手［ □下級生 □同級生 □地域/大人 ］ 名前/班［　　　　　］'
         ));
 
-        // 【1】自分の発表の振り返り
+        // 【1】発表後の対話を始める「仕掛け」（事前準備・作戦）
         const part1 = [
             new docx.Paragraph({
-                spacing: { before: 0, after: 40 },
+                spacing: { before: 0, after: 30 },
                 children: [
-                    gothicRun('【1】自分の発表の振り返り', { bold: true, size: 22 }),
-                    gothicRun('　［自己評価： A（説得力あり）・B（提案伝わった）・C（改善余地あり）］', { size: 19, color: '0F766E' })
+                    gothicRun('【1】発表後の対話を始める「仕掛け」（事前準備・作戦）', { bold: true, size: 22 })
                 ]
             }),
             new docx.Paragraph({
-                spacing: { before: 10, after: 20 },
+                spacing: { before: 0, after: 20 },
                 children: [
-                    gothicRun('めあて：', { bold: true, size: 19 }),
-                    minchoRun('事実と自分の考えを分け、ポスターや端末の資料を見せながら未来への提案を語ろう', { size: 19 })
+                    gothicRun('めあて：', { bold: true, size: 19, color: '0F766E' }),
+                    minchoRun('発表の型にとらわれず、発表後の自然な質疑応答と対話でセッションを充実させよう！', { size: 19 })
                 ]
             }),
             new docx.Paragraph({
-                spacing: { before: 20, after: 20 },
-                children: [gothicRun('観点チェック：', { bold: true, size: 20 })]
+                spacing: { before: 10, after: 10, line: 240 },
+                children: [
+                    gothicRun('💡 コツ1（呼び水）：', { bold: true, size: 19 }),
+                    minchoRun('「何か質問は？」と待たず、「皆さんはどう感じましたか？」と自分から投げかけて対話のきっかけをつくる。', { size: 19 })
+                ]
             }),
-            createCheckItem('現状の課題と提案の根拠（一次データ・取材・試算）を論理的に結びつけて説明できた'),
-            createCheckItem('ポスター（論理の骨子）と端末（詳細データ・補足資料）を自在に連携させて提示できた'),
-            createCheckItem('相手からの疑問や視点を受け止め、対話を通してアイデアを広げられた'),
-            createCheckItem('「天川村の未来のために」という当事者意識を持ち、熱意と誠実さを持って語りかけられた'),
             new docx.Paragraph({
-                spacing: { before: 40, after: 20 },
-                children: [gothicRun('発表の成果・受けた質問と対話で深まった論点（メモ）：', { size: 19, color: '475569' })]
+                spacing: { before: 10, after: 20, line: 240 },
+                children: [
+                    gothicRun('💡 コツ2（引き出し）：', { bold: true, size: 19 }),
+                    minchoRun('質問されたときにサッと見せられる取材写真、ボツ案、端末のデータなど「隠し味」を手元に準備しておく。', { size: 19 })
+                ]
             }),
-            createInputBox(600)
+            new docx.Paragraph({
+                spacing: { before: 20, after: 10 },
+                children: [gothicRun('発表の終わりに聞き手へ投げる「呼び水（問いかけの一言）」：', { size: 19, color: '475569' })]
+            }),
+            createInputBox(350),
+            new docx.Paragraph({
+                spacing: { before: 20, after: 10 },
+                children: [gothicRun('質問に備えて用意した「追加の引き出し（端末写真・データ・裏話）」：', { size: 19, color: '475569' })]
+            }),
+            createInputBox(350)
         ];
         children.push(createBoxTable(part1));
-        children.push(new docx.Paragraph({ spacing: { before: 40, after: 40 } }));
+        children.push(new docx.Paragraph({ spacing: { before: 30, after: 30 } }));
 
-        // 【2】相手の発表へのフィードバック
+        // 【2】自然な質疑応答を生む「対話のキャッチボール」（実践スキル）
         const part2 = [
             new docx.Paragraph({
-                spacing: { before: 0, after: 40 },
+                spacing: { before: 0, after: 30 },
                 children: [
-                    gothicRun('【2】相手の発表へのフィードバック', { bold: true, size: 22 }),
-                    gothicRun('　［相手の発表評価： A（高い説得力・洞察）・B（論理的提案）・C（今後に期待）］', { size: 19, color: '475569' })
+                    gothicRun('【2】自然な質疑応答を生む「対話のキャッチボール」（実践スキル）', { bold: true, size: 22 }),
+                    gothicRun('　［充実度： A（自然に対話が弾んだ）・B（丁寧に返せた）・C（一問一答）］', { size: 18, color: '0F766E' })
                 ]
             }),
             new docx.Paragraph({
-                spacing: { before: 20, after: 20 },
-                children: [gothicRun('良かった点（チェック）：', { bold: true, size: 20 })]
+                spacing: { before: 10, after: 20, line: 240 },
+                children: [
+                    gothicRun('対話の技：', { bold: true, size: 19 }),
+                    minchoRun('①受け止め（共感・感謝）／②背景・理由を添えて返す／③パスを返す（問い返し）／④わからない時も宝にする', { size: 19 })
+                ]
             }),
-            createCheckItem('課題の本質を捉えた独自性のある提案で、実現可能性も考えられていた'),
-            createCheckItem('統計データや現地インタビューなどのエビデンス（客観的事実）の扱いが的確だった'),
-            createCheckItem('多角的な立場（住民・行政・観光客・将来世代など）への配慮や視点が含まれていた'),
-            createCheckItem('対話的な姿勢で質問を受け止め、建設的に議論を発展させていた'),
-            new docx.Paragraph({
-                spacing: { before: 40, after: 20 },
-                children: [gothicRun('相手グループへの建設的なフィードバック・アドバイス（記入）：', { size: 19, color: '475569' })]
-            }),
-            createInputBox(600)
+            createCheckItem('「質問ありがとう」等のクッション言葉を使い、聞き手が話しやすい温かい空気をつくった'),
+            createCheckItem('一問一答で終わらせず、「実は〜」と背景や手元端末のデータを添えて話を広げた'),
+            createCheckItem('「〇〇さんはどう感じますか？」と相手にもパスを返し、自然な会話の往復をつくった'),
+            createCheckItem('分からない質問にも焦らず誠実に向き合い、「次調べてみます！」と探究のタネにした')
         ];
         children.push(createBoxTable(part2));
-        children.push(new docx.Paragraph({ spacing: { before: 40, after: 40 } }));
+        children.push(new docx.Paragraph({ spacing: { before: 30, after: 30 } }));
 
-        // 【3】次の発表に向けて
+        // 【3】交わされた対話の記録 ＆ セッションで深まった発見
         const part3 = [
             new docx.Paragraph({
-                spacing: { before: 0, after: 40 },
+                spacing: { before: 0, after: 30 },
                 children: [
-                    gothicRun('【3】次の発表に向けて（探究の深化と次の一歩）', { bold: true, size: 22 })
+                    gothicRun('【3】交わされた対話の記録 ＆ セッションで深まった新しい発見', { bold: true, size: 22 })
                 ]
             }),
             new docx.Paragraph({
-                spacing: { before: 20, after: 20 },
-                children: [gothicRun('今後深化・改善させたい視点（チェック）：', { bold: true, size: 20 })]
+                spacing: { before: 10, after: 10 },
+                children: [gothicRun('聞き手から出た質問・意見 ＆ 自分の応答・広がった対話（メモ）：', { size: 19, color: '475569' })]
             }),
-            createCheckItem('異なる意見や課題（コスト・手間・持続可能性など）への対応策を補強する'),
-            createCheckItem('地域住民や専門家など、多様な主体からのヒアリング・一次情報を増やす'),
-            createCheckItem('提案を実際のアクションにつなげるための具体的なステップ（計画）を明確にする'),
-            createCheckItem('ポスターとデジタル端末の相乗効果（ビジュアル・数字の訴求力）を一段と高める'),
+            createInputBox(450),
             new docx.Paragraph({
-                spacing: { before: 40, after: 20 },
-                children: [gothicRun('次のステップ・提案のブラッシュアップ計画（記入）：', { size: 19, color: '475569' })]
+                spacing: { before: 20, after: 10 },
+                children: [gothicRun('対話を通して新しく気づいたこと・アイデアが深まった論点（セッションの収穫）：', { size: 19, color: '475569' })]
             }),
-            createInputBox(500)
+            createInputBox(400)
         ];
         children.push(createBoxTable(part3));
+        children.push(new docx.Paragraph({ spacing: { before: 30, after: 30 } }));
+
+        // 【4】次へのステップ ＆ 相手へのフィードバック
+        const part4 = [
+            new docx.Paragraph({
+                spacing: { before: 0, after: 30 },
+                children: [
+                    gothicRun('【4】次のセッションをさらに充実させるための改善 ＆ 相手へのメッセージ', { bold: true, size: 22 })
+                ]
+            }),
+            new docx.Paragraph({
+                spacing: { before: 10, after: 10 },
+                children: [gothicRun('次回挑戦したい「セッション向上の工夫」（チェック）：', { bold: true, size: 19 })]
+            }),
+            createCheckItem('聞き手の反応を見て、呼び水となる問いかけのバリエーションを増やす'),
+            createCheckItem('下級生や静かな聞き手にも「ここ、どう思う？」と優しく話を振る'),
+            createCheckItem('質問に対して、端末の写真や追加の具体例をさらにスムーズに提示する'),
+            createCheckItem('相手の意見を肯定しながら「さらに〜するとどうかな？」と議論を発展させる'),
+            new docx.Paragraph({
+                spacing: { before: 20, after: 10 },
+                children: [gothicRun('次回のセッションをもっと充実させる作戦 ／ 相手グループへのアドバイス（記入）：', { size: 19, color: '475569' })]
+            }),
+            createInputBox(400)
+        ];
+        children.push(createBoxTable(part4));
 
         return { properties: pageProperties, children };
     }
