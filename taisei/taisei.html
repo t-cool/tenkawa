@@ -72,6 +72,10 @@
             </div>
         </div>
         <div class="flex items-center gap-2">
+            <button id="wordExportBtn" onclick="exportWordDocument()" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded text-sm transition flex items-center gap-1.5 shadow-2xs">
+                <i class="fa-solid fa-file-word text-xs"></i>
+                <span>Word 原稿生成</span>
+            </button>
             <button onclick="window.print()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium rounded text-sm transition flex items-center gap-1.5 border border-slate-300">
                 <i class="fa-solid fa-print text-xs text-slate-500"></i>
                 <span>印刷</span>
@@ -999,5 +1003,10 @@
             }
         });
     </script>
+
+    <!-- Word 原稿生成スクリプト -->
+    <script src="https://unpkg.com/docx@8.5.0/build/index.umd.js"></script>
+    <script>window.docx || document.write('<script src="docx.umd.js"><\/script>');</script>
+    <script src="word-export.js"></script>
 </body>
 </html>
