@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICT研修（Google Workspace & Gemini 活用ガイド） - ふるさと学習</title>
+    <link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="../icons/apple-touch-icon.png">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Noto Sans JP -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+            scroll-behavior: smooth;
+        }
+        @media print {
+            body {
+                background-color: #ffffff !important;
+                padding: 0 !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            section {
+                box-shadow: none !important;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen p-3 sm:p-5 md:p-6">
+
+    <!-- 操作ナビゲーションバー -->
+    <header class="no-print max-w-[960px] mx-auto mb-5 sm:mb-6 bg-white p-3 sm:p-4 rounded-xl border border-slate-300 shadow-xs flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-2.5 sm:gap-3 flex-wrap">
+            <a href="../index.html" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium rounded text-xs sm:text-sm transition flex items-center gap-1.5 border border-slate-300">
+                <i class="fa-solid fa-arrow-left text-[11px] text-slate-500"></i>
+                <i class="fa-solid fa-house text-slate-600"></i>
+                <span>目次</span>
+            </a>
+            <span class="text-slate-300 hidden sm:inline">|</span>
+            <a href="kenshu.html" class="px-3 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-700 font-medium rounded text-xs sm:text-sm transition flex items-center gap-1.5 border border-purple-200">
+                <i class="fa-solid fa-chalkboard-user text-xs"></i>
+                <span>校内研修</span>
+            </a>
+            <span class="text-slate-300 hidden sm:inline">|</span>
+            <div class="text-xs sm:text-sm font-bold text-slate-800 flex items-center gap-1.5">
+                <i class="fa-solid fa-laptop-code text-indigo-600 text-xs"></i>
+                <span>ICT研修（Google Workspace）</span>
+            </div>
+        </div>
+        <div class="flex items-center gap-2">
+            <button onclick="window.print()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium rounded text-xs sm:text-sm transition flex items-center gap-1.5 border border-slate-300">
+                <i class="fa-solid fa-print text-xs text-slate-500"></i>
+                <span>印刷</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main class="max-w-[960px] mx-auto space-y-6">
+
+        <!-- メモ（Google ドキュメント）最上部クイックアクセス -->
+        <section class="no-print bg-white p-4 sm:p-5 rounded-xl border border-indigo-200 bg-gradient-to-r from-indigo-50/70 via-indigo-50/30 to-white shadow-xs">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="space-y-0.5">
+                    <div class="flex items-center gap-2 text-slate-900 font-bold text-sm sm:text-base">
+                        <i class="fa-solid fa-file-lines text-indigo-600 text-base sm:text-lg"></i>
+                        <span>ICT研修 記録メモ（Google ドキュメント）</span>
+                    </div>
+                    <p class="text-xs text-slate-500">
+                        天川小中教職員の校内ICT研修記録・検討メモ・共有事項（担当者用）
+                    </p>
+                </div>
+                <a href="https://docs.google.com/document/d/1Qeusv6XB3He0PwrsiBjoG6458aNUBOJyhP1SbVtEUbY" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs sm:text-sm shadow-xs transition shrink-0 group">
+                    <span>ドキュメントを開く</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-xs transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- ページ見出しカード -->
+        <section class="bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs relative overflow-hidden">
+            <div class="absolute right-0 top-0 w-40 h-40 bg-gradient-to-bl from-indigo-100/60 to-transparent rounded-bl-full pointer-events-none"></div>
+            <div class="relative z-10 space-y-3">
+                <div class="flex items-center gap-2 flex-wrap">
+                    <span class="text-xs font-bold text-indigo-800 bg-indigo-50 border border-indigo-200 px-2.5 py-0.5 rounded-full inline-block">
+                        校内ICT研修
+                    </span>
+                    <span class="text-xs font-bold text-blue-800 bg-blue-50 border border-blue-200 px-2.5 py-0.5 rounded-full inline-block">
+                        Google Workspace for Education
+                    </span>
+                    <span class="text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full inline-block">
+                        生成AI（Gemini）活用
+                    </span>
+                </div>
+                <h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 tracking-tight flex items-center gap-2.5 flex-wrap">
+                    <i class="fa-solid fa-laptop-code text-indigo-600"></i>
+                    <span>Google Workspace & 生成AI 教育活用ガイド</span>
+                </h1>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-3xl">
+                    奈良県全体で導入されている <strong>Google Workspace for Education</strong> を学校現場でより効果的に利活用するための研修サイトです。授業での児童生徒の探究活動や協働学習の深化、さらに生成AI（Gemini）を活用した教材研究・校務効率化の具体的なノウハウをまとめています。
+                </p>
+
+                <!-- クイックジャンプナビゲーション -->
+                <div class="pt-3 border-t border-slate-100 flex items-center gap-1.5 sm:gap-2 flex-wrap text-xs font-medium">
+                    <span class="text-slate-400 text-[11px] mr-1"><i class="fa-solid fa-bookmark text-indigo-400 mr-1"></i>目次:</span>
+                    <a href="#classroom" class="px-2.5 py-1 rounded-md bg-slate-100 hover:bg-indigo-50 hover:text-indigo-700 text-slate-700 transition border border-slate-200">Classroom</a>
+                    <a href="#gemini" class="px-2.5 py-1 rounded-md bg-slate-100 hover:bg-indigo-50 hover:text-indigo-700 text-slate-700 transition border border-slate-200">生成AI（Gemini）</a>
+                    <a href="#kyoudou" class="px-2.5 py-1 rounded-md bg-slate-100 hover:bg-indigo-50 hover:text-indigo-700 text-slate-700 transition border border-slate-200">協働学習（スライド等）</a>
+                    <a href="#forms" class="px-2.5 py-1 rounded-md bg-slate-100 hover:bg-indigo-50 hover:text-indigo-700 text-slate-700 transition border border-slate-200">アンケート・評価</a>
+                    <a href="#videos" class="px-2.5 py-1 rounded-md bg-slate-100 hover:bg-indigo-50 hover:text-indigo-700 text-slate-700 transition border border-slate-200">公式動画・リンク</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- 1. Google Classroom 活用ガイド                 -->
+        <!-- ============================================== -->
+        <section id="classroom" class="bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs space-y-5">
+            <div class="border-b border-slate-200 pb-3 flex items-center justify-between flex-wrap gap-2">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg font-bold shadow-2xs">
+                        <i class="fa-solid fa-chalkboard-user"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-base sm:text-lg md:text-xl font-bold text-slate-900">
+                            1. Google Classroom の活用法（授業・学級経営）
+                        </h2>
+                        <p class="text-xs text-slate-500">授業のデジタル母艦・課題配信・ルーブリック評価</p>
+                    </div>
+                </div>
+                <span class="text-[11px] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+                    基本アプリ
+                </span>
+            </div>
+
+            <!-- Classroomの3つの活用ポイント -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                    <div class="flex items-center gap-2 text-emerald-800 font-bold text-sm">
+                        <i class="fa-solid fa-paper-plane text-emerald-600"></i>
+                        <span>課題の一括配信と回収</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        プリントの印刷を減らし、生徒各自のコピーを自動作成して配信。誰が提出済みか一目で把握でき、個別フィードバックも即時送信できます。
+                    </p>
+                </div>
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                    <div class="flex items-center gap-2 text-emerald-800 font-bold text-sm">
+                        <i class="fa-solid fa-list-check text-emerald-600"></i>
+                        <span>ルーブリック評価の提示</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        評価規準をClassroom上で事前に児童生徒に明示。提出物に対して観点別評価を直感的に採点・返却できます。
+                    </p>
+                </div>
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                    <div class="flex items-center gap-2 text-emerald-800 font-bold text-sm">
+                        <i class="fa-solid fa-folder-open text-emerald-600"></i>
+                        <span>デジタル教材の蓄積・アーカイブ</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        学期や単元ごとの授業資料、スライド、動画リンクをトピック別に整理。欠席した児童生徒へのフォローや次年度の引き継ぎにも最適です。
+                    </p>
+                </div>
+            </div>
+
+            <!-- 天川村ふるさと学習での実践アイデア -->
+            <div class="p-4 sm:p-5 rounded-xl bg-emerald-50/50 border border-emerald-200 space-y-2.5">
+                <div class="flex items-center gap-2 text-emerald-900 font-bold text-xs sm:text-sm">
+                    <i class="fa-solid fa-lightbulb text-amber-500"></i>
+                    <span>天川村のふるさと学習での実践アイデア</span>
+                </div>
+                <ul class="text-xs text-slate-700 space-y-1.5 list-disc list-inside leading-relaxed">
+                    <li><strong>帯活動（ポスターセッション）のデータ提出</strong>: 生徒がGoogleスライドで作成したポスター資料をClassroomに提出し、相互評価を実施。</li>
+                    <li><strong>校外学習・フィールドワーク記録</strong>: 地域取材で撮影した写真やインタビューメモをその日のうちにClassroomに投稿・集約。</li>
+                    <li><strong>小中一貫・異学年交流</strong>: 後期課程（中学生）の探究成果スライドを前期課程（小学生）のクラスに共有して閲覧・コメント。</li>
+                </ul>
+            </div>
+
+            <!-- Classroom 公式リンク & 動画リンク -->
+            <div class="flex flex-wrap items-center justify-between gap-3 pt-1 text-xs">
+                <a href="https://support.google.com/edu/classroom/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-indigo-700 hover:text-indigo-900 font-medium hover:underline">
+                    <i class="fa-solid fa-book-open text-indigo-500"></i>
+                    <span>Google Classroom 公式ヘルプセンター（使い方ガイド）</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+                <a href="https://www.youtube.com/results?search_query=Google+Classroom+%E4%BD%BF%E3%81%84%E6%96%B9+%E6%95%99%E5%93%A1" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-rose-600 hover:text-rose-800 font-medium hover:underline">
+                    <i class="fa-brands fa-youtube text-rose-500 text-sm"></i>
+                    <span>Classroom 活用動画を検索（YouTube）</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- 2. 生成AI「Gemini」の教育活用ガイド            -->
+        <!-- ============================================== -->
+        <section id="gemini" class="bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs space-y-5">
+            <div class="border-b border-slate-200 pb-3 flex items-center justify-between flex-wrap gap-2">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 text-white flex items-center justify-center text-lg font-bold shadow-2xs">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-base sm:text-lg md:text-xl font-bold text-slate-900">
+                            2. 生成AI「Gemini」の教育活用（教材研究・校務効率化）
+                        </h2>
+                        <p class="text-xs text-slate-500">指導案のアイデア出し・ワークシート作成・校務文章の推敲</p>
+                    </div>
+                </div>
+                <span class="text-[11px] font-semibold text-purple-800 bg-purple-50 border border-purple-200 px-2 py-0.5 rounded-full">
+                    最新AIツール
+                </span>
+            </div>
+
+            <!-- Gemini活用の3大メリット -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="p-4 rounded-xl bg-purple-50/40 border border-purple-200 space-y-2">
+                    <div class="flex items-center gap-2 text-purple-900 font-bold text-sm">
+                        <i class="fa-solid fa-pen-ruler text-purple-600"></i>
+                        <span>指導案・本時展開の壁打ち</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        単元の目標や本時のねらいを入力し、「児童が主体的に問いをもつ導入の工夫」や発問のバリエーションを短時間でブレストできます。
+                    </p>
+                </div>
+                <div class="p-4 rounded-xl bg-purple-50/40 border border-purple-200 space-y-2">
+                    <div class="flex items-center gap-2 text-purple-900 font-bold text-sm">
+                        <i class="fa-solid fa-file-circle-check text-purple-600"></i>
+                        <span>ワークシート・振り返りの作成</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        学年に応じた漢字や言葉遣いを指定して、探究活動のまとめ用ワークシートや小テスト、ルーブリックの原案を即座に生成できます。
+                    </p>
+                </div>
+                <div class="p-4 rounded-xl bg-purple-50/40 border border-purple-200 space-y-2">
+                    <div class="flex items-center gap-2 text-purple-900 font-bold text-sm">
+                        <i class="fa-solid fa-clock-rotate-left text-purple-600"></i>
+                        <span>校務の効率化・文書推敲</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        学級通信やお便りの下書き、行事案内文、会議資料の要約、メール文の作成をサポート。教員の負担を大幅に軽減します。
+                    </p>
+                </div>
+            </div>
+
+            <!-- すぐに使えるプロンプト（指示文）テンプレート集 -->
+            <div class="space-y-3 pt-2">
+                <h3 class="text-xs sm:text-sm font-bold text-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-terminal text-purple-600"></i>
+                    <span>先生がそのまま使える Gemini プロンプト例</span>
+                </h3>
+
+                <!-- プロンプトカード1 -->
+                <div class="p-4 rounded-xl bg-slate-900 text-slate-100 space-y-2">
+                    <div class="flex items-center justify-between text-xs text-purple-300 font-mono">
+                        <span>【指導案アイデア出し】探究的な導入の発問</span>
+                        <span class="text-[10px] text-slate-400">Geminiに入力して試してみましょう</span>
+                    </div>
+                    <pre class="text-xs font-mono bg-slate-950 p-3 rounded-lg overflow-x-auto text-emerald-300 whitespace-pre-wrap leading-relaxed select-all">あなたは経験豊かなベテラン教師です。
+小学3年生の総合的な学習の時間「天川村の特産品や名水を調べよう」の単元で、
+児童が自分から問いをもてるような本時の導入のアイデアと、教師の主な発問を3パターン提案してください。
+児童の生活体験（水遊び・川・地元の食べ物）と結びつく工夫を含めてください。</pre>
+                </div>
+
+                <!-- プロンプトカード2 -->
+                <div class="p-4 rounded-xl bg-slate-900 text-slate-100 space-y-2">
+                    <div class="flex items-center justify-between text-xs text-purple-300 font-mono">
+                        <span>【ルーブリック作成】帯活動・ポスターセッションの評価規準</span>
+                        <span class="text-[10px] text-slate-400">Geminiに入力して試してみましょう</span>
+                    </div>
+                    <pre class="text-xs font-mono bg-slate-950 p-3 rounded-lg overflow-x-auto text-emerald-300 whitespace-pre-wrap leading-relaxed select-all">小中学生を対象としたポスターセッション（帯活動）のルーブリック評価規準を作成してください。
+観点は「①発表の構成・表現力」「②相手意識・質問への応答」「③探究内容の深まり」の3つです。
+各観点について、A（十分満足できる）、B（おおむね満足できる）、C（努力を要する）の3段階で、具体的かつ児童生徒にもわかりやすい文言で表形式で作成してください。</pre>
+                </div>
+            </div>
+
+            <!-- 生成AI利用時の注意点（文科省ガイドラインに基づく） -->
+            <div class="p-4 sm:p-5 rounded-xl bg-amber-50/60 border border-amber-300 space-y-2">
+                <div class="flex items-center gap-2 text-amber-900 font-bold text-xs sm:text-sm">
+                    <i class="fa-solid fa-triangle-exclamation text-amber-600"></i>
+                    <span>学校における生成AI利用の留意事項（文部科学省ガイドラインより）</span>
+                </div>
+                <ul class="text-xs text-slate-700 space-y-1 list-disc list-inside leading-relaxed">
+                    <li><strong>個人情報・機密情報の入力禁止</strong>: 児童生徒の氏名、成績、個人を特定できる情報は絶対に入力しないこと。</li>
+                    <li><strong>ファクトチェック（事実確認）の徹底</strong>: AIの回答には誤り（ハルシネーション）が含まれる場合があるため、必ず教員自身の目で正確性を確認すること。</li>
+                    <li><strong>著作権への配慮</strong>: 既存の教科書や著作物の丸写し入力を避け、補助的なアイデア出し・推敲ツールとして活用すること。</li>
+                </ul>
+            </div>
+
+            <!-- Gemini 公式リンク -->
+            <div class="flex flex-wrap items-center justify-between gap-3 pt-1 text-xs">
+                <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-bold transition shadow-2xs">
+                    <i class="fa-solid fa-sparkles"></i>
+                    <span>Gemini を使ってみる（Googleアカウントでログイン）</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+                <a href="https://edu.google.com/intl/ALL_jp/ai/gemini-for-education/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-purple-700 hover:text-purple-900 font-medium hover:underline">
+                    <i class="fa-solid fa-graduation-cap text-purple-600"></i>
+                    <span>Google for Education と Gemini（公式解説）</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- 3. 協働学習・探究ツール（スライド・ドキュメント） -->
+        <!-- ============================================== -->
+        <section id="kyoudou" class="bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs space-y-5">
+            <div class="border-b border-slate-200 pb-3 flex items-center justify-between flex-wrap gap-2">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center text-lg font-bold shadow-2xs">
+                        <i class="fa-solid fa-users-rectangle"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-base sm:text-lg md:text-xl font-bold text-slate-900">
+                            3. 協働学習ツール（スライド・ドキュメント・ドライブ）
+                        </h2>
+                        <p class="text-xs text-slate-500">リアルタイム共同編集・ポスター発表資料・教材バンク</p>
+                    </div>
+                </div>
+                <span class="text-[11px] font-semibold text-amber-800 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">
+                    協働・表現
+                </span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Google スライド -->
+                <div class="p-4 sm:p-5 rounded-xl bg-gradient-to-br from-amber-50/50 to-white border border-amber-200 space-y-2.5">
+                    <div class="flex items-center gap-2 text-amber-900 font-bold text-sm sm:text-base">
+                        <i class="fa-solid fa-file-powerpoint text-amber-600 text-lg"></i>
+                        <span>Google スライド（ポスターセッション・発表）</span>
+                    </div>
+                    <ul class="text-xs text-slate-600 space-y-1.5 list-disc list-inside leading-relaxed">
+                        <li><strong>用紙サイズを自由に変更</strong>: 「ページ設定」からカスタム（A3やA4縦など）にすることで、見栄えの良い発表ポスターを作成可能。</li>
+                        <li><strong>グループ共同編集</strong>: 1つのプレゼンテーションを班員で分担して同時に作成・編集。</li>
+                        <li><strong>コメント・提案機能</strong>: 友だちの発表内容に対して付箋感覚でアドバイスを送り合える。</li>
+                    </ul>
+                </div>
+
+                <!-- Google ドライブ & ドキュメント -->
+                <div class="p-4 sm:p-5 rounded-xl bg-gradient-to-br from-blue-50/50 to-white border border-blue-200 space-y-2.5">
+                    <div class="flex items-center gap-2 text-blue-900 font-bold text-sm sm:text-base">
+                        <i class="fa-solid fa-folder-tree text-blue-600 text-lg"></i>
+                        <span>Google ドライブ & ドキュメント（校内教材バンク）</span>
+                    </div>
+                    <ul class="text-xs text-slate-600 space-y-1.5 list-disc list-inside leading-relaxed">
+                        <li><strong>共有ドライブの活用</strong>: 学年団や部会（天・木・川）ごとにフォルダを共有し、指導案や写真を一括保管。</li>
+                        <li><strong>音声入力での記録</strong>: ドキュメントの音声入力機能を使えば、低学年児童でもスムーズに思考を言語化可能。</li>
+                        <li><strong>バージョン履歴の確認</strong>: いつ・誰が・どこを編集したかを簡単に復元・追跡可能。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- 4. Google フォーム & スプレッドシート（評価・変容）-->
+        <!-- ============================================== -->
+        <section id="forms" class="bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs space-y-5">
+            <div class="border-b border-slate-200 pb-3 flex items-center justify-between flex-wrap gap-2">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center text-lg font-bold shadow-2xs">
+                        <i class="fa-solid fa-chart-pie"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-base sm:text-lg md:text-xl font-bold text-slate-900">
+                            4. Google フォーム & スプレッドシート（アンケート・変容測定）
+                        </h2>
+                        <p class="text-xs text-slate-500">毎学期の振り返り・小テスト自動集計・学習成果の可視化</p>
+                    </div>
+                </div>
+                <span class="text-[11px] font-semibold text-indigo-800 bg-indigo-50 border border-indigo-200 px-2 py-0.5 rounded-full">
+                    評価・集計
+                </span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                    <div class="flex items-center gap-2 text-indigo-900 font-bold text-sm">
+                        <i class="fa-solid fa-square-poll-vertical text-indigo-600"></i>
+                        <span>振り返りアンケートの即時グラフ化</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        授業の終わりや学期末にGoogleフォームで自己評価アンケートを実施。回答がリアルタイムで円グラフや棒グラフにまとまり、児童生徒の意識変容を即座に確認できます。
+                    </p>
+                </div>
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                    <div class="flex items-center gap-2 text-indigo-900 font-bold text-sm">
+                        <i class="fa-solid fa-table-cells text-indigo-600"></i>
+                        <span>スプレッドシートによるデータ蓄積</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        フォームの回答は自動的にスプレッドシートに蓄積。学年別・年度別の比較分析や、研究紀要用のグラフ出力も簡単に行えます。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- 5. YouTube 公式動画 & オンライントレーニング   -->
+        <!-- ============================================== -->
+        <section id="videos" class="bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs space-y-5">
+            <div class="border-b border-slate-200 pb-3 flex items-center justify-between flex-wrap gap-2">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center text-lg font-bold shadow-2xs">
+                        <i class="fa-solid fa-video"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-base sm:text-lg md:text-xl font-bold text-slate-900">
+                            5. YouTube 動画で学ぶ & 公式オンライントレーニング
+                        </h2>
+                        <p class="text-xs text-slate-500">すきま時間で学べる公式動画・教員向け無料研修コース</p>
+                    </div>
+                </div>
+                <span class="text-[11px] font-semibold text-rose-800 bg-rose-50 border border-rose-200 px-2 py-0.5 rounded-full">
+                    動画・研修
+                </span>
+            </div>
+
+            <!-- YouTube 公式チャンネル & おすすめ動画カード -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- カード1: Google for Education Japan 公式チャンネル -->
+                <div class="p-4 sm:p-5 rounded-xl bg-gradient-to-br from-rose-50/50 to-white border border-rose-200 space-y-3 flex flex-col justify-between">
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2 text-slate-900 font-bold text-sm sm:text-base">
+                            <i class="fa-brands fa-youtube text-rose-600 text-xl"></i>
+                            <span>Google for Education Japan（公式YouTube）</span>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Google公式の日本向け教育チャンネルです。Classroomの基礎講座、授業実践事例、教職員向けウェビナーのアーカイブ動画が豊富に公開されています。
+                        </p>
+                    </div>
+                    <a href="https://www.youtube.com/@GoogleforEducationJapan" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs shadow-xs transition group w-full sm:w-auto">
+                        <i class="fa-brands fa-youtube"></i>
+                        <span>公式 YouTube チャンネルを見る</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px] transition-transform group-hover:translate-x-0.5"></i>
+                    </a>
+                </div>
+
+                <!-- カード2: Google Teacher Center（無料のオンライン学習） -->
+                <div class="p-4 sm:p-5 rounded-xl bg-gradient-to-br from-blue-50/50 to-white border border-blue-200 space-y-3 flex flex-col justify-between">
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2 text-slate-900 font-bold text-sm sm:text-base">
+                            <i class="fa-solid fa-graduation-cap text-blue-600 text-xl"></i>
+                            <span>Google ティーチャー センター（無料研修）</span>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            教職員が自分のペースでオンライン受講できる無料の公式トレーニングコースです。「基本編」「応用編」など段階に応じたスキルを短時間で習得できます。
+                        </p>
+                    </div>
+                    <a href="https://teachercenter.withgoogle.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-xs transition group w-full sm:w-auto">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <span>Teacher Center を受講する</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px] transition-transform group-hover:translate-x-0.5"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 公式リンク集クイックリスト -->
+            <div class="p-4 sm:p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-3">
+                <div class="font-bold text-xs sm:text-sm text-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-link text-indigo-600"></i>
+                    <span>教育現場向け公式リソースリンク集</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+                    <a href="https://edu.google.com/intl/ALL_jp/" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-lg bg-white border border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/30 transition flex items-center justify-between group">
+                        <span class="text-slate-800 font-medium group-hover:text-indigo-700">Google for Education 公式ポータル</span>
+                        <i class="fa-solid fa-chevron-right text-[10px] text-slate-400 group-hover:translate-x-0.5 transition-transform"></i>
+                    </a>
+                    <a href="https://support.google.com/edu/classroom/" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-lg bg-white border border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/30 transition flex items-center justify-between group">
+                        <span class="text-slate-800 font-medium group-hover:text-indigo-700">Classroom ヘルプセンター（Q&A）</span>
+                        <i class="fa-solid fa-chevron-right text-[10px] text-slate-400 group-hover:translate-x-0.5 transition-transform"></i>
+                    </a>
+                    <a href="https://edu.google.com/intl/ALL_jp/ai/gemini-for-education/" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-lg bg-white border border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/30 transition flex items-center justify-between group">
+                        <span class="text-slate-800 font-medium group-hover:text-indigo-700">Gemini 教育活用ガイドライン（公式）</span>
+                        <i class="fa-solid fa-chevron-right text-[10px] text-slate-400 group-hover:translate-x-0.5 transition-transform"></i>
+                    </a>
+                    <a href="https://www.mext.go.jp/a_menu/other/mext_02412.html" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-lg bg-white border border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/30 transition flex items-center justify-between group">
+                        <span class="text-slate-800 font-medium group-hover:text-indigo-700">文科省：初中段階 生成AI暫定ガイドライン</span>
+                        <i class="fa-solid fa-chevron-right text-[10px] text-slate-400 group-hover:translate-x-0.5 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 控えめなクレジット -->
+    <div class="relative z-10 mt-6 text-center text-[9px] sm:text-[10px] text-slate-500 tracking-wider">
+        <span class="inline-block bg-white/75 backdrop-blur-sm px-3 py-1 rounded-full">© 天川村立天川小中学校 - 研究推進委員会</span>
+    </div>
+
+</body>
+</html>

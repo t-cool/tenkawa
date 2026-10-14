@@ -1,4 +1,4 @@
 # tenkawa
 
-振興大会ポータルサイト
+へき研・校内研究ポータルサイト
 - GitHub Pages: https://t-cool.github.io/tenkawa/
