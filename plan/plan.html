@@ -110,6 +110,20 @@
             .border-print {
                 border-color: #000000 !important;
             }
+            .print-stage-section {
+                box-shadow: none !important;
+                border: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                width: 100% !important;
+                max-width: none !important;
+                page-break-before: always !important;
+                break-before: page !important;
+            }
+            .stage-card {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
         }
 
         /* html2canvasのFontMetrics計算用img要素がTailwindのdisplay:blockにより改行され、
@@ -139,6 +153,10 @@
             </div>
         </div>
         <div class="flex items-center gap-2 flex-wrap">
+            <a href="#stage-goals" class="px-3.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium rounded text-sm transition flex items-center gap-1.5 border border-slate-300">
+                <i class="fa-solid fa-shapes text-indigo-600"></i>
+                <span>4ステージ目標イメージ</span>
+            </a>
             <button onclick="downloadA3PDF()" class="px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded text-sm transition flex items-center gap-1.5 shadow-xs">
                 <i class="fa-solid fa-file-pdf"></i>
                 <span>A3 PDF保存</span>
@@ -619,6 +637,379 @@
 
             </div>
         </section>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- 4ステージの目標 視覚化イメージ（2x2マス）                 -->
+    <!-- ======================================================== -->
+    <div id="stage-goals" class="max-w-[1400px] mx-auto mt-8 sm:mt-10 mb-10 print-stage-section">
+        <section class="bg-white p-6 sm:p-8 md:p-10 rounded-2xl shadow-md border border-slate-300">
+            
+            <!-- セクション見出し -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 mb-8 border-b border-slate-200">
+                <div class="space-y-1">
+                    <div class="flex items-center gap-2.5">
+                        <span class="w-9 h-9 rounded-xl bg-indigo-100 text-indigo-700 font-bold flex items-center justify-center text-base shadow-xs shrink-0">
+                            <i class="fa-solid fa-shapes"></i>
+                        </span>
+                        <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-slate-800">
+                            ふるさと学習 4ステージの目標・視覚化イメージ
+                        </h2>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-500 leading-relaxed pl-11.5">
+                        義務教育9年間を見通した系統的な資質・能力の発展（低学年の生活科から中学校の社会参画・提言まで）
+                    </p>
+                </div>
+                <!-- 9年間のスパイラル発展インジケーター -->
+                <div class="flex items-center gap-1.5 text-[11px] sm:text-xs font-medium text-slate-600 bg-slate-50 border border-slate-200 px-3.5 py-2 rounded-xl shrink-0 overflow-x-auto shadow-2xs">
+                    <span class="text-emerald-700 font-bold flex items-center gap-1"><i class="fa-solid fa-seedling text-[10px]"></i>第1: 気付き・親しみ</span>
+                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-400"></i>
+                    <span class="text-amber-700 font-bold flex items-center gap-1"><i class="fa-solid fa-compass text-[10px]"></i>第2: 広がり・整理</span>
+                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-400"></i>
+                    <span class="text-blue-700 font-bold flex items-center gap-1"><i class="fa-solid fa-laptop text-[10px]"></i>第3: 深まり・協同</span>
+                    <i class="fa-solid fa-arrow-right text-[10px] text-slate-400"></i>
+                    <span class="text-purple-700 font-bold flex items-center gap-1"><i class="fa-solid fa-mountain-sun text-[10px]"></i>第4: 参画・未来創造</span>
+                </div>
+            </div>
+
+            <!-- 4マスの枠 (2x2 Grid) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                
+                <!-- マス 1: 第1ステージ（1・2年生） -->
+                <div class="stage-card border-2 border-emerald-300/80 hover:border-emerald-500 bg-white rounded-xl shadow-xs hover:shadow-md transition flex flex-col overflow-hidden">
+                    <!-- ヘッダーバナー -->
+                    <div class="bg-gradient-to-r from-emerald-50 via-teal-50/40 to-white border-b border-emerald-200 p-4">
+                        <div class="flex items-center gap-2 flex-wrap mb-1.5">
+                            <span class="bg-emerald-600 text-white text-xs font-bold px-2.5 py-1 rounded-md shadow-2xs">第1ステージ</span>
+                            <span class="bg-white text-emerald-800 border border-emerald-300 text-xs font-semibold px-2 py-0.5 rounded-md">1・2年生（生活科）</span>
+                            <span class="text-xs font-bold text-emerald-800 ml-auto flex items-center gap-1">
+                                <i class="fa-solid fa-compass text-emerald-600"></i> 探究の視点：〜の中で
+                            </span>
+                        </div>
+                        <h3 class="text-base sm:text-lg font-bold text-slate-800">
+                            身近な自然・人々への愛着と五感を通した発見
+                        </h3>
+                    </div>
+
+                    <!-- 視覚化イメージ画像 -->
+                    <div class="p-4 pb-2">
+                        <div class="relative group cursor-pointer overflow-hidden rounded-lg border border-slate-200 bg-slate-100 aspect-[16/9]" onclick="openStageModal(0)">
+                            <img src="stages/stage1.jpeg" alt="第1ステージ（1・2年）五感を通した発見イメージ" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <div class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors"></div>
+                            <div class="absolute bottom-2.5 right-2.5 px-2.5 py-1 bg-black/65 hover:bg-black/85 text-white text-xs rounded-md backdrop-blur-xs flex items-center gap-1.5 transition">
+                                <i class="fa-solid fa-magnifying-glass-plus"></i>
+                                <span>拡大表示</span>
+                            </div>
+                            <div class="absolute top-2.5 left-2.5 px-2 py-0.5 bg-emerald-700/85 text-white text-[11px] font-bold rounded-md backdrop-blur-xs">
+                                1・2年 生活科
+                            </div>
+                        </div>
+                        <p class="text-[11px] text-slate-500 mt-1.5 flex items-center justify-between">
+                            <span><i class="fa-solid fa-camera text-emerald-600 mr-1"></i>川のせせらぎや森での五感を使った観察とスケッチ・気付き</span>
+                            <span class="text-emerald-700 font-medium">クリックで拡大</span>
+                        </p>
+                    </div>
+
+                    <!-- ステージ目標・資質能力 -->
+                    <div class="p-4 pt-2 flex-1 flex flex-col justify-between space-y-3">
+                        <!-- ステージ目標 -->
+                        <div class="bg-emerald-50/80 border-l-4 border-emerald-500 p-3 rounded-r-lg">
+                            <div class="font-bold text-emerald-950 text-xs sm:text-sm flex items-center gap-1.5 mb-1">
+                                <i class="fa-solid fa-bullseye text-emerald-600"></i>
+                                <span>ステージ目標</span>
+                            </div>
+                            <p class="text-xs sm:text-[13px] text-slate-700 leading-relaxed">
+                                天川村の身近な人々、社会及び自然と関わる具体的な活動や体験を通して、生活上必要な習慣や技能（五感を生かした観察や表現等）を身に付けるとともに、それらの特徴やよさ、自分との関わりに気付き、自立し生活を豊かにしていくことの基礎を体感的に理解する。
+                            </p>
+                        </div>
+
+                        <!-- 育成する資質・能力（3つの柱） -->
+                        <div class="space-y-2 bg-slate-50/90 p-3 rounded-lg border border-slate-200/80 text-xs">
+                            <div class="font-bold text-slate-800 text-[11px] uppercase tracking-wider text-slate-500 mb-1 border-b border-slate-200 pb-1 flex items-center justify-between">
+                                <span>資質・能力の重点（ルーブリック基準）</span>
+                                <span class="text-emerald-700 font-bold">発達段階：低学年</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="px-1.5 py-0.5 bg-emerald-100 text-emerald-800 font-bold rounded text-[10px] shrink-0">知識・技能</span>
+                                <p class="text-slate-700 leading-snug">身近な自然や人々と触れ合い、五感を生かした観察や表現技能、生活習慣を身に付ける。</p>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="px-1.5 py-0.5 bg-emerald-100 text-emerald-800 font-bold rounded text-[10px] shrink-0">思考・表現</span>
+                                <p class="text-slate-700 leading-snug">「やってみたい・知りたい」思いから問いを見出し、五感で触れて集めた情報を絵や言葉、動作で豊かに工夫して表現する。</p>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="px-1.5 py-0.5 bg-emerald-100 text-emerald-800 font-bold rounded text-[10px] shrink-0">態度・情意</span>
+                                <p class="text-slate-700 leading-snug">身近な環境に自ら進んで働きかけ、友達と助け合い活動を楽しみながら、ふるさと天川への親しみと愛着を育む。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- マス 2: 第2ステージ（3・4年生） -->
+                <div class="stage-card border-2 border-amber-300/80 hover:border-amber-500 bg-white rounded-xl shadow-xs hover:shadow-md transition flex flex-col overflow-hidden">
+                    <!-- ヘッダーバナー -->
+                    <div class="bg-gradient-to-r from-amber-50 via-orange-50/40 to-white border-b border-amber-200 p-4">
+                        <div class="flex items-center gap-2 flex-wrap mb-1.5">
+                            <span class="bg-amber-600 text-white text-xs font-bold px-2.5 py-1 rounded-md shadow-2xs">第2ステージ</span>
+                            <span class="bg-white text-amber-800 border border-amber-300 text-xs font-semibold px-2 py-0.5 rounded-md">3・4年生（総合）</span>
+                            <span class="text-xs font-bold text-amber-800 ml-auto flex items-center gap-1">
+                                <i class="fa-solid fa-compass text-amber-600"></i> 探究の視点：〜について
+                            </span>
+                        </div>
+                        <h3 class="text-base sm:text-lg font-bold text-slate-800">
+                            地域の魅力・人々の工夫の探究と整理
+                        </h3>
+                    </div>
+
+                    <!-- 視覚化イメージ画像 -->
+                    <div class="p-4 pb-2">
+                        <div class="relative group cursor-pointer overflow-hidden rounded-lg border border-slate-200 bg-slate-100 aspect-[16/9]" onclick="openStageModal(1)">
+                            <img src="stages/stage2.jpeg" alt="第2ステージ（3・4年）地域マップづくりと職人インタビュー" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <div class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors"></div>
+                            <div class="absolute bottom-2.5 right-2.5 px-2.5 py-1 bg-black/65 hover:bg-black/85 text-white text-xs rounded-md backdrop-blur-xs flex items-center gap-1.5 transition">
+                                <i class="fa-solid fa-magnifying-glass-plus"></i>
+                                <span>拡大表示</span>
+                            </div>
+                            <div class="absolute top-2.5 left-2.5 px-2 py-0.5 bg-amber-700/85 text-white text-[11px] font-bold rounded-md backdrop-blur-xs">
+                                3・4年 総合
+                            </div>
+                        </div>
+                        <p class="text-[11px] text-slate-500 mt-1.5 flex items-center justify-between">
+                            <span><i class="fa-solid fa-camera text-amber-600 mr-1"></i>木工工房での職人への取材・見学と地域マップによる情報整理</span>
+                            <span class="text-amber-700 font-medium">クリックで拡大</span>
+                        </p>
+                    </div>
+
+                    <!-- ステージ目標・資質能力 -->
+                    <div class="p-4 pt-2 flex-1 flex flex-col justify-between space-y-3">
+                        <!-- ステージ目標 -->
+                        <div class="bg-amber-50/80 border-l-4 border-amber-500 p-3 rounded-r-lg">
+                            <div class="font-bold text-amber-950 text-xs sm:text-sm flex items-center gap-1.5 mb-1">
+                                <i class="fa-solid fa-bullseye text-amber-600"></i>
+                                <span>ステージ目標</span>
+                            </div>
+                            <p class="text-xs sm:text-[13px] text-slate-700 leading-relaxed">
+                                天川村の自然・文化・産業に関わる見学や調査、体験活動を通して、情報手段を活用した収集・整理の基礎的技能を身に付けるとともに、地域のよさや人々の工夫に気付き、日常生活と社会との関わりを捉え、協同して探究を進めることの価値を体感的に理解する。
+                            </p>
+                        </div>
+
+                        <!-- 育成する資質・能力（3つの柱） -->
+                        <div class="space-y-2 bg-slate-50/90 p-3 rounded-lg border border-slate-200/80 text-xs">
+                            <div class="font-bold text-slate-800 text-[11px] uppercase tracking-wider text-slate-500 mb-1 border-b border-slate-200 pb-1 flex items-center justify-between">
+                                <span>資質・能力の重点（ルーブリック基準）</span>
+                                <span class="text-amber-700 font-bold">発達段階：中学年</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="px-1.5 py-0.5 bg-amber-100 text-amber-900 font-bold rounded text-[10px] shrink-0">知識・技能</span>
+                                <p class="text-slate-700 leading-snug">見学や調査、体験活動を通して情報手段を活用した収集・整理の基礎的技能を身に付け、地域の工夫や価値を理解する。</p>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="px-1.5 py-0.5 bg-amber-100 text-amber-900 font-bold rounded text-[10px] shrink-0">思考・表現</span>
+                                <p class="text-slate-700 leading-snug">身近な生活から関心のある問いを見出し、情報を分類・比較して言葉や図表に整理し、工夫して発表・表現する。</p>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="px-1.5 py-0.5 bg-amber-100 text-amber-900 font-bold rounded text-[10px] shrink-0">態度・情意</span>
+                                <p class="text-slate-700 leading-snug">身近な地域の事象に粘り強く取り組み、友達と役割を分担して協同し、天川村の魅力を身近な人々に広め役立とうとする。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- マス 3: 第3ステージ（5・6年生） -->
+                <div class="stage-card border-2 border-blue-300/80 hover:border-blue-500 bg-white rounded-xl shadow-xs hover:shadow-md transition flex flex-col overflow-hidden">
+                    <!-- ヘッダーバナー -->
+                    <div class="bg-gradient-to-r from-blue-50 via-indigo-50/40 to-white border-b border-blue-200 p-4">
+                        <div class="flex items-center gap-2 flex-wrap mb-1.5">
+                            <span class="bg-blue-600 text-white text-xs font-bold px-2.5 py-1 rounded-md shadow-2xs">第3ステージ</span>
+                            <span class="bg-white text-blue-800 border border-blue-300 text-xs font-semibold px-2 py-0.5 rounded-md">5・6年生（総合）</span>
+                            <span class="text-xs font-bold text-blue-800 ml-auto flex items-center gap-1">
+                                <i class="fa-solid fa-compass text-blue-600"></i> 探究の視点：〜のために（準備）
+                            </span>
+                        </div>
+                        <h3 class="text-base sm:text-lg font-bold text-slate-800">
+                            地域課題の多面的分析と協同的な発信
+                        </h3>
+                    </div>
+
+                    <!-- 視覚化イメージ画像 -->
+                    <div class="p-4 pb-2">
+                        <div class="relative group cursor-pointer overflow-hidden rounded-lg border border-slate-200 bg-slate-100 aspect-[16/9]" onclick="openStageModal(2)">
+                            <img src="stages/stage3.jpeg" alt="第3ステージ（5・6年）ICTを活用した多面的分析と発表" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <div class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors"></div>
+                            <div class="absolute bottom-2.5 right-2.5 px-2.5 py-1 bg-black/65 hover:bg-black/85 text-white text-xs rounded-md backdrop-blur-xs flex items-center gap-1.5 transition">
+                                <i class="fa-solid fa-magnifying-glass-plus"></i>
+                                <span>拡大表示</span>
+                            </div>
+                            <div class="absolute top-2.5 left-2.5 px-2 py-0.5 bg-blue-700/85 text-white text-[11px] font-bold rounded-md backdrop-blur-xs">
+                                5・6年 総合
+                            </div>
+                        </div>
+                        <p class="text-[11px] text-slate-500 mt-1.5 flex items-center justify-between">
+                            <span><i class="fa-solid fa-camera text-blue-600 mr-1"></i>タブレット端末でのグラフ分析とホワイトボードを活用した根拠ある協同発表</span>
+                            <span class="text-blue-700 font-medium">クリックで拡大</span>
+                        </p>
+                    </div>
+
+                    <!-- ステージ目標・資質能力 -->
+                    <div class="p-4 pt-2 flex-1 flex flex-col justify-between space-y-3">
+                        <!-- ステージ目標 -->
+                        <div class="bg-blue-50/80 border-l-4 border-blue-500 p-3 rounded-r-lg">
+                            <div class="font-bold text-blue-950 text-xs sm:text-sm flex items-center gap-1.5 mb-1">
+                                <i class="fa-solid fa-bullseye text-blue-600"></i>
+                                <span>ステージ目標</span>
+                            </div>
+                            <p class="text-xs sm:text-[13px] text-slate-700 leading-relaxed">
+                                天川村の自然環境や産業、歴史等の探究において、各教科で学んだ知識・技能を相互に関連付けて生かし、多面的な分析や情報手段を活用・発信する技能を高めるとともに、地域課題に関わる概念を形成し、協同して社会参画に向かう探究の意義を深く理解する。
+                            </p>
+                        </div>
+
+                        <!-- 育成する資質・能力（3つの柱） -->
+                        <div class="space-y-2 bg-slate-50/90 p-3 rounded-lg border border-slate-200/80 text-xs">
+                            <div class="font-bold text-slate-800 text-[11px] uppercase tracking-wider text-slate-500 mb-1 border-b border-slate-200 pb-1 flex items-center justify-between">
+                                <span>資質・能力の重点（ルーブリック基準）</span>
+                                <span class="text-blue-700 font-bold">発達段階：高学年</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="px-1.5 py-0.5 bg-blue-100 text-blue-900 font-bold rounded text-[10px] shrink-0">知識・技能</span>
+                                <p class="text-slate-700 leading-snug">各教科の知識・技能を統合して多面的に分析・発信する技能を高め、地域課題への概念を形成し社会参画の意義を理解する。</p>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="px-1.5 py-0.5 bg-blue-100 text-blue-900 font-bold rounded text-[10px] shrink-0">思考・表現</span>
+                                <p class="text-slate-700 leading-snug">目的や解決すべき課題を明確にして見通しをもった計画を立て、ICTを活用して論理的に分析し、根拠を示して効果的に伝える。</p>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="px-1.5 py-0.5 bg-blue-100 text-blue-900 font-bold rounded text-[10px] shrink-0">態度・情意</span>
+                                <p class="text-slate-700 leading-snug">明確な目標を掲げて試行錯誤を恐れず粘り強く取り組み、多様な考えを認め合って協同し、ふるさとの課題に主体的に参画する。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- マス 4: 第4ステージ（7〜9年生） -->
+                <div class="stage-card border-2 border-purple-300/80 hover:border-purple-500 bg-white rounded-xl shadow-xs hover:shadow-md transition flex flex-col overflow-hidden">
+                    <!-- ヘッダーバナー -->
+                    <div class="bg-gradient-to-r from-purple-50 via-violet-50/40 to-white border-b border-purple-200 p-4">
+                        <div class="flex items-center gap-2 flex-wrap mb-1.5">
+                            <span class="bg-purple-600 text-white text-xs font-bold px-2.5 py-1 rounded-md shadow-2xs">第4ステージ</span>
+                            <span class="bg-white text-purple-800 border border-purple-300 text-xs font-semibold px-2 py-0.5 rounded-md">7〜9年生（中学生・総合）</span>
+                            <span class="text-xs font-bold text-purple-800 ml-auto flex items-center gap-1">
+                                <i class="fa-solid fa-compass text-purple-600"></i> 探究の視点：〜のために
+                            </span>
+                        </div>
+                        <h3 class="text-base sm:text-lg font-bold text-slate-800">
+                            ふるさとの持続可能な未来への参画と提言
+                        </h3>
+                    </div>
+
+                    <!-- 視覚化イメージ画像 -->
+                    <div class="p-4 pb-2">
+                        <div class="relative group cursor-pointer overflow-hidden rounded-lg border border-slate-200 bg-slate-100 aspect-[16/9]" onclick="openStageModal(3)">
+                            <img src="stages/stage4.jpeg" alt="第4ステージ（7〜9年）特産品マルシェと地域参画" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <div class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors"></div>
+                            <div class="absolute bottom-2.5 right-2.5 px-2.5 py-1 bg-black/65 hover:bg-black/85 text-white text-xs rounded-md backdrop-blur-xs flex items-center gap-1.5 transition">
+                                <i class="fa-solid fa-magnifying-glass-plus"></i>
+                                <span>拡大表示</span>
+                            </div>
+                            <div class="absolute top-2.5 left-2.5 px-2 py-0.5 bg-purple-700/85 text-white text-[11px] font-bold rounded-md backdrop-blur-xs">
+                                7〜9年 中学校総合
+                            </div>
+                        </div>
+                        <p class="text-[11px] text-slate-500 mt-1.5 flex items-center justify-between">
+                            <span><i class="fa-solid fa-camera text-purple-600 mr-1"></i>特産品マルシェの企画運営と地域住民・来訪者との対話を通じた実践的な社会参画</span>
+                            <span class="text-purple-700 font-medium">クリックで拡大</span>
+                        </p>
+                    </div>
+
+                    <!-- ステージ目標・資質能力 -->
+                    <div class="p-4 pt-2 flex-1 flex flex-col justify-between space-y-3">
+                        <!-- ステージ目標 -->
+                        <div class="bg-purple-50/80 border-l-4 border-purple-500 p-3 rounded-r-lg">
+                            <div class="font-bold text-purple-950 text-xs sm:text-sm flex items-center gap-1.5 mb-1">
+                                <i class="fa-solid fa-bullseye text-purple-600"></i>
+                                <span>ステージ目標</span>
+                            </div>
+                            <p class="text-xs sm:text-[13px] text-slate-700 leading-relaxed">
+                                天川村の地域課題や職場体験活動等の探究において、小学校での学びや各教科等の知識・技能を総合的に活用して多角的に考察・検証する技能を深めるとともに、ふるさとの持続可能な未来への参画や自己の将来の生き方・キャリア形成に果たす探究の意義を深く理解する。
+                            </p>
+                        </div>
+
+                        <!-- 育成する資質・能力（3つの柱） -->
+                        <div class="space-y-2 bg-slate-50/90 p-3 rounded-lg border border-slate-200/80 text-xs">
+                            <div class="font-bold text-slate-800 text-[11px] uppercase tracking-wider text-slate-500 mb-1 border-b border-slate-200 pb-1 flex items-center justify-between">
+                                <span>資質・能力の重点（ルーブリック基準）</span>
+                                <span class="text-purple-700 font-bold">発達段階：中学校（後期）</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="px-1.5 py-0.5 bg-purple-100 text-purple-900 font-bold rounded text-[10px] shrink-0">知識・技能</span>
+                                <p class="text-slate-700 leading-snug">小学校での学びや各教科の知識・技能を総合的に活用して多角的に検証し、持続可能な地域づくりやキャリア形成の意義を理解する。</p>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="px-1.5 py-0.5 bg-purple-100 text-purple-900 font-bold rounded text-[10px] shrink-0">思考・表現</span>
+                                <p class="text-slate-700 leading-snug">地域の持続可能性や進路に関わる本質的な課題を設定し、多角的な情報源から因果関係を推論し、社会的文脈を踏まえて説得力ある提言を行う。</p>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="px-1.5 py-0.5 bg-purple-100 text-purple-900 font-bold rounded text-[10px] shrink-0">態度・情意</span>
+                                <p class="text-slate-700 leading-snug">自らの将来を見据えて責任ある主体的な行動をとり、多様な他者の価値観を尊重して合意形成を図り、地域社会の担い手として参画する。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <!-- ステージ画像拡大モーダル -->
+    <div id="stageImageModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-xs z-50 hidden items-center justify-center p-3 sm:p-6 transition-opacity no-print" onclick="handleStageModalBackdrop(event)">
+        <div class="bg-white rounded-2xl max-w-4xl w-full overflow-hidden shadow-2xl flex flex-col max-h-[92vh] border border-slate-300" onclick="event.stopPropagation()">
+            <!-- モーダルヘッダー -->
+            <div class="px-5 py-3.5 bg-slate-50 border-b border-slate-200 flex items-center justify-between gap-3">
+                <div class="flex items-center gap-2.5 min-w-0">
+                    <span id="modalStageBadge" class="px-2.5 py-1 bg-emerald-600 text-white font-bold text-xs rounded-md shrink-0">第1ステージ</span>
+                    <span id="modalGradeBadge" class="px-2 py-0.5 bg-white border border-slate-300 text-slate-700 font-semibold text-xs rounded-md shrink-0">1・2年生（生活科）</span>
+                    <h3 id="modalStageTitle" class="text-sm sm:text-base font-bold text-slate-800 truncate">ステージタイトル</h3>
+                </div>
+                <div class="flex items-center gap-2 shrink-0">
+                    <a id="modalImageDownload" href="stages/stage1.jpeg" target="_blank" download class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition" title="元画像を別タブで開く">
+                        <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                    </a>
+                    <button onclick="closeStageModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 flex items-center justify-center transition">
+                        <i class="fa-solid fa-xmark text-sm"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 画像表示エリア（前後ナビボタン付き） -->
+            <div class="relative bg-slate-950 flex items-center justify-center overflow-hidden flex-1 min-h-[300px] max-h-[62vh]">
+                <img id="modalStageImg" src="stages/stage1.jpeg" alt="ステージ拡大イメージ" class="max-w-full max-h-[62vh] object-contain">
+                
+                <!-- 前へボタン -->
+                <button onclick="changeStageModal(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center backdrop-blur-xs transition group shadow-md" title="前のステージ">
+                    <i class="fa-solid fa-chevron-left text-sm group-hover:-translate-x-0.5 transition-transform"></i>
+                </button>
+                <!-- 次へボタン -->
+                <button onclick="changeStageModal(1)" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center backdrop-blur-xs transition group shadow-md" title="次のステージ">
+                    <i class="fa-solid fa-chevron-right text-sm group-hover:translate-x-0.5 transition-transform"></i>
+                </button>
+
+                <!-- 探究の視点バッジ -->
+                <div class="absolute bottom-3 left-3 px-3 py-1 bg-black/70 text-white text-xs rounded-md backdrop-blur-xs font-medium">
+                    <span id="modalStagePerspective">探究の視点：〜の中で</span>
+                </div>
+            </div>
+
+            <!-- モーダルフッター（目標・解説） -->
+            <div class="p-4 sm:p-5 bg-white border-t border-slate-200 space-y-2 overflow-y-auto max-h-[26vh]">
+                <div class="flex items-start gap-2">
+                    <span class="px-2 py-0.5 bg-slate-800 text-white font-bold text-[11px] rounded shrink-0 mt-0.5">目標</span>
+                    <p id="modalStageGoal" class="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">ステージの目標</p>
+                </div>
+                <div class="flex items-start gap-2">
+                    <span class="px-2 py-0.5 bg-slate-200 text-slate-800 font-bold text-[11px] rounded shrink-0 mt-0.5">姿</span>
+                    <p id="modalStageDesc" class="text-xs text-slate-600 leading-relaxed">活動の姿</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- トースト通知 (共通) -->
@@ -1191,6 +1582,125 @@
                 card.classList.remove('pdf-exporting');
             }
         }
+
+        // --- 4ステージ視覚化モーダル制御 ---
+        const STAGE_MODAL_DATA = [
+            {
+                stage: '第1ステージ',
+                grade: '1・2年生（生活科）',
+                badgeBg: 'bg-emerald-600',
+                title: '身近な自然・人々への愛着と五感を通した発見',
+                perspective: '探究の視点：〜の中で（五感と発見）',
+                image: 'stages/stage1.jpeg',
+                goal: '天川村の身近な人々、社会及び自然と関わる具体的な活動や体験を通して、生活上必要な習慣や技能（五感を生かした観察や表現等）を身に付けるとともに、それらの特徴やよさ、自分との関わりに気付き、自立し生活を豊かにしていくことの基礎を体感的に理解する。',
+                desc: '川のせせらぎや森の生き物・ドングリ等を五感で直接観察しスケッチする姿。身近な自然や人々と触れ合い、「やってみたい・知りたい」思いから探究の基礎を育みます。'
+            },
+            {
+                stage: '第2ステージ',
+                grade: '3・4年生（総合的な学習の時間）',
+                badgeBg: 'bg-amber-600',
+                title: '地域の魅力・人々の工夫の探究と整理',
+                perspective: '探究の視点：〜について（整理と要点）',
+                image: 'stages/stage2.jpeg',
+                goal: '天川村の自然・文化・産業に関わる見学や調査、体験活動を通して、情報手段を活用した収集・整理の基礎的技能を身に付けるとともに、地域のよさや人々の工夫に気付き、日常生活と社会との関わりを捉え、協同して探究を進めることの価値を体感的に理解する。',
+                desc: '木工工房での職人へのインタビュー取材と仲間と机を囲んで作る地域マップ。情報を分類・比較して言葉や図表に整理し、地域への理解を深める姿です。'
+            },
+            {
+                stage: '第3ステージ',
+                grade: '5・6年生（総合的な学習の時間）',
+                badgeBg: 'bg-blue-600',
+                title: '地域課題の多面的分析と協同的な発信',
+                perspective: '探究の視点：〜のために（準備）（根拠と伝達）',
+                image: 'stages/stage3.jpeg',
+                goal: '天川村の自然環境や産業、歴史等の探究において、各教科で学んだ知識・技能を相互に関連付けて生かし、多面的な分析や情報手段を活用・発信する技能を高めるとともに、地域課題に関わる概念を形成し、協同して社会参画に向かう探究の意義を深く理解する。',
+                desc: 'タブレット端末でのグラフ分析とホワイトボードを活用した根拠ある協同発表。教科の学びを総合し、ICTを活用して地域課題への見通しを論理的に発信する姿です。'
+            },
+            {
+                stage: '第4ステージ',
+                grade: '7〜9年生（中学生・総合的な学習の時間）',
+                badgeBg: 'bg-purple-600',
+                title: 'ふるさとの持続可能な未来への参画と提言',
+                perspective: '探究の視点：〜のために（社会参画と提言）',
+                image: 'stages/stage4.jpeg',
+                goal: '天川村の地域課題や職場体験活動等の探究において、小学校での学びや各教科等の知識・技能を総合的に活用して多角的に考察・検証する技能を深めるとともに、ふるさとの持続可能な未来への参画や自己の将来の生き方・キャリア形成に果たす探究の意義を深く理解する。',
+                desc: '特産品マルシェの企画運営と地域住民・来訪者との対話を通じた実践的な社会参画。本質的な地域課題を探究し、将来を見据えて地域社会へ提言・行動する姿です。'
+            }
+        ];
+
+        let currentStageIndex = 0;
+
+        function openStageModal(index) {
+            currentStageIndex = index;
+            updateStageModalContent();
+            const modal = document.getElementById('stageImageModal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeStageModal() {
+            const modal = document.getElementById('stageImageModal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function changeStageModal(delta) {
+            currentStageIndex = (currentStageIndex + delta + STAGE_MODAL_DATA.length) % STAGE_MODAL_DATA.length;
+            updateStageModalContent();
+        }
+
+        function updateStageModalContent() {
+            const item = STAGE_MODAL_DATA[currentStageIndex];
+            if (!item) return;
+
+            const badgeEl = document.getElementById('modalStageBadge');
+            const gradeEl = document.getElementById('modalGradeBadge');
+            const titleEl = document.getElementById('modalStageTitle');
+            const imgEl = document.getElementById('modalStageImg');
+            const downloadEl = document.getElementById('modalImageDownload');
+            const perspectiveEl = document.getElementById('modalStagePerspective');
+            const goalEl = document.getElementById('modalStageGoal');
+            const descEl = document.getElementById('modalStageDesc');
+
+            if (badgeEl) {
+                badgeEl.textContent = item.stage;
+                badgeEl.className = `px-2.5 py-1 ${item.badgeBg} text-white font-bold text-xs rounded-md shrink-0`;
+            }
+            if (gradeEl) gradeEl.textContent = item.grade;
+            if (titleEl) titleEl.textContent = item.title;
+            if (imgEl) {
+                imgEl.src = item.image;
+                imgEl.alt = `${item.stage} 視覚化イメージ`;
+            }
+            if (downloadEl) downloadEl.href = item.image;
+            if (perspectiveEl) perspectiveEl.textContent = item.perspective;
+            if (goalEl) goalEl.textContent = item.goal;
+            if (descEl) descEl.textContent = item.desc;
+        }
+
+        function handleStageModalBackdrop(e) {
+            if (e.target.id === 'stageImageModal') {
+                closeStageModal();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            const modal = document.getElementById('stageImageModal');
+            if (!modal || modal.classList.contains('hidden')) return;
+
+            if (e.key === 'Escape') {
+                closeStageModal();
+            } else if (e.key === 'ArrowLeft') {
+                changeStageModal(-1);
+            } else if (e.key === 'ArrowRight') {
+                changeStageModal(1);
+            }
+        });
     </script>
 </body>
 </html>
