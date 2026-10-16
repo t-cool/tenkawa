@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学習発表会(交流会) - ふるさと学習</title>
+    <link rel="icon" type="image/svg+xml" href="../icons/favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="../icons/apple-touch-icon.png">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Noto Sans JP -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+        }
+        @media print {
+            body {
+                background-color: #ffffff !important;
+                padding: 0 !important;
+                color: #000000 !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            section {
+                box-shadow: none !important;
+                border-color: #cbd5e1 !important;
+                page-break-inside: avoid;
+                margin-bottom: 1.5rem !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen p-3 sm:p-4 md:p-6">
+
+    <!-- 操作ナビゲーションバー -->
+    <header class="no-print max-w-[960px] mx-auto mb-4 sm:mb-6 bg-white p-3 sm:p-4 rounded-xl border border-slate-300 shadow-xs flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
+            <a href="../index.html" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium rounded text-xs sm:text-sm transition flex items-center gap-1.5 border border-slate-300">
+                <i class="fa-solid fa-arrow-left text-[11px] text-slate-500"></i>
+                <i class="fa-solid fa-house text-slate-600"></i>
+                <span>目次</span>
+            </a>
+            <span class="text-slate-300 hidden sm:inline">|</span>
+            <div class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-teal-800 bg-teal-50 px-2.5 py-1 rounded-md border border-teal-200">
+                <span class="w-2 h-2 rounded-full bg-teal-600 inline-block"></span>
+                <span>校長・教頭・研究推進委員会</span>
+            </div>
+            <span class="text-slate-300 hidden sm:inline">|</span>
+            <div class="text-xs sm:text-sm font-bold text-slate-700 flex items-center gap-1.5">
+                <i class="fa-solid fa-chalkboard-user text-teal-600 text-xs"></i>
+                <span>学習発表会(交流会)</span>
+            </div>
+        </div>
+        <div class="flex items-center gap-2">
+            <button onclick="window.print()" class="px-3.5 py-1.5 bg-teal-700 hover:bg-teal-800 text-white font-medium rounded text-xs sm:text-sm transition flex items-center gap-1.5 shadow-2xs">
+                <i class="fa-solid fa-print text-xs"></i>
+                <span>印刷する</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main class="max-w-[960px] mx-auto space-y-5 sm:space-y-6">
+
+        <!-- ページ見出しカード -->
+        <section class="bg-white p-5 sm:p-7 md:p-8 rounded-xl sm:rounded-2xl border border-slate-300 shadow-xs relative overflow-hidden">
+            <div class="absolute -right-8 -top-8 w-40 h-40 bg-teal-50 rounded-full opacity-60 pointer-events-none"></div>
+
+            <div class="relative z-10">
+                <div class="flex items-center gap-2 flex-wrap">
+                    <span class="text-xs font-bold text-teal-800 bg-teal-50 border border-teal-200 px-2.5 py-0.5 rounded-full inline-block">
+                        校長・教頭・研究推進委員会
+                    </span>
+                    <span class="text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full inline-block">
+                        ふるさと学習実践
+                    </span>
+                    <span class="text-xs font-bold text-slate-600 bg-slate-100 border border-slate-200 px-2.5 py-0.5 rounded-full inline-block">
+                        ポスターセッション形式
+                    </span>
+                </div>
+
+                <h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 mt-3 flex items-center gap-2.5 flex-wrap">
+                    <i class="fa-solid fa-chalkboard-user text-teal-600"></i>
+                    <span>学習発表会(交流会)</span>
+                </h1>
+                <p class="text-xs sm:text-sm text-slate-500 mt-1">
+                    全校児童生徒によるふるさと学習の成果発信・相互交流
+                </p>
+            </div>
+        </section>
+
+        <!-- ★冒頭方針カード（ユーザー指定方針） -->
+        <section class="bg-gradient-to-br from-teal-50 via-emerald-50/70 to-white p-5 sm:p-7 rounded-xl sm:rounded-2xl border-2 border-teal-600/30 shadow-xs">
+            <div class="flex items-start gap-3 sm:gap-4">
+                <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-teal-600 text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
+                    <i class="fa-solid fa-compass text-base sm:text-lg"></i>
+                </div>
+                <div class="space-y-2 flex-1">
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <span class="text-[11px] sm:text-xs font-bold text-teal-900 bg-teal-100/80 px-2.5 py-0.5 rounded-full border border-teal-300">
+                            基本方針
+                        </span>
+                        <h2 class="text-base sm:text-lg font-bold text-slate-900">
+                            2年後の振興大会を見据えた位置づけと基本方針
+                        </h2>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                        「学習発表会（交流会）」は、2年後のへき地教育振興大会での公開授業（ふるさと学習に関わるポスターセッション）に合わせて、同じような行程で進めます。
+                    </p>
+                    <div class="p-3.5 sm:p-4 rounded-xl bg-white/90 border border-teal-200/80 text-xs sm:text-sm text-slate-700 space-y-2">
+                        <div class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-check text-teal-600 mt-0.5 shrink-0 text-sm"></i>
+                            <div>
+                                <strong class="text-teal-950 font-bold">本番同様の行程による検証：</strong>
+                                <span>2年後の振興大会当日の公開授業と同じ「ポスターセッション形式」「前半・後半の入れ替え発表・参観」「児童生徒の相互交流と振り返り」を学習発表会に取り入れ、生徒の発表力向上とともに教職員の運営ノウハウを蓄積します。</span>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <i class="fa-solid fa-circle-check text-teal-600 mt-0.5 shrink-0 text-sm"></i>
+                            <div>
+                                <strong class="text-teal-950 font-bold">9年間の学びの系統性の可視化：</strong>
+                                <span>前期課程（小学校）から後期課程（中学校）までの児童生徒が同一フロアで学びの成果を発表し合うことで、小中一貫ふるさと学習の系統性と成長の姿を全校で共有します。</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ★指定Google ドキュメントへのリンクカード -->
+        <section class="bg-white p-5 sm:p-7 rounded-xl sm:rounded-2xl border border-slate-300 shadow-xs space-y-4">
+            <div class="border-b border-slate-200 pb-3 flex items-center justify-between flex-wrap gap-2">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-sm border border-blue-200">
+                        <i class="fa-solid fa-file-lines"></i>
+                    </div>
+                    <h2 class="text-base sm:text-lg font-bold text-slate-900">
+                        実施要項
+                    </h2>
+                </div>
+            </div>
+
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                学習発表会（交流会）の具体的な実施要項、タイムテーブル等の詳細資料は、下記の Google ドキュメントのとおりです。
+            </p>
+
+            <!-- リンクバナー -->
+            <div class="p-4 sm:p-5 rounded-xl bg-gradient-to-r from-blue-50/80 via-teal-50/50 to-emerald-50/60 border border-blue-200/90 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div class="flex items-start gap-3 min-w-0">
+                    <div class="w-10 h-10 rounded-xl bg-white text-blue-600 flex items-center justify-center shadow-xs border border-blue-200 shrink-0 mt-0.5">
+                        <i class="fa-solid fa-file-lines text-lg"></i>
+                    </div>
+                    <div class="min-w-0">
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <span class="text-xs font-bold text-blue-800 bg-white px-2 py-0.5 rounded border border-blue-200 shadow-2xs">
+                                Google ドキュメント
+                            </span>
+                        </div>
+                        <h3 class="text-sm sm:text-base font-bold text-slate-900 mt-1 truncate">
+                            学習発表会(交流会) 実施要項
+                        </h3>
+                    </div>
+                </div>
+
+                <a href="https://drive.google.com/open?id=1-PyXdQBHrMa-XUCXviqtYXVIJp2GDgovQ-9nhiVYCpU" target="_blank" rel="noopener noreferrer" class="w-full md:w-auto px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-xs shrink-0 group hover:shadow">
+                    <i class="fa-brands fa-google-drive text-base"></i>
+                    <span>ドキュメントを開く</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-75 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- ポスターセッションの行程・当日の流れ（振興大会公開授業対応） -->
+        <section class="bg-white p-5 sm:p-7 rounded-xl sm:rounded-2xl border border-slate-300 shadow-xs space-y-4">
+            <div class="border-b border-slate-200 pb-3 flex items-center justify-between flex-wrap gap-2">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-teal-50 text-teal-700 flex items-center justify-center font-bold text-sm border border-teal-200">
+                        <i class="fa-solid fa-timeline"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-base sm:text-lg font-bold text-slate-900">
+                            ポスターセッション形式の行程（本番準拠）
+                        </h2>
+                        <p class="text-[11px] sm:text-xs text-slate-500">振興大会当日の公開授業と同様の2部構成</p>
+                    </div>
+                </div>
+                <span class="text-xs font-semibold text-teal-800 bg-teal-50 border border-teal-200 px-2.5 py-1 rounded-full">
+                    前半・後半の入れ替え制
+                </span>
+            </div>
+
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                児童生徒が「発表者」と「聴衆・質問者」の双方を体験できるよう、前半と後半で役割を交代するポスターセッション形式を採用します。これにより全員が主体的に発信し、相互に学び合います。
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                <!-- 前半セッション -->
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-teal-800 bg-teal-100/70 px-2 py-0.5 rounded border border-teal-200">
+                            セッション 1（前半）
+                        </span>
+                        <span class="text-xs font-mono font-bold text-slate-600">約 40〜45分</span>
+                    </div>
+                    <h3 class="text-sm sm:text-base font-bold text-slate-900">
+                        グループ A：ポスター発表 ／ グループ B：参観・質疑
+                    </h3>
+                    <ul class="text-xs text-slate-600 space-y-1 list-disc list-inside">
+                        <li>ブースごとに数回に分けて発表（各回 7〜8分 ＋ 質疑 3分）</li>
+                        <li>参観者は自由にブースを巡回し、質問や感想メモを記入</li>
+                        <li>教員・参観者からのアドバイスシートを収集</li>
+                    </ul>
+                </div>
+
+                <!-- 後半セッション -->
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-emerald-800 bg-emerald-100/70 px-2 py-0.5 rounded border border-emerald-200">
+                            セッション 2（後半）
+                        </span>
+                        <span class="text-xs font-mono font-bold text-slate-600">約 40〜45分</span>
+                    </div>
+                    <h3 class="text-sm sm:text-base font-bold text-slate-900">
+                        グループ B：ポスター発表 ／ グループ A：参観・質疑
+                    </h3>
+                    <ul class="text-xs text-slate-600 space-y-1 list-disc list-inside">
+                        <li>役割を完全に入れ替えて同形式で実施</li>
+                        <li>前期・後期課程の学年を超えた交流と意見交換</li>
+                        <li>相互評価・Good &amp; Next のフィードバック</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 振り返りとまとめ -->
+            <div class="p-3.5 sm:p-4 rounded-xl bg-amber-50/70 border border-amber-200 text-xs sm:text-sm text-slate-700 space-y-1">
+                <div class="font-bold text-amber-950 flex items-center gap-1.5">
+                    <i class="fa-solid fa-lightbulb text-amber-600"></i>
+                    <span>セッション終了後の振り返り（変容の評価）</span>
+                </div>
+                <p class="text-slate-600">
+                    発表会終了後は、天部会の「振り返りの記録（アンケート）」および各学級でのリフレクションを実施し、児童生徒の探究心や郷土愛の変容、発表スキルの成果と課題を測定・検証します。
+                </p>
+            </div>
+        </section>
+
+        <!-- 2年後の振興大会に向けたロードマップ -->
+        <section class="bg-white p-5 sm:p-7 rounded-xl sm:rounded-2xl border border-slate-300 shadow-xs space-y-4">
+            <div class="border-b border-slate-200 pb-3 flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-700 flex items-center justify-center font-bold text-sm border border-indigo-200">
+                    <i class="fa-solid fa-mountain-sun"></i>
+                </div>
+                <div>
+                    <h2 class="text-base sm:text-lg font-bold text-slate-900">
+                        へき地教育振興大会までのステップ（ロードマップ）
+                    </h2>
+                    <p class="text-[11px] sm:text-xs text-slate-500">段階的な改善による本番への接続</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+                <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5">
+                    <div class="text-[11px] font-bold text-teal-800 bg-teal-100/70 px-2 py-0.5 rounded inline-block">
+                        R8年度（今年度）
+                    </div>
+                    <div class="font-bold text-slate-900 text-sm">学習発表会での試行</div>
+                    <p class="text-[11px] text-slate-600 leading-relaxed">
+                        ポスターセッション形式の初導入。当日の時間配分や動線、生徒の発表方法の課題を洗い出し。
+                    </p>
+                </div>
+
+                <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5">
+                    <div class="text-[11px] font-bold text-blue-800 bg-blue-100/70 px-2 py-0.5 rounded inline-block">
+                        R9年度（次年度）
+                    </div>
+                    <div class="font-bold text-slate-900 text-sm">行程のブラッシュアップ</div>
+                    <p class="text-[11px] text-slate-600 leading-relaxed">
+                        地域講師や保護者を交えたプレ大会としての実施。質疑応答の深化とICT活用の強化。
+                    </p>
+                </div>
+
+                <div class="p-3.5 rounded-xl bg-emerald-50/80 border border-emerald-300 space-y-1.5 shadow-2xs">
+                    <div class="text-[11px] font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded inline-block">
+                        R10年度（2年後・本番）
+                    </div>
+                    <div class="font-bold text-emerald-950 text-sm">振興大会 公開授業 本番</div>
+                    <p class="text-[11px] text-emerald-900 leading-relaxed">
+                        全国のへき地教育関係者を迎えての公開授業。完成されたポスターセッション形式で発信！
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- フッター -->
+    <footer class="no-print max-w-[960px] mx-auto mt-8 pt-4 border-t border-slate-200 text-center text-xs text-slate-400 pb-8">
+        <p>奈良県吉野郡天川村立天川小中学校 ｜ へき地教育振興大会・校内研究推進ポータル</p>
+    </footer>
+
+</body>
+</html>

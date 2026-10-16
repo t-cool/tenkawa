@@ -310,9 +310,111 @@
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
             background-color: #94a3b8;
         }
+
+        /* ===== インタラクティブな小鳥 ===== */
+        .interactive-bird {
+            pointer-events: auto !important;
+            cursor: pointer;
+            outline: none;
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .interactive-bird:hover .perched,
+        .interactive-bird:focus-visible .perched {
+            filter: drop-shadow(0 0 7px rgba(255, 255, 255, 0.95)) drop-shadow(0 2px 5px rgba(13, 51, 38, 0.4));
+            transform: scale(1.22) translateY(-2px);
+        }
+        .interactive-bird.is-flying {
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+        /* 着地時のふわりとした小バウンス */
+        @keyframes bird-land {
+            0%   { transform: scale(0.6) translateY(-10px); opacity: 0; }
+            55%  { transform: scale(1.2) translateY(2px); opacity: 1; }
+            75%  { transform: scale(0.95) translateY(-1px); }
+            100% { transform: scale(1) translateY(0); }
+        }
+        .interactive-bird.just-landed .perched {
+            animation: bird-land 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+        }
+
+        /* 飛び立つ鳥用オーバーレイ */
+        #flying-birds-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 60;
+            overflow: hidden;
+        }
+
+        /* 飛翔する鳥のコンテナ */
+        .flying-bird-actor {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 44px;
+            height: 38px;
+            margin-left: -22px;
+            margin-top: -19px;
+            pointer-events: none;
+            will-change: transform;
+            filter: drop-shadow(0 8px 14px rgba(13, 51, 38, 0.25));
+        }
+
+        /* 羽ばたきアニメーション（上下に高速リズミカル） */
+        .flying-bird-actor .wing-front {
+            transform-box: fill-box;
+            transform-origin: 85% 85%;
+            animation: wing-flap-front 0.15s ease-in-out infinite alternate;
+        }
+        .flying-bird-actor .wing-back {
+            transform-box: fill-box;
+            transform-origin: 85% 85%;
+            animation: wing-flap-back 0.15s ease-in-out infinite alternate;
+            animation-delay: -0.04s;
+        }
+        .flying-bird-actor .bird-bob {
+            transform-box: fill-box;
+            transform-origin: center;
+            animation: bird-fly-bob 0.3s ease-in-out infinite;
+        }
+
+        @keyframes wing-flap-front {
+            0%   { transform: rotate(-50deg) scaleY(1.05); }
+            100% { transform: rotate(38deg) scaleY(0.65); }
+        }
+        @keyframes wing-flap-back {
+            0%   { transform: rotate(-42deg) scaleY(1.05); }
+            100% { transform: rotate(32deg) scaleY(0.7); }
+        }
+        @keyframes bird-fly-bob {
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(-3.5px); }
+        }
+
+        /* 飛び立ちパーティクル */
+        .bird-takeoff-particle {
+            position: absolute;
+            pointer-events: none;
+            border-radius: 50%;
+            animation: particle-fade 0.75s ease-out forwards;
+        }
+        @keyframes particle-fade {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.95;
+            }
+            100% {
+                transform: translate(var(--dx), var(--dy)) scale(0);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body class="tenkawa-canvas text-slate-800 min-h-screen py-3 px-2 sm:py-10 sm:px-4">
+
+    <!-- 飛び立つ小鳥のアニメーション用オーバーレイ（画面最前面） -->
+    <div id="flying-birds-overlay" aria-hidden="true"></div>
 
     <!-- ===== 背景シーン：上＝雲 / 中＝木と鳥 / 下＝川 ===== -->
     <div class="nature-scene" aria-hidden="true">
@@ -365,7 +467,8 @@
                     <polygon points="72,100 18,230 126,230" fill="#28704e"/>
                     <polygon points="72,170 8,305 136,305" fill="#226345"/>
                     <!-- 杉のてっぺんの鳥（オオルリ） -->
-                    <g transform="translate(72 44)">
+                    <g transform="translate(72 44)" class="interactive-bird" data-bird-id="left-top-ooruri" data-bird-type="ooruri" role="button" tabindex="0" title="小鳥をクリックすると飛び立ちます" aria-label="杉のてっぺんのオオルリ">
+                        <circle cx="0" cy="-8" r="26" fill="transparent" class="bird-hitbox"/>
                         <g class="perched" style="animation-duration:5.2s; animation-delay:-1.5s;">
                             <polygon points="-8,-9 -17,-4 -8,-5" fill="#24467f"/>
                             <ellipse cx="0" cy="-8" rx="9" ry="6.5" fill="#2f5fa8"/>
@@ -390,7 +493,8 @@
                     <circle cx="232" cy="160" r="38" fill="#57b57b"/>
                 </g>
                 <!-- 枝に止まる鳥（スズメ） -->
-                <g transform="translate(282 278)">
+                <g transform="translate(282 278)" class="interactive-bird" data-bird-id="left-branch-sparrow1" data-bird-type="sparrow" role="button" tabindex="0" title="小鳥をクリックすると飛び立ちます" aria-label="枝のスズメ">
+                    <circle cx="0" cy="-8" r="26" fill="transparent" class="bird-hitbox"/>
                     <g class="perched">
                         <polygon points="-8,-9 -17,-4 -8,-5" fill="#5b3f26"/>
                         <ellipse cx="0" cy="-8" rx="9" ry="6.5" fill="#8a6440"/>
@@ -404,7 +508,8 @@
                     </g>
                 </g>
                 <!-- 枝の付け根にもう一羽 -->
-                <g transform="translate(240 289)">
+                <g transform="translate(240 289)" class="interactive-bird" data-bird-id="left-branch-sparrow2" data-bird-type="sparrow" role="button" tabindex="0" title="小鳥をクリックすると飛び立ちます" aria-label="枝のスズメ">
+                    <circle cx="0" cy="-8" r="26" fill="transparent" class="bird-hitbox"/>
                     <g class="perched" style="animation-duration:6s; animation-delay:-3s;">
                         <polygon points="-8,-9 -17,-4 -8,-5" fill="#5b3f26"/>
                         <ellipse cx="0" cy="-8" rx="9" ry="6.5" fill="#8a6440"/>
@@ -438,7 +543,8 @@
                     <circle cx="196" cy="148" r="42" fill="#6ac78d"/>
                     <circle cx="238" cy="165" r="36" fill="#58b77c"/>
                     <!-- 葉の上の鳥（メジロ） -->
-                    <g transform="translate(196 108)">
+                    <g transform="translate(196 108)" class="interactive-bird" data-bird-id="right-leaf-mejiro" data-bird-type="mejiro" role="button" tabindex="0" title="小鳥をクリックすると飛び立ちます" aria-label="葉の上のメジロ">
+                        <circle cx="0" cy="-8" r="26" fill="transparent" class="bird-hitbox"/>
                         <g class="perched" style="animation-duration:3.8s; animation-delay:-0.8s;">
                             <polygon points="-8,-9 -17,-4 -8,-5" fill="#5f7a2c"/>
                             <ellipse cx="0" cy="-8" rx="9" ry="6.5" fill="#86a83a"/>
@@ -452,7 +558,9 @@
                         </g>
                     </g>
                 </g>
-                <g transform="translate(286 278)">
+                <!-- 枝の上の鳥（オオルリ） -->
+                <g transform="translate(286 278)" class="interactive-bird" data-bird-id="right-branch-ooruri" data-bird-type="ooruri" role="button" tabindex="0" title="小鳥をクリックすると飛び立ちます" aria-label="枝のオオルリ">
+                    <circle cx="0" cy="-8" r="26" fill="transparent" class="bird-hitbox"/>
                     <g class="perched" style="animation-duration:5s; animation-delay:-2.2s;">
                         <polygon points="-8,-9 -17,-4 -8,-5" fill="#24467f"/>
                         <ellipse cx="0" cy="-8" rx="9" ry="6.5" fill="#2f5fa8"/>
@@ -725,6 +833,22 @@
                                     </div>
                                     <p class="text-[11px] sm:text-sm text-slate-500 mt-0.5 leading-snug text-wrap-safe">
                                         午前は「ふるさと学習」をテーマとしたポスターセッション形式の公開授業（前期・後期課程）および研究発表、午後は村内有識者を講師に迎えての講演会の予定。
+                                    </p>
+                                </div>
+                                <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-slate-50 group-hover:bg-teal-600 group-hover:text-white text-slate-400 flex items-center justify-center transition shrink-0 shadow-2xs">
+                                    <i class="fa-solid fa-chevron-right text-[10px] sm:text-xs transition-transform group-hover:translate-x-0.5"></i>
+                                </div>
+                            </a>
+
+                            <a href="happyou/happyou.html" class="nature-card flex items-center justify-between p-3 sm:p-4.5 rounded-lg bg-white border border-teal-200/90 hover:border-teal-500 hover:bg-teal-50/30 transition group shadow-2xs relative overflow-hidden min-w-0 w-full" title="学習発表会(交流会) ページを開く">
+                                <div class="absolute left-0 top-0 bottom-0 w-1 bg-teal-600 rounded-l"></div>
+                                <div class="pl-2 flex-1 min-w-0 pr-2">
+                                    <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                                        <span class="text-sm sm:text-base lg:text-lg font-bold text-slate-900 group-hover:text-teal-800 transition text-wrap-safe">学習発表会(交流会)</span>
+                                        <span class="text-[9px] sm:text-[10px] font-medium text-teal-700 bg-teal-50 border border-teal-200 px-1.5 py-0.2 rounded-full shrink-0">公開授業接続</span>
+                                    </div>
+                                    <p class="text-[11px] sm:text-sm text-slate-500 mt-0.5 leading-snug text-wrap-safe">
+                                        2年後の振興大会での公開授業（ふるさと学習のポスターセッション）に合わせて、同じような行程で進める学習発表会・交流会の方針と計画。
                                     </p>
                                 </div>
                                 <div class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-slate-50 group-hover:bg-teal-600 group-hover:text-white text-slate-400 flex items-center justify-center transition shrink-0 shadow-2xs">
@@ -1211,6 +1335,400 @@
                 pwaInstallBtn.classList.remove('hidden');
             }
         }
+
+        // ===== 小鳥をクリックすると飛び立つインタラクション =====
+        (function() {
+            // 鳥の配色設定（止まり木の鳥と完全同期）
+            const BIRD_CONFIGS = {
+                ooruri: {
+                    name: 'オオルリ',
+                    body: '#2f5fa8',
+                    belly: '#f3f4f6',
+                    head: '#2f5fa8',
+                    wingFront: '#24467f',
+                    wingBack: '#1c3664',
+                    tail: '#24467f',
+                    beak: '#1f2937',
+                    eye: '#111827',
+                    eyeRing: null,
+                    cheek: null,
+                    particleColor: '#93c5fd'
+                },
+                sparrow: {
+                    name: 'スズメ',
+                    body: '#8a6440',
+                    belly: '#efe4cf',
+                    head: '#7a4f2c',
+                    wingFront: '#5b3f26',
+                    wingBack: '#432918',
+                    tail: '#5b3f26',
+                    beak: '#1f2937',
+                    eye: '#111827',
+                    eyeRing: null,
+                    cheek: '#f5efe3',
+                    particleColor: '#fed7aa'
+                },
+                mejiro: {
+                    name: 'メジロ',
+                    body: '#86a83a',
+                    belly: '#f1efd8',
+                    head: '#8fb33f',
+                    wingFront: '#5f7a2c',
+                    wingBack: '#495e20',
+                    tail: '#5f7a2c',
+                    beak: '#1f2937',
+                    eye: '#111827',
+                    eyeRing: '#ffffff',
+                    cheek: null,
+                    particleColor: '#d9f99d'
+                }
+            };
+
+            // Web Audio API による自然で愛らしい小鳥のさえずり
+            function playBirdChirp(type) {
+                try {
+                    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                    if (!AudioCtx) return;
+                    if (!window.__birdAudioCtx) {
+                        window.__birdAudioCtx = new AudioCtx();
+                    }
+                    const ctx = window.__birdAudioCtx;
+                    if (ctx.state === 'suspended') {
+                        ctx.resume();
+                    }
+                    const now = ctx.currentTime;
+
+                    let notes;
+                    if (type === 'sparrow') {
+                        // スズメの元気な「チュンチュン♪」
+                        notes = [
+                            { f1: 2900, f2: 3600, t: 0, d: 0.045, v: 0.06 },
+                            { f1: 3500, f2: 2500, t: 0.05, d: 0.06, v: 0.07 },
+                            { f1: 3100, f2: 3900, t: 0.13, d: 0.045, v: 0.06 },
+                            { f1: 3700, f2: 2600, t: 0.18, d: 0.07, v: 0.07 }
+                        ];
+                    } else if (type === 'mejiro') {
+                        // メジロの可憐な高音「チーチー♪」
+                        notes = [
+                            { f1: 4300, f2: 4900, t: 0, d: 0.05, v: 0.05 },
+                            { f1: 4700, f2: 4100, t: 0.07, d: 0.06, v: 0.06 },
+                            { f1: 4500, f2: 5100, t: 0.16, d: 0.06, v: 0.05 }
+                        ];
+                    } else {
+                        // オオルリの澄み渡る美声「ピピッ、ピリリ♪」
+                        notes = [
+                            { f1: 3100, f2: 3900, t: 0, d: 0.06, v: 0.06 },
+                            { f1: 3800, f2: 4600, t: 0.08, d: 0.07, v: 0.07 },
+                            { f1: 4400, f2: 3300, t: 0.18, d: 0.09, v: 0.06 }
+                        ];
+                    }
+
+                    notes.forEach(n => {
+                        const osc = ctx.createOscillator();
+                        const gain = ctx.createGain();
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(n.f1, now + n.t);
+                        osc.frequency.exponentialRampToValueAtTime(n.f2, now + n.t + n.d);
+
+                        gain.gain.setValueAtTime(0, now + n.t);
+                        gain.gain.linearRampToValueAtTime(n.v, now + n.t + 0.01);
+                        gain.gain.exponentialRampToValueAtTime(0.0001, now + n.t + n.d);
+
+                        osc.connect(gain);
+                        gain.connect(ctx.destination);
+
+                        osc.start(now + n.t);
+                        osc.stop(now + n.t + n.d);
+                    });
+                } catch (e) {
+                    // オーディオ再生がブロックされてもエラーにしない
+                }
+            }
+
+            // 飛び立ちの瞬間のキラキラ・羽毛パーティクル
+            function createTakeoffParticles(x, y, color) {
+                const overlay = document.getElementById('flying-birds-overlay');
+                if (!overlay) return;
+
+                for (let i = 0; i < 5; i++) {
+                    const p = document.createElement('div');
+                    p.className = 'bird-takeoff-particle';
+                    const angle = (Math.PI * 2 * i) / 5 + (Math.random() - 0.5) * 0.6;
+                    const dist = 16 + Math.random() * 24;
+                    const dx = Math.cos(angle) * dist;
+                    const dy = Math.sin(angle) * dist - 8; // やや上向きに散る
+                    const size = 3 + Math.random() * 4;
+
+                    p.style.width = size + 'px';
+                    p.style.height = size + 'px';
+                    p.style.left = x + 'px';
+                    p.style.top = y + 'px';
+                    p.style.backgroundColor = color || '#a7f3d0';
+                    p.style.setProperty('--dx', dx + 'px');
+                    p.style.setProperty('--dy', dy + 'px');
+
+                    overlay.appendChild(p);
+                    setTimeout(() => p.remove(), 800);
+                }
+            }
+
+            // 飛翔鳥の羽ばたくSVGを生成
+            function createFlyingBirdSvg(c) {
+                return `
+                <svg viewBox="0 0 44 38" width="100%" height="100%" style="overflow:visible;">
+                    <g class="bird-bob">
+                        <!-- 奥の翼 -->
+                        <g class="wing-back">
+                            <path d="M 14 15 C 10 5, 2 -2, -2 2 C 2 8, 8 15, 14 16 Z" fill="${c.wingBack}"/>
+                        </g>
+                        <!-- 尾羽 -->
+                        <polygon points="4,21 -8,25 0,21 -7,19 4,18" fill="${c.tail}"/>
+                        <!-- 胴体 -->
+                        <ellipse cx="16" cy="20" rx="11" ry="8" fill="${c.body}"/>
+                        <!-- お腹 -->
+                        <ellipse cx="18" cy="22" rx="7.5" ry="4.5" fill="${c.belly}"/>
+                        <!-- ほっぺ（スズメ等） -->
+                        ${c.cheek ? `<circle cx="26" cy="15" r="2.2" fill="${c.cheek}"/>` : ''}
+                        <!-- 頭 -->
+                        <circle cx="25" cy="14" r="6" fill="${c.head}"/>
+                        <!-- アイリング・目（メジロ等） -->
+                        ${c.eyeRing ? `<circle cx="26.8" cy="12.8" r="2.4" fill="${c.eyeRing}"/>` : ''}
+                        <circle cx="26.8" cy="12.8" r="1.1" fill="${c.eye}"/>
+                        <!-- くちばし -->
+                        <polygon points="30,13 36,15 30,17" fill="${c.beak}"/>
+                        <!-- 手前の翼 -->
+                        <g class="wing-front">
+                            <path d="M 16 18 C 12 7, 5 0, 1 3 C 4 10, 11 18, 16 19 Z" fill="${c.wingFront}"/>
+                            <path d="M 14 17 C 10 8, 5 3, 2 5" stroke="rgba(255,255,255,0.3)" stroke-width="0.8" fill="none"/>
+                        </g>
+                    </g>
+                </svg>`;
+            }
+
+            // Catmull-Rom スプライン補間（滑らかな曲線）
+            function getCatmullRomPoint(points, t) {
+                const p = points;
+                const numSections = p.length - 1;
+                const clampedT = Math.max(0, Math.min(1, t));
+                const totalT = clampedT * numSections;
+                const section = Math.min(Math.floor(totalT), numSections - 1);
+                const u = totalT - section;
+
+                const p0 = section > 0 ? p[section - 1] : p[0];
+                const p1 = p[section];
+                const p2 = p[section + 1];
+                const p3 = section + 2 < p.length ? p[section + 2] : p2;
+
+                const u2 = u * u;
+                const u3 = u2 * u;
+
+                const x = 0.5 * (
+                    (2 * p1[0]) +
+                    (-p0[0] + p2[0]) * u +
+                    (2 * p0[0] - 5 * p1[0] + 4 * p2[0] - p3[0]) * u2 +
+                    (-p0[0] + 3 * p1[0] - 3 * p2[0] + p3[0]) * u3
+                );
+                const y = 0.5 * (
+                    (2 * p1[1]) +
+                    (-p0[1] + p2[1]) * u +
+                    (2 * p0[1] - 5 * p1[1] + 4 * p2[1] - p3[1]) * u2 +
+                    (-p0[1] + 3 * p1[1] - 3 * p2[1] + p3[1]) * u3
+                );
+
+                return [x, y];
+            }
+
+            // 鳥を飛び立たせるメイン関数
+            function makeBirdFly(birdEl) {
+                if (birdEl.classList.contains('is-flying')) return;
+
+                const birdId = birdEl.getAttribute('data-bird-id') || 'bird';
+                const type = birdEl.getAttribute('data-bird-type') || 'ooruri';
+                const config = BIRD_CONFIGS[type] || BIRD_CONFIGS.ooruri;
+
+                const overlay = document.getElementById('flying-birds-overlay');
+                if (!overlay) return;
+
+                // 止まり木の現在位置（ビューポート基準）
+                const rect = birdEl.getBoundingClientRect();
+                const startX = rect.left + rect.width / 2;
+                const startY = rect.top + rect.height / 2;
+
+                // 左側の木か右側の木かを判定
+                const isLeftTree = birdEl.closest('.trees-left') !== null;
+
+                // 音とパーティクルを再生
+                playBirdChirp(type);
+                createTakeoffParticles(startX, startY, config.particleColor);
+
+                // 元の止まり木の鳥を非表示にし、飛行中フラグを立てる
+                birdEl.classList.add('is-flying');
+
+                // 画面サイズの取得
+                const winW = window.innerWidth;
+                const winH = window.innerHeight;
+
+                // 各鳥ごとの飛行特性と軌道制御点の設計
+                let duration = 4600; // ms
+                let points = [];
+
+                if (isLeftTree) {
+                    // 左側の木から画面中央・右上空へ飛び立ち、大空を旋回して戻る
+                    const spreadX = Math.max(200, Math.min(winW * 0.48, 550));
+                    const peakY = Math.max(30, winH * 0.12);
+
+                    if (birdId === 'left-top-ooruri') {
+                        // 杉のてっぺんのオオルリ：大空高く雄大に舞い上がる
+                        duration = 5200;
+                        points = [
+                            [startX, startY],
+                            [startX + spreadX * 0.35, Math.max(40, startY - 140)],
+                            [startX + spreadX * 0.85, peakY],
+                            [startX + spreadX * 1.05, peakY + 70],
+                            [startX + spreadX * 0.65, Math.max(90, startY - 40)],
+                            [startX + spreadX * 0.20, startY - 40],
+                            [startX, startY]
+                        ];
+                    } else if (birdId === 'left-branch-sparrow1') {
+                        // 枝のスズメ1：小刻み＆軽快に波打って旋回
+                        duration = 4300;
+                        points = [
+                            [startX, startY],
+                            [startX + spreadX * 0.4, Math.max(60, startY - 120)],
+                            [startX + spreadX * 0.8, Math.max(50, startY - 180)],
+                            [startX + spreadX * 0.95, Math.max(90, startY - 110)],
+                            [startX + spreadX * 0.5, Math.max(120, startY - 30)],
+                            [startX + spreadX * 0.15, startY - 30],
+                            [startX, startY]
+                        ];
+                    } else {
+                        // 枝のスズメ2：低めの高度をすばしっこく周回
+                        duration = 4600;
+                        points = [
+                            [startX, startY],
+                            [startX + spreadX * 0.35, Math.max(70, startY - 100)],
+                            [startX + spreadX * 0.75, Math.max(65, startY - 150)],
+                            [startX + spreadX * 0.9, Math.max(100, startY - 90)],
+                            [startX + spreadX * 0.45, Math.max(130, startY - 20)],
+                            [startX + spreadX * 0.15, startY - 25],
+                            [startX, startY]
+                        ];
+                    }
+                } else {
+                    // 右側の木から画面中央・左上空へ飛び立ち、旋回して戻る
+                    const spreadX = -Math.max(200, Math.min(winW * 0.48, 550));
+                    const peakY = Math.max(30, winH * 0.12);
+
+                    if (birdId === 'right-leaf-mejiro') {
+                        // 葉の上のメジロ：素早くくるりと旋回
+                        duration = 4100;
+                        points = [
+                            [startX, startY],
+                            [startX + spreadX * 0.4, Math.max(50, startY - 130)],
+                            [startX + spreadX * 0.8, Math.max(45, startY - 170)],
+                            [startX + spreadX * 0.95, Math.max(85, startY - 100)],
+                            [startX + spreadX * 0.5, Math.max(110, startY - 30)],
+                            [startX + spreadX * 0.15, startY - 25],
+                            [startX, startY]
+                        ];
+                    } else {
+                        // 右枝のオオルリ：優雅に舞い上がる
+                        duration = 4900;
+                        points = [
+                            [startX, startY],
+                            [startX + spreadX * 0.35, Math.max(45, startY - 140)],
+                            [startX + spreadX * 0.85, peakY],
+                            [startX + spreadX * 1.05, peakY + 70],
+                            [startX + spreadX * 0.65, Math.max(90, startY - 40)],
+                            [startX + spreadX * 0.20, startY - 35],
+                            [startX, startY]
+                        ];
+                    }
+                }
+
+                // 飛翔アクター要素の作成
+                const actor = document.createElement('div');
+                actor.className = 'flying-bird-actor';
+                actor.innerHTML = createFlyingBirdSvg(config);
+                overlay.appendChild(actor);
+
+                let startTime = null;
+
+                function animateFlight(now) {
+                    if (!startTime) startTime = now;
+                    const elapsed = now - startTime;
+                    const progress = Math.min(1, elapsed / duration);
+
+                    // 現在位置の計算
+                    const [currX, currY] = getCatmullRomPoint(points, progress);
+
+                    // 進行方向（微小未来位置）から回転角度と左右反転を計算
+                    const nextProgress = Math.min(1, progress + 0.008);
+                    const [nextX, nextY] = getCatmullRomPoint(points, nextProgress);
+                    const dx = nextX - currX;
+                    const dy = nextY - currY;
+
+                    let scaleX = 1;
+                    let angle = 0;
+
+                    if (Math.abs(dx) > 0.01 || Math.abs(dy) > 0.01) {
+                        if (dx < 0) {
+                            scaleX = -1; // 左向きに進行
+                            angle = Math.atan2(dy, -dx) * (180 / Math.PI);
+                        } else {
+                            scaleX = 1;  // 右向きに進行
+                            angle = Math.atan2(dy, dx) * (180 / Math.PI);
+                        }
+                    }
+
+                    // 急激な回転をクランプして自然な鳥のバンク姿勢にする
+                    angle = Math.max(-42, Math.min(42, angle));
+
+                    actor.style.transform = `translate3d(${currX}px, ${currY}px, 0) scaleX(${scaleX}) rotate(${angle}deg)`;
+
+                    if (progress < 1) {
+                        requestAnimationFrame(animateFlight);
+                    } else {
+                        // 着地処理
+                        actor.style.transition = 'opacity 0.2s ease';
+                        actor.style.opacity = '0';
+                        setTimeout(() => actor.remove(), 250);
+
+                        // 元の止まり木の鳥を復帰＆着地小バウンス
+                        birdEl.classList.remove('is-flying');
+                        birdEl.classList.add('just-landed');
+                        setTimeout(() => {
+                            birdEl.classList.remove('just-landed');
+                        }, 550);
+                    }
+                }
+
+                requestAnimationFrame(animateFlight);
+            }
+
+            // 全ての小鳥にイベントを登録
+            function initInteractiveBirds() {
+                const birds = document.querySelectorAll('.interactive-bird');
+                birds.forEach(bird => {
+                    bird.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        makeBirdFly(bird);
+                    });
+                    bird.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            makeBirdFly(bird);
+                        }
+                    });
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initInteractiveBirds);
+            } else {
+                initInteractiveBirds();
+            }
+        })();
     </script>
 </body>
 </html>
