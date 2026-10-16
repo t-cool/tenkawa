@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tenkawa-pwa-v2';
+const CACHE_NAME = 'tenkawa-pwa-v3';
 
 // アプリのコア資産（オフライン対応・高速化）
 const PRECACHE_ASSETS = [
@@ -6,6 +6,8 @@ const PRECACHE_ASSETS = [
   './index.html',
   './manifest.json',
   './qr.png',
+  './enno_walk_sheet.png',
+  './enno_fly.png',
   './icons/favicon.svg',
   './icons/favicon.ico',
   './icons/favicon-32.png',

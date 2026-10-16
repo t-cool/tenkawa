@@ -780,6 +780,202 @@
             0%   { transform: translate(-50%, -50%) scale(0.2); opacity: 0.95; }
             100% { transform: translate(-50%, -50%) scale(2.4); opacity: 0; }
         }
+
+        /* ===== 役行者（えんの）インタラクション演出 ===== */
+        #enno-character-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 46;
+            overflow: hidden;
+        }
+
+        /* 右の木（インタラクティブ・クリックで役行者登場） */
+        .trees-right {
+            pointer-events: auto !important;
+            cursor: pointer;
+            outline: none;
+            transition: filter 0.3s ease;
+        }
+        .trees-right:hover {
+            filter: drop-shadow(0 0 16px rgba(52, 211, 153, 0.6)) brightness(1.05);
+        }
+        .trees-right:focus-visible {
+            filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.85)) brightness(1.08);
+        }
+
+        /* 木がクリックされた時のリアクション（弾み） */
+        @keyframes tree-react-bounce {
+            0%   { transform: scaleX(-1) scale(1); }
+            30%  { transform: scaleX(-1) scale(1.06, 0.95) translateY(-5px); }
+            60%  { transform: scaleX(-1) scale(0.97, 1.03) translateY(2px); }
+            100% { transform: scaleX(-1) scale(1); }
+        }
+        .trees-right.is-clicked {
+            animation: tree-react-bounce 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+        }
+
+        /* 役行者アクター共通ラッパー */
+        .enno-actor {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            will-change: transform, opacity;
+            user-select: none;
+            transition: opacity 0.35s ease;
+        }
+
+        /* 川辺歩行キャラクター（CSSスプライト4フレーム） */
+        .enno-walk-figure {
+            width: 70px;
+            height: 112px;
+            background-image: url('./enno_walk_sheet.png');
+            background-size: 280px 112px;
+            background-repeat: no-repeat;
+            animation: enno-walk-step 0.6s steps(4) infinite;
+            filter: drop-shadow(0 5px 9px rgba(10, 40, 30, 0.28));
+        }
+        @keyframes enno-walk-step {
+            from { background-position: 0 0; }
+            to   { background-position: -280px 0; }
+        }
+
+        /* 空飛ぶキャラクター */
+        .enno-fly-figure {
+            position: relative;
+            width: 72px;
+            height: 115px;
+            background-image: url('./enno_fly.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center top;
+            filter: drop-shadow(0 6px 14px rgba(16, 78, 120, 0.35));
+            animation: enno-float-sway 2.6s ease-in-out infinite alternate;
+        }
+        @keyframes enno-float-sway {
+            0%   { transform: translateY(0px) rotate(-1.5deg); }
+            50%  { transform: translateY(-7px) rotate(1deg); }
+            100% { transform: translateY(3px) rotate(-0.5deg); }
+        }
+
+        /* 飛行時の足元の神聖な霊雲（筋斗雲） */
+        .enno-spiritual-cloud {
+            position: absolute;
+            bottom: -13px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 98px;
+            height: 38px;
+            pointer-events: none;
+            filter: drop-shadow(0 4px 10px rgba(255, 255, 255, 0.85)) drop-shadow(0 2px 6px rgba(56, 120, 160, 0.28));
+            animation: enno-cloud-puff 2.2s ease-in-out infinite alternate;
+        }
+        @keyframes enno-cloud-puff {
+            0%   { transform: translateX(-50%) scale(0.96, 0.94); opacity: 0.92; }
+            100% { transform: translateX(-50%) scale(1.05, 1.04); opacity: 1; }
+        }
+
+        /* 後光・光輪（頭上） */
+        .enno-halo {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(254, 240, 138, 0.65) 0%, rgba(250, 204, 21, 0.28) 45%, transparent 70%);
+            pointer-events: none;
+            animation: enno-halo-pulse 2.2s ease-in-out infinite alternate;
+        }
+        @keyframes enno-halo-pulse {
+            0%   { transform: translateX(-50%) scale(0.9); opacity: 0.6; }
+            100% { transform: translateX(-50%) scale(1.15); opacity: 0.95; }
+        }
+
+        /* セリフの吹き出し */
+        .enno-speech-bubble {
+            position: absolute;
+            bottom: calc(100% + 12px);
+            left: 50%;
+            transform: translateX(-50%) translateY(4px);
+            background: rgba(255, 255, 255, 0.97);
+            border: 1.5px solid #059669;
+            color: #064e3b;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 5px 13px;
+            border-radius: 14px;
+            box-shadow: 0 4px 14px rgba(6, 78, 59, 0.18);
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.35s ease, transform 0.35s ease;
+            z-index: 50;
+        }
+        .enno-speech-bubble::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: #059669;
+        }
+        .enno-speech-bubble.is-visible {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* キラキラ・風の光粒 */
+        .enno-sparkle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #fde047;
+            box-shadow: 0 0 6px #facc15;
+            pointer-events: none;
+            animation: enno-sparkle-float 0.8s ease-out forwards;
+        }
+        @keyframes enno-sparkle-float {
+            0%   { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--sx), var(--sy)) scale(0.2); opacity: 0; }
+        }
+
+        @media (max-width: 640px) {
+            .sky-hint-badge { font-size: 10px; padding: 3px 10px; top: 8px; }
+            .enno-walk-figure {
+                width: 56px;
+                height: 90px;
+                background-size: 224px 90px;
+            }
+            @keyframes enno-walk-step {
+                from { background-position: 0 0; }
+                to   { background-position: -224px 0; }
+            }
+            .enno-fly-figure {
+                width: 58px;
+                height: 93px;
+            }
+            .enno-spiritual-cloud {
+                width: 80px;
+                height: 32px;
+                bottom: -11px;
+            }
+            .enno-speech-bubble {
+                font-size: 11px;
+                padding: 4px 10px;
+            }
+        }
+
+        /* 動きを減らす設定の対応 */
+        @media (prefers-reduced-motion: reduce) {
+            #enno-character-overlay {
+                display: none !important;
+            }
+        }
     </style>
 </head>
 <body class="tenkawa-canvas text-slate-800 min-h-screen py-3 px-2 sm:py-10 sm:px-4">
@@ -792,6 +988,9 @@
 
     <!-- 川から跳ねる鮎（アユ）のアニメーション用オーバーレイ -->
     <div id="jumping-fish-overlay" aria-hidden="true"></div>
+
+    <!-- 役行者（えんの）のアニメーション用オーバーレイ（画面最前面） -->
+    <div id="enno-character-overlay" aria-hidden="true"></div>
 
     <!-- ===== 背景シーン：上＝雲 / 中＝木と鳥 / 下＝川 ===== -->
     <div class="nature-scene" aria-hidden="true">
@@ -902,8 +1101,8 @@
             </svg>
         </div>
 
-        <!-- 中部：木と止まる鳥（右・左右反転） -->
-        <div class="trees trees-right">
+        <!-- 中部：木と止まる鳥（右・左右反転 / クリックで役行者登場） -->
+        <div class="trees trees-right" id="tree-right-interactive" role="button" tabindex="0" aria-label="右の木">
             <svg viewBox="0 0 320 420">
                 <g class="sway" style="animation-duration:6.4s; animation-delay:-1s;">
                     <rect x="66" y="290" width="12" height="130" rx="3" fill="#6b4a2b"/>
@@ -2959,6 +3158,422 @@
                 document.addEventListener('DOMContentLoaded', initInteractiveClouds);
             } else {
                 initInteractiveClouds();
+            }
+        })();
+
+        // ===== 役行者（えんの）の空飛翔＆川辺散歩インタラクション（右の木を起点） =====
+        (function() {
+            let activeEnnoCount = 0;
+            const MAX_ACTIVE_ENNO = 3;
+            let lastMode = 'walk'; // 'fly' と 'walk' を交互または状況に応じて切り替え
+            let audioCtx = null;
+
+            // 天川のセリフコレクション
+            const FLY_QUOTES = [
+                '木々の梢から、いざ大峯の空へ',
+                '天川の風は清らかで心地よいわい',
+                'ほっほっほ、良い風が吹いておる',
+                '空からの学びの里も格別じゃな',
+                '修験の峰々が見守っておるぞ'
+            ];
+
+            const WALK_QUOTES = [
+                '木陰から川辺へお散歩じゃ',
+                '天ノ川のせせらぎ、心が洗われるのう',
+                '鮎たちも元気に跳ねておるな',
+                'トコトコ…自然の恵みに感謝じゃ',
+                '一歩一歩、歩むことが学びじゃよ'
+            ];
+
+            // 澄んだ神聖な効果音のシンセサイズ
+            function playEnnoSound(type) {
+                try {
+                    const AudioContext = window.AudioContext || window.webkitAudioContext;
+                    if (!AudioContext) return;
+                    if (!audioCtx) audioCtx = new AudioContext();
+                    if (audioCtx.state === 'suspended') audioCtx.resume();
+
+                    const now = audioCtx.currentTime;
+
+                    if (type === 'fly') {
+                        // 霊峰の風・鈴の澄んだ和音
+                        [880, 1320, 1760].forEach((freq, idx) => {
+                            const osc = audioCtx.createOscillator();
+                            const gain = audioCtx.createGain();
+                            const startTime = now + idx * 0.08;
+
+                            osc.type = 'sine';
+                            osc.frequency.setValueAtTime(freq, startTime);
+                            osc.frequency.exponentialRampToValueAtTime(freq * 1.05, startTime + 0.3);
+
+                            gain.gain.setValueAtTime(0.001, startTime);
+                            gain.gain.linearRampToValueAtTime(0.025, startTime + 0.04);
+                            gain.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.6);
+
+                            osc.connect(gain);
+                            gain.connect(audioCtx.destination);
+                            osc.start(startTime);
+                            osc.stop(startTime + 0.65);
+                        });
+                    } else if (type === 'walk') {
+                        // 錫杖（しゃくじょう）の澄んだ金属音（シャン…）
+                        [1480, 2200, 2960].forEach((freq, idx) => {
+                            const osc = audioCtx.createOscillator();
+                            const gain = audioCtx.createGain();
+                            const startTime = now + idx * 0.03;
+
+                            osc.type = 'triangle';
+                            osc.frequency.setValueAtTime(freq, startTime);
+
+                            gain.gain.setValueAtTime(0.001, startTime);
+                            gain.gain.linearRampToValueAtTime(0.03, startTime + 0.02);
+                            gain.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.4);
+
+                            osc.connect(gain);
+                            gain.connect(audioCtx.destination);
+                            osc.start(startTime);
+                            osc.stop(startTime + 0.45);
+                        });
+                    }
+                } catch (e) {
+                    // 無音環境でも安全に継続
+                }
+            }
+
+            // キラキラ光粒パーティクル
+            function createSparkles(container, count = 3) {
+                for (let i = 0; i < count; i++) {
+                    const spark = document.createElement('div');
+                    spark.className = 'enno-sparkle';
+                    spark.style.left = (18 + Math.random() * 36) + 'px';
+                    spark.style.top = (25 + Math.random() * 55) + 'px';
+                    const angle = Math.random() * Math.PI * 2;
+                    const dist = 14 + Math.random() * 26;
+                    spark.style.setProperty('--sx', (Math.cos(angle) * dist) + 'px');
+                    spark.style.setProperty('--sy', (Math.sin(angle) * dist) + 'px');
+                    container.appendChild(spark);
+                    setTimeout(() => spark.remove(), 800);
+                }
+            }
+
+            // 霊雲SVG生成
+            function createSpiritualCloudSvg() {
+                return `
+                <svg viewBox="0 0 100 40" class="enno-spiritual-cloud" aria-hidden="true">
+                    <defs>
+                        <linearGradient id="enno-cgrad" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.98"/>
+                            <stop offset="60%" stop-color="#e0f2fe" stop-opacity="0.95"/>
+                            <stop offset="100%" stop-color="#bae6fd" stop-opacity="0.88"/>
+                        </linearGradient>
+                    </defs>
+                    <path d="M15,30 Q8,30 5,24 Q2,16 12,14 Q14,6 25,6 Q32,6 38,11 Q44,4 56,4 Q68,4 74,12 Q82,8 89,13 Q96,18 94,26 Q92,30 84,30 Z" fill="url(#enno-cgrad)" stroke="#ffffff" stroke-width="1.2"/>
+                    <ellipse cx="32" cy="22" rx="14" ry="7" fill="#ffffff" opacity="0.6"/>
+                    <ellipse cx="64" cy="20" rx="16" ry="8" fill="#ffffff" opacity="0.6"/>
+                    <circle cx="8" cy="28" r="4" fill="#ffffff" opacity="0.8"/>
+                    <circle cx="2" cy="30" r="2.5" fill="#e0f2fe" opacity="0.6"/>
+                </svg>`;
+            }
+
+            // 右の木の基準座標を取得
+            function getRightTreeCoords() {
+                const tree = document.getElementById('tree-right-interactive');
+                const winW = window.innerWidth;
+                const winH = window.innerHeight;
+                const river = document.getElementById('tenkawa-river');
+                const riverRect = river ? river.getBoundingClientRect() : null;
+                const riverTop = riverRect ? riverRect.top : (winH * 0.84);
+
+                if (tree) {
+                    const rect = tree.getBoundingClientRect();
+                    return {
+                        // 木の梢・幹の中心付近X
+                        x: Math.max(rect.left + rect.width * 0.35, winW - 140),
+                        // 木の梢（上部）Y
+                        topY: rect.top + rect.height * 0.28,
+                        // 木の根元・川岸草地Y
+                        groundY: Math.max(winH * 0.68, riverTop - (winW < 640 ? 76 : 94))
+                    };
+                }
+                return {
+                    x: winW - 110,
+                    topY: winH * 0.42,
+                    groundY: Math.max(winH * 0.68, riverTop - (winW < 640 ? 76 : 94))
+                };
+            }
+
+            // 1. 右の木から空を飛ぶ役行者（飛行モード）
+            function spawnEnnoFly(originY) {
+                if (activeEnnoCount >= MAX_ACTIVE_ENNO) return;
+
+                const overlay = document.getElementById('enno-character-overlay');
+                if (!overlay) return;
+
+                activeEnnoCount++;
+                playEnnoSound('fly');
+
+                const winW = window.innerWidth;
+                const winH = window.innerHeight;
+                const isMobile = winW < 640;
+                const charW = isMobile ? 58 : 72;
+                const coords = getRightTreeCoords();
+
+                // 起点：右の木の梢
+                const startX = coords.x;
+                const startY = coords.topY;
+                // 到達する上空高度
+                const skyAltitude = Math.min(220, Math.max(65, winH * (0.12 + Math.random() * 0.12)));
+                // 退場先：画面左端外側へ飛び去る
+                const endX = -charW - 50;
+
+                // アクター要素
+                const actor = document.createElement('div');
+                actor.className = 'enno-actor';
+                actor.style.opacity = '0';
+
+                const quote = FLY_QUOTES[Math.floor(Math.random() * FLY_QUOTES.length)];
+
+                actor.innerHTML = `
+                    <div class="enno-speech-bubble">${quote}</div>
+                    <div class="enno-halo"></div>
+                    <div class="enno-fly-figure">
+                        ${createSpiritualCloudSvg()}
+                    </div>
+                `;
+
+                overlay.appendChild(actor);
+
+                const bubble = actor.querySelector('.enno-speech-bubble');
+                const flyFigure = actor.querySelector('.enno-fly-figure');
+                const totalDuration = 7600 + Math.random() * 1200; // ms
+                let startTime = null;
+                let lastSparkleTime = 0;
+
+                // 吹き出し表示タイマー（空に舞い上がった中央付近で表示）
+                setTimeout(() => {
+                    if (bubble && actor.parentNode) bubble.classList.add('is-visible');
+                }, 1800);
+                setTimeout(() => {
+                    if (bubble && actor.parentNode) bubble.classList.remove('is-visible');
+                }, 4900);
+
+                function animateFlight(now) {
+                    if (!startTime) startTime = now;
+                    const elapsed = now - startTime;
+                    const t = Math.min(1, elapsed / totalDuration);
+
+                    // 進行カーブ：
+                    // 0〜0.22: 右の木から「ふわっ」と現れて斜め上空へ舞い上がる
+                    // 0.22〜0.65: 大空をゆったり左へ回遊・横断
+                    // 0.65〜1.0: 「しばらくすると画面の左右どちらかに移動して消える」画面左端へ向かってスーッと加速して飛び去る
+                    let progress;
+                    let currY;
+                    let scale = 1;
+
+                    if (t < 0.22) {
+                        // 登場フェーズ（右の木から斜め上空へ）
+                        const introT = t / 0.22;
+                        progress = Math.pow(introT, 1.4) * 0.22; // X移動
+                        // Y座標：木の梢から上空へと優雅に上昇
+                        currY = startY + (skyAltitude - startY) * Math.pow(introT, 0.85);
+                        actor.style.opacity = Math.min(1, introT * 2).toString();
+                        scale = 0.5 + introT * 0.5;
+                    } else if (t < 0.65) {
+                        // 大空滑空フェーズ
+                        const midT = (t - 0.22) / 0.43;
+                        progress = 0.22 + midT * 0.46;
+                        // サイン波で上下にふわりと揺れる
+                        const wave = Math.sin(midT * Math.PI * 3.5) * 16 + Math.sin(midT * Math.PI) * 8;
+                        currY = skyAltitude + wave;
+                        actor.style.opacity = '1';
+                    } else {
+                        // 退場フェーズ（画面左端へスーッと飛び去る）
+                        const exitT = (t - 0.65) / 0.35;
+                        progress = 0.68 + Math.pow(exitT, 1.5) * 0.32;
+                        const exitWave = Math.sin(exitT * Math.PI * 2) * 10;
+                        currY = skyAltitude + exitWave;
+                        actor.style.opacity = (1 - Math.max(0, (exitT - 0.75) / 0.25)).toString();
+                    }
+
+                    const currX = startX + (endX - startX) * progress;
+
+                    // ★吹き出しが反転しないよう、actor自体は常に正立（scaleX(1)）を保持
+                    actor.style.transform = `translate3d(${currX}px, ${currY}px, 0) scale(${scale})`;
+
+                    // 飛行の傾き（バンク角）はキャラクターのフィギュア要素のみに適用
+                    if (flyFigure) {
+                        const bankAngle = -3 + Math.cos(t * Math.PI * 4) * 2;
+                        flyFigure.style.transform = `rotate(${bankAngle}deg)`;
+                    }
+
+                    // キラキラパーティクル生成
+                    if (now - lastSparkleTime > 340 && t > 0.08 && t < 0.75) {
+                        createSparkles(actor, 2);
+                        lastSparkleTime = now;
+                    }
+
+                    if (t < 1) {
+                        requestAnimationFrame(animateFlight);
+                    } else {
+                        actor.remove();
+                        activeEnnoCount = Math.max(0, activeEnnoCount - 1);
+                    }
+                }
+
+                requestAnimationFrame(animateFlight);
+            }
+
+            // 2. 右の木から画面下の川辺を歩く役行者（歩行モード）
+            function spawnEnnoWalk(originY) {
+                if (activeEnnoCount >= MAX_ACTIVE_ENNO) return;
+
+                const overlay = document.getElementById('enno-character-overlay');
+                if (!overlay) return;
+
+                activeEnnoCount++;
+                playEnnoSound('walk');
+
+                const winW = window.innerWidth;
+                const isMobile = winW < 640;
+                const charW = isMobile ? 56 : 70;
+                const coords = getRightTreeCoords();
+
+                // 起点：右の木の根元・川辺
+                const startX = coords.x;
+                const groundY = coords.groundY;
+                // 退場先：画面左端へ歩き去る
+                const endX = -charW - 50;
+
+                // アクター要素
+                const actor = document.createElement('div');
+                actor.className = 'enno-actor';
+                actor.style.opacity = '0';
+
+                const quote = WALK_QUOTES[Math.floor(Math.random() * WALK_QUOTES.length)];
+
+                actor.innerHTML = `
+                    <div class="enno-speech-bubble">${quote}</div>
+                    <div class="enno-walk-figure"></div>
+                `;
+
+                overlay.appendChild(actor);
+
+                const bubble = actor.querySelector('.enno-speech-bubble');
+                const totalDuration = 9600 + Math.random() * 1200; // ms
+                let startTime = null;
+
+                // 吹き出し表示タイマー
+                setTimeout(() => {
+                    if (bubble && actor.parentNode) bubble.classList.add('is-visible');
+                }, 1600);
+                setTimeout(() => {
+                    if (bubble && actor.parentNode) bubble.classList.remove('is-visible');
+                }, 5200);
+
+                function animateWalk(now) {
+                    if (!startTime) startTime = now;
+                    const elapsed = now - startTime;
+                    const t = Math.min(1, elapsed / totalDuration);
+
+                    // 歩行進行カーブ：
+                    // 0〜0.15: 木の足元から川岸に姿を現す
+                    // 0.15〜0.65: 川辺をのんびりトコトコ散歩
+                    // 0.65〜1.0: 「しばらくすると画面の左右どちらかに移動して消える」そのまま画面左端へ歩いて抜けて消える
+                    let progress;
+                    if (t < 0.15) {
+                        const introT = t / 0.15;
+                        progress = introT * 0.12;
+                        actor.style.opacity = Math.min(1, introT * 2).toString();
+                    } else if (t < 0.65) {
+                        const midT = (t - 0.15) / 0.50;
+                        progress = 0.12 + midT * 0.48;
+                        actor.style.opacity = '1';
+                    } else {
+                        const exitT = (t - 0.65) / 0.35;
+                        progress = 0.60 + exitT * 0.40;
+                        actor.style.opacity = (1 - Math.max(0, (exitT - 0.8) / 0.2)).toString();
+                    }
+
+                    const currX = startX + (endX - startX) * progress;
+                    // 歩行時の微小な上下バウンス（トコトコ感）
+                    const bounce = Math.abs(Math.sin(elapsed * 0.012)) * 3;
+                    const currY = groundY - bounce;
+
+                    // 元の画像は左向きなので、画面左に向かって歩く時は通常向き (scaleX: 1)
+                    actor.style.transform = `translate3d(${currX}px, ${currY}px, 0) scaleX(1)`;
+
+                    if (t < 1) {
+                        requestAnimationFrame(animateWalk);
+                    } else {
+                        actor.remove();
+                        activeEnnoCount = Math.max(0, activeEnnoCount - 1);
+                    }
+                }
+
+                requestAnimationFrame(animateWalk);
+            }
+
+            // メイン出現トリガー（右の木をクリックした時に発動）
+            function triggerEnnoFromTree(clickY) {
+                if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                    return;
+                }
+
+                // 木のクリックエフェクト（弾むアニメーション）
+                const tree = document.getElementById('tree-right-interactive');
+                if (tree) {
+                    tree.classList.remove('is-clicked');
+                    // reflow
+                    void tree.offsetWidth;
+                    tree.classList.add('is-clicked');
+                    setTimeout(() => tree.classList.remove('is-clicked'), 700);
+                }
+
+                // 交互に切り替えつつ、クリック位置が木の上部なら飛翔、下部なら歩行を優先
+                let chosenMode = lastMode === 'fly' ? 'walk' : 'fly';
+
+                if (clickY !== undefined && tree) {
+                    const rect = tree.getBoundingClientRect();
+                    const relativeY = clickY - rect.top;
+                    if (relativeY < rect.height * 0.45) {
+                        chosenMode = 'fly'; // 木の上部・梢をクリック
+                    } else if (relativeY > rect.height * 0.65) {
+                        chosenMode = 'walk'; // 木の下部・幹をクリック
+                    }
+                }
+
+                lastMode = chosenMode;
+
+                if (chosenMode === 'fly') {
+                    spawnEnnoFly(clickY);
+                } else {
+                    spawnEnnoWalk(clickY);
+                }
+            }
+
+            // イベント初期化
+            function initInteractiveEnno() {
+                const tree = document.getElementById('tree-right-interactive');
+                if (tree) {
+                    // 木自体のクリックで発火（中の鳥をクリックした時は鳥イベントで stopPropagation されるため共存）
+                    tree.addEventListener('click', (e) => {
+                        triggerEnnoFromTree(e.clientY);
+                    });
+
+                    // キーボードアクセシビリティ（Enter / Space）
+                    tree.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            triggerEnnoFromTree(undefined);
+                        }
+                    });
+                }
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initInteractiveEnno);
+            } else {
+                initInteractiveEnno();
             }
         })();
     </script>
