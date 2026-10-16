@@ -167,6 +167,19 @@
             right: 0;
             bottom: 0;
             height: var(--river-h);
+            pointer-events: auto;
+            cursor: pointer;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+            transition: filter 0.25s ease;
+        }
+        .river:hover {
+            filter: brightness(1.05);
+        }
+        .river:focus-visible {
+            outline: 2px dashed rgba(255, 255, 255, 0.85);
+            outline-offset: -4px;
         }
         .river-edge {
             position: absolute;
@@ -219,8 +232,155 @@
             50%      { background-position-x: 0%; }
         }
 
+        /* ===== 川から跳ねる鮎（アユ）演出 ===== */
+        #jumping-fish-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 45;
+            overflow: hidden;
+        }
+
+        /* 鮎アクター */
+        .jumping-ayu-actor {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 82px;
+            height: 32px;
+            margin-left: -41px;
+            margin-top: -16px;
+            pointer-events: none;
+            will-change: transform, opacity;
+            filter: drop-shadow(0 6px 12px rgba(12, 45, 60, 0.32));
+        }
+
+        /* 尾びれのしなやかなピチピチアニメーション */
+        @keyframes ayu-swim-wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25%      { transform: rotate(-7deg); }
+            75%      { transform: rotate(7deg); }
+        }
+        .ayu-tail-joint {
+            transform-origin: 22px 17px;
+            animation: ayu-swim-wiggle 0.09s ease-in-out infinite;
+        }
+
+        /* 胸びれの小刻みな羽ばたき */
+        @keyframes ayu-fin-flutter {
+            0%, 100% { transform: rotate(0deg); }
+            50%      { transform: rotate(12deg); }
+        }
+        .ayu-fin-pectoral {
+            transform-origin: 66px 19px;
+            animation: ayu-fin-flutter 0.14s ease-in-out infinite;
+        }
+
+        /* 水面波紋（リップル） */
+        .fish-water-ripple {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 72px;
+            height: 24px;
+            margin-left: -36px;
+            margin-top: -12px;
+            pointer-events: none;
+            will-change: transform, opacity;
+        }
+        .fish-water-ripple ellipse {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.95);
+            stroke-width: 2.2;
+            transform-origin: center;
+        }
+        @keyframes ripple-ring-expand-1 {
+            0%   { transform: scale(0.15); opacity: 0.95; }
+            100% { transform: scale(1.6); opacity: 0; stroke-width: 0.8; }
+        }
+        @keyframes ripple-ring-expand-2 {
+            0%   { transform: scale(0.1); opacity: 0.8; }
+            100% { transform: scale(1.25); opacity: 0; stroke-width: 0.6; }
+        }
+        .fish-water-ripple .ring-1 {
+            animation: ripple-ring-expand-1 0.65s cubic-bezier(0.1, 0.4, 0.2, 1) forwards;
+        }
+        .fish-water-ripple .ring-2 {
+            animation: ripple-ring-expand-2 0.55s cubic-bezier(0.1, 0.4, 0.2, 1) 0.08s forwards;
+        }
+
+        /* 水しぶき・水滴パーティクル */
+        .fish-splash-drop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 4px;
+            margin-left: -2px;
+            margin-top: -2px;
+            border-radius: 50%;
+            background: #ffffff;
+            box-shadow: 0 0 4px rgba(255, 255, 255, 0.9), 0 1px 3px rgba(30, 90, 120, 0.3);
+            pointer-events: none;
+            will-change: transform, opacity;
+            animation: splash-drop-anim 0.6s cubic-bezier(0.25, 0.7, 0.3, 1) forwards;
+        }
+        @keyframes splash-drop-anim {
+            0%   { transform: translate(0, 0) scale(1); opacity: 1; }
+            70%  { opacity: 0.8; }
+            100% { transform: translate(var(--dx), var(--dy)) scale(0.25); opacity: 0; }
+        }
+
+        /* 空中での水滴こぼれ */
+        .fish-air-droplet {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 3px;
+            margin-left: -1.5px;
+            margin-top: -1.5px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 3px rgba(255, 255, 255, 0.8);
+            pointer-events: none;
+            animation: air-drop-fall 0.45s ease-in forwards;
+        }
+        @keyframes air-drop-fall {
+            0%   { transform: translate(0, 0) scale(1); opacity: 0.9; }
+            100% { transform: translate(var(--dx, 0px), 18px) scale(0.2); opacity: 0; }
+        }
+
+        /* 川の控えめなヒントバッジ */
+        .river-hint-badge {
+            position: absolute;
+            top: -34px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(15, 60, 50, 0.88);
+            backdrop-filter: blur(4px);
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 500;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            white-space: nowrap;
+            z-index: 20;
+        }
+        .river:hover .river-hint-badge,
+        .river:focus-visible .river-hint-badge {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-2px);
+        }
+
         @media (max-width: 640px) {
             .trees { width: 34vw; }
+            .river-hint-badge { font-size: 10px; padding: 3px 10px; top: -30px; }
         }
 
         /* 動きを減らす設定の利用者への配慮 */
@@ -231,6 +391,12 @@
                 animation: none !important;
             }
             .cloud { transform: translateX(var(--x, 10vw)); }
+            .jumping-ayu-actor,
+            .fish-water-ripple,
+            .fish-splash-drop,
+            .fish-air-droplet {
+                display: none !important;
+            }
         }
 
         /* 日本語テキストの自然な折り返し制御 */
@@ -416,6 +582,9 @@
     <!-- 飛び立つ小鳥のアニメーション用オーバーレイ（画面最前面） -->
     <div id="flying-birds-overlay" aria-hidden="true"></div>
 
+    <!-- 川から跳ねる鮎（アユ）のアニメーション用オーバーレイ -->
+    <div id="jumping-fish-overlay" aria-hidden="true"></div>
+
     <!-- ===== 背景シーン：上＝雲 / 中＝木と鳥 / 下＝川 ===== -->
     <div class="nature-scene" aria-hidden="true">
 
@@ -576,7 +745,7 @@
         </div>
 
         <!-- 下部：流れる川 -->
-        <div class="river">
+        <div class="river" id="tenkawa-river" role="button" tabindex="0" title="清流・天ノ川（クリックすると鮎が跳ねます）" aria-label="清流・天ノ川（クリックすると鮎が跳ねます）">
             <svg class="river-edge" viewBox="0 0 1440 22" preserveAspectRatio="none">
                 <path d="M0 14 Q180 2 360 12 T720 11 T1080 9 T1440 13 V22 H0 Z" fill="#92d4e9"/>
                 <path d="M0 14 Q180 2 360 12 T720 11 T1080 9 T1440 13" fill="none" stroke="#e9e1c9" stroke-width="3"/>
@@ -585,6 +754,9 @@
                 <div class="ripple ripple-2"></div>
                 <div class="ripple ripple-1"></div>
                 <div class="river-shine"></div>
+            </div>
+            <div class="river-hint-badge" aria-hidden="true">
+                <span>🐟 クリックすると鮎（アユ）が跳ねます</span>
             </div>
         </div>
     </div>
@@ -1727,6 +1899,364 @@
                 document.addEventListener('DOMContentLoaded', initInteractiveBirds);
             } else {
                 initInteractiveBirds();
+            }
+        })();
+
+        // ===== 清流・天ノ川の鮎（アユ）が跳ねるインタラクション =====
+        (function() {
+            let fishCounter = 0;
+            let activeFishCount = 0;
+            const MAX_ACTIVE_FISH = 8;
+            let lastJumpDirection = 1;
+            let audioCtx = null;
+
+            // 水音のシンセサイズ再生（清らかな水しぶきと着水音）
+            function playWaterSound(type) {
+                try {
+                    const AudioContext = window.AudioContext || window.webkitAudioContext;
+                    if (!AudioContext) return;
+                    if (!audioCtx) audioCtx = new AudioContext();
+                    if (audioCtx.state === 'suspended') audioCtx.resume();
+
+                    const now = audioCtx.currentTime;
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+
+                    if (type === 'splash') {
+                        // 水面をピョンと跳ね上がる清らかな水音
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(640, now);
+                        osc.frequency.exponentialRampToValueAtTime(1150, now + 0.04);
+                        osc.frequency.exponentialRampToValueAtTime(520, now + 0.12);
+
+                        gain.gain.setValueAtTime(0.001, now);
+                        gain.gain.linearRampToValueAtTime(0.065, now + 0.02);
+                        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.15);
+
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+                        osc.start(now);
+                        osc.stop(now + 0.16);
+                    } else if (type === 'dive') {
+                        // 川に戻る時のピシャッという軽やかな着水音
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(760, now);
+                        osc.frequency.exponentialRampToValueAtTime(380, now + 0.1);
+
+                        gain.gain.setValueAtTime(0.001, now);
+                        gain.gain.linearRampToValueAtTime(0.05, now + 0.02);
+                        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.13);
+
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+                        osc.start(now);
+                        osc.stop(now + 0.14);
+                    }
+                } catch (e) {
+                    // オーディオ再生不可環境でも安全に継続
+                }
+            }
+
+            // 鮎（アユ）の詳細なベクターSVG生成
+            function createAyuSvg(uid) {
+                return `
+                <svg viewBox="0 0 100 40" width="100%" height="100%" style="overflow:visible;" aria-hidden="true">
+                    <defs>
+                        <!-- 鮎の魚体グラデーション（背中：オリーブグリーン → 腹：透き通る白銀） -->
+                        <linearGradient id="ayu-body-${uid}" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#22351c"/>
+                            <stop offset="25%" stop-color="#4a6636"/>
+                            <stop offset="55%" stop-color="#8ba468"/>
+                            <stop offset="78%" stop-color="#d4e0cf"/>
+                            <stop offset="100%" stop-color="#f8fafc"/>
+                        </linearGradient>
+                        <!-- 追星（おいぼし：胸ビレの前の鮮やかな黄金黄色） -->
+                        <radialGradient id="ayu-oiboshi-${uid}" cx="45%" cy="45%" r="55%">
+                            <stop offset="0%" stop-color="#fff59d"/>
+                            <stop offset="45%" stop-color="#fbc02d"/>
+                            <stop offset="100%" stop-color="#f57f17" stop-opacity="0.3"/>
+                        </radialGradient>
+                        <!-- ヒレの黄金グラデーション（鮎特有の黄色みがかったヒレ） -->
+                        <linearGradient id="ayu-fin-${uid}" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#fff59d" stop-opacity="0.95"/>
+                            <stop offset="60%" stop-color="#fbc02d" stop-opacity="0.85"/>
+                            <stop offset="100%" stop-color="#d97706" stop-opacity="0.65"/>
+                        </linearGradient>
+                    </defs>
+                    <g class="ayu-whole">
+                        <!-- 背びれ（背中中央・三角形で先がシャープ） -->
+                        <path d="M 45 11 Q 52 3 56 4 Q 54 8 50 11 Z" fill="url(#ayu-fin-${uid})" stroke="#b45309" stroke-width="0.5"/>
+                        <!-- 脂びれ（サケ・アユ科の象徴的な小さなヒレ） -->
+                        <path d="M 27 11.5 Q 29 9.5 31 10 Q 30 11.8 28 12.2 Z" fill="url(#ayu-fin-${uid})" opacity="0.9"/>
+                        <!-- 腹びれ（腹側の小さなヒレ） -->
+                        <path d="M 48 24 Q 45 28 41 29 Q 44 26 47 24 Z" fill="url(#ayu-fin-${uid})" stroke="#b45309" stroke-width="0.5"/>
+                        <!-- 臀びれ（尾寄りの腹側のヒレ） -->
+                        <path d="M 33 23 Q 28 27 24 26 Q 27 24 31 22.5 Z" fill="url(#ayu-fin-${uid})" stroke="#b45309" stroke-width="0.5"/>
+
+                        <!-- 尾部としなる尾びれ（空中でピチピチとしなる） -->
+                        <g class="ayu-tail-joint">
+                            <!-- 二股に分かれた力強い尾びれ -->
+                            <path d="M 17 18 Q 8 9 2 7 Q 6 15 11 18 Q 6 21 2 29 Q 8 27 17 19 Z" fill="url(#ayu-fin-${uid})" stroke="#b45309" stroke-width="0.6"/>
+                            <!-- 尾びれの条線 -->
+                            <path d="M 15 18 L 4 10 M 15 18 L 4 26 M 14 18 L 5 18" stroke="#ca8a04" stroke-width="0.4" opacity="0.6"/>
+                        </g>
+
+                        <!-- 胴体（流線型の美しい魚体） -->
+                        <path d="M 92 18 C 88 14 74 11 55 11 C 36 11 24 15 16 18 C 24 21 36 24 55 24 C 74 24 88 22 92 18 Z" fill="url(#ayu-body-${uid})"/>
+                        <!-- 腹の白銀ハイライト（艶感） -->
+                        <path d="M 86 19 C 78 22.5 65 23.5 50 23.5 C 35 23.5 24 21 18 18.5 C 24 20.2 36 22 50 22 C 65 22 78 20.5 86 19 Z" fill="#ffffff" opacity="0.85"/>
+                        <!-- 背中のオリーブグリーン陰影 -->
+                        <path d="M 88 17.5 C 80 13.5 68 11.5 52 11.5 C 36 11.5 24 14 17 17.5 C 24 13.2 38 12.2 52 12.2 C 68 12.2 80 14.5 88 17.5 Z" fill="#1e2e18" opacity="0.9"/>
+
+                        <!-- エラ蓋 -->
+                        <path d="M 74 13.5 Q 70 18 73 22" fill="none" stroke="#788b56" stroke-width="0.9" stroke-linecap="round"/>
+                        <path d="M 75 14 Q 72 18 74.5 21" fill="none" stroke="#ffffff" stroke-width="0.5" opacity="0.7"/>
+
+                        <!-- ★鮎の象徴：追星（おいぼし／金色に輝く斑紋） -->
+                        <ellipse cx="66" cy="16.5" rx="4.8" ry="3.4" fill="url(#ayu-oiboshi-${uid})"/>
+                        <circle cx="65.5" cy="16.2" r="2.2" fill="#fff59d" opacity="0.95"/>
+
+                        <!-- 胸びれ（追星の下・エラの後ろ） -->
+                        <g class="ayu-fin-pectoral">
+                            <path d="M 68 20 Q 61 24 57 23.5 Q 62 21.5 66 19.5 Z" fill="url(#ayu-fin-${uid})" stroke="#b45309" stroke-width="0.5"/>
+                        </g>
+
+                        <!-- 目（澄んだ黒目と金色のアイリング） -->
+                        <circle cx="83" cy="15.8" r="2.7" fill="#fbc02d"/>
+                        <circle cx="83" cy="15.8" r="2" fill="#0f172a"/>
+                        <circle cx="83.8" cy="15.2" r="0.75" fill="#ffffff"/>
+
+                        <!-- 口（下向きの繊細な口元） -->
+                        <path d="M 92 18 Q 89 19.2 86 18.8" fill="none" stroke="#475569" stroke-width="0.7"/>
+
+                        <!-- 体側の銀鱗ハイライト -->
+                        <path d="M 60 17.5 Q 45 17 32 18" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.7" stroke-linecap="round"/>
+                    </g>
+                </svg>`;
+            }
+
+            // 水面波紋（リップル）の生成
+            function createWaterRipple(x, y) {
+                const overlay = document.getElementById('jumping-fish-overlay');
+                if (!overlay) return;
+
+                const ripple = document.createElement('div');
+                ripple.className = 'fish-water-ripple';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.innerHTML = `
+                <svg viewBox="0 0 72 24" width="100%" height="100%" aria-hidden="true">
+                    <ellipse cx="36" cy="12" rx="20" ry="7" class="ring-1"/>
+                    <ellipse cx="36" cy="12" rx="14" ry="5" class="ring-2"/>
+                </svg>`;
+                overlay.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 700);
+            }
+
+            // 水しぶきパーティクル（Splash drops）の生成
+            function createSplashParticles(x, y, count = 5) {
+                const overlay = document.getElementById('jumping-fish-overlay');
+                if (!overlay) return;
+
+                for (let i = 0; i < count; i++) {
+                    const drop = document.createElement('div');
+                    drop.className = 'fish-splash-drop';
+                    const angle = -Math.PI * 0.5 + (Math.random() - 0.5) * 1.5;
+                    const dist = 14 + Math.random() * 26;
+                    const dx = Math.cos(angle) * dist;
+                    const dy = Math.sin(angle) * dist * 0.85;
+
+                    drop.style.left = x + 'px';
+                    drop.style.top = y + 'px';
+                    drop.style.setProperty('--dx', dx + 'px');
+                    drop.style.setProperty('--dy', dy + 'px');
+
+                    const size = 3 + Math.random() * 3;
+                    drop.style.width = size + 'px';
+                    drop.style.height = size + 'px';
+
+                    overlay.appendChild(drop);
+                    setTimeout(() => drop.remove(), 650);
+                }
+            }
+
+            // 空中での水滴こぼれ
+            function createAirDroplet(x, y) {
+                const overlay = document.getElementById('jumping-fish-overlay');
+                if (!overlay) return;
+
+                const drop = document.createElement('div');
+                drop.className = 'fish-air-droplet';
+                drop.style.left = x + 'px';
+                drop.style.top = y + 'px';
+                drop.style.setProperty('--dx', (Math.random() - 0.5) * 6 + 'px');
+                overlay.appendChild(drop);
+                setTimeout(() => drop.remove(), 500);
+            }
+
+            // 鮎を川から飛び出させて戻すメイン関数
+            function jumpAyuFish(originX, originY) {
+                if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                    return;
+                }
+                if (activeFishCount >= MAX_ACTIVE_FISH) return;
+
+                const overlay = document.getElementById('jumping-fish-overlay');
+                const river = document.getElementById('tenkawa-river');
+                if (!overlay || !river) return;
+
+                const riverRect = river.getBoundingClientRect();
+                const winW = window.innerWidth;
+                const winH = window.innerHeight;
+
+                // 水面位置（川の天面波打ちライン付近）
+                const waterY = Math.min(winH - 24, Math.max(riverRect.top - 2, winH - riverRect.height - 2));
+
+                // 飛び出し地点 X（クリック位置または川の自然な位置）
+                let startX = originX;
+                if (startX === undefined || isNaN(startX)) {
+                    startX = winW * 0.5 + (Math.random() - 0.5) * (winW * 0.5);
+                }
+                startX = Math.max(50, Math.min(winW - 50, startX));
+
+                // ジャンプの方向（左または右：遡上と流れ）
+                let dir = 1;
+                if (startX > winW * 0.65) {
+                    dir = -1; // 画面右寄りは左（遡上）へ
+                } else if (startX < winW * 0.35) {
+                    dir = 1;  // 画面左寄りは右へ
+                } else {
+                    dir = -lastJumpDirection; // 中央付近は交互
+                }
+                lastJumpDirection = dir;
+
+                // ジャンプ幅と着水点
+                const jumpDistance = dir * (150 + Math.random() * 100);
+                const endX = Math.max(40, Math.min(winW - 40, startX + jumpDistance));
+                const actualDistance = endX - startX;
+
+                // ジャンプ高さ（水面から140px〜210px）と滞空時間
+                const jumpHeight = 140 + Math.random() * 70;
+                const duration = 1150 + Math.random() * 200; // ms
+
+                const uid = 'ayu_' + (++fishCounter);
+
+                // アクター要素の作成
+                const actor = document.createElement('div');
+                actor.className = 'jumping-ayu-actor';
+                const fishScale = 0.92 + Math.random() * 0.16; // 成魚〜若鮎のサイズ変化
+                actor.innerHTML = createAyuSvg(uid);
+                overlay.appendChild(actor);
+
+                activeFishCount++;
+
+                // 飛び出しエフェクト（音・波紋・水しぶき）
+                playWaterSound('splash');
+                createWaterRipple(startX, waterY);
+                createSplashParticles(startX, waterY, 6);
+
+                // 姿勢計算関数（左右どちら向きでも背中が上を向き、頭が進行方向を向く）
+                function getFishTransform(x, y, vx, vy) {
+                    const absVx = Math.abs(vx);
+                    const angleRad = Math.atan2(vy, absVx);
+                    let angleDeg = angleRad * (180 / Math.PI);
+                    angleDeg = Math.max(-62, Math.min(62, angleDeg));
+
+                    if (dir > 0) {
+                        return `translate3d(${x}px, ${y}px, 0) scale(${fishScale}) rotate(${angleDeg}deg)`;
+                    } else {
+                        // 左向き：scaleX(-1)かつ回転を反転して背中を常に上（外側）に向ける
+                        return `translate3d(${x}px, ${y}px, 0) scale(${fishScale}) scaleX(-1) rotate(${-angleDeg}deg)`;
+                    }
+                }
+
+                let startTime = null;
+                let dropCount = 0;
+
+                function animate(now) {
+                    if (!startTime) startTime = now;
+                    const elapsed = now - startTime;
+                    const t = Math.min(1, elapsed / duration);
+
+                    // 放物線軌道: y(t) = waterY - 4 * H * t * (1 - t)
+                    const currX = startX + actualDistance * t;
+                    const currY = waterY - 4 * jumpHeight * t * (1 - t);
+
+                    // 速度ベクトル
+                    const vx = actualDistance;
+                    const vy = -4 * jumpHeight * (1 - 2 * t);
+
+                    actor.style.transform = getFishTransform(currX, currY, vx, vy);
+
+                    // 空中での水滴こぼれ（上昇〜頂点付近）
+                    if (t > 0.2 && t < 0.65 && (elapsed - dropCount * 220 > 180)) {
+                        createAirDroplet(currX, currY);
+                        dropCount++;
+                    }
+
+                    if (t < 1) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        // 着水エフェクト（音・波紋・水しぶき）
+                        playWaterSound('dive');
+                        createWaterRipple(endX, waterY);
+                        createSplashParticles(endX, waterY, 5);
+
+                        // 川の中へ滑らかに潜り込んでフェードアウト
+                        actor.style.transition = 'opacity 0.15s ease, transform 0.15s ease';
+                        actor.style.opacity = '0';
+                        actor.style.transform = `translate3d(${endX}px, ${waterY + 14}px, 0) scale(${fishScale * 0.9}) ${dir > 0 ? '' : 'scaleX(-1)'}`;
+                        setTimeout(() => {
+                            actor.remove();
+                            activeFishCount = Math.max(0, activeFishCount - 1);
+                        }, 220);
+                    }
+                }
+
+                requestAnimationFrame(animate);
+            }
+
+            // イベント登録
+            function initInteractiveRiver() {
+                const river = document.getElementById('tenkawa-river');
+                if (!river) return;
+
+                // 川自体のクリック
+                river.addEventListener('click', (e) => {
+                    jumpAyuFish(e.clientX, e.clientY);
+                });
+
+                // キーボードアクセシビリティ（川にフォーカスしてEnterまたはSpace）
+                river.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        const winW = window.innerWidth;
+                        jumpAyuFish(winW * 0.5, undefined);
+                    }
+                });
+
+                // 画面最下部（川の領域）をクリックした場合も検知（カード外の川領域）
+                document.addEventListener('click', (e) => {
+                    // カード内のインタラクティブ要素（ボタン、リンク、カード等）のクリックは除外
+                    if (e.target.closest('a, button, input, textarea, select, .nature-card, .interactive-bird, [role="button"]:not(#tenkawa-river)')) {
+                        return;
+                    }
+
+                    const riverRect = river.getBoundingClientRect();
+                    // クリック位置が川のY座標範囲内ならジャンプ
+                    if (e.clientY >= riverRect.top - 16) {
+                        // 川要素自身でなければここで発火（二重発火防止）
+                        if (!river.contains(e.target) && e.target !== river) {
+                            jumpAyuFish(e.clientX, e.clientY);
+                        }
+                    }
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initInteractiveRiver);
+            } else {
+                initInteractiveRiver();
             }
         })();
     </script>
