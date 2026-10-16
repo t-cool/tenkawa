@@ -80,19 +80,74 @@
             background: radial-gradient(circle, rgba(255, 248, 216, 0.95) 0%, rgba(255, 240, 190, 0.35) 40%, transparent 70%);
         }
 
-        /* ===== 上部：雲 ===== */
+        /* ===== 上部：雲（インタラクティブ） ===== */
         .cloud {
             position: absolute;
             left: 0;
             animation: cloud-drift linear infinite;
             will-change: transform;
             filter: drop-shadow(0 8px 12px rgba(56, 120, 160, 0.08));
+            pointer-events: auto !important;
+            cursor: pointer;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+            padding: 10px;
+            margin: -10px;
         }
         .cloud svg {
             width: 100%;
             height: auto;
             display: block;
+            transform-origin: 50% 55%;
+            transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.35s ease;
         }
+        .cloud svg g,
+        .cloud svg .cloud-g {
+            transition: fill 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* 雲ホバー・フォーカス時：ふわりと浮き上がり */
+        .cloud:hover svg,
+        .cloud:focus-visible svg {
+            transform: scale(1.1) translateY(-4px);
+            filter: drop-shadow(0 14px 22px rgba(40, 100, 150, 0.24));
+        }
+
+        /* 雨雲状態 */
+        .cloud.is-rainy svg g,
+        .cloud.is-rainy svg .cloud-g {
+            fill: #546a7e;
+        }
+        .cloud.is-rainy svg {
+            filter: drop-shadow(0 14px 20px rgba(30, 41, 59, 0.42));
+            animation: cloud-rain-sway 2.6s ease-in-out infinite alternate;
+        }
+
+        /* 雷雲状態 */
+        .cloud.is-stormy svg g,
+        .cloud.is-stormy svg .cloud-g {
+            fill: #2d3748;
+        }
+        .cloud.is-stormy svg {
+            filter: drop-shadow(0 0 16px rgba(254, 240, 138, 0.85)) drop-shadow(0 14px 24px rgba(15, 23, 42, 0.55));
+            animation: cloud-thunder-rumble 0.18s ease-in-out infinite;
+        }
+
+        /* 雲の揺れアニメーション */
+        @keyframes cloud-rain-sway {
+            0%   { transform: translateY(0) scale(1.02); }
+            50%  { transform: translateY(3.5px) scale(0.99); }
+            100% { transform: translateY(-2.5px) scale(1.03); }
+        }
+        @keyframes cloud-thunder-rumble {
+            0%, 100% { transform: scale(1.05) translate(0, 0); }
+            20%      { transform: scale(1.06) translate(-2.5px, 1.5px); }
+            40%      { transform: scale(1.04) translate(2.5px, -1.5px); }
+            60%      { transform: scale(1.06) translate(-1.5px, -1.5px); }
+            80%      { transform: scale(1.05) translate(1.5px, 2px); }
+        }
+
         @keyframes cloud-drift {
             from { transform: translateX(-28vw); }
             to   { transform: translateX(110vw); }
@@ -575,9 +630,162 @@
                 opacity: 0;
             }
         }
+
+        /* ===== 天候インタラクション（雨・雷）用オーバーレイ ===== */
+        #weather-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 45; /* メインカードの上から画面全体へ降り注ぐ */
+            overflow: hidden;
+            contain: paint;
+        }
+
+        /* 天候による空の薄暗がり（雨・雷雲） */
+        .weather-sky-dim {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s ease, background 0.8s ease;
+        }
+        .weather-sky-dim.dim-rain {
+            opacity: 1;
+            background: radial-gradient(circle at 50% 25%, rgba(90, 110, 130, 0.24) 0%, rgba(30, 41, 59, 0.38) 100%);
+        }
+        .weather-sky-dim.dim-storm {
+            opacity: 1;
+            background: radial-gradient(circle at 50% 25%, rgba(60, 75, 95, 0.36) 0%, rgba(15, 23, 42, 0.54) 100%);
+        }
+
+        /* 雷の全画面閃光（フラッシュ：鮮やかな黄色の雷光） */
+        .weather-lightning-flash {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 65% 20%, rgba(254, 240, 138, 0.85) 0%, rgba(250, 204, 21, 0.45) 45%, rgba(255, 255, 255, 0.7) 100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .weather-lightning-flash.flash-active {
+            animation: lightning-flash-anim 0.42s ease-out forwards;
+        }
+        @keyframes lightning-flash-anim {
+            0%   { opacity: 0; }
+            10%  { opacity: 0.95; }
+            22%  { opacity: 0.2; }
+            36%  { opacity: 0.9; }
+            52%  { opacity: 0.12; }
+            68%  { opacity: 0.5; }
+            100% { opacity: 0; }
+        }
+
+        /* 稲妻SVGコンテナ */
+        .weather-lightning-svg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: visible;
+        }
+        .lightning-bolt-glow {
+            fill: none !important;
+            stroke: #f59e0b !important; /* 濃い黄金色アンバー */
+            stroke-width: 14px;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            opacity: 0.85;
+            filter: blur(5px);
+        }
+        .lightning-bolt-mid {
+            fill: none !important;
+            stroke: #facc15 !important; /* 鮮やかなイエロー・黄金雷⚡️ */
+            stroke-width: 6.5px;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            opacity: 1;
+            filter: drop-shadow(0 0 10px #facc15) drop-shadow(0 0 20px #eab308);
+        }
+        .lightning-bolt-core {
+            fill: none !important;
+            stroke: #ffffff !important; /* 中心は白熱のハイライト */
+            stroke-width: 3px;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            opacity: 1;
+        }
+        .lightning-bolt-group {
+            animation: lightning-strike-fade 0.55s ease-out forwards;
+        }
+        @keyframes lightning-strike-fade {
+            0%   { opacity: 0; }
+            8%   { opacity: 1; }
+            25%  { opacity: 0.25; }
+            40%  { opacity: 1; }
+            60%  { opacity: 0.6; }
+            80%  { opacity: 0.15; }
+            100% { opacity: 0; }
+        }
+
+        /* 雨粒コンテナ */
+        .weather-rain-container {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            opacity: 1;
+            transition: opacity 0.6s ease;
+        }
+
+        /* 一筋の雨粒 */
+        .weather-raindrop {
+            position: absolute;
+            top: -110px;
+            pointer-events: none;
+            border-radius: 9999px;
+            background: linear-gradient(180deg, transparent 0%, rgba(96, 165, 250, 0.7) 40%, rgba(224, 242, 254, 0.95) 75%, #ffffff 100%);
+            box-shadow: 0 0 3px rgba(37, 99, 235, 0.35);
+            will-change: transform;
+            animation: raindrop-fall-anim linear infinite;
+        }
+        @keyframes raindrop-fall-anim {
+            0% {
+                transform: translateY(-90px) rotate(var(--angle, 12deg));
+                opacity: 0;
+            }
+            15% {
+                opacity: var(--drop-opacity, 0.9);
+            }
+            85% {
+                opacity: var(--drop-opacity, 0.9);
+            }
+            100% {
+                transform: translateY(calc(100vh + 130px)) rotate(var(--angle, 12deg));
+                opacity: 0;
+            }
+        }
+
+        /* 雨の水しぶき（川や水面への着水） */
+        .rain-ripple {
+            position: absolute;
+            width: 20px;
+            height: 8px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(220, 245, 255, 0.85);
+            pointer-events: none;
+            transform: translate(-50%, -50%) scale(0.2);
+            animation: rain-ripple-expand 0.55s ease-out forwards;
+        }
+        @keyframes rain-ripple-expand {
+            0%   { transform: translate(-50%, -50%) scale(0.2); opacity: 0.95; }
+            100% { transform: translate(-50%, -50%) scale(2.4); opacity: 0; }
+        }
     </style>
 </head>
 <body class="tenkawa-canvas text-slate-800 min-h-screen py-3 px-2 sm:py-10 sm:px-4">
+
+    <!-- 天候（雨・雷）のアニメーション用オーバーレイ -->
+    <div id="weather-overlay" aria-hidden="true"></div>
 
     <!-- 飛び立つ小鳥のアニメーション用オーバーレイ（画面最前面） -->
     <div id="flying-birds-overlay" aria-hidden="true"></div>
@@ -590,24 +798,24 @@
 
         <div class="sun-glow"></div>
 
-        <!-- 上部：浮かぶ雲 -->
-        <div class="cloud" style="top:4%;  width:260px; animation-duration:110s; animation-delay:-10s;  --x:6vw;">
-            <svg viewBox="0 0 200 80"><g fill="#fff"><ellipse cx="100" cy="58" rx="92" ry="20"/><circle cx="68" cy="44" r="28"/><circle cx="108" cy="32" r="34"/><circle cx="146" cy="47" r="22"/></g></svg>
+        <!-- 上部：浮かぶ雲（クリックで雨や雷⚡️を降らせる） -->
+        <div class="cloud interactive-cloud" role="button" tabindex="0" title="雲をクリックすると雨や雷が降ります" aria-label="浮かぶ雲（クリックすると雨や雷が降ります）" style="top:4%;  width:260px; animation-duration:110s; animation-delay:-10s;  --x:6vw;">
+            <svg viewBox="0 0 200 80"><g class="cloud-g" fill="#fff"><ellipse cx="100" cy="58" rx="92" ry="20"/><circle cx="68" cy="44" r="28"/><circle cx="108" cy="32" r="34"/><circle cx="146" cy="47" r="22"/></g></svg>
         </div>
-        <div class="cloud" style="top:13%; width:180px; animation-duration:85s;  animation-delay:-50s;  --x:72vw; opacity:.9;">
-            <svg viewBox="0 0 200 80"><g fill="#fff"><ellipse cx="100" cy="60" rx="85" ry="16"/><circle cx="80" cy="46" r="24"/><circle cx="120" cy="40" r="28"/></g></svg>
+        <div class="cloud interactive-cloud" role="button" tabindex="0" title="雲をクリックすると雨や雷が降ります" aria-label="浮かぶ雲（クリックすると雨や雷が降ります）" style="top:13%; width:180px; animation-duration:85s;  animation-delay:-50s;  --x:72vw; opacity:.9;">
+            <svg viewBox="0 0 200 80"><g class="cloud-g" fill="#fff"><ellipse cx="100" cy="60" rx="85" ry="16"/><circle cx="80" cy="46" r="24"/><circle cx="120" cy="40" r="28"/></g></svg>
         </div>
-        <div class="cloud" style="top:2%;  width:320px; animation-duration:140s; animation-delay:-90s;  --x:40vw; opacity:.8;">
-            <svg viewBox="0 0 200 80"><g fill="#fff"><ellipse cx="100" cy="58" rx="92" ry="20"/><circle cx="68" cy="44" r="28"/><circle cx="108" cy="32" r="34"/><circle cx="146" cy="47" r="22"/></g></svg>
+        <div class="cloud interactive-cloud" role="button" tabindex="0" title="雲をクリックすると雨や雷が降ります" aria-label="浮かぶ雲（クリックすると雨や雷が降ります）" style="top:2%;  width:320px; animation-duration:140s; animation-delay:-90s;  --x:40vw; opacity:.8;">
+            <svg viewBox="0 0 200 80"><g class="cloud-g" fill="#fff"><ellipse cx="100" cy="58" rx="92" ry="20"/><circle cx="68" cy="44" r="28"/><circle cx="108" cy="32" r="34"/><circle cx="146" cy="47" r="22"/></g></svg>
         </div>
-        <div class="cloud" style="top:21%; width:200px; animation-duration:95s;  animation-delay:-30s;  --x:86vw; opacity:.85;">
-            <svg viewBox="0 0 200 80"><g fill="#fff"><ellipse cx="100" cy="60" rx="85" ry="16"/><circle cx="80" cy="46" r="24"/><circle cx="120" cy="40" r="28"/></g></svg>
+        <div class="cloud interactive-cloud" role="button" tabindex="0" title="雲をクリックすると雨や雷が降ります" aria-label="浮かぶ雲（クリックすると雨や雷が降ります）" style="top:21%; width:200px; animation-duration:95s;  animation-delay:-30s;  --x:86vw; opacity:.85;">
+            <svg viewBox="0 0 200 80"><g class="cloud-g" fill="#fff"><ellipse cx="100" cy="60" rx="85" ry="16"/><circle cx="80" cy="46" r="24"/><circle cx="120" cy="40" r="28"/></g></svg>
         </div>
-        <div class="cloud" style="top:9%;  width:150px; animation-duration:75s;  animation-delay:-65s;  --x:24vw; opacity:.75;">
-            <svg viewBox="0 0 200 80"><g fill="#fff"><ellipse cx="100" cy="60" rx="85" ry="16"/><circle cx="80" cy="46" r="24"/><circle cx="120" cy="40" r="28"/></g></svg>
+        <div class="cloud interactive-cloud" role="button" tabindex="0" title="雲をクリックすると雨や雷が降ります" aria-label="浮かぶ雲（クリックすると雨や雷が降ります）" style="top:9%;  width:150px; animation-duration:75s;  animation-delay:-65s;  --x:24vw; opacity:.75;">
+            <svg viewBox="0 0 200 80"><g class="cloud-g" fill="#fff"><ellipse cx="100" cy="60" rx="85" ry="16"/><circle cx="80" cy="46" r="24"/><circle cx="120" cy="40" r="28"/></g></svg>
         </div>
-        <div class="cloud" style="top:25%; width:240px; animation-duration:125s; animation-delay:-115s; --x:55vw; opacity:.7;">
-            <svg viewBox="0 0 200 80"><g fill="#fff"><ellipse cx="100" cy="58" rx="92" ry="20"/><circle cx="68" cy="44" r="28"/><circle cx="108" cy="32" r="34"/><circle cx="146" cy="47" r="22"/></g></svg>
+        <div class="cloud interactive-cloud" role="button" tabindex="0" title="雲をクリックすると雨や雷が降ります" aria-label="浮かぶ雲（クリックすると雨や雷が降ります）" style="top:25%; width:240px; animation-duration:125s; animation-delay:-115s; --x:55vw; opacity:.7;">
+            <svg viewBox="0 0 200 80"><g class="cloud-g" fill="#fff"><ellipse cx="100" cy="58" rx="92" ry="20"/><circle cx="68" cy="44" r="28"/><circle cx="108" cy="32" r="34"/><circle cx="146" cy="47" r="22"/></g></svg>
         </div>
 
         <!-- 中部：遠くの山並み -->
@@ -2257,6 +2465,500 @@
                 document.addEventListener('DOMContentLoaded', initInteractiveRiver);
             } else {
                 initInteractiveRiver();
+            }
+        })();
+
+        // ===== 画面上部の雲：クリックで雨・雷⚡️を降らせるインタラクション =====
+        (function() {
+            let activeWeatherTimeout = null;
+            let rippleInterval = null;
+            let secondaryLightningTimeout = null;
+            let currentWeatherType = null;
+            let lastWeatherType = null;
+            let activeCloudEl = null;
+            let weatherAudioCtx = null;
+
+            // 天候用オーディオコンテキスト（ユーザーのクリック時に初期化）
+            function getWeatherAudioContext() {
+                try {
+                    const AudioContext = window.AudioContext || window.webkitAudioContext;
+                    if (!AudioContext) return null;
+                    if (!weatherAudioCtx) weatherAudioCtx = new AudioContext();
+                    if (weatherAudioCtx.state === 'suspended') weatherAudioCtx.resume();
+                    return weatherAudioCtx;
+                } catch (e) {
+                    return null;
+                }
+            }
+
+            // 雨音の合成再生（自然な恵みの雨のサーッという環境音）
+            function playRainAudio(durationSec = 4.2) {
+                const ctx = getWeatherAudioContext();
+                if (!ctx) return;
+                try {
+                    const sampleRate = ctx.sampleRate;
+                    const bufferSize = Math.floor(sampleRate * durationSec);
+                    const buffer = ctx.createBuffer(1, bufferSize, sampleRate);
+                    const output = buffer.getChannelData(0);
+
+                    // ピンクノイズフィルターで柔らかな雨音を生成
+                    let b0 = 0, b1 = 0, b2 = 0;
+                    for (let i = 0; i < bufferSize; i++) {
+                        const white = (Math.random() * 2 - 1) * 0.4;
+                        b0 = 0.99765 * b0 + white * 0.0990460;
+                        b1 = 0.96300 * b1 + white * 0.1091560;
+                        b2 = 0.57000 * b2 + white * 0.2226500;
+                        output[i] = (b0 + b1 + b2) * 0.22;
+                    }
+
+                    const noiseSource = ctx.createBufferSource();
+                    noiseSource.buffer = buffer;
+
+                    // 雨の音響特性に合わせたバンドパス・ローパスフィルター
+                    const filter = ctx.createBiquadFilter();
+                    filter.type = 'lowpass';
+                    filter.frequency.setValueAtTime(1100, ctx.currentTime);
+
+                    const gainNode = ctx.createGain();
+                    const now = ctx.currentTime;
+                    gainNode.gain.setValueAtTime(0.0001, now);
+                    gainNode.gain.linearRampToValueAtTime(0.045, now + 0.6); // 緩やかにフェードイン
+                    gainNode.gain.setValueAtTime(0.045, now + durationSec - 1.2);
+                    gainNode.gain.linearRampToValueAtTime(0.0001, now + durationSec); // フェードアウト
+
+                    noiseSource.connect(filter);
+                    filter.connect(gainNode);
+                    gainNode.connect(ctx.destination);
+
+                    noiseSource.start(now);
+                    noiseSource.stop(now + durationSec);
+                } catch (e) {}
+            }
+
+            // 雷鳴の合成再生（ドン…ゴロゴロゴロ…という遠雷）
+            function playThunderAudio() {
+                const ctx = getWeatherAudioContext();
+                if (!ctx) return;
+                try {
+                    const now = ctx.currentTime;
+
+                    // 1. 地響き（低周波オシレーター）
+                    const osc = ctx.createOscillator();
+                    const oscGain = ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(85, now);
+                    osc.frequency.exponentialRampToValueAtTime(32, now + 1.8);
+
+                    oscGain.gain.setValueAtTime(0.0001, now);
+                    oscGain.gain.linearRampToValueAtTime(0.09, now + 0.06);
+                    oscGain.gain.exponentialRampToValueAtTime(0.001, now + 2.2);
+
+                    osc.connect(oscGain);
+                    oscGain.connect(ctx.destination);
+                    osc.start(now);
+                    osc.stop(now + 2.4);
+
+                    // 2. 轟音ノイズ（雷の衝撃波と残響）
+                    const noiseBuffer = ctx.createBuffer(1, Math.floor(ctx.sampleRate * 2.5), ctx.sampleRate);
+                    const data = noiseBuffer.getChannelData(0);
+                    for (let i = 0; i < data.length; i++) {
+                        data[i] = (Math.random() * 2 - 1) * 0.45;
+                    }
+                    const noise = ctx.createBufferSource();
+                    noise.buffer = noiseBuffer;
+
+                    const noiseFilter = ctx.createBiquadFilter();
+                    noiseFilter.type = 'lowpass';
+                    noiseFilter.frequency.setValueAtTime(520, now);
+                    noiseFilter.frequency.exponentialRampToValueAtTime(140, now + 1.6);
+
+                    const noiseGain = ctx.createGain();
+                    noiseGain.gain.setValueAtTime(0.0001, now);
+                    noiseGain.gain.linearRampToValueAtTime(0.12, now + 0.04);
+                    noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 2.4);
+
+                    noise.connect(noiseFilter);
+                    noiseFilter.connect(noiseGain);
+                    noiseGain.connect(ctx.destination);
+
+                    noise.start(now);
+                    noise.stop(now + 2.6);
+                } catch (e) {}
+            }
+
+            // リアルなジグザグ稲妻パスの生成（中点変位アルゴリズム）
+            function createLightningPathData(x1, y1, x2, y2, displace, minDistance = 14) {
+                const points = [[x1, y1]];
+                function subdivide(p1, p2, disp) {
+                    const dx = p2[0] - p1[0];
+                    const dy = p2[1] - p1[1];
+                    const dist = Math.hypot(dx, dy);
+                    if (dist <= minDistance) {
+                        return [p2];
+                    }
+                    const normalX = -dy / dist;
+                    const normalY = dx / dist;
+                    const offset = (Math.random() - 0.5) * disp;
+                    const midX = (p1[0] + p2[0]) * 0.5 + normalX * offset;
+                    const midY = (p1[1] + p2[1]) * 0.5 + normalY * offset * 0.4;
+                    const mid = [midX, midY];
+                    const left = subdivide(p1, mid, disp * 0.58);
+                    const right = subdivide(mid, p2, disp * 0.58);
+                    return left.concat(right);
+                }
+                const allPoints = points.concat(subdivide([x1, y1], [x2, y2], displace));
+                let d = `M ${allPoints[0][0].toFixed(1)} ${allPoints[0][1].toFixed(1)}`;
+                for (let i = 1; i < allPoints.length; i++) {
+                    d += ` L ${allPoints[i][0].toFixed(1)} ${allPoints[i][1].toFixed(1)}`;
+                }
+
+                // 枝分かれ（Branching bolt）の生成
+                const branchPaths = [];
+                if (allPoints.length > 8) {
+                    const branchIdx = Math.floor(allPoints.length * (0.35 + Math.random() * 0.3));
+                    const bp = allPoints[branchIdx];
+                    const branchAngle = (Math.random() > 0.5 ? 1 : -1) * (0.4 + Math.random() * 0.5);
+                    const branchLen = 70 + Math.random() * 90;
+                    const bEndX = bp[0] + Math.sin(branchAngle) * branchLen;
+                    const bEndY = bp[1] + Math.cos(branchAngle) * branchLen;
+                    const bPoints = [[bp[0], bp[1]]].concat(subdivide(bp, [bEndX, bEndY], displace * 0.5));
+                    let bd = `M ${bPoints[0][0].toFixed(1)} ${bPoints[0][1].toFixed(1)}`;
+                    for (let j = 1; j < bPoints.length; j++) {
+                        bd += ` L ${bPoints[j][0].toFixed(1)} ${bPoints[j][1].toFixed(1)}`;
+                    }
+                    branchPaths.push(bd);
+                }
+
+                return { main: d, branches: branchPaths };
+            }
+
+            // 稲妻（Lightning Bolt）をSVGに描画して発光させる
+            function strikeLightning(originX, originY, svgContainer) {
+                if (!svgContainer) return;
+                const winW = window.innerWidth;
+                const winH = window.innerHeight;
+
+                // 地上や水面に向かう着地ターゲット
+                const targetX = Math.max(40, Math.min(winW - 40, originX + (Math.random() - 0.5) * 220));
+                const targetY = Math.min(winH - 50, originY + 280 + Math.random() * 220);
+
+                const pathData = createLightningPathData(originX, originY, targetX, targetY, 90);
+
+                const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                group.setAttribute('class', 'lightning-bolt-group');
+
+                function makePath(d, strokeColor, strokeWidth, className, filterStr) {
+                    const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                    p.setAttribute('d', d);
+                    p.setAttribute('fill', 'none');
+                    p.setAttribute('stroke', strokeColor);
+                    p.setAttribute('stroke-width', strokeWidth);
+                    p.setAttribute('stroke-linecap', 'round');
+                    p.setAttribute('stroke-linejoin', 'round');
+                    p.setAttribute('class', className);
+                    p.style.fill = 'none';
+                    p.style.stroke = strokeColor;
+                    if (filterStr) p.style.filter = filterStr;
+                    return p;
+                }
+
+                // 鮮烈な黄色・黄金色の稲妻⚡️（外側アンバーグロー＋中間鮮やかイエロー＋白熱芯線）
+                group.appendChild(makePath(pathData.main, '#f59e0b', '14', 'lightning-bolt-glow', 'blur(4px)'));
+                group.appendChild(makePath(pathData.main, '#facc15', '6.5', 'lightning-bolt-mid', 'drop-shadow(0 0 10px #facc15)'));
+                group.appendChild(makePath(pathData.main, '#ffffff', '3', 'lightning-bolt-core', ''));
+
+                // 枝分かれも鮮やかな黄色で描画
+                pathData.branches.forEach(bd => {
+                    group.appendChild(makePath(bd, '#f59e0b', '10', 'lightning-bolt-glow', 'blur(3px)'));
+                    group.appendChild(makePath(bd, '#facc15', '4.5', 'lightning-bolt-mid', 'drop-shadow(0 0 8px #facc15)'));
+                    group.appendChild(makePath(bd, '#ffffff', '2', 'lightning-bolt-core', ''));
+                });
+
+                svgContainer.appendChild(group);
+                setTimeout(() => group.remove(), 600);
+            }
+
+            // 雨の水面波紋（川や水辺にポツポツ広がる）
+            function createRainRipple(container) {
+                if (!container) return;
+                const winW = window.innerWidth;
+                const winH = window.innerHeight;
+                const river = document.getElementById('tenkawa-river');
+                let y;
+                if (river) {
+                    const rect = river.getBoundingClientRect();
+                    y = rect.top + Math.random() * (rect.height * 0.85);
+                } else {
+                    y = winH - 60 + Math.random() * 50;
+                }
+                const x = 30 + Math.random() * (winW - 60);
+
+                const rip = document.createElement('div');
+                rip.className = 'rain-ripple';
+                rip.style.left = x + 'px';
+                rip.style.top = y + 'px';
+                container.appendChild(rip);
+                setTimeout(() => rip.remove(), 600);
+            }
+
+            // 雨粒（Raindrops）の生成
+            function createRaindrops(container, originX, count = 75) {
+                const winW = window.innerWidth;
+                const frag = document.createDocumentFragment();
+
+                for (let i = 0; i < count; i++) {
+                    const drop = document.createElement('div');
+                    drop.className = 'weather-raindrop';
+
+                    // 雲の直下付近に集中させつつ、全画面にも爽やかに散布
+                    let x;
+                    if (originX !== undefined && Math.random() < 0.45) {
+                        x = originX + (Math.random() - 0.5) * 280;
+                    } else {
+                        x = Math.random() * winW;
+                    }
+                    x = Math.max(-20, Math.min(winW + 20, x));
+
+                    const width = 2.0 + Math.random() * 1.6;
+                    const height = 48 + Math.random() * 55;
+                    const speed = 0.58 + Math.random() * 0.4; // 落下所要時間 (s)
+                    const delay = -(Math.random() * speed); // マイナスディレイで最初から降っている状態にする
+                    const opacity = 0.7 + Math.random() * 0.3;
+                    const angle = 10 + (Math.random() - 0.5) * 5; // わずかな傾き（吉野の風）
+
+                    drop.style.left = x + 'px';
+                    drop.style.width = width + 'px';
+                    drop.style.height = height + 'px';
+                    drop.style.animationDuration = speed + 's';
+                    drop.style.animationDelay = delay + 's';
+                    drop.style.setProperty('--angle', angle + 'deg');
+                    drop.style.setProperty('--drop-opacity', opacity);
+
+                    frag.appendChild(drop);
+                }
+                container.appendChild(frag);
+            }
+
+            // 天候演出のリセット・完全復帰
+            function clearWeatherEffect() {
+                if (activeWeatherTimeout) {
+                    clearTimeout(activeWeatherTimeout);
+                    activeWeatherTimeout = null;
+                }
+                if (secondaryLightningTimeout) {
+                    clearTimeout(secondaryLightningTimeout);
+                    secondaryLightningTimeout = null;
+                }
+                if (rippleInterval) {
+                    clearInterval(rippleInterval);
+                    rippleInterval = null;
+                }
+
+                // 全ての雲のクラスを解除して白い雲に戻す
+                document.querySelectorAll('.interactive-cloud').forEach(c => {
+                    c.classList.remove('is-rainy', 'is-stormy');
+                });
+                activeCloudEl = null;
+
+                const overlay = document.getElementById('weather-overlay');
+                if (overlay) {
+                    overlay.innerHTML = '';
+                }
+                currentWeatherType = null;
+            }
+
+            // メイン発火関数：天候（雨 または 雷⚡️）のトリガー
+            function triggerCloudWeather(cloudEl, weatherChoice) {
+                // アニメーション軽減モードの確認
+                const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+                // 既存の天候演出があればクリーンアップして新規開始
+                clearWeatherEffect();
+
+                // 雨か雷かの決定：初回は確実に「雨」からスタートし、クリックするたびに「雷⚡️」と「雨」が交互に発生！
+                let chosenType = weatherChoice;
+                if (!chosenType) {
+                    if (!lastWeatherType) {
+                        chosenType = 'rain'; // 初回は確実に雨！
+                    } else {
+                        chosenType = (lastWeatherType === 'rain') ? 'thunder' : 'rain'; // 交互に切り替え
+                    }
+                }
+                lastWeatherType = chosenType;
+                currentWeatherType = chosenType;
+                activeCloudEl = cloudEl;
+
+                // クリックされた雲の座標計算
+                const rect = cloudEl.getBoundingClientRect();
+                const cloudCenterX = rect.left + rect.width * 0.5;
+                const cloudBottomY = rect.bottom - 4;
+
+                // オーバーレイ要素の組み立て
+                const overlay = document.getElementById('weather-overlay');
+                if (!overlay) return;
+                overlay.innerHTML = `
+                    <div id="weather-sky-dim" class="weather-sky-dim"></div>
+                    <div id="weather-lightning-flash" class="weather-lightning-flash"></div>
+                    <svg id="weather-lightning-svg" class="weather-lightning-svg" viewBox="0 0 ${window.innerWidth} ${window.innerHeight}"></svg>
+                    <div id="weather-rain-container" class="weather-rain-container"></div>
+                `;
+
+                const skyDim = document.getElementById('weather-sky-dim');
+                const lightningFlash = document.getElementById('weather-lightning-flash');
+                const lightningSvg = document.getElementById('weather-lightning-svg');
+                const rainContainer = document.getElementById('weather-rain-container');
+
+                if (chosenType === 'rain') {
+                    // ===== 雨（Rain）モード =====
+                    cloudEl.classList.add('is-rainy');
+                    skyDim.classList.add('dim-rain');
+
+                    // 雨粒の生成と表示
+                    createRaindrops(rainContainer, cloudCenterX, 70);
+                    rainContainer.classList.add('rain-active');
+
+                    // 雨音の再生
+                    playRainAudio(4.5);
+
+                    // 川の波紋を一定間隔で生成
+                    rippleInterval = setInterval(() => {
+                        createRainRipple(rainContainer);
+                    }, 130);
+
+                } else {
+                    // ===== 雷⚡️（Thunder & Lightning）モード =====
+                    cloudEl.classList.add('is-stormy');
+                    skyDim.classList.add('dim-storm');
+
+                    // 雷雨としての激しい雨粒
+                    createRaindrops(rainContainer, cloudCenterX, 95);
+                    rainContainer.classList.add('rain-active');
+
+                    // 第1雷撃：クリック直後にビカビカッと走る！
+                    setTimeout(() => {
+                        if (!prefersReduced) {
+                            lightningFlash.classList.add('flash-active');
+                            setTimeout(() => lightningFlash.classList.remove('flash-active'), 400);
+                        }
+                        strikeLightning(cloudCenterX, cloudBottomY, lightningSvg);
+                        playThunderAudio();
+                    }, 40);
+
+                    // 第2雷撃：約1.3秒後に遠雷とともに再び稲妻が走る
+                    secondaryLightningTimeout = setTimeout(() => {
+                        if (!prefersReduced) {
+                            lightningFlash.classList.add('flash-active');
+                            setTimeout(() => lightningFlash.classList.remove('flash-active'), 400);
+                        }
+                        strikeLightning(cloudCenterX + (Math.random() - 0.5) * 80, cloudBottomY, lightningSvg);
+                        playThunderAudio();
+                    }, 1300);
+
+                    // 川の波紋
+                    rippleInterval = setInterval(() => {
+                        createRainRipple(rainContainer);
+                    }, 100);
+                }
+
+                // ===== 「しばらくするともとに戻る」タイマー =====
+                // 3.6秒：雨・調光のフェードアウト開始
+                activeWeatherTimeout = setTimeout(() => {
+                    if (rainContainer) {
+                        rainContainer.style.transition = 'opacity 0.8s ease';
+                        rainContainer.style.opacity = '0';
+                    }
+                    if (skyDim) {
+                        skyDim.style.transition = 'opacity 0.9s ease';
+                        skyDim.style.opacity = '0';
+                    }
+
+                    // 4.2秒：雲の雨・雷状態を解除（CSSでふわりと真っ白に戻る）
+                    setTimeout(() => {
+                        if (cloudEl) {
+                            cloudEl.classList.remove('is-rainy', 'is-stormy');
+                        }
+                    }, 600);
+
+                    // 4.6秒：完全クリーンアップ
+                    setTimeout(() => {
+                        clearWeatherEffect();
+                    }, 1000);
+
+                }, 3600);
+            }
+
+            // 最も近い雲を検索（上部の空領域をクリックした時のフォールバック）
+            function findNearestCloud(clickX, clickY) {
+                const clouds = document.querySelectorAll('.interactive-cloud');
+                let nearest = null;
+                let minDist = Infinity;
+                clouds.forEach(c => {
+                    const r = c.getBoundingClientRect();
+                    const cx = r.left + r.width * 0.5;
+                    const cy = r.top + r.height * 0.5;
+                    const dist = Math.hypot(clickX - cx, clickY - cy);
+                    if (dist < minDist) {
+                        minDist = dist;
+                        nearest = c;
+                    }
+                });
+                return nearest;
+            }
+
+            // 初期化とイベントリスナー登録
+            function initInteractiveClouds() {
+                const clouds = document.querySelectorAll('.interactive-cloud');
+
+                clouds.forEach(cloud => {
+                    // クリックイベント
+                    cloud.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        triggerCloudWeather(cloud);
+                    });
+
+                    // キーボードアクセシビリティ（Enter / Space）
+                    cloud.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            triggerCloudWeather(cloud);
+                        }
+                    });
+                });
+
+                // 画面上部（カード外の空領域）をクリックした時も、近くの雲をトリガー
+                document.addEventListener('click', (e) => {
+                    // 他のインタラクティブ要素のクリックは除外
+                    if (e.target.closest('a, button, input, textarea, select, .nature-card, .interactive-bird, [role="button"], #tenkawa-river')) {
+                        return;
+                    }
+
+                    // 画面上部（32%以内）または左右の余白での空タップを検知
+                    const winH = window.innerHeight;
+                    if (e.clientY < winH * 0.32) {
+                        const targetCloud = findNearestCloud(e.clientX, e.clientY);
+                        if (targetCloud) {
+                            triggerCloudWeather(targetCloud);
+                        }
+                    }
+                });
+
+                // URLクエリパラメータでの指定対応（?weather=rain または ?weather=thunder）
+                try {
+                    const params = new URLSearchParams(window.location.search);
+                    const qWeather = params.get('weather');
+                    if (qWeather === 'rain' || qWeather === 'thunder') {
+                        setTimeout(() => {
+                            const firstCloud = document.querySelector('.interactive-cloud');
+                            if (firstCloud) triggerCloudWeather(firstCloud, qWeather);
+                        }, 50);
+                    }
+                } catch (e) {}
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initInteractiveClouds);
+            } else {
+                initInteractiveClouds();
             }
         })();
     </script>
