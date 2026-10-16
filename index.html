@@ -3324,7 +3324,7 @@
                 // 到達する上空高度
                 const skyAltitude = Math.min(220, Math.max(65, winH * (0.12 + Math.random() * 0.12)));
                 // 退場先：画面左端外側へ飛び去る
-                const endX = -charW - 50;
+                const endX = -charW - 70;
 
                 // アクター要素
                 const actor = document.createElement('div');
@@ -3345,69 +3345,71 @@
 
                 const bubble = actor.querySelector('.enno-speech-bubble');
                 const flyFigure = actor.querySelector('.enno-fly-figure');
-                const totalDuration = 7600 + Math.random() * 1200; // ms
+                const totalDuration = 8200 + Math.random() * 1000; // ms
                 let startTime = null;
                 let lastSparkleTime = 0;
 
-                // 吹き出し表示タイマー（空に舞い上がった中央付近で表示）
+                // 吹き出し表示・非表示タイマー（川辺歩行と同様に途中でふわりと消える）
                 setTimeout(() => {
                     if (bubble && actor.parentNode) bubble.classList.add('is-visible');
-                }, 1800);
+                }, 1400);
                 setTimeout(() => {
                     if (bubble && actor.parentNode) bubble.classList.remove('is-visible');
-                }, 4900);
+                }, 5000);
 
                 function animateFlight(now) {
                     if (!startTime) startTime = now;
                     const elapsed = now - startTime;
                     const t = Math.min(1, elapsed / totalDuration);
 
-                    // 進行カーブ：
-                    // 0〜0.22: 右の木から「ふわっ」と現れて斜め上空へ舞い上がる
-                    // 0.22〜0.65: 大空をゆったり左へ回遊・横断
-                    // 0.65〜1.0: 「しばらくすると画面の左右どちらかに移動して消える」画面左端へ向かってスーッと加速して飛び去る
+                    // 水平移動（X軸進行カーブ）：
+                    // 0〜0.20: 木から舞い上がりつつゆっくり前進
+                    // 0.20〜1.0: 風に乗って大空を滑空し、滑らかに画面左端外へ去る
                     let progress;
-                    let currY;
-                    let scale = 1;
+                    let baseY;
+                    let scale;
 
-                    if (t < 0.22) {
-                        // 登場フェーズ（右の木から斜め上空へ）
-                        const introT = t / 0.22;
-                        progress = Math.pow(introT, 1.4) * 0.22; // X移動
+                    if (t < 0.20) {
+                        const introT = t / 0.20;
+                        progress = Math.pow(introT, 1.4) * 0.16;
                         // Y座標：木の梢から上空へと優雅に上昇
-                        currY = startY + (skyAltitude - startY) * Math.pow(introT, 0.85);
-                        actor.style.opacity = Math.min(1, introT * 2).toString();
-                        scale = 0.5 + introT * 0.5;
-                    } else if (t < 0.65) {
-                        // 大空滑空フェーズ
-                        const midT = (t - 0.22) / 0.43;
-                        progress = 0.22 + midT * 0.46;
-                        // サイン波で上下にふわりと揺れる
-                        const wave = Math.sin(midT * Math.PI * 3.5) * 16 + Math.sin(midT * Math.PI) * 8;
-                        currY = skyAltitude + wave;
-                        actor.style.opacity = '1';
+                        const riseT = 1 - Math.pow(1 - introT, 2.5);
+                        baseY = startY + (skyAltitude - startY) * riseT;
+                        actor.style.opacity = Math.min(1, introT * 2.5).toString();
+                        scale = 0.55 + introT * 0.45;
                     } else {
-                        // 退場フェーズ（画面左端へスーッと飛び去る）
-                        const exitT = (t - 0.65) / 0.35;
-                        progress = 0.68 + Math.pow(exitT, 1.5) * 0.32;
-                        const exitWave = Math.sin(exitT * Math.PI * 2) * 10;
-                        currY = skyAltitude + exitWave;
-                        actor.style.opacity = (1 - Math.max(0, (exitT - 0.75) / 0.25)).toString();
+                        const cruiseT = (t - 0.20) / 0.80;
+                        // 途切れや急加速のない滑らかな巡航〜左端への退場
+                        progress = 0.16 + Math.pow(cruiseT, 1.12) * 0.84;
+                        baseY = skyAltitude;
+                        scale = 1;
+                        // 役行者・セリフが画面左端外へ完全に抜けきるところで自然にフェード
+                        if (t > 0.93) {
+                            actor.style.opacity = Math.max(0, (1 - t) / 0.07).toString();
+                        } else {
+                            actor.style.opacity = '1';
+                        }
                     }
 
+                    // 上下の揺れ（ボビング）：
+                    // 経過時間(elapsed)ベースでアニメーション全体を通じて連続したサイン波を計算
+                    // フェーズ切り替えでも途切れず、画面左端へ抜けるまで心地よくふわりふわりと揺れ続ける
+                    const bobStrength = Math.min(1, t / 0.18);
+                    const wave = (Math.sin(elapsed * 0.0034) * 15 + Math.sin(elapsed * 0.0017) * 7) * bobStrength;
+                    const currY = baseY + wave;
                     const currX = startX + (endX - startX) * progress;
 
-                    // ★吹き出しが反転しないよう、actor自体は常に正立（scaleX(1)）を保持
+                    // 吹き出しが反転しないよう、actor自体は常に正立を保持
                     actor.style.transform = `translate3d(${currX}px, ${currY}px, 0) scale(${scale})`;
 
-                    // 飛行の傾き（バンク角）はキャラクターのフィギュア要素のみに適用
+                    // 飛行の傾き（バンク角）：波とシンクロして滑らかに揺れる
                     if (flyFigure) {
-                        const bankAngle = -3 + Math.cos(t * Math.PI * 4) * 2;
+                        const bankAngle = -2.5 + Math.cos(elapsed * 0.0034) * 2.2;
                         flyFigure.style.transform = `rotate(${bankAngle}deg)`;
                     }
 
                     // キラキラパーティクル生成
-                    if (now - lastSparkleTime > 340 && t > 0.08 && t < 0.75) {
+                    if (now - lastSparkleTime > 320 && t > 0.08 && t < 0.88) {
                         createSparkles(actor, 2);
                         lastSparkleTime = now;
                     }
