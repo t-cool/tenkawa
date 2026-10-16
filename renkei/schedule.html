@@ -14,22 +14,38 @@
     <!-- Google Fonts: Noto Sans JP -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+        }
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            letter-spacing: 0.2em;
         }
         @media print {
             body {
                 background-color: #ffffff !important;
                 padding: 0 !important;
+                color: #000000 !important;
             }
             .no-print {
                 display: none !important;
             }
             section {
                 box-shadow: none !important;
+                border-color: #cbd5e1 !important;
                 page-break-inside: avoid;
+                margin-bottom: 1.5rem !important;
+            }
+            #morning-table-content, #afternoon-table-content {
+                transform: none !important;
+                width: 100% !important;
+            }
+            #morning-scale-wrapper, #afternoon-scale-wrapper {
+                height: auto !important;
+                overflow: visible !important;
             }
         }
     </style>
@@ -37,7 +53,7 @@
 <body class="bg-slate-50 text-slate-800 min-h-screen p-4 md:p-6">
 
     <!-- 操作ナビゲーションバー -->
-    <header class="no-print max-w-[900px] mx-auto mb-6 bg-white p-3.5 md:p-4 rounded-xl border border-slate-300 shadow-xs flex flex-wrap items-center justify-between gap-3">
+    <header class="no-print max-w-[960px] mx-auto mb-6 bg-white p-3.5 md:p-4 rounded-xl border border-slate-300 shadow-xs flex flex-wrap items-center justify-between gap-3">
         <div class="flex items-center gap-2.5 sm:gap-3 flex-wrap">
             <a href="../index.html" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium rounded text-xs sm:text-sm transition flex items-center gap-1.5 border border-slate-300">
                 <i class="fa-solid fa-arrow-left text-[11px] text-slate-500"></i>
@@ -56,15 +72,15 @@
             </div>
         </div>
         <div class="flex items-center gap-2">
-            <button onclick="window.print()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium rounded text-xs sm:text-sm transition flex items-center gap-1.5 border border-slate-300">
-                <i class="fa-solid fa-print text-xs text-slate-500"></i>
-                <span>印刷</span>
+            <button onclick="window.print()" class="px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded text-xs sm:text-sm transition flex items-center gap-1.5 shadow-2xs">
+                <i class="fa-solid fa-print text-xs"></i>
+                <span>印刷する</span>
             </button>
         </div>
     </header>
 
     <!-- メインコンテンツ -->
-    <main class="max-w-[900px] mx-auto space-y-6">
+    <main class="max-w-[960px] mx-auto space-y-6">
 
         <!-- ページ見出しカード -->
         <section class="bg-white p-6 md:p-8 rounded-xl border border-slate-300 shadow-xs">
@@ -77,6 +93,9 @@
                         <span class="text-xs font-bold text-slate-600 bg-slate-100 border border-slate-200 px-2.5 py-0.5 rounded-full inline-block">
                             へき地教育振興大会
                         </span>
+                        <span class="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full inline-block">
+                            当日の日程案
+                        </span>
                     </div>
                     <h1 class="text-xl md:text-2xl font-bold text-slate-900 mt-2.5 flex items-center gap-2.5">
                         <i class="fa-regular fa-calendar-check text-indigo-600"></i>
@@ -86,30 +105,490 @@
             </div>
             <div class="mt-4 p-4 sm:p-5 rounded-xl bg-indigo-50/50 border border-indigo-100">
                 <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-                    午前中は、「ふるさと学習」をテーマとしたポスターセッションによる公開授業（前期課程・後期課程）を順次行い、続いて研究発表を実施します。午後からは村内の有識者を講師にお迎えし、講演会を開催する予定です。
+                    午前中は、「ふるさと学習」をテーマとした公開授業を前期課程・後期課程の2回に分けて順次行い、続いて研究発表および研究協議・指導助言を実施します。午後からは大会開会行事・功労者表彰に続いて、記念講演会を開催する予定です。
                 </p>
             </div>
         </section>
 
-        <!-- コンテンツカード（準備中） -->
-        <section class="bg-white p-8 sm:p-12 rounded-xl border border-slate-300 shadow-xs text-center space-y-5">
-            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-amber-50 border border-amber-200 text-amber-500 flex items-center justify-center mx-auto text-2xl sm:text-3xl shadow-2xs">
-                <i class="fa-solid fa-clock"></i>
+        <!-- 午前の部セクション -->
+        <section class="bg-white p-5 md:p-7 rounded-xl border border-slate-300 shadow-xs space-y-4">
+            <div class="border-b border-slate-200 pb-3 flex items-center justify-between flex-wrap gap-2">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-sm">
+                        <i class="fa-regular fa-sun"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-base sm:text-lg font-bold text-slate-900">
+                            午前の部
+                        </h2>
+                        <p class="text-[11px] sm:text-xs text-slate-500">受付・公開授業（前期・後期課程）・研究発表・研究協議・指導助言・閉会行事</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="text-xs font-bold text-slate-700 bg-slate-100 border border-slate-200 px-3 py-1 rounded-full">
+                        8:30 〜 12:00
+                    </div>
+                    <button onclick="openZoomModal('morning')" class="no-print inline-flex items-center gap-1.5 px-3 py-1 text-xs font-bold text-indigo-700 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 rounded-full transition shadow-2xs" title="拡大表示">
+                        <i class="fa-solid fa-magnifying-glass-plus text-xs"></i>
+                        <span>拡大</span>
+                    </button>
+                </div>
             </div>
-            
-            <div>
-                <h2 class="text-lg sm:text-xl font-bold text-slate-800">
-                    現在、準備中です。
-                </h2>
+
+            <!-- スケジュール帯表（午前）コンテナ（クリックで拡大可能） -->
+            <div class="relative group cursor-pointer" onclick="openZoomModal('morning')" title="クリックして拡大表示">
+                <div class="flex items-center justify-between text-xs text-slate-500 mb-2 no-print">
+                    <span class="inline-flex items-center gap-1.5 text-[11px] font-bold text-indigo-700 bg-indigo-50 hover:bg-indigo-100 px-2.5 py-1 rounded-md border border-indigo-200 transition">
+                        <i class="fa-solid fa-magnifying-glass-plus text-[11px]"></i>
+                        <span>クリック／タップで拡大</span>
+                    </span>
+                    <span class="font-mono text-[11px] text-slate-400">枠内下部: 所要時間（分）</span>
+                </div>
+
+                <!-- スケール調整ラッパー -->
+                <div id="morning-scale-wrapper" class="w-full relative transition-all duration-150">
+                    <div id="morning-table-content" class="min-w-[860px]">
+                        <!-- 上部：時刻目盛り（各セルの境界線と完全に一致） -->
+                        <div class="flex text-xs text-slate-800 h-10 relative select-none border-l-2 border-r-2 border-transparent">
+                            <!-- 8:30 (受付開始) -->
+                            <div style="flex: 20 20 0;" class="relative">
+                                <div class="absolute left-0 bottom-1 flex flex-col items-start leading-tight">
+                                    <span class="text-[13px] font-black tracking-tight text-slate-900">8時</span>
+                                    <span class="text-[11px] font-bold text-slate-700">30</span>
+                                </div>
+                            </div>
+                            <!-- 8:50 (日程説明) -->
+                            <div style="flex: 10 10 0;" class="relative">
+                                <div class="absolute left-0 bottom-1 -translate-x-1/2 flex flex-col items-center leading-tight">
+                                    <span class="text-[11px] font-bold text-slate-700">50</span>
+                                </div>
+                            </div>
+                            <!-- 9:00 (公開授業 前期) -->
+                            <div style="flex: 45 45 0;" class="relative">
+                                <div class="absolute left-0 bottom-1 -translate-x-1/2 flex flex-col items-center leading-tight">
+                                    <span class="text-[13px] font-black tracking-tight text-slate-900">9時</span>
+                                    <span class="text-[11px] font-bold text-slate-700">00</span>
+                                </div>
+                            </div>
+                            <!-- 9:45 (移動休憩) -->
+                            <div style="flex: 10 10 0;" class="relative">
+                                <div class="absolute left-0 bottom-1 -translate-x-1/2 flex flex-col items-center leading-tight">
+                                    <span class="text-[11px] font-bold text-slate-700">45</span>
+                                </div>
+                            </div>
+                            <!-- 9:55 (公開授業 後期) -->
+                            <div style="flex: 45 45 0;" class="relative">
+                                <div class="absolute left-0 bottom-1 -translate-x-1/2 flex flex-col items-center leading-tight">
+                                    <span class="text-[11px] font-bold text-slate-700">55</span>
+                                </div>
+                            </div>
+                            <!-- 10:40 (移動休憩) -->
+                            <div style="flex: 10 10 0;" class="relative">
+                                <div class="absolute left-0 bottom-1 -translate-x-1/2 flex flex-col items-center leading-tight">
+                                    <span class="text-[13px] font-black tracking-tight text-slate-900">10時</span>
+                                    <span class="text-[11px] font-bold text-slate-700">40</span>
+                                </div>
+                            </div>
+                            <!-- 10:50 (開会行事) -->
+                            <div style="flex: 10 10 0;" class="relative">
+                                <div class="absolute left-0 bottom-1 -translate-x-1/2 flex flex-col items-center leading-tight">
+                                    <span class="text-[11px] font-bold text-slate-700">50</span>
+                                </div>
+                            </div>
+                            <!-- 11:00 (研究発表) -->
+                            <div style="flex: 30 30 0;" class="relative">
+                                <div class="absolute left-0 bottom-1 -translate-x-1/2 flex flex-col items-center leading-tight">
+                                    <span class="text-[13px] font-black tracking-tight text-slate-900">11時</span>
+                                    <span class="text-[11px] font-bold text-slate-700">00</span>
+                                </div>
+                            </div>
+                            <!-- 11:30 (研究協議) -->
+                            <div style="flex: 20 20 0;" class="relative">
+                                <div class="absolute left-0 bottom-1 -translate-x-1/2 flex flex-col items-center leading-tight">
+                                    <span class="text-[11px] font-bold text-slate-700">30</span>
+                                </div>
+                            </div>
+                            <!-- 11:50 (閉会行事) -->
+                            <div style="flex: 10 10 0;" class="relative">
+                                <div class="absolute left-0 bottom-1 -translate-x-1/2 flex flex-col items-center leading-tight">
+                                    <span class="text-[11px] font-bold text-slate-700">50</span>
+                                </div>
+                            </div>
+                            <!-- 12:00 (昼食・移動) -->
+                            <div style="flex: 25 25 0;" class="relative">
+                                <div class="absolute left-0 bottom-1 -translate-x-1/2 flex flex-col items-center leading-tight">
+                                    <span class="text-[13px] font-black tracking-tight text-slate-900">12時</span>
+                                    <span class="text-[11px] font-bold text-slate-700">00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 表本体ブロック（色なし・白背景） -->
+                        <div class="border-2 border-slate-900 flex h-[160px] bg-white divide-x divide-slate-900 text-slate-900 shadow-xs">
+                            <!-- 受付 (20分) -->
+                            <div style="flex: 20 20 0;" class="flex flex-col justify-between items-center py-2.5 px-0.5 bg-white">
+                                <div class="flex-1 flex items-center justify-center">
+                                    <span class="vertical-text font-bold text-sm tracking-widest text-slate-900">受付</span>
+                                </div>
+                                <div class="text-[12px] font-semibold text-slate-800">20</div>
+                            </div>
+
+                            <!-- 日程説明 (10分) -->
+                            <div style="flex: 10 10 0;" class="flex flex-col justify-between items-center py-2.5 px-0.5 bg-white">
+                                <div class="flex-1 flex items-center justify-center">
+                                    <span class="vertical-text font-bold text-xs tracking-wider text-slate-900">日程説明</span>
+                                </div>
+                                <div class="text-[12px] font-semibold text-slate-800">10</div>
+                            </div>
+
+                            <!-- 公開授業（前期課程） (45分) -->
+                            <div style="flex: 45 45 0;" class="flex flex-col justify-between items-center py-2.5 px-1 bg-white">
+                                <div class="flex-1 flex flex-col items-center justify-center text-center">
+                                    <span class="font-bold text-sm sm:text-base text-slate-900 leading-snug">公開授業</span>
+                                    <span class="font-bold text-xs sm:text-sm text-slate-900">（前期課程）</span>
+                                    <span class="text-[11px] text-slate-700 mt-1 leading-tight">生活科・総合的な<br class="hidden sm:inline">学習の時間</span>
+                                </div>
+                                <div class="text-[12px] font-semibold text-slate-800">45</div>
+                            </div>
+
+                            <!-- 移動・休憩 (10分) -->
+                            <div style="flex: 10 10 0;" class="flex flex-col justify-between items-center py-2.5 px-0.5 bg-white">
+                                <div class="flex-1 flex items-center justify-center">
+                                    <span class="vertical-text font-bold text-xs tracking-wider text-slate-900">移動 休憩</span>
+                                </div>
+                                <div class="text-[12px] font-semibold text-slate-800">10</div>
+                            </div>
+
+                            <!-- 公開授業（後期課程） (45分) -->
+                            <div style="flex: 45 45 0;" class="flex flex-col justify-between items-center py-2.5 px-1 bg-white">
+                                <div class="flex-1 flex flex-col items-center justify-center text-center">
+                                    <span class="font-bold text-sm sm:text-base text-slate-900 leading-snug">公開授業</span>
+                                    <span class="font-bold text-xs sm:text-sm text-slate-900">（後期課程）</span>
+                                    <span class="text-[11px] text-slate-700 mt-1 leading-tight">総合的な学習の時間</span>
+                                </div>
+                                <div class="text-[12px] font-semibold text-slate-800">45</div>
+                            </div>
+
+                            <!-- 移動・休憩 (10分) -->
+                            <div style="flex: 10 10 0;" class="flex flex-col justify-between items-center py-2.5 px-0.5 bg-white">
+                                <div class="flex-1 flex items-center justify-center">
+                                    <span class="vertical-text font-bold text-xs tracking-wider text-slate-900">移動 休憩</span>
+                                </div>
+                                <div class="text-[12px] font-semibold text-slate-800">10</div>
+                            </div>
+
+                            <!-- 開会行事 (10分) -->
+                            <div style="flex: 10 10 0;" class="flex flex-col justify-between items-center py-2.5 px-0.5 bg-white">
+                                <div class="flex-1 flex items-center justify-center">
+                                    <span class="vertical-text font-bold text-xs tracking-wider text-slate-900">開会行事</span>
+                                </div>
+                                <div class="text-[12px] font-semibold text-slate-800">10</div>
+                            </div>
+
+                            <!-- 研究発表 (30分) -->
+                            <div style="flex: 30 30 0;" class="flex flex-col justify-between items-center py-2.5 px-1 bg-white">
+                                <div class="flex-1 flex items-center justify-center text-center">
+                                    <span class="font-bold text-sm sm:text-base text-slate-900">研究発表</span>
+                                </div>
+                                <div class="text-[12px] font-semibold text-slate-800">30</div>
+                            </div>
+
+                            <!-- 研究協議・指導助言 (20分) -->
+                            <div style="flex: 20 20 0;" class="flex flex-col justify-between items-center py-2.5 px-1 bg-white">
+                                <div class="flex-1 flex flex-col items-center justify-center text-center leading-tight">
+                                    <span class="font-bold text-xs sm:text-sm text-slate-900">研究協議</span>
+                                    <span class="font-bold text-xs sm:text-sm text-slate-900 mt-0.5">指導助言</span>
+                                </div>
+                                <div class="text-[12px] font-semibold text-slate-800">20</div>
+                            </div>
+
+                            <!-- 閉会行事 (10分) -->
+                            <div style="flex: 10 10 0;" class="flex flex-col justify-between items-center py-2.5 px-0.5 bg-white">
+                                <div class="flex-1 flex items-center justify-center">
+                                    <span class="vertical-text font-bold text-xs tracking-wider text-slate-900">閉会行事</span>
+                                </div>
+                                <div class="text-[12px] font-semibold text-slate-800">10</div>
+                            </div>
+
+                            <!-- 昼食・移動 (25分相当) -->
+                            <div style="flex: 25 25 0;" class="flex flex-col justify-between items-center py-2.5 px-0.5 bg-white">
+                                <div class="flex-1 flex items-center justify-center">
+                                    <span class="vertical-text font-bold text-xs tracking-wider text-slate-900">昼食・移動</span>
+                                </div>
+                                <div class="text-[11px] text-slate-400 font-medium">〜</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 午後の部セクション -->
+        <section class="bg-white p-5 md:p-7 rounded-xl border border-slate-300 shadow-xs space-y-4">
+            <div class="border-b border-slate-200 pb-3 flex items-center justify-between flex-wrap gap-2">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center font-bold text-sm">
+                        <i class="fa-solid fa-moon"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-base sm:text-lg font-bold text-slate-900">
+                            午後の部
+                        </h2>
+                        <p class="text-[11px] sm:text-xs text-slate-500">受付・大会開会行事・功労者表彰・記念講演・閉会行事</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="text-xs font-bold text-slate-700 bg-slate-100 border border-slate-200 px-3 py-1 rounded-full">
+                        13:00 〜 16:00
+                    </div>
+                    <button onclick="openZoomModal('afternoon')" class="no-print inline-flex items-center gap-1.5 px-3 py-1 text-xs font-bold text-indigo-700 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 rounded-full transition shadow-2xs" title="拡大表示">
+                        <i class="fa-solid fa-magnifying-glass-plus text-xs"></i>
+                        <span>拡大</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- スケジュール帯表（午後）コンテナ（クリックで拡大可能） -->
+            <div class="relative group cursor-pointer" onclick="openZoomModal('afternoon')" title="クリックして拡大表示">
+                <div class="flex items-center justify-between text-xs text-slate-500 mb-2 no-print">
+                    <span class="inline-flex items-center gap-1.5 text-[11px] font-bold text-indigo-700 bg-indigo-50 hover:bg-indigo-100 px-2.5 py-1 rounded-md border border-indigo-200 transition">
+                        <i class="fa-solid fa-magnifying-glass-plus text-[11px]"></i>
+                        <span>クリック／タップで拡大</span>
+                    </span>
+                    <span class="font-mono text-[11px] text-slate-400">枠内下部: 所要時間（分）</span>
+                </div>
+
+                <!-- スケール調整ラッパー -->
+                <div id="afternoon-scale-wrapper" class="w-full relative transition-all duration-150">
+                    <div id="afternoon-table-content" class="min-w-[720px]">
+                        <!-- 上部：時刻目盛り -->
+                        <div class="flex text-xs text-slate-800 h-10 relative select-none border-l-2 border-r-2 border-transparent">
+                            <!-- 13:00 -->
+                            <div style="flex: 30 30 0;" class="relative">
+                                <div class="absolute left-0 bottom-1 flex flex-col items-start leading-tight">
+                                    <span class="text-[13px] font-black tracking-tight text-slate-900">13時</span>
+                                    <span class="text-[11px] font-bold text-slate-700">00</span>
+                                </div>
+                            </div>
+                            <!-- 13:30 -->
+                            <div style="flex: 50 50 0;" class="relative">
+                                <div class="absolute left-0 bottom-1 -translate-x-1/2 flex flex-col items-center leading-tight">
+                                    <span class="text-[11px] font-bold text-slate-700">30</span>
+                                </div>
+                            </div>
+                            <!-- 14:20 -->
+                            <div style="flex: 10 10 0;" class="relative">
+                                <div class="absolute left-0 bottom-1 -translate-x-1/2 flex flex-col items-center leading-tight">
+                                    <span class="text-[13px] font-black tracking-tight text-slate-900">14時</span>
+                                    <span class="text-[11px] font-bold text-slate-700">20</span>
+                                </div>
+                            </div>
+                            <!-- 14:30 -->
+                            <div style="flex: 60 60 0;" class="relative">
+                                <div class="absolute left-0 bottom-1 -translate-x-1/2 flex flex-col items-center leading-tight">
+                                    <span class="text-[11px] font-bold text-slate-700">30</span>
+                                </div>
+                            </div>
+                            <!-- 15:30 〜 16:00 -->
+                            <div style="flex: 30 30 0;" class="relative">
+                                <div class="absolute left-0 bottom-1 -translate-x-1/2 flex flex-col items-center leading-tight">
+                                    <span class="text-[13px] font-black tracking-tight text-slate-900">15時</span>
+                                    <span class="text-[11px] font-bold text-slate-700">30</span>
+                                </div>
+                                <div class="absolute right-0 bottom-1 flex flex-col items-end leading-tight">
+                                    <span class="text-[13px] font-black tracking-tight text-slate-900">16時</span>
+                                    <span class="text-[11px] font-bold text-slate-700">00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 表本体ブロック（色なし・白背景） -->
+                        <div class="border-2 border-slate-900 flex h-[160px] bg-white divide-x divide-slate-900 text-slate-900 shadow-xs">
+                            <!-- 受付 (30分) -->
+                            <div style="flex: 30 30 0;" class="flex flex-col justify-between items-center py-2.5 px-1 bg-white">
+                                <div class="flex-1 flex items-center justify-center">
+                                    <span class="vertical-text font-bold text-sm tracking-widest text-slate-900">受付</span>
+                                </div>
+                                <div class="text-[12px] font-semibold text-slate-800">30</div>
+                            </div>
+
+                            <!-- 開会行事・功労者表彰 (50分) -->
+                            <div style="flex: 50 50 0;" class="flex flex-col justify-between items-center py-2.5 px-2 bg-white">
+                                <div class="flex-1 flex flex-col items-center justify-center text-center">
+                                    <span class="font-bold text-base text-slate-900">開会行事</span>
+                                    <span class="font-bold text-sm text-slate-900 mt-1">功労者表彰</span>
+                                </div>
+                                <div class="text-[12px] font-semibold text-slate-800">50</div>
+                            </div>
+
+                            <!-- 休憩 (10分) -->
+                            <div style="flex: 10 10 0;" class="flex flex-col justify-between items-center py-2.5 px-0.5 bg-white">
+                                <div class="flex-1 flex items-center justify-center">
+                                    <span class="vertical-text font-bold text-xs tracking-wider text-slate-900">休 憩</span>
+                                </div>
+                                <div class="text-[12px] font-semibold text-slate-800">10</div>
+                            </div>
+
+                            <!-- 記念講演 (60分) -->
+                            <div style="flex: 60 60 0;" class="flex flex-col justify-between items-center py-2.5 px-2 bg-white">
+                                <div class="flex-1 flex flex-col items-center justify-center text-center">
+                                    <span class="font-bold text-base text-slate-900">記念講演</span>
+                                    <p class="text-xs sm:text-sm text-slate-700 mt-1.5 font-medium">（講師：未定）</p>
+                                </div>
+                                <div class="text-[12px] font-semibold text-slate-800">60</div>
+                            </div>
+
+                            <!-- 閉会行事 (30分) -->
+                            <div style="flex: 30 30 0;" class="flex flex-col justify-between items-center py-2.5 px-1 bg-white">
+                                <div class="flex-1 flex items-center justify-center">
+                                    <span class="vertical-text font-bold text-sm tracking-widest text-slate-900">閉会行事</span>
+                                </div>
+                                <div class="text-[12px] font-semibold text-slate-800">30</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
     </main>
 
+    <!-- 拡大表示用モーダル（全画面ポップアップ） -->
+    <div id="zoom-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-6 bg-slate-900/80 backdrop-blur-xs no-print">
+        <div class="bg-white w-full max-w-5xl rounded-2xl shadow-2xl border border-slate-300 flex flex-col max-h-[92vh] overflow-hidden">
+            <!-- モーダルヘッダー -->
+            <div class="p-3.5 sm:p-5 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-700 flex items-center justify-center text-sm font-bold shadow-2xs">
+                        <i class="fa-solid fa-magnifying-glass-plus"></i>
+                    </div>
+                    <div>
+                        <h3 id="modal-title" class="font-bold text-slate-900 text-sm sm:text-base">
+                            スケジュール拡大表示
+                        </h3>
+                        <p class="text-[11px] text-slate-500 flex items-center gap-1 mt-0.5">
+                            <i class="fa-solid fa-arrows-left-right text-[10px]"></i>
+                            <span>左右にスクロールしてご確認いただけます</span>
+                        </p>
+                    </div>
+                </div>
+                <button onclick="closeZoomModal()" class="w-8 h-8 rounded-full bg-slate-200 hover:bg-slate-300 text-slate-700 flex items-center justify-center transition" title="閉じる">
+                    <i class="fa-solid fa-xmark text-base"></i>
+                </button>
+            </div>
+
+            <!-- モーダル本体（スクロール可能） -->
+            <div class="p-4 sm:p-8 overflow-x-auto overflow-y-auto flex-1 bg-slate-100/50">
+                <div class="bg-white p-4 sm:p-6 rounded-xl border border-slate-200 shadow-xs inline-block min-w-fit mx-auto">
+                    <div id="modal-content-container"></div>
+                </div>
+            </div>
+
+            <!-- モーダルフッター -->
+            <div class="p-3 sm:p-4 border-t border-slate-200 bg-slate-50 flex items-center justify-between">
+                <span class="text-[11px] text-slate-500 hidden sm:inline">Escキーまたは背景タップでも閉じられます</span>
+                <button onclick="closeZoomModal()" class="ml-auto px-4 py-1.5 bg-slate-800 hover:bg-slate-900 text-white text-xs sm:text-sm font-bold rounded-lg transition shadow-xs">
+                    閉じる
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- 控えめなクレジット -->
     <div class="relative z-10 mt-8 text-center text-[9px] sm:text-[10px] text-slate-500 tracking-wider">
         <span class="inline-block bg-white/75 backdrop-blur-sm px-3 py-1 rounded-full">© 天川村立天川小中学校 - 研究推進委員会</span>
     </div>
+
+    <!-- スマホ縮小＆拡大モーダル制御スクリプト -->
+    <script>
+        // スマホ画面幅に合わせて表全体を自動縮小スケール
+        function fitScheduleScale() {
+            const isMobile = window.innerWidth < 768;
+            ['morning', 'afternoon'].forEach(type => {
+                const wrapper = document.getElementById(`${type}-scale-wrapper`);
+                const content = document.getElementById(`${type}-table-content`);
+                const baseWidth = type === 'morning' ? 860 : 720;
+
+                if (!wrapper || !content) return;
+
+                const availableWidth = wrapper.parentElement.clientWidth;
+
+                if (availableWidth < baseWidth) {
+                    // 表全体の縮小比率を計算
+                    const scale = availableWidth / baseWidth;
+                    content.style.transform = `scale(${scale})`;
+                    content.style.transformOrigin = 'top left';
+                    content.style.width = `${baseWidth}px`;
+                    
+                    // 縮小後の高さを反映（表全体の高さは約215px）
+                    const unscaledHeight = content.offsetHeight || 215;
+                    wrapper.style.height = `${Math.ceil(unscaledHeight * scale)}px`;
+                    wrapper.style.overflow = 'hidden';
+                } else {
+                    content.style.transform = 'none';
+                    content.style.width = '100%';
+                    wrapper.style.height = 'auto';
+                    wrapper.style.overflow = 'visible';
+                }
+            });
+        }
+
+        // 拡大モーダルの制御
+        function openZoomModal(type) {
+            const modal = document.getElementById('zoom-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const container = document.getElementById('modal-content-container');
+            const sourceContent = document.getElementById(`${type}-table-content`);
+
+            if (!modal || !sourceContent) return;
+
+            modalTitle.textContent = type === 'morning' ? '午前の部 スケジュール（拡大）' : '午後の部 スケジュール（拡大）';
+            
+            // 表の中身をクローンし、等倍（無縮小）でモーダル内に展開
+            const clone = sourceContent.cloneNode(true);
+            clone.id = '';
+            clone.style.transform = 'none';
+            clone.style.width = type === 'morning' ? '880px' : '740px';
+            
+            container.innerHTML = '';
+            container.appendChild(clone);
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeZoomModal() {
+            const modal = document.getElementById('zoom-modal');
+            if (!modal) return;
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        // 背景クリックで閉じる
+        document.getElementById('zoom-modal')?.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeZoomModal();
+            }
+        });
+
+        // Escキーで閉じる
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeZoomModal();
+            }
+        });
+
+        // イベントバインド
+        window.addEventListener('resize', fitScheduleScale);
+        window.addEventListener('orientationchange', fitScheduleScale);
+        document.addEventListener('DOMContentLoaded', () => {
+            fitScheduleScale();
+            setTimeout(fitScheduleScale, 100);
+            setTimeout(fitScheduleScale, 400);
+        });
+    </script>
 
 </body>
 </html>
